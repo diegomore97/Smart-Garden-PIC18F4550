@@ -5906,6 +5906,11 @@ unsigned char EUSART1_Read(void);
 void UART_write(char dato);
 void UART_printf(char* cadena);
 
+unsigned char byteUart = 0;
+unsigned char esperaDatoConcluida = 0;
+unsigned char esperandoDatos = 1;
+int VALOR_TIMER0UART = 26473;
+
 void UART_init(long BAUD) {
     long frecuenciaCristal = 4000000;
     TRISCbits.TRISC6 = 0;
@@ -5930,9 +5935,19 @@ void UART_init(long BAUD) {
 
 unsigned char UART_read(void) {
 
-    while (!PIR1bits.RCIF);
+    TMR0 = VALOR_TIMER0UART;
+    esperaDatoConcluida = 0;
+    esperandoDatos = 1;
+    byteUart = 0;
 
-    return RCREG;
+    while (!PIR1bits.RCIF && !esperaDatoConcluida);
+
+    if (!esperaDatoConcluida) {
+        byteUart = RCREG;
+        esperandoDatos = 0;
+    }
+
+    return byteUart;
 }
 
 void UART_write(char dato) {
@@ -5971,7 +5986,6 @@ SensorHumedad sensores[8];
 unsigned char hora = 0, minutos = 0, segundos = 0;
 unsigned char datoRecibido = 0;
 unsigned char overflowTimer = 0;
-unsigned char byteUart = 0;
 
 int VALOR_TIMER0 = 26473;
 int contInterrupciones = 0;
@@ -6010,6 +6024,10 @@ void __attribute__((picinterrupt(("")))) desbordamiento(void) {
         INTCONbits.TMR0IF = 0;
 
         TMR0 = VALOR_TIMER0;
+
+        if (esperandoDatos) {
+            esperaDatoConcluida = 1;
+        }
 
         overflowTimer = 1;
 
@@ -6081,13 +6099,12 @@ void setRtc(unsigned char direccion) {
             }
         } else {
             datoCapturado = 0;
-            UART_printf("\r\n Solo se permiten numeros \r\n");
-            UART_printf("\r\n Vuelva a grabar los datos \r\n");
+            UART_printf("\r\n DATO NO RECIBIDO \r\n");
             break;
         }
     }
 
-    if (datoCapturado)
+    if (datoCapturado && !esperandoDatos)
         escribe_rtc(direccion, dato);
 }
 
@@ -6237,11 +6254,20 @@ void fijaHoraRtc(void) {
     UART_printf("\r\n Envie las Horas en formato 24 Ej: 15 \r\n");
     setRtc(0x02);
 
-    UART_printf("\r\n Envie los Minutos Ej: 25 \r\n");
-    setRtc(0x01);
 
-    UART_printf("\r\n HORA ESTABLECIDA CORRECTAMENTE \r\n");
-    escribe_rtc(0x00, 0);
+    if (!esperandoDatos) {
+        UART_printf("\r\n Envie los Minutos Ej: 25 \r\n");
+        setRtc(0x01);
+
+    }
+
+    if (!esperandoDatos) {
+
+        UART_printf("\r\n HORA ESTABLECIDA CORRECTAMENTE \r\n");
+        escribe_rtc(0x00, 0);
+
+    }
+
 }
 
 void asignarHorarios()
@@ -6267,13 +6293,12 @@ void asignarHorarios()
             }
         } else {
             datoCapturado = 0;
-            UART_printf("\r\n Solo se permiten numeros \r\n");
-            UART_printf("\r\n Vuelva a grabar los datos \r\n");
+            UART_printf("\r\n DATO NO RECIBIDO \r\n");
             break;
         }
     }
 
-    if (datoCapturado) {
+    if (datoCapturado && !esperandoDatos) {
 
         UART_printf("\r\n Ingrese 1 para regar || ingrese 0 para no regar: \r\n");
 
@@ -6283,12 +6308,18 @@ void asignarHorarios()
         if (Rx != 1 && Rx != 0)
             Rx = 0;
 
-        UART_printf("\r\n Horario Modificado! \r\n");
+        if (!esperandoDatos) {
+            UART_printf("\r\n Horario Modificado! \r\n");
 
-        horarios[hora].regar = Rx;
+            horarios[hora].regar = Rx;
 
-        escribeHorariosMemoria();
+            escribeHorariosMemoria();
 
+
+        }
+        else {
+            UART_printf("\r\n DATO NO RECIBIDO \r\n");
+        }
 
     }
 
@@ -6318,13 +6349,12 @@ void setTiempoRegar() {
             }
         } else {
             datoCapturado = 0;
-            UART_printf("\r\n Solo se permiten numeros \r\n");
-            UART_printf("\r\n Vuelva a grabar los datos \r\n");
+            UART_printf("\r\n DATO NO RECIBIDO \r\n");
             break;
         }
     }
 
-    if (datoCapturado) {
+    if (datoCapturado && !esperandoDatos) {
 
         UART_printf("\r\n Ingrese los minutos que desee que se riegue en ese horario ej: 15 \r\n");
 
@@ -6342,13 +6372,12 @@ void setTiempoRegar() {
                 }
             } else {
                 datoCapturado = 0;
-                UART_printf("\r\n Solo se permiten numeros \r\n");
-                UART_printf("\r\n Vuelva a grabar los datos \r\n");
+                UART_printf("\r\n DATO NO RECIBIDO \r\n");
                 break;
             }
         }
 
-        if (datoCapturado) {
+        if (datoCapturado && !esperandoDatos) {
 
             UART_printf("\r\n Minutos de riego establecidos! \r\n");
 

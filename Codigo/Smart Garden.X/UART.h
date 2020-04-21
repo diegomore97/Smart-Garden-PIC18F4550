@@ -3,6 +3,11 @@ unsigned char EUSART1_Read(void);
 void UART_write(char dato);
 void UART_printf(char* cadena);
 
+unsigned char byteUart = 0;
+unsigned char esperaDatoConcluida = 0;
+unsigned char esperandoDatos = 1;
+int VALOR_TIMER0UART = 26473;
+
 void UART_init(long BAUD) {
     long frecuenciaCristal = _XTAL_FREQ;
     TRISCbits.TRISC6 = 0; //TX OUTPUT
@@ -27,9 +32,19 @@ void UART_init(long BAUD) {
 
 unsigned char UART_read(void) {
 
-    while (!PIR1bits.RCIF);
+    TMR0 = VALOR_TIMER0UART; //Overflow cada 10 Segundos
+    esperaDatoConcluida = 0; //Esperar solo 10 segundos a que el usuario ingrese datos
+    esperandoDatos = 1; //Bandera que indica que estamos esperando dato por UART
+    byteUart = 0; //Borrar Byte anterior
 
-    return RCREG;
+    while (!PIR1bits.RCIF && !esperaDatoConcluida);
+
+    if (!esperaDatoConcluida) {
+        byteUart = RCREG;
+        esperandoDatos = 0;
+    }
+
+    return byteUart;
 }
 
 void UART_write(char dato) {

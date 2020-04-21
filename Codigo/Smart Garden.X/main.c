@@ -31,7 +31,6 @@ SensorHumedad sensores[MAX_SENSORES];
 unsigned char hora = 0, minutos = 0, segundos = 0;
 unsigned char datoRecibido = 0;
 unsigned char overflowTimer = 0;
-unsigned char byteUart = 0;
 
 int VALOR_TIMER0 = 26473;
 int contInterrupciones = 0;
@@ -70,6 +69,10 @@ void __interrupt() desbordamiento(void) {
         INTCONbits.TMR0IF = 0; //Regresando Bandera a 0 (Interrupcion por Timer 0)
 
         TMR0 = VALOR_TIMER0; //Overflow cada 10 Segundos
+
+        if (esperandoDatos) {
+            esperaDatoConcluida = 1; //Ya pasaron 10 segundos de espera
+        }
 
         overflowTimer = 1;
 
@@ -141,13 +144,12 @@ void setRtc(unsigned char direccion) {
             }
         } else {
             datoCapturado = 0;
-            UART_printf("\r\n Solo se permiten numeros \r\n");
-            UART_printf("\r\n Vuelva a grabar los datos \r\n");
+            UART_printf("\r\n DATO NO RECIBIDO \r\n");
             break;
         }
     }
 
-    if (datoCapturado)
+    if (datoCapturado && !esperandoDatos)
         escribe_rtc(direccion, dato);
 }
 
@@ -297,11 +299,20 @@ void fijaHoraRtc(void) {
     UART_printf("\r\n Envie las Horas en formato 24 Ej: 15 \r\n");
     setRtc(0x02);
     ///////Seccion minutos/////
-    UART_printf("\r\n Envie los Minutos Ej: 25 \r\n");
-    setRtc(0x01);
 
-    UART_printf("\r\n HORA ESTABLECIDA CORRECTAMENTE \r\n");
-    escribe_rtc(0x00, 0); //SEGUNDOS: 0 SEGUNDOS
+    if (!esperandoDatos) {
+        UART_printf("\r\n Envie los Minutos Ej: 25 \r\n");
+        setRtc(0x01);
+
+    }
+
+    if (!esperandoDatos) {
+
+        UART_printf("\r\n HORA ESTABLECIDA CORRECTAMENTE \r\n");
+        escribe_rtc(0x00, 0); //SEGUNDOS: 0 SEGUNDOS
+
+    }
+
 }
 
 void asignarHorarios() //ESP8266
@@ -327,13 +338,12 @@ void asignarHorarios() //ESP8266
             }
         } else {
             datoCapturado = 0;
-            UART_printf("\r\n Solo se permiten numeros \r\n");
-            UART_printf("\r\n Vuelva a grabar los datos \r\n");
+            UART_printf("\r\n DATO NO RECIBIDO \r\n");
             break;
         }
     }
 
-    if (datoCapturado) {
+    if (datoCapturado && !esperandoDatos) {
 
         UART_printf("\r\n Ingrese 1 para regar || ingrese 0 para no regar: \r\n");
 
@@ -343,12 +353,18 @@ void asignarHorarios() //ESP8266
         if (Rx != 1 && Rx != 0) //Si no recibe cero o uno
             Rx = 0;
 
-        UART_printf("\r\n Horario Modificado! \r\n");
+        if (!esperandoDatos) {
+            UART_printf("\r\n Horario Modificado! \r\n");
 
-        horarios[hora].regar = Rx;
+            horarios[hora].regar = Rx;
 
-        escribeHorariosMemoria(); //HACER ESTO INDEPENDIENTEMENTE DE SI MANDA DATO
-        //POR UART
+            escribeHorariosMemoria(); //HACER ESTO INDEPENDIENTEMENTE DE SI MANDA DATO
+            //POR UART
+
+        }
+        else {
+            UART_printf("\r\n DATO NO RECIBIDO \r\n");
+        }
 
     }
 
@@ -378,13 +394,12 @@ void setTiempoRegar() {
             }
         } else {
             datoCapturado = 0;
-            UART_printf("\r\n Solo se permiten numeros \r\n");
-            UART_printf("\r\n Vuelva a grabar los datos \r\n");
+            UART_printf("\r\n DATO NO RECIBIDO \r\n");
             break;
         }
     }
 
-    if (datoCapturado) {
+    if (datoCapturado && !esperandoDatos) {
 
         UART_printf("\r\n Ingrese los minutos que desee que se riegue en ese horario ej: 15 \r\n");
 
@@ -402,13 +417,12 @@ void setTiempoRegar() {
                 }
             } else {
                 datoCapturado = 0;
-                UART_printf("\r\n Solo se permiten numeros \r\n");
-                UART_printf("\r\n Vuelva a grabar los datos \r\n");
+                UART_printf("\r\n DATO NO RECIBIDO \r\n");
                 break;
             }
         }
 
-        if (datoCapturado) {
+        if (datoCapturado && !esperandoDatos) {
 
             UART_printf("\r\n Minutos de riego establecidos! \r\n");
 
@@ -513,7 +527,7 @@ void sistemaPrincipal(unsigned char opcion) {
 }
 
 void sistemaRegado(void) {
-    
+
     //UART_printf(".\n"); //Para verificar si se desborda el timer cada 10 seg
 
     if (regando) {
@@ -533,13 +547,13 @@ void sistemaRegado(void) {
         }
 
     } else {
-        
+
         dameHoraActual();
 
         if (horaRegar() && !minutos) {
-            
+
             //UART_printf("\n\nRiego Iniciado!\n");
-            
+
             //lecturaWifi();
             lecturaAnalogaSensores();
 
@@ -579,13 +593,13 @@ void main(void) {
     LATD = 0;
 
     TMR0 = VALOR_TIMER0; //Overflow cada 10 Segundos
-    
+
     INTCONbits.TMR0IF = 1; //Inicializando Bandera del TIMER0
-    
+
     T0CONbits.TMR0ON = 1; //Iniciar Timer 0
-    
+
     mostrarMenu();
-        
+
     while (1) {
 
         if (datoRecibido) {
