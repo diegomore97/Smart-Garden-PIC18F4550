@@ -5906,9 +5906,10 @@ unsigned char EUSART1_Read(void);
 void UART_write(char dato);
 void UART_printf(char* cadena);
 
+unsigned char tiempoInactividadTrans = 0;
 unsigned char byteUart = 0;
 unsigned char esperaDatoConcluida = 0;
-unsigned char esperandoDatos = 1;
+unsigned char esperandoDatos = 0;
 int VALOR_TIMER0UART = 26473;
 
 void UART_init(long BAUD) {
@@ -5939,6 +5940,7 @@ unsigned char UART_read(void) {
     esperaDatoConcluida = 0;
     esperandoDatos = 1;
     byteUart = 0;
+    tiempoInactividadTrans = 0;
 
     while (!PIR1bits.RCIF && !esperaDatoConcluida);
 
@@ -5961,14 +5963,7 @@ void UART_printf(char* cadena) {
     }
 }
 # 9 "main.c" 2
-
-
-
-
-
-
-
-
+# 19 "main.c"
 typedef struct {
     unsigned char humedadMedida;
     unsigned char pinSensor;
@@ -6021,14 +6016,18 @@ void __attribute__((picinterrupt(("")))) desbordamiento(void) {
 
     if (INTCONbits.TMR0IF) {
 
-        INTCONbits.TMR0IF = 0;
-
-        TMR0 = VALOR_TIMER0;
-
         if (esperandoDatos) {
-            esperaDatoConcluida = 1;
+
+            tiempoInactividadTrans++;
+
+            if (tiempoInactividadTrans == 2)
+                esperaDatoConcluida = 1;
+
+
         }
 
+        INTCONbits.TMR0IF = 0;
+        TMR0 = VALOR_TIMER0;
         overflowTimer = 1;
 
     }
@@ -6316,8 +6315,7 @@ void asignarHorarios()
             escribeHorariosMemoria();
 
 
-        }
-        else {
+        } else {
             UART_printf("\r\n DATO NO RECIBIDO \r\n");
         }
 
@@ -6569,6 +6567,7 @@ void main(void) {
 
         if (overflowTimer) {
 
+            esperandoDatos = 0;
             overflowTimer = 0;
             sistemaRegado();
         }

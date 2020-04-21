@@ -3,9 +3,10 @@ unsigned char EUSART1_Read(void);
 void UART_write(char dato);
 void UART_printf(char* cadena);
 
+unsigned char tiempoInactividadTrans = 0;
 unsigned char byteUart = 0;
 unsigned char esperaDatoConcluida = 0;
-unsigned char esperandoDatos = 1;
+unsigned char esperandoDatos = 0;
 int VALOR_TIMER0UART = 26473;
 
 void UART_init(long BAUD) {
@@ -36,6 +37,7 @@ unsigned char UART_read(void) {
     esperaDatoConcluida = 0; //Esperar solo 10 segundos a que el usuario ingrese datos
     esperandoDatos = 1; //Bandera que indica que estamos esperando dato por UART
     byteUart = 0; //Borrar Byte anterior
+    tiempoInactividadTrans = 0; //Tiempo que ha transcurrido esperando un dato en decenas de segundo
 
     while (!PIR1bits.RCIF && !esperaDatoConcluida);
 

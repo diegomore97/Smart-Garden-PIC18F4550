@@ -12,7 +12,9 @@
 #define MAX_SENSORES 8   //Maximo 8 sensores
 #define REPETICIONES 6  //REPETICIONES PARA QUE TRANSCURRA 1 MINUTO
 #define SENSIBILIDAD_HUMEDAD 60 //Este nos indica a partir de cuantos bits se
-//considera seco el suelo
+//considera seco el suelo#
+#define MAX_TIEMPO_INACTIVIDAD 2 //Decenas de segundo de espera para que el 
+//usuario setie datos en el sistema a traves del protocolo UART
 
 typedef struct {
     unsigned char humedadMedida; //0 - 255
@@ -66,14 +68,18 @@ void __interrupt() desbordamiento(void) {
 
     if (INTCONbits.TMR0IF) {
 
-        INTCONbits.TMR0IF = 0; //Regresando Bandera a 0 (Interrupcion por Timer 0)
-
-        TMR0 = VALOR_TIMER0; //Overflow cada 10 Segundos
-
         if (esperandoDatos) {
-            esperaDatoConcluida = 1; //Ya pasaron 10 segundos de espera
+
+            tiempoInactividadTrans++;
+
+            if (tiempoInactividadTrans == MAX_TIEMPO_INACTIVIDAD)
+                esperaDatoConcluida = 1; //Ya pasaron 10 segundos de espera
+
+
         }
 
+        INTCONbits.TMR0IF = 0; //Regresando Bandera a 0 (Interrupcion por Timer 0)
+        TMR0 = VALOR_TIMER0; //Overflow cada 10 Segundos
         overflowTimer = 1;
 
     }
@@ -361,8 +367,7 @@ void asignarHorarios() //ESP8266
             escribeHorariosMemoria(); //HACER ESTO INDEPENDIENTEMENTE DE SI MANDA DATO
             //POR UART
 
-        }
-        else {
+        } else {
             UART_printf("\r\n DATO NO RECIBIDO \r\n");
         }
 
@@ -614,6 +619,7 @@ void main(void) {
 
         if (overflowTimer) {
 
+            esperandoDatos = 0;
             overflowTimer = 0; //Bajando bandera
             sistemaRegado();
         }
