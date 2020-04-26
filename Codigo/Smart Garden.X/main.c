@@ -1,5 +1,7 @@
 //ESTE SISTEMA USA RELOJ DE 24 HORAS
 //DIEGO MORENO ARROYO
+//COMENTA LAS LINEAS QUE DICEN "COMENTAR" YA QUE ESAS SOLO SE UTILIZAN PARA 
+//SIMULACION O DEBUGUEO
 
 #define _XTAL_FREQ 4000000 //FRECUENCIA DEL CRISTAL A 4 MHZ
 #include "config.h"
@@ -7,6 +9,7 @@
 #include "I2C.h"
 #include "RTC.h"
 #include "UART.h"
+#include <stdio.h>
 
 #define TOTAL_SENSORES 3 //Sensores a Utilizar
 #define MAX_SENSORES 8   //Maximo 8 sensores
@@ -15,6 +18,7 @@
 //considera seco el suelo#
 #define MAX_TIEMPO_INACTIVIDAD 2 //Decenas de segundo de espera para que el 
 //usuario setie datos en el sistema a traves del protocolo UART
+#define TAMANO_CADENA 15    
 
 typedef struct {
     unsigned char humedadMedida; //0 - 255
@@ -63,6 +67,7 @@ void configurarAdc(void);
 void mostrarMenu(void);
 void sistemaPrincipal(unsigned char opcion);
 void sistemaRegado(void);
+void dameDatosSistema(void);
 
 void __interrupt() desbordamiento(void) {
 
@@ -150,7 +155,7 @@ void setRtc(unsigned char direccion) {
             }
         } else {
             datoCapturado = 0;
-            UART_printf("\r\n DATO NO RECIBIDO \r\n");
+            UART_printf("\r\n DATO NO RECIBIDO \r\n"); //comentar
             break;
         }
     }
@@ -299,22 +304,22 @@ void fijaHoraRtc(void) {
 
     unsigned char dato = 0;
 
-    UART_printf("\r\n FIJA HORA \r\n");
+    UART_printf("\r\n FIJA HORA \r\n"); //comentar
 
     //// Seccion Horas ///
-    UART_printf("\r\n Envie las Horas en formato 24 Ej: 15 \r\n");
+    UART_printf("\r\n Envie las Horas en formato 24 Ej: 15 \r\n"); //comentar
     setRtc(0x02);
     ///////Seccion minutos/////
 
     if (!esperandoDatos) {
-        UART_printf("\r\n Envie los Minutos Ej: 25 \r\n");
+        UART_printf("\r\n Envie los Minutos Ej: 25 \r\n"); //comentar
         setRtc(0x01);
 
     }
 
     if (!esperandoDatos) {
 
-        UART_printf("\r\n HORA ESTABLECIDA CORRECTAMENTE \r\n");
+        UART_printf("\r\n HORA ESTABLECIDA CORRECTAMENTE \r\n"); //comentar
         escribe_rtc(0x00, 0); //SEGUNDOS: 0 SEGUNDOS
 
     }
@@ -327,8 +332,8 @@ void asignarHorarios() //ESP8266
     unsigned char Rx;
     char datoCapturado = 0;
 
-    UART_printf("\r\n OPCIONES DE REGADO \r\n");
-    UART_printf("\r\n Ingrese una hora en formato de 24 hrs ej: 15 \r\n");
+    UART_printf("\r\n OPCIONES DE REGADO \r\n"); //comentar
+    UART_printf("\r\n Ingrese una hora en formato de 24 hrs ej: 15 \r\n"); //comentar
 
     for (int i = 0; i < 2; i++) {//en las direccienes que van desde 0 a 50
         Rx = UART_read();
@@ -344,14 +349,14 @@ void asignarHorarios() //ESP8266
             }
         } else {
             datoCapturado = 0;
-            UART_printf("\r\n DATO NO RECIBIDO \r\n");
+            UART_printf("\r\n DATO NO RECIBIDO \r\n"); //comentar
             break;
         }
     }
 
     if (datoCapturado && !esperandoDatos) {
 
-        UART_printf("\r\n Ingrese 1 para regar || ingrese 0 para no regar: \r\n");
+        UART_printf("\r\n Ingrese 1 para regar || ingrese 0 para no regar: \r\n"); //comentar
 
         Rx = UART_read();
         Rx -= 48;
@@ -360,7 +365,7 @@ void asignarHorarios() //ESP8266
             Rx = 0;
 
         if (!esperandoDatos) {
-            UART_printf("\r\n Horario Modificado! \r\n");
+            UART_printf("\r\n Horario Modificado! \r\n"); //comentar
 
             horarios[hora].regar = Rx;
 
@@ -368,7 +373,7 @@ void asignarHorarios() //ESP8266
             //POR UART
 
         } else {
-            UART_printf("\r\n DATO NO RECIBIDO \r\n");
+            UART_printf("\r\n DATO NO RECIBIDO \r\n"); //comentar
         }
 
     }
@@ -382,8 +387,8 @@ void setTiempoRegar() {
     unsigned char Rx;
     char datoCapturado = 0;
 
-    UART_printf("\r\n TIEMPO DE REGADO \r\n");
-    UART_printf("\r\n Ingrese una hora en formato de 24 hrs ej: 15 \r\n");
+    UART_printf("\r\n TIEMPO DE REGADO \r\n"); //comentar
+    UART_printf("\r\n Ingrese una hora en formato de 24 hrs ej: 15 \r\n"); //comentar
 
     for (int i = 0; i < 2; i++) {//en las direccienes que van desde 0 a 50
         Rx = UART_read();
@@ -399,14 +404,14 @@ void setTiempoRegar() {
             }
         } else {
             datoCapturado = 0;
-            UART_printf("\r\n DATO NO RECIBIDO \r\n");
+            UART_printf("\r\n DATO NO RECIBIDO \r\n"); //comentar
             break;
         }
     }
 
     if (datoCapturado && !esperandoDatos) {
 
-        UART_printf("\r\n Ingrese los minutos que desee que se riegue en ese horario ej: 15 \r\n");
+        UART_printf("\r\n Ingrese los minutos que desee que se riegue en ese horario ej: 15 \r\n"); //comentar
 
         for (int i = 0; i < 2; i++) {//en las direccienes que van desde 0 a 50
             Rx = UART_read();
@@ -422,14 +427,14 @@ void setTiempoRegar() {
                 }
             } else {
                 datoCapturado = 0;
-                UART_printf("\r\n DATO NO RECIBIDO \r\n");
+                UART_printf("\r\n DATO NO RECIBIDO \r\n"); //comentar
                 break;
             }
         }
 
         if (datoCapturado && !esperandoDatos) {
 
-            UART_printf("\r\n Minutos de riego establecidos! \r\n");
+            UART_printf("\r\n Minutos de riego establecidos! \r\n"); //comentar
 
             horarios[hora].tiempoRegar = tiempoRegar;
             minutosRegar = horarios[hora].tiempoRegar;
@@ -466,20 +471,38 @@ void restablecerDatosSensor() {
 
 void lecturaWifi() {
 
+    PIE1bits.RCIE = 0; //deshabilita interrupción por recepción USART PIC.
+
     char Rx;
 
-    for (int i = 0; i < TOTAL_SENSORES; i++) {
+    UART_write('r'); //Indicar al otro Micro que ya estoy listo para recibir los datos
 
-        __delay_ms(5);
+    UART_printf("\r\nSolicitando Muestreo de sensores\r\n\n"); //comentar
 
-        Rx = UART_read();
-        Rx -= 48;
+    Rx = UART_read(); //Esperar la confirmacion del otro micro
 
-        if (Rx == 1) //1 Si esta seco | 0 si esta humedo
-            sensores[i].humedadMedida = 60;
-        else
-            sensores[i].humedadMedida = 0;
+    if (Rx == '1') {
+
+        for (int i = 0; i < TOTAL_SENSORES; i++) {
+
+            UART_printf("\r\nDame DATOS DEL SENSOR :\r\n"); //comentar
+
+            Rx = UART_read();
+            Rx -= 48;
+
+            if (Rx == 1) //1 Si esta seco | 0 si esta humedo
+                sensores[i].humedadMedida = 60;
+            else
+                sensores[i].humedadMedida = 0;
+        }
+
+        UART_printf("\r\nSensores Leidos con Exito!\r\n\n"); //comentar
+
     }
+
+    PIE1bits.RCIE = 1; //habilita interrupción por recepción USART PIC.
+
+    mostrarMenu(); //comentar
 
 }
 
@@ -498,6 +521,7 @@ void mostrarMenu(void) {
     UART_printf("\r\n 1. Fijar Hora Actual \r\n");
     UART_printf("\r\n 2. Asignar Horarios para regar \r\n");
     UART_printf("\r\n 3. Programar tiempo de riego en un horario \r\n");
+    UART_printf("\r\n 4. Dame datos del sistema \r\n");
     UART_printf("\r\n Opcion:  \r");
     UART_printf("\r\n");
 }
@@ -520,13 +544,17 @@ void sistemaPrincipal(unsigned char opcion) {
             setTiempoRegar();
             break;
 
+        case 4:
+            dameDatosSistema();
+            break;
+
 
         default:
-            UART_printf("\r\n Solo se permiten numeros del 1 al 3 \r\n");
+            UART_printf("\r\n Solo se permiten numeros del 1 al 3 \r\n"); //comentar
             break;
     }
 
-    mostrarMenu();
+    mostrarMenu(); //comentar
     PIE1bits.RCIE = 1; //habilita interrupción por recepción USART PIC.
 
 }
@@ -560,11 +588,28 @@ void sistemaRegado(void) {
             //UART_printf("\n\nRiego Iniciado!\n");
 
             //lecturaWifi();
-            lecturaAnalogaSensores();
+            lecturaAnalogaSensores(); //SENSORES CONECTADOS AL PIC
 
             minutosRegar = horarios[hora].tiempoRegar;
             encenderBombas();
         }
+    }
+
+}
+
+void dameDatosSistema(void) {
+
+    char buffer[TAMANO_CADENA];
+
+    UART_printf("\r\n\nHora | Regar(1 si 0 no) | Minutos de riego \r\n\n"); //comentar
+
+    for (int i = 0; i < 24; i++) {
+
+        sprintf(buffer, "%d | %d | %d \r\n", horarios[i].hora, horarios[i].regar,
+                horarios[i].tiempoRegar);
+
+        UART_printf(buffer);
+
     }
 
 }
@@ -603,16 +648,14 @@ void main(void) {
 
     T0CONbits.TMR0ON = 1; //Iniciar Timer 0
 
-    mostrarMenu();
+    mostrarMenu(); //comentar
 
     while (1) {
 
         if (datoRecibido) {
 
             datoRecibido = 0; //Bajando bandera
-
             byteUart -= 48; //Convirtiendo ASCII A ENTERO
-
             sistemaPrincipal(byteUart);
 
         }
