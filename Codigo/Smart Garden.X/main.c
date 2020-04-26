@@ -155,7 +155,8 @@ void setRtc(unsigned char direccion) {
             }
         } else {
             datoCapturado = 0;
-            UART_printf("\r\n DATO NO RECIBIDO \r\n"); //comentar
+            //UART_printf("\r\n DATO NO RECIBIDO \r\n"); //comentar
+            UART_write('F'); //Notificar al otro micro que no se recibira el dato
             break;
         }
     }
@@ -349,7 +350,8 @@ void asignarHorarios() //ESP8266
             }
         } else {
             datoCapturado = 0;
-            UART_printf("\r\n DATO NO RECIBIDO \r\n"); //comentar
+            //UART_printf("\r\n DATO NO RECIBIDO \r\n"); //comentar
+            UART_write('F'); //Notificar al otro micro que no se recibira el dato
             break;
         }
     }
@@ -373,7 +375,8 @@ void asignarHorarios() //ESP8266
             //POR UART
 
         } else {
-            UART_printf("\r\n DATO NO RECIBIDO \r\n"); //comentar
+            //UART_printf("\r\n DATO NO RECIBIDO \r\n"); //comentar
+            UART_write('F'); //Notificar al otro micro que no se recibira el dato
         }
 
     }
@@ -404,7 +407,8 @@ void setTiempoRegar() {
             }
         } else {
             datoCapturado = 0;
-            UART_printf("\r\n DATO NO RECIBIDO \r\n"); //comentar
+            //UART_printf("\r\n DATO NO RECIBIDO \r\n"); //comentar
+            UART_write('F'); //Notificar al otro micro que no se recibira el dato
             break;
         }
     }
@@ -427,7 +431,8 @@ void setTiempoRegar() {
                 }
             } else {
                 datoCapturado = 0;
-                UART_printf("\r\n DATO NO RECIBIDO \r\n"); //comentar
+                //UART_printf("\r\n DATO NO RECIBIDO \r\n"); //comentar
+                UART_write('F'); //Notificar al otro micro que no se recibira el dato
                 break;
             }
         }

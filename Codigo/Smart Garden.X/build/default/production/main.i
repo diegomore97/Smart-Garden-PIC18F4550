@@ -6241,7 +6241,8 @@ void setRtc(unsigned char direccion) {
             }
         } else {
             datoCapturado = 0;
-            UART_printf("\r\n DATO NO RECIBIDO \r\n");
+
+            UART_write('F');
             break;
         }
     }
@@ -6435,7 +6436,8 @@ void asignarHorarios()
             }
         } else {
             datoCapturado = 0;
-            UART_printf("\r\n DATO NO RECIBIDO \r\n");
+
+            UART_write('F');
             break;
         }
     }
@@ -6459,7 +6461,8 @@ void asignarHorarios()
 
 
         } else {
-            UART_printf("\r\n DATO NO RECIBIDO \r\n");
+
+            UART_write('F');
         }
 
     }
@@ -6490,7 +6493,8 @@ void setTiempoRegar() {
             }
         } else {
             datoCapturado = 0;
-            UART_printf("\r\n DATO NO RECIBIDO \r\n");
+
+            UART_write('F');
             break;
         }
     }
@@ -6513,7 +6517,8 @@ void setTiempoRegar() {
                 }
             } else {
                 datoCapturado = 0;
-                UART_printf("\r\n DATO NO RECIBIDO \r\n");
+
+                UART_write('F');
                 break;
             }
         }
