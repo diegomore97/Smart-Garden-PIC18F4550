@@ -18,7 +18,10 @@
 //considera seco el suelo#
 #define MAX_TIEMPO_INACTIVIDAD 2 //Decenas de segundo de espera para que el 
 //usuario setie datos en el sistema a traves del protocolo UART
-#define TAMANO_CADENA 15    
+#define TAMANO_CADENA 15   
+#define SETEO_DENEGADO 'F' //Variable que se mandara por UART a otro Micro
+#define SOLICITUD_DATOS_SENSORES 'R' //Variable que se mandara por UART a otro Micro
+#define ENVIANDO_DATOS_SENSORES 'O' //El otro micro ya nos confirmo que mandara los datos
 
 typedef struct {
     unsigned char humedadMedida; //0 - 255
@@ -156,7 +159,7 @@ void setRtc(unsigned char direccion) {
         } else {
             datoCapturado = 0;
             //UART_printf("\r\n DATO NO RECIBIDO \r\n"); //comentar
-            UART_write('F'); //Notificar al otro micro que no se recibira el dato
+            UART_write(SETEO_DENEGADO); //Notificar al otro micro que no se recibira el dato
             break;
         }
     }
@@ -303,8 +306,6 @@ void encenderBombas() {
 
 void fijaHoraRtc(void) {
 
-    unsigned char dato = 0;
-
     UART_printf("\r\n FIJA HORA \r\n"); //comentar
 
     //// Seccion Horas ///
@@ -351,7 +352,7 @@ void asignarHorarios() //ESP8266
         } else {
             datoCapturado = 0;
             //UART_printf("\r\n DATO NO RECIBIDO \r\n"); //comentar
-            UART_write('F'); //Notificar al otro micro que no se recibira el dato
+            UART_write(SETEO_DENEGADO); //Notificar al otro micro que no se recibira el dato
             break;
         }
     }
@@ -376,7 +377,7 @@ void asignarHorarios() //ESP8266
 
         } else {
             //UART_printf("\r\n DATO NO RECIBIDO \r\n"); //comentar
-            UART_write('F'); //Notificar al otro micro que no se recibira el dato
+            UART_write(SETEO_DENEGADO); //Notificar al otro micro que no se recibira el dato
         }
 
     }
@@ -408,7 +409,7 @@ void setTiempoRegar() {
         } else {
             datoCapturado = 0;
             //UART_printf("\r\n DATO NO RECIBIDO \r\n"); //comentar
-            UART_write('F'); //Notificar al otro micro que no se recibira el dato
+            UART_write(SETEO_DENEGADO); //Notificar al otro micro que no se recibira el dato
             break;
         }
     }
@@ -432,7 +433,7 @@ void setTiempoRegar() {
             } else {
                 datoCapturado = 0;
                 //UART_printf("\r\n DATO NO RECIBIDO \r\n"); //comentar
-                UART_write('F'); //Notificar al otro micro que no se recibira el dato
+                UART_write(SETEO_DENEGADO); //Notificar al otro micro que no se recibira el dato
                 break;
             }
         }
@@ -480,13 +481,13 @@ void lecturaWifi() {
 
     char Rx;
 
-    UART_write('r'); //Indicar al otro Micro que ya estoy listo para recibir los datos
+    UART_write(SOLICITUD_DATOS_SENSORES); //Indicar al otro Micro que ya estoy listo para recibir los datos
 
     UART_printf("\r\nSolicitando Muestreo de sensores\r\n\n"); //comentar
 
     Rx = UART_read(); //Esperar la confirmacion del otro micro
 
-    if (Rx == '1') {
+    if (Rx == ENVIANDO_DATOS_SENSORES) {
 
         for (int i = 0; i < TOTAL_SENSORES; i++) {
 

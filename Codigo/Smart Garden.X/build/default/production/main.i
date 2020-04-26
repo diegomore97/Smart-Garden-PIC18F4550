@@ -6105,7 +6105,7 @@ char *ctermid(char *);
 
 char *tempnam(const char *, const char *);
 # 12 "main.c" 2
-# 23 "main.c"
+# 26 "main.c"
 typedef struct {
     unsigned char humedadMedida;
     unsigned char pinSensor;
@@ -6389,8 +6389,6 @@ void encenderBombas() {
 
 void fijaHoraRtc(void) {
 
-    unsigned char dato = 0;
-
     UART_printf("\r\n FIJA HORA \r\n");
 
 
@@ -6566,13 +6564,13 @@ void lecturaWifi() {
 
     char Rx;
 
-    UART_write('r');
+    UART_write('R');
 
     UART_printf("\r\nSolicitando Muestreo de sensores\r\n\n");
 
     Rx = UART_read();
 
-    if (Rx == '1') {
+    if (Rx == 'O') {
 
         for (int i = 0; i < 3; i++) {
 
