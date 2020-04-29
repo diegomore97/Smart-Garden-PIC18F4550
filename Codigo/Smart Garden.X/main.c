@@ -22,6 +22,8 @@
 #define MAX_TIEMPO_INACTIVIDAD 2 //Decenas de segundo de espera para que el 
 //usuario setie datos en el sistema a traves del protocolo UART
 #define TAMANO_CADENA 50   
+
+//INSTRUCCIONES DE CONTROL
 #define SETEO_DENEGADO 'F' //Variable que se mandara por UART a otro Micro
 #define SOLICITUD_DATOS_SENSORES 'R' //Variable que se mandara por UART a otro Micro
 #define ENVIANDO_DATOS_SENSORES 'O' //El otro micro ya nos confirmo que mandara los datos
@@ -126,7 +128,7 @@ int estaSeco(SensorHumedad s) {
 
     dameTemperaturaHumedad(NULL, &temperatura);
 
-
+    //Temperatura Ambiente Sensada por el DHT11 y Humedad suelo por el FC -28
     return (s.humedadMedida >= SENSIBILIDAD_HUMEDAD) && (temperatura < TEMPERATURA_MAX);
 }
 
@@ -528,7 +530,7 @@ void lecturaWifi() {
 
 void lecturaAnalogaSensores() {
 
-    for (int i = 0; i < TOTAL_SENSORES; i++) {
+    for (int i = 0; i < TOTAL_SENSORES; i++) { //Sensores humedad suelo FC-28
         sensores[i].humedadMedida = dameHumedadSuelo(i);
         __delay_ms(5);
     }
@@ -636,7 +638,9 @@ void dameDatosSistema(void) {
 
     char buffer[TAMANO_CADENA];
 
-    UART_printf("\r\n\nHora | Regar(1 si 0 no) | Minutos de riego \r\n\n"); //comentar
+    UART_write(INTERRUMPIR_COMANDOS); //Esta Indica que inicio la transmicion de cadenas
+
+    UART_printf("\r\n\nHora | Regar(1 si 0 no) | Minutos de riego \r\n\n");
 
     for (int i = 0; i < 24; i++) {
 
@@ -646,6 +650,8 @@ void dameDatosSistema(void) {
         UART_printf(buffer);
 
     }
+
+    UART_write(INTERRUMPIR_COMANDOS); //Esta Indica que acabo la transmicion de cadenas
 
 }
 
@@ -670,14 +676,14 @@ void dameTemperaturaHumedad(unsigned char* Humedad, unsigned char* Temperatura) 
         checkSum = DHT11_ReadData(); /* read 8-bit checksum value */
 
         if (checkSum != (humedad + humedadDecimal + temperatura + temperaturaDecimal))
-            UART_printf("Error de lectura\r\n"); //comentar
+            UART_printf("Error de lectura DHT11\r\n"); //comentar
         else {
             *Humedad = humedad;
             *Temperatura = temperatura;
         }
 
     } else
-        UART_printf("DHT NO RESPONDIO\r\n"); //Comentar
+        UART_printf("DHT11 NO RESPONDIO\r\n"); //Comentar
 
 
     PIE1bits.RCIE = 1; //habilita interrupción por recepción USART PIC.
@@ -695,10 +701,10 @@ void mostrarDatosSensores(void) {
     UART_write(INTERRUMPIR_COMANDOS); //Esta Indica que se transmitiran cadenas por
     //UART que no tengan que ver con instrucciones
 
-    sprintf(buffer, "\r\n\nLa Humedad Ambiente es: %d\r\n", humedad); //comentar
-    UART_printf(buffer); //comentar
-    sprintf(buffer, "\r\n\nLa Temperatura es: %d C\r\n", temperatura); //comentar
-    UART_printf(buffer); //comentar
+    sprintf(buffer, "\r\n\nLa Humedad Ambiente es: %d\r\n", humedad);
+    UART_printf(buffer);
+    sprintf(buffer, "\r\n\nLa Temperatura es: %d C\r\n", temperatura);
+    UART_printf(buffer);
 
     lecturaAnalogaSensores();
 
@@ -712,7 +718,7 @@ void mostrarDatosSensores(void) {
 
         sprintf(buffer, "\r\n\nPorcentaje Humedad del sensor %d: %d\r\n"
                 , i, porcentajeHumedad);
-        UART_printf(buffer); //comentar
+        UART_printf(buffer);
 
 
     }
@@ -738,12 +744,12 @@ void mostrarDatosSensoresWIFI(void) {
 
             if (sensores[i].humedadMedida >= SENSIBILIDAD_HUMEDAD) {
                 sprintf(buffer, "\r\n\nEl sensor %d detecta tierra seca\r\n", i);
-                UART_printf(buffer); //comentar
+                UART_printf(buffer);
 
 
             } else {
                 sprintf(buffer, "\r\n\nEl sensor %d detecta tierra humeda\r\n", i);
-                UART_printf(buffer); //comentar
+                UART_printf(buffer);
             }
 
         }
@@ -752,10 +758,10 @@ void mostrarDatosSensoresWIFI(void) {
 
     dameTemperaturaHumedad(&humedad, &temperatura);
 
-    sprintf(buffer, "\r\n\nLa Humedad Ambiente es: %d\r\n", humedad); //comentar
-    UART_printf(buffer); //comentar
-    sprintf(buffer, "\r\n\nLa Temperatura es: %d C\r\n", temperatura); //comentar
-    UART_printf(buffer); //comentar
+    sprintf(buffer, "\r\n\nLa Humedad Ambiente es: %d\r\n", humedad);
+    UART_printf(buffer);
+    sprintf(buffer, "\r\n\nLa Temperatura es: %d C\r\n", temperatura);
+    UART_printf(buffer);
 
     UART_write(INTERRUMPIR_COMANDOS); //Esta Indica que acabo la transmicion de cadenas
 
@@ -799,8 +805,7 @@ void main(void) {
 
     mostrarMenu(); //comentar
 
-    // dameTemperaturaHumedad(&humedad, &temperatura);
-
+    
     while (1) {
 
         if (datoRecibido) {

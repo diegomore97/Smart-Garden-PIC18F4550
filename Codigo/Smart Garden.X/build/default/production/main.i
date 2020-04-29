@@ -6159,7 +6159,7 @@ char *ctermid(char *);
 
 char *tempnam(const char *, const char *);
 # 13 "main.c" 2
-# 30 "main.c"
+# 32 "main.c"
 typedef struct {
     short humedadMedida;
     unsigned char pinSensor;
@@ -6769,6 +6769,8 @@ void dameDatosSistema(void) {
 
     char buffer[50];
 
+    UART_write('I');
+
     UART_printf("\r\n\nHora | Regar(1 si 0 no) | Minutos de riego \r\n\n");
 
     for (int i = 0; i < 24; i++) {
@@ -6779,6 +6781,8 @@ void dameDatosSistema(void) {
         UART_printf(buffer);
 
     }
+
+    UART_write('I');
 
 }
 
@@ -6803,14 +6807,14 @@ void dameTemperaturaHumedad(unsigned char* Humedad, unsigned char* Temperatura) 
         checkSum = DHT11_ReadData();
 
         if (checkSum != (humedad + humedadDecimal + temperatura + temperaturaDecimal))
-            UART_printf("Error de lectura\r\n");
+            UART_printf("Error de lectura DHT11\r\n");
         else {
             *Humedad = humedad;
             *Temperatura = temperatura;
         }
 
     } else
-        UART_printf("DHT NO RESPONDIO\r\n");
+        UART_printf("DHT11 NO RESPONDIO\r\n");
 
 
     PIE1bits.RCIE = 1;
@@ -6931,7 +6935,6 @@ void main(void) {
     T0CONbits.TMR0ON = 1;
 
     mostrarMenu();
-
 
 
     while (1) {
