@@ -715,6 +715,9 @@ void mostrarDatosSensores(void) {
         porcentajeHumedad *= 10;
         porcentajeHumedad /= 1023;
         porcentajeHumedad *= 10;
+        
+        porcentajeHumedad -=100;      
+        porcentajeHumedad *= -1;
 
         sprintf(buffer, "\r\n\nPorcentaje Humedad del sensor %d: %d\r\n"
                 , i, porcentajeHumedad);

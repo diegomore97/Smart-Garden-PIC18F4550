@@ -143,9 +143,9 @@
 [v _dameTemperaturaHumedad dameTemperaturaHumedad `(v  1 e 1 0 ]
 "693
 [v _mostrarDatosSensores mostrarDatosSensores `(v  1 e 1 0 ]
-"730
+"733
 [v _mostrarDatosSensoresWIFI mostrarDatosSensoresWIFI `(v  1 e 1 0 ]
-"770
+"773
 [v _main main `(v  1 e 1 0 ]
 "6 C:\Users\Diego Moreno\Documents\Mis Proyectos con Pic\Smart Garden\Codigo\Smart Garden.X/UART.h
 [v _tiempoInactividadTrans tiempoInactividadTrans `uc  1 e 1 0 ]
@@ -489,10 +489,10 @@
 [v _regando regando `uc  1 e 1 0 ]
 "55
 [v _peticionLecturaSensores peticionLecturaSensores `uc  1 e 1 0 ]
-"770
+"773
 [v _main main `(v  1 e 1 0 ]
 {
-"828
+"831
 } 0
 "592
 [v _sistemaRegado sistemaRegado `(v  1 e 1 0 ]
@@ -582,17 +582,17 @@
 {
 "550
 } 0
-"730
+"733
 [v _mostrarDatosSensoresWIFI mostrarDatosSensoresWIFI `(v  1 e 1 0 ]
 {
-"743
+"746
 [v mostrarDatosSensoresWIFI@i i `i  1 a 2 72 ]
-"733
+"736
 [v mostrarDatosSensoresWIFI@buffer buffer `[50]uc  1 a 50 20 ]
-"734
+"737
 [v mostrarDatosSensoresWIFI@humedad humedad `uc  1 a 1 71 ]
 [v mostrarDatosSensoresWIFI@temperatura temperatura `uc  1 a 1 70 ]
-"768
+"771
 } 0
 "489
 [v _lecturaWifi lecturaWifi `(v  1 e 1 0 ]
@@ -631,7 +631,7 @@
 "697
 [v mostrarDatosSensores@humedad humedad `uc  1 a 1 71 ]
 [v mostrarDatosSensores@temperatura temperatura `uc  1 a 1 70 ]
-"728
+"731
 } 0
 "531
 [v _lecturaAnalogaSensores lecturaAnalogaSensores `(v  1 e 1 0 ]

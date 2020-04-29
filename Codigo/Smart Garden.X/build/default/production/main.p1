@@ -3247,50 +3247,56 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;main.c: 717:         porcentajeHumedad *= 10;
 [e =* _porcentajeHumedad -> 10 `i ]
 "719
-[; ;main.c: 719:         sprintf(buffer, "\r\n\nPorcentaje Humedad del sensor %d: %d\r\n"
+[; ;main.c: 719:         porcentajeHumedad -=100;
+[e =- _porcentajeHumedad -> 100 `i ]
+"720
+[; ;main.c: 720:         porcentajeHumedad *= -1;
+[e =* _porcentajeHumedad -U -> 1 `i ]
+"722
+[; ;main.c: 722:         sprintf(buffer, "\r\n\nPorcentaje Humedad del sensor %d: %d\r\n"
 [e ( _sprintf (1 , , (. , &U _buffer :s 31C _i _porcentajeHumedad ]
-"721
-[; ;main.c: 721:         UART_printf(buffer);
-[e ( _UART_printf (1 &U _buffer ]
 "724
-[; ;main.c: 724:     }
+[; ;main.c: 724:         UART_printf(buffer);
+[e ( _UART_printf (1 &U _buffer ]
+"727
+[; ;main.c: 727:     }
 }
 [e ++ _i -> 1 `i ]
 [e $ < _i -> 3 `i 554  ]
 [e :U 555 ]
 }
-"726
-[; ;main.c: 726:     UART_write('I');
+"729
+[; ;main.c: 729:     UART_write('I');
 [e ( _UART_write (1 -> -> 73 `ui `uc ]
-"728
-[; ;main.c: 728: }
+"731
+[; ;main.c: 731: }
 [e :UE 553 ]
 }
-"730
-[; ;main.c: 730: void mostrarDatosSensoresWIFI(void) {
+"733
+[; ;main.c: 733: void mostrarDatosSensoresWIFI(void) {
 [v _mostrarDatosSensoresWIFI `(v ~T0 @X0 1 ef ]
 {
 [e :U _mostrarDatosSensoresWIFI ]
 [f ]
-"733
-[; ;main.c: 733:     char buffer[50];
+"736
+[; ;main.c: 736:     char buffer[50];
 [v _buffer `uc ~T0 @X0 -> 50 `i a ]
-"734
-[; ;main.c: 734:     unsigned char temperatura, humedad;
+"737
+[; ;main.c: 737:     unsigned char temperatura, humedad;
 [v _temperatura `uc ~T0 @X0 1 a ]
 [v _humedad `uc ~T0 @X0 1 a ]
-"736
-[; ;main.c: 736:     lecturaWifi();
+"739
+[; ;main.c: 739:     lecturaWifi();
 [e ( _lecturaWifi ..  ]
-"738
-[; ;main.c: 738:     UART_write('I');
-[e ( _UART_write (1 -> -> 73 `ui `uc ]
 "741
-[; ;main.c: 741:     if (peticionLecturaSensores) {
+[; ;main.c: 741:     UART_write('I');
+[e ( _UART_write (1 -> -> 73 `ui `uc ]
+"744
+[; ;main.c: 744:     if (peticionLecturaSensores) {
 [e $ ! != -> _peticionLecturaSensores `i -> 0 `i 558  ]
 {
-"743
-[; ;main.c: 743:         for (int i = 0; i < 3; i++) {
+"746
+[; ;main.c: 746:         for (int i = 0; i < 3; i++) {
 {
 [v _i `i ~T0 @X0 1 a ]
 [e = _i -> 0 `i ]
@@ -3298,182 +3304,182 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e $U 560  ]
 [e :U 559 ]
 {
-"745
-[; ;main.c: 745:             if (sensores[i].humedadMedida >= 60) {
+"748
+[; ;main.c: 748:             if (sensores[i].humedadMedida >= 60) {
 [e $ ! >= -> . *U + &U _sensores * -> -> _i `ui `ux -> -> # *U &U _sensores `ui `ux 0 `i -> 60 `i 562  ]
 {
-"746
-[; ;main.c: 746:                 sprintf(buffer, "\r\n\nEl sensor %d detecta tierra seca\r\n", i);
+"749
+[; ;main.c: 749:                 sprintf(buffer, "\r\n\nEl sensor %d detecta tierra seca\r\n", i);
 [e ( _sprintf (1 , (. , &U _buffer :s 32C _i ]
-"747
-[; ;main.c: 747:                 UART_printf(buffer);
-[e ( _UART_printf (1 &U _buffer ]
 "750
-[; ;main.c: 750:             } else {
+[; ;main.c: 750:                 UART_printf(buffer);
+[e ( _UART_printf (1 &U _buffer ]
+"753
+[; ;main.c: 753:             } else {
 }
 [e $U 563  ]
 [e :U 562 ]
 {
-"751
-[; ;main.c: 751:                 sprintf(buffer, "\r\n\nEl sensor %d detecta tierra humeda\r\n", i);
+"754
+[; ;main.c: 754:                 sprintf(buffer, "\r\n\nEl sensor %d detecta tierra humeda\r\n", i);
 [e ( _sprintf (1 , (. , &U _buffer :s 33C _i ]
-"752
-[; ;main.c: 752:                 UART_printf(buffer);
+"755
+[; ;main.c: 755:                 UART_printf(buffer);
 [e ( _UART_printf (1 &U _buffer ]
-"753
-[; ;main.c: 753:             }
+"756
+[; ;main.c: 756:             }
 }
 [e :U 563 ]
-"755
-[; ;main.c: 755:         }
+"758
+[; ;main.c: 758:         }
 }
 [e ++ _i -> 1 `i ]
 [e $ < _i -> 3 `i 559  ]
 [e :U 560 ]
 }
-"757
-[; ;main.c: 757:     }
+"760
+[; ;main.c: 760:     }
 }
 [e :U 558 ]
-"759
-[; ;main.c: 759:     dameTemperaturaHumedad(&humedad, &temperatura);
-[e ( _dameTemperaturaHumedad (2 , &U _humedad &U _temperatura ]
-"761
-[; ;main.c: 761:     sprintf(buffer, "\r\n\nLa Humedad Ambiente es: %d\r\n", humedad);
-[e ( _sprintf (1 , (. , &U _buffer :s 34C -> _humedad `i ]
 "762
-[; ;main.c: 762:     UART_printf(buffer);
-[e ( _UART_printf (1 &U _buffer ]
-"763
-[; ;main.c: 763:     sprintf(buffer, "\r\n\nLa Temperatura es: %d C\r\n", temperatura);
-[e ( _sprintf (1 , (. , &U _buffer :s 35C -> _temperatura `i ]
+[; ;main.c: 762:     dameTemperaturaHumedad(&humedad, &temperatura);
+[e ( _dameTemperaturaHumedad (2 , &U _humedad &U _temperatura ]
 "764
-[; ;main.c: 764:     UART_printf(buffer);
+[; ;main.c: 764:     sprintf(buffer, "\r\n\nLa Humedad Ambiente es: %d\r\n", humedad);
+[e ( _sprintf (1 , (. , &U _buffer :s 34C -> _humedad `i ]
+"765
+[; ;main.c: 765:     UART_printf(buffer);
 [e ( _UART_printf (1 &U _buffer ]
 "766
-[; ;main.c: 766:     UART_write('I');
+[; ;main.c: 766:     sprintf(buffer, "\r\n\nLa Temperatura es: %d C\r\n", temperatura);
+[e ( _sprintf (1 , (. , &U _buffer :s 35C -> _temperatura `i ]
+"767
+[; ;main.c: 767:     UART_printf(buffer);
+[e ( _UART_printf (1 &U _buffer ]
+"769
+[; ;main.c: 769:     UART_write('I');
 [e ( _UART_write (1 -> -> 73 `ui `uc ]
-"768
-[; ;main.c: 768: }
+"771
+[; ;main.c: 771: }
 [e :UE 557 ]
 }
 [v $root$_main `(v ~T0 @X0 0 e ]
-"770
-[; ;main.c: 770: void main(void) {
+"773
+[; ;main.c: 773: void main(void) {
 [v _main `(v ~T0 @X0 1 ef ]
 {
 [e :U _main ]
 [f ]
-"772
-[; ;main.c: 772:     unsigned char humedad, temperatura;
+"775
+[; ;main.c: 775:     unsigned char humedad, temperatura;
 [v _humedad `uc ~T0 @X0 1 a ]
 [v _temperatura `uc ~T0 @X0 1 a ]
-"774
-[; ;main.c: 774:     INTCONbits.GIE = 1;
-[e = . . _INTCONbits 1 7 -> -> 1 `i `uc ]
-"775
-[; ;main.c: 775:     INTCONbits.PEIE = 1;
-[e = . . _INTCONbits 1 6 -> -> 1 `i `uc ]
-"776
-[; ;main.c: 776:     INTCONbits.TMR0IE = 0;
-[e = . . _INTCONbits 0 5 -> -> 0 `i `uc ]
 "777
-[; ;main.c: 777:     INTCONbits.TMR0IF = 0;
-[e = . . _INTCONbits 0 2 -> -> 0 `i `uc ]
+[; ;main.c: 777:     INTCONbits.GIE = 1;
+[e = . . _INTCONbits 1 7 -> -> 1 `i `uc ]
 "778
-[; ;main.c: 778:     PIE1bits.RCIE = 1;
-[e = . . _PIE1bits 0 5 -> -> 1 `i `uc ]
+[; ;main.c: 778:     INTCONbits.PEIE = 1;
+[e = . . _INTCONbits 1 6 -> -> 1 `i `uc ]
+"779
+[; ;main.c: 779:     INTCONbits.TMR0IE = 0;
+[e = . . _INTCONbits 0 5 -> -> 0 `i `uc ]
 "780
-[; ;main.c: 780:     T0CON = 0b00000111;
+[; ;main.c: 780:     INTCONbits.TMR0IF = 0;
+[e = . . _INTCONbits 0 2 -> -> 0 `i `uc ]
+"781
+[; ;main.c: 781:     PIE1bits.RCIE = 1;
+[e = . . _PIE1bits 0 5 -> -> 1 `i `uc ]
+"783
+[; ;main.c: 783:     T0CON = 0b00000111;
 [e = _T0CON -> -> 7 `i `uc ]
-"782
-[; ;main.c: 782:     INTCONbits.TMR0IE = 1;
+"785
+[; ;main.c: 785:     INTCONbits.TMR0IE = 1;
 [e = . . _INTCONbits 0 5 -> -> 1 `i `uc ]
-"787
-[; ;main.c: 787:     restablecerDatosSensor();
-[e ( _restablecerDatosSensor ..  ]
-"789
-[; ;main.c: 789:     UART_init(9600);
-[e ( _UART_init (1 -> -> 9600 `i `l ]
 "790
-[; ;main.c: 790:     i2c_iniciar();
-[e ( _i2c_iniciar ..  ]
-"791
-[; ;main.c: 791:     configurarAdc();
-[e ( _configurarAdc ..  ]
+[; ;main.c: 790:     restablecerDatosSensor();
+[e ( _restablecerDatosSensor ..  ]
 "792
-[; ;main.c: 792:     inicializarObjetos();
-[e ( _inicializarObjetos ..  ]
+[; ;main.c: 792:     UART_init(9600);
+[e ( _UART_init (1 -> -> 9600 `i `l ]
+"793
+[; ;main.c: 793:     i2c_iniciar();
+[e ( _i2c_iniciar ..  ]
 "794
-[; ;main.c: 794:     leeHorariosMemoria();
-[e ( _leeHorariosMemoria ..  ]
+[; ;main.c: 794:     configurarAdc();
+[e ( _configurarAdc ..  ]
+"795
+[; ;main.c: 795:     inicializarObjetos();
+[e ( _inicializarObjetos ..  ]
 "797
-[; ;main.c: 797:     TRISD = 0;
-[e = _TRISD -> -> 0 `i `uc ]
-"798
-[; ;main.c: 798:     LATD = 0;
-[e = _LATD -> -> 0 `i `uc ]
+[; ;main.c: 797:     leeHorariosMemoria();
+[e ( _leeHorariosMemoria ..  ]
 "800
-[; ;main.c: 800:     TMR0 = VALOR_TIMER0;
+[; ;main.c: 800:     TRISD = 0;
+[e = _TRISD -> -> 0 `i `uc ]
+"801
+[; ;main.c: 801:     LATD = 0;
+[e = _LATD -> -> 0 `i `uc ]
+"803
+[; ;main.c: 803:     TMR0 = VALOR_TIMER0;
 [e = _TMR0 -> _VALOR_TIMER0 `us ]
-"802
-[; ;main.c: 802:     INTCONbits.TMR0IF = 1;
+"805
+[; ;main.c: 805:     INTCONbits.TMR0IF = 1;
 [e = . . _INTCONbits 0 2 -> -> 1 `i `uc ]
-"804
-[; ;main.c: 804:     T0CONbits.TMR0ON = 1;
+"807
+[; ;main.c: 807:     T0CONbits.TMR0ON = 1;
 [e = . . _T0CONbits 0 5 -> -> 1 `i `uc ]
-"806
-[; ;main.c: 806:     mostrarMenu();
-[e ( _mostrarMenu ..  ]
 "809
-[; ;main.c: 809:     while (1) {
+[; ;main.c: 809:     mostrarMenu();
+[e ( _mostrarMenu ..  ]
+"812
+[; ;main.c: 812:     while (1) {
 [e :U 566 ]
 {
-"811
-[; ;main.c: 811:         if (datoRecibido) {
+"814
+[; ;main.c: 814:         if (datoRecibido) {
 [e $ ! != -> _datoRecibido `i -> 0 `i 568  ]
 {
-"813
-[; ;main.c: 813:             datoRecibido = 0;
+"816
+[; ;main.c: 816:             datoRecibido = 0;
 [e = _datoRecibido -> -> 0 `i `uc ]
-"814
-[; ;main.c: 814:             byteUart -= 48;
-[e =- _byteUart -> -> 48 `i `uc ]
-"815
-[; ;main.c: 815:             sistemaPrincipal(byteUart);
-[e ( _sistemaPrincipal (1 _byteUart ]
 "817
-[; ;main.c: 817:         }
+[; ;main.c: 817:             byteUart -= 48;
+[e =- _byteUart -> -> 48 `i `uc ]
+"818
+[; ;main.c: 818:             sistemaPrincipal(byteUart);
+[e ( _sistemaPrincipal (1 _byteUart ]
+"820
+[; ;main.c: 820:         }
 }
 [e :U 568 ]
-"819
-[; ;main.c: 819:         if (overflowTimer) {
+"822
+[; ;main.c: 822:         if (overflowTimer) {
 [e $ ! != -> _overflowTimer `i -> 0 `i 569  ]
 {
-"821
-[; ;main.c: 821:             esperandoDatos = 0;
-[e = _esperandoDatos -> -> 0 `i `uc ]
-"822
-[; ;main.c: 822:             overflowTimer = 0;
-[e = _overflowTimer -> -> 0 `i `uc ]
-"823
-[; ;main.c: 823:             sistemaRegado();
-[e ( _sistemaRegado ..  ]
 "824
-[; ;main.c: 824:         }
+[; ;main.c: 824:             esperandoDatos = 0;
+[e = _esperandoDatos -> -> 0 `i `uc ]
+"825
+[; ;main.c: 825:             overflowTimer = 0;
+[e = _overflowTimer -> -> 0 `i `uc ]
+"826
+[; ;main.c: 826:             sistemaRegado();
+[e ( _sistemaRegado ..  ]
+"827
+[; ;main.c: 827:         }
 }
 [e :U 569 ]
-"826
-[; ;main.c: 826:     }
+"829
+[; ;main.c: 829:     }
 }
 [e :U 565 ]
 [e $U 566  ]
 [e :U 567 ]
-"827
-[; ;main.c: 827:     return;
+"830
+[; ;main.c: 830:     return;
 [e $UE 564  ]
-"828
-[; ;main.c: 828: }
+"831
+[; ;main.c: 831: }
 [e :UE 564 ]
 }
 [p f _sprintf 8388736 ]
