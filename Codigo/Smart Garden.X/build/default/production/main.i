@@ -6159,7 +6159,7 @@ char *ctermid(char *);
 
 char *tempnam(const char *, const char *);
 # 13 "main.c" 2
-# 32 "main.c"
+# 33 "main.c"
 typedef struct {
     short humedadMedida;
     unsigned char pinSensor;
@@ -6213,6 +6213,7 @@ void dameDatosSistema(void);
 void dameTemperaturaHumedad(unsigned char* Humedad, unsigned char* Temperatura);
 void mostrarDatosSensores(void);
 void mostrarDatosSensoresWIFI(void);
+long map(long x, long in_min, long in_max, long out_min, long out_max);
 
 void __attribute__((picinterrupt(("")))) desbordamiento(void) {
 
@@ -6241,6 +6242,10 @@ void __attribute__((picinterrupt(("")))) desbordamiento(void) {
 
     }
 
+}
+
+long map(long x, long in_min, long in_max, long out_min, long out_max) {
+    return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
 }
 
 void constructorSensor(SensorHumedad s, unsigned char humedad, unsigned char pin) {
@@ -6824,8 +6829,7 @@ void dameTemperaturaHumedad(unsigned char* Humedad, unsigned char* Temperatura) 
 void mostrarDatosSensores(void) {
 
     char buffer[50];
-    int porcentajeHumedad = 0;
-    unsigned char temperatura, humedad;
+    unsigned char temperatura, humedad, porcentajeHumedad;
 
     dameTemperaturaHumedad(&humedad, &temperatura);
 
@@ -6842,13 +6846,7 @@ void mostrarDatosSensores(void) {
 
     for (int i = 0; i < 3; i++) {
 
-        porcentajeHumedad = (sensores[i].humedadMedida);
-        porcentajeHumedad *= 10;
-        porcentajeHumedad /= 1023;
-        porcentajeHumedad *= 10;
-
-        porcentajeHumedad -=100;
-        porcentajeHumedad *= -1;
+        porcentajeHumedad = map(sensores[i].humedadMedida, 0, 1023, 100, 0);
 
         sprintf(buffer, "\r\n\nPorcentaje Humedad del sensor %d: %d\r\n"
                 , i, porcentajeHumedad);

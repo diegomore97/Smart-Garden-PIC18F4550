@@ -28,6 +28,7 @@
 #define SOLICITUD_DATOS_SENSORES 'R' //Variable que se mandara por UART a otro Micro
 #define ENVIANDO_DATOS_SENSORES 'O' //El otro micro ya nos confirmo que mandara los datos
 #define INTERRUMPIR_COMANDOS 'I' //Se utiliza esta constante para la opcion de leer sensores
+#define BITS_ADC 1023 //Indica el numero de bits de lectura de ADC en este caso 10 bits
 
 typedef struct {
     short humedadMedida;
@@ -82,6 +83,7 @@ void dameDatosSistema(void);
 void dameTemperaturaHumedad(unsigned char* Humedad, unsigned char* Temperatura);
 void mostrarDatosSensores(void);
 void mostrarDatosSensoresWIFI(void);
+long map(long x, long in_min, long in_max, long out_min, long out_max);
 
 void __interrupt() desbordamiento(void) {
 
@@ -110,6 +112,10 @@ void __interrupt() desbordamiento(void) {
 
     }
 
+}
+
+long map(long x, long in_min, long in_max, long out_min, long out_max) {
+    return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
 }
 
 void constructorSensor(SensorHumedad s, unsigned char humedad, unsigned char pin) {
@@ -693,8 +699,7 @@ void dameTemperaturaHumedad(unsigned char* Humedad, unsigned char* Temperatura) 
 void mostrarDatosSensores(void) {
 
     char buffer[TAMANO_CADENA];
-    int porcentajeHumedad = 0;
-    unsigned char temperatura, humedad;
+    unsigned char temperatura, humedad, porcentajeHumedad;
 
     dameTemperaturaHumedad(&humedad, &temperatura);
 
@@ -711,13 +716,7 @@ void mostrarDatosSensores(void) {
 
     for (int i = 0; i < TOTAL_SENSORES; i++) {
 
-        porcentajeHumedad = (sensores[i].humedadMedida);
-        porcentajeHumedad *= 10;
-        porcentajeHumedad /= 1023;
-        porcentajeHumedad *= 10;
-        
-        porcentajeHumedad -=100;      
-        porcentajeHumedad *= -1;
+        porcentajeHumedad = map(sensores[i].humedadMedida, 0, BITS_ADC, 100, 0);
 
         sprintf(buffer, "\r\n\nPorcentaje Humedad del sensor %d: %d\r\n"
                 , i, porcentajeHumedad);
@@ -808,7 +807,7 @@ void main(void) {
 
     mostrarMenu(); //comentar
 
-    
+
     while (1) {
 
         if (datoRecibido) {
