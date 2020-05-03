@@ -192,14 +192,14 @@ Version 4.0 HI-TECH Software Intermediate Code
 "3290
 [; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic18f4550.h: 3290: extern volatile LATDbits_t LATDbits __attribute__((address(0xF8C)));
 [v _LATDbits `VS135 ~T0 @X0 0 e@3980 ]
-"39 main.c
-[; ;main.c: 39: typedef struct {
+"40 main.c
+[; ;main.c: 40: typedef struct {
 [s S413 `uc 1 `uc 1 `uc 1 ]
 [n S413 . hora regar tiempoRegar ]
-"33
-[; ;main.c: 33: typedef struct {
-[s S412 `s 1 `uc 1 ]
-[n S412 . humedadMedida pinSensor ]
+"34
+[; ;main.c: 34: typedef struct {
+[s S412 `uc 1 `uc 1 ]
+[n S412 . porcientoHumedad pinSensor ]
 [t ~ __interrupt . k ]
 [t T36 __interrupt ]
 "8588 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic18f4550.h
@@ -227,8 +227,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 "6510
 [; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic18f4550.h: 6510: extern volatile unsigned char ADCON2 __attribute__((address(0xFC0)));
 [v _ADCON2 `Vuc ~T0 @X0 0 e@4032 ]
-"83 main.c
-[; ;main.c: 83: void dameTemperaturaHumedad(unsigned char* Humedad, unsigned char* Temperatura);
+"85 main.c
+[; ;main.c: 85: void dameTemperaturaHumedad(unsigned char* Humedad, unsigned char* Temperatura);
 [v _dameTemperaturaHumedad `(v ~T0 @X0 0 ef2`*uc`*uc ]
 "6672 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic18f4550.h
 [; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic18f4550.h: 6672:     struct {
@@ -290,21 +290,21 @@ Version 4.0 HI-TECH Software Intermediate Code
 "4408
 [; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic18f4550.h: 4408: extern volatile PIE1bits_t PIE1bits __attribute__((address(0xF9D)));
 [v _PIE1bits `VS174 ~T0 @X0 0 e@3997 ]
-"82 main.c
-[; ;main.c: 82: void dameDatosSistema(void);
+"113 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\c99\stdio.h
+[v _sprintf `(i ~T0 @X0 0 e1v`*uc`*Cuc ]
+"84 main.c
+[; ;main.c: 84: void dameDatosSistema(void);
 [v _dameDatosSistema `(v ~T0 @X0 0 ef ]
-"85
-[; ;main.c: 85: void mostrarDatosSensoresWIFI(void);
+"87
+[; ;main.c: 87: void mostrarDatosSensoresWIFI(void);
 [v _mostrarDatosSensoresWIFI `(v ~T0 @X0 0 ef ]
-"84
-[; ;main.c: 84: void mostrarDatosSensores(void);
+"86
+[; ;main.c: 86: void mostrarDatosSensores(void);
 [v _mostrarDatosSensores `(v ~T0 @X0 0 ef ]
 "3263 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic18f4550.h
 [; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic18f4550.h: 3263: extern volatile unsigned char LATD __attribute__((address(0xF8C)));
 [v _LATD `Vuc ~T0 @X0 0 e@3980 ]
-"113 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\c99\stdio.h
-[v _sprintf `(i ~T0 @X0 0 e1v`*uc`*Cuc ]
-"8075 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic18f4550.h
+"8075
 [; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic18f4550.h: 8075:     struct {
 [s S347 :3 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
 [n S347 . T0PS PSA T0SE T0CS T08BIT TMR0ON ]
@@ -1467,14 +1467,17 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;./DHT11.h: 51: }
 [e :UE 407 ]
 }
-"45 main.c
-[; ;main.c: 45: Horario horarios[24];
-[v _horarios `S413 ~T0 @X0 -> 24 `i e ]
-"46
-[; ;main.c: 46: SensorHumedad sensores[8];
-[v _sensores `S412 ~T0 @X0 -> 8 `i e ]
+"46 main.c
+[; ;main.c: 46: unsigned char MODO_COMUNICACION;
+[v _MODO_COMUNICACION `uc ~T0 @X0 1 e ]
 "47
-[; ;main.c: 47: unsigned char hora = 0, minutos = 0, segundos = 0;
+[; ;main.c: 47: Horario horarios[24];
+[v _horarios `S413 ~T0 @X0 -> 24 `i e ]
+"48
+[; ;main.c: 48: SensorHumedad sensores[8];
+[v _sensores `S412 ~T0 @X0 -> 8 `i e ]
+"49
+[; ;main.c: 49: unsigned char hora = 0, minutos = 0, segundos = 0;
 [v _hora `uc ~T0 @X0 1 e ]
 [i _hora
 -> -> 0 `i `uc
@@ -1487,116 +1490,116 @@ Version 4.0 HI-TECH Software Intermediate Code
 [i _segundos
 -> -> 0 `i `uc
 ]
-"48
-[; ;main.c: 48: unsigned char datoRecibido = 0;
+"50
+[; ;main.c: 50: unsigned char datoRecibido = 0;
 [v _datoRecibido `uc ~T0 @X0 1 e ]
 [i _datoRecibido
 -> -> 0 `i `uc
 ]
-"49
-[; ;main.c: 49: unsigned char overflowTimer = 0;
+"51
+[; ;main.c: 51: unsigned char overflowTimer = 0;
 [v _overflowTimer `uc ~T0 @X0 1 e ]
 [i _overflowTimer
 -> -> 0 `i `uc
 ]
-"51
-[; ;main.c: 51: int VALOR_TIMER0 = 26473;
+"53
+[; ;main.c: 53: int VALOR_TIMER0 = 26473;
 [v _VALOR_TIMER0 `i ~T0 @X0 1 e ]
 [i _VALOR_TIMER0
 -> 26473 `i
 ]
-"52
-[; ;main.c: 52: int contInterrupciones = 0;
+"54
+[; ;main.c: 54: int contInterrupciones = 0;
 [v _contInterrupciones `i ~T0 @X0 1 e ]
 [i _contInterrupciones
 -> 0 `i
 ]
-"53
-[; ;main.c: 53: unsigned char minutosRegar = 0;
+"55
+[; ;main.c: 55: unsigned char minutosRegar = 0;
 [v _minutosRegar `uc ~T0 @X0 1 e ]
 [i _minutosRegar
 -> -> 0 `i `uc
 ]
-"54
-[; ;main.c: 54: unsigned char minutosTranscurridos = 0;
+"56
+[; ;main.c: 56: unsigned char minutosTranscurridos = 0;
 [v _minutosTranscurridos `uc ~T0 @X0 1 e ]
 [i _minutosTranscurridos
 -> -> 0 `i `uc
 ]
-"55
-[; ;main.c: 55: unsigned char regando = 0;
+"57
+[; ;main.c: 57: unsigned char regando = 0;
 [v _regando `uc ~T0 @X0 1 e ]
 [i _regando
 -> -> 0 `i `uc
 ]
-"56
-[; ;main.c: 56: unsigned char peticionLecturaSensores = 0;
+"58
+[; ;main.c: 58: unsigned char peticionLecturaSensores = 0;
 [v _peticionLecturaSensores `uc ~T0 @X0 1 e ]
 [i _peticionLecturaSensores
 -> -> 0 `i `uc
 ]
 [v $root$_desbordamiento `(v ~T0 @X0 0 e ]
-"88
-[; ;main.c: 88: void __attribute__((picinterrupt(("")))) desbordamiento(void) {
+"90
+[; ;main.c: 90: void __attribute__((picinterrupt(("")))) desbordamiento(void) {
 [v _desbordamiento `(v ~T36 @X0 1 ef ]
 {
 [e :U _desbordamiento ]
 [f ]
-"90
-[; ;main.c: 90:     if (INTCONbits.TMR0IF) {
+"92
+[; ;main.c: 92:     if (INTCONbits.TMR0IF) {
 [e $ ! != -> . . _INTCONbits 0 2 `i -> 0 `i 415  ]
 {
-"92
-[; ;main.c: 92:         if (esperandoDatos) {
+"94
+[; ;main.c: 94:         if (esperandoDatos) {
 [e $ ! != -> _esperandoDatos `i -> 0 `i 416  ]
 {
-"94
-[; ;main.c: 94:             tiempoInactividadTrans++;
-[e ++ _tiempoInactividadTrans -> -> 1 `i `uc ]
 "96
-[; ;main.c: 96:             if (tiempoInactividadTrans == 2)
+[; ;main.c: 96:             tiempoInactividadTrans++;
+[e ++ _tiempoInactividadTrans -> -> 1 `i `uc ]
+"98
+[; ;main.c: 98:             if (tiempoInactividadTrans == 2)
 [e $ ! == -> _tiempoInactividadTrans `i -> 2 `i 417  ]
-"97
-[; ;main.c: 97:                 esperaDatoConcluida = 1;
+"99
+[; ;main.c: 99:                 esperaDatoConcluida = 1;
 [e = _esperaDatoConcluida -> -> 1 `i `uc ]
 [e :U 417 ]
-"100
-[; ;main.c: 100:         }
+"102
+[; ;main.c: 102:         }
 }
 [e :U 416 ]
-"102
-[; ;main.c: 102:         INTCONbits.TMR0IF = 0;
-[e = . . _INTCONbits 0 2 -> -> 0 `i `uc ]
-"103
-[; ;main.c: 103:         TMR0 = VALOR_TIMER0;
-[e = _TMR0 -> _VALOR_TIMER0 `us ]
 "104
-[; ;main.c: 104:         overflowTimer = 1;
-[e = _overflowTimer -> -> 1 `i `uc ]
+[; ;main.c: 104:         INTCONbits.TMR0IF = 0;
+[e = . . _INTCONbits 0 2 -> -> 0 `i `uc ]
+"105
+[; ;main.c: 105:         TMR0 = VALOR_TIMER0;
+[e = _TMR0 -> _VALOR_TIMER0 `us ]
 "106
-[; ;main.c: 106:     }
+[; ;main.c: 106:         overflowTimer = 1;
+[e = _overflowTimer -> -> 1 `i `uc ]
+"108
+[; ;main.c: 108:     }
 }
 [e :U 415 ]
-"108
-[; ;main.c: 108:     if (PIR1bits.RCIF) {
+"110
+[; ;main.c: 110:     if (PIR1bits.RCIF) {
 [e $ ! != -> . . _PIR1bits 0 5 `i -> 0 `i 418  ]
 {
-"110
-[; ;main.c: 110:         byteUart = RCREG;
+"112
+[; ;main.c: 112:         byteUart = RCREG;
 [e = _byteUart _RCREG ]
-"111
-[; ;main.c: 111:         datoRecibido = 1;
-[e = _datoRecibido -> -> 1 `i `uc ]
 "113
-[; ;main.c: 113:     }
+[; ;main.c: 113:         datoRecibido = 1;
+[e = _datoRecibido -> -> 1 `i `uc ]
+"115
+[; ;main.c: 115:     }
 }
 [e :U 418 ]
-"115
-[; ;main.c: 115: }
+"117
+[; ;main.c: 117: }
 [e :UE 414 ]
 }
-"117
-[; ;main.c: 117: long map(long x, long in_min, long in_max, long out_min, long out_max) {
+"119
+[; ;main.c: 119: long map(long x, long in_min, long in_max, long out_min, long out_max) {
 [v _map `(l ~T0 @X0 1 ef5`l`l`l`l`l ]
 {
 [e :U _map ]
@@ -1606,92 +1609,92 @@ Version 4.0 HI-TECH Software Intermediate Code
 [v _out_min `l ~T0 @X0 1 r4 ]
 [v _out_max `l ~T0 @X0 1 r5 ]
 [f ]
-"118
-[; ;main.c: 118:     return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
+"120
+[; ;main.c: 120:     return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
 [e ) + / * - _x _in_min - _out_max _out_min - _in_max _in_min _out_min ]
 [e $UE 419  ]
-"119
-[; ;main.c: 119: }
+"121
+[; ;main.c: 121: }
 [e :UE 419 ]
 }
-"121
-[; ;main.c: 121: void constructorSensor(SensorHumedad s, unsigned char humedad, unsigned char pin) {
+"123
+[; ;main.c: 123: void constructorSensor(SensorHumedad s, unsigned char porcientoHumedad, unsigned char pin) {
 [v _constructorSensor `(v ~T0 @X0 1 ef3`S412`uc`uc ]
 {
 [e :U _constructorSensor ]
 [v _s `S412 ~T0 @X0 1 r1 ]
-[v _humedad `uc ~T0 @X0 1 r2 ]
+[v _porcientoHumedad `uc ~T0 @X0 1 r2 ]
 [v _pin `uc ~T0 @X0 1 r3 ]
 [f ]
-"123
-[; ;main.c: 123:     s.humedadMedida = humedad;
-[e = . _s 0 -> _humedad `s ]
 "124
-[; ;main.c: 124:     s.pinSensor = pin;
-[e = . _s 1 _pin ]
+[; ;main.c: 124:     s.porcientoHumedad = porcientoHumedad;
+[e = . _s 0 _porcientoHumedad ]
 "125
-[; ;main.c: 125: }
+[; ;main.c: 125:     s.pinSensor = pin;
+[e = . _s 1 _pin ]
+"126
+[; ;main.c: 126: }
 [e :UE 420 ]
 }
-"127
-[; ;main.c: 127: void configurarAdc(void) {
+"128
+[; ;main.c: 128: void configurarAdc(void) {
 [v _configurarAdc `(v ~T0 @X0 1 ef ]
 {
 [e :U _configurarAdc ]
 [f ]
-"128
-[; ;main.c: 128:     ADCON1 = 0b00000000;
-[e = _ADCON1 -> -> 0 `i `uc ]
 "129
-[; ;main.c: 129:     ADCON2 = 0b10100101;
-[e = _ADCON2 -> -> 165 `i `uc ]
+[; ;main.c: 129:     ADCON1 = 0b00000000;
+[e = _ADCON1 -> -> 0 `i `uc ]
 "130
-[; ;main.c: 130: }
+[; ;main.c: 130:     ADCON2 = 0b10100101;
+[e = _ADCON2 -> -> 165 `i `uc ]
+"131
+[; ;main.c: 131: }
 [e :UE 421 ]
 }
-"132
-[; ;main.c: 132: int estaSeco(SensorHumedad s) {
+"133
+[; ;main.c: 133: int estaSeco(SensorHumedad s) {
 [v _estaSeco `(i ~T0 @X0 1 ef1`S412 ]
 {
 [e :U _estaSeco ]
 [v _s `S412 ~T0 @X0 1 r1 ]
 [f ]
-"133
-[; ;main.c: 133:     unsigned char temperatura;
+"134
+[; ;main.c: 134:     unsigned char temperatura;
 [v _temperatura `uc ~T0 @X0 1 a ]
-"135
-[; ;main.c: 135:     dameTemperaturaHumedad(((void*)0), &temperatura);
+"136
+[; ;main.c: 136:     dameTemperaturaHumedad(((void*)0), &temperatura);
 [e ( _dameTemperaturaHumedad (2 , -> -> -> 0 `i `*v `*uc &U _temperatura ]
-"138
-[; ;main.c: 138:     return (s.humedadMedida >= 60) && (temperatura < 34);
-[e ) -> && >= -> . _s 0 `i -> 60 `i < -> _temperatura `i -> 34 `i `i ]
-[e $UE 422  ]
 "139
-[; ;main.c: 139: }
+[; ;main.c: 139:     return (s.porcientoHumedad < 94) && (temperatura < 34);
+[e ) -> && < -> . _s 0 `i -> 94 `i < -> _temperatura `i -> 34 `i `i ]
+[e $UE 422  ]
+"140
+[; ;main.c: 140: }
 [e :UE 422 ]
 }
-"141
-[; ;main.c: 141: int horaRegar() {
+"142
+[; ;main.c: 142: int horaRegar() {
 [v _horaRegar `(i ~T0 @X0 1 ef ]
 {
 [e :U _horaRegar ]
 [f ]
-"143
-[; ;main.c: 143:     return horarios[hora].regar == 1;
+"144
+[; ;main.c: 144:     return horarios[hora].regar == 1;
 [e ) -> == -> . *U + &U _horarios * -> _hora `ux -> -> # *U &U _horarios `ui `ux 1 `i -> 1 `i `i ]
 [e $UE 423  ]
-"144
-[; ;main.c: 144: }
+"145
+[; ;main.c: 145: }
 [e :UE 423 ]
 }
-"146
-[; ;main.c: 146: void inicializarObjetos() {
+"147
+[; ;main.c: 147: void inicializarObjetos() {
 [v _inicializarObjetos `(v ~T0 @X0 1 ef ]
 {
 [e :U _inicializarObjetos ]
 [f ]
-"148
-[; ;main.c: 148:     for (int i = 0; i < 24; i++) {
+"149
+[; ;main.c: 149:     for (int i = 0; i < 24; i++) {
 {
 [v _i `i ~T0 @X0 1 a ]
 [e = _i -> 0 `i ]
@@ -1699,61 +1702,61 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e $U 426  ]
 [e :U 425 ]
 {
-"149
-[; ;main.c: 149:         horarios[i].hora = i;
-[e = . *U + &U _horarios * -> -> _i `ui `ux -> -> # *U &U _horarios `ui `ux 0 -> _i `uc ]
 "150
-[; ;main.c: 150:         horarios[i].regar = 0;
-[e = . *U + &U _horarios * -> -> _i `ui `ux -> -> # *U &U _horarios `ui `ux 1 -> -> 0 `i `uc ]
+[; ;main.c: 150:         horarios[i].hora = i;
+[e = . *U + &U _horarios * -> -> _i `ui `ux -> -> # *U &U _horarios `ui `ux 0 -> _i `uc ]
 "151
-[; ;main.c: 151:         horarios[i].tiempoRegar = 15;
-[e = . *U + &U _horarios * -> -> _i `ui `ux -> -> # *U &U _horarios `ui `ux 2 -> -> 15 `i `uc ]
+[; ;main.c: 151:         horarios[i].regar = 0;
+[e = . *U + &U _horarios * -> -> _i `ui `ux -> -> # *U &U _horarios `ui `ux 1 -> -> 0 `i `uc ]
 "152
-[; ;main.c: 152:     }
+[; ;main.c: 152:         horarios[i].tiempoRegar = 15;
+[e = . *U + &U _horarios * -> -> _i `ui `ux -> -> # *U &U _horarios `ui `ux 2 -> -> 15 `i `uc ]
+"153
+[; ;main.c: 153:     }
 }
 [e ++ _i -> 1 `i ]
 [e $ < _i -> 24 `i 425  ]
 [e :U 426 ]
 }
-"154
-[; ;main.c: 154: }
+"155
+[; ;main.c: 155: }
 [e :UE 424 ]
 }
-"156
-[; ;main.c: 156: void dameHoraActual() {
+"157
+[; ;main.c: 157: void dameHoraActual() {
 [v _dameHoraActual `(v ~T0 @X0 1 ef ]
 {
 [e :U _dameHoraActual ]
 [f ]
-"158
-[; ;main.c: 158:     segundos = convertirDato(leer_rtc(0x00));
-[e = _segundos ( _convertirDato (1 ( _leer_rtc (1 -> -> 0 `i `uc ]
 "159
-[; ;main.c: 159:     minutos = convertirDato(leer_rtc(0x01));
-[e = _minutos ( _convertirDato (1 ( _leer_rtc (1 -> -> 1 `i `uc ]
+[; ;main.c: 159:     segundos = convertirDato(leer_rtc(0x00));
+[e = _segundos ( _convertirDato (1 ( _leer_rtc (1 -> -> 0 `i `uc ]
 "160
-[; ;main.c: 160:     hora = convertirDato(leer_rtc(0x02));
-[e = _hora ( _convertirDato (1 ( _leer_rtc (1 -> -> 2 `i `uc ]
+[; ;main.c: 160:     minutos = convertirDato(leer_rtc(0x01));
+[e = _minutos ( _convertirDato (1 ( _leer_rtc (1 -> -> 1 `i `uc ]
 "161
-[; ;main.c: 161: }
+[; ;main.c: 161:     hora = convertirDato(leer_rtc(0x02));
+[e = _hora ( _convertirDato (1 ( _leer_rtc (1 -> -> 2 `i `uc ]
+"162
+[; ;main.c: 162: }
 [e :UE 428 ]
 }
-"163
-[; ;main.c: 163: void setRtc(unsigned char direccion) {
+"164
+[; ;main.c: 164: void setRtc(unsigned char direccion) {
 [v _setRtc `(v ~T0 @X0 1 ef1`uc ]
 {
 [e :U _setRtc ]
 [v _direccion `uc ~T0 @X0 1 r1 ]
 [f ]
-"164
-[; ;main.c: 164:     unsigned char dato;
-[v _dato `uc ~T0 @X0 1 a ]
 "165
-[; ;main.c: 165:     char datoCapturado = 0;
+[; ;main.c: 165:     unsigned char dato;
+[v _dato `uc ~T0 @X0 1 a ]
+"166
+[; ;main.c: 166:     char datoCapturado = 0;
 [v _datoCapturado `uc ~T0 @X0 1 a ]
 [e = _datoCapturado -> -> 0 `i `uc ]
-"167
-[; ;main.c: 167:     for (int i = 0; i < 2; i++) {
+"168
+[; ;main.c: 168:     for (int i = 0; i < 2; i++) {
 {
 [v _i `i ~T0 @X0 1 a ]
 [e = _i -> 0 `i ]
@@ -1761,164 +1764,164 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e $U 431  ]
 [e :U 430 ]
 {
-"168
-[; ;main.c: 168:         char Rx = UART_read();
+"169
+[; ;main.c: 169:         char Rx = UART_read();
 [v _Rx `uc ~T0 @X0 1 a ]
 [e = _Rx -> ( _UART_read ..  `uc ]
-"169
-[; ;main.c: 169:         if (Rx >= 48 && Rx <= 57) {
+"170
+[; ;main.c: 170:         if (Rx >= 48 && Rx <= 57) {
 [e $ ! && >= -> _Rx `i -> 48 `i <= -> _Rx `i -> 57 `i 433  ]
 {
-"170
-[; ;main.c: 170:             if (!i) {
+"171
+[; ;main.c: 171:             if (!i) {
 [e $ ! ! != _i -> 0 `i 434  ]
 {
-"171
-[; ;main.c: 171:                 dato = ((Rx - 48) & 0x0F) << 4;
-[e = _dato -> << & - -> _Rx `i -> 48 `i -> 15 `i -> 4 `i `uc ]
 "172
-[; ;main.c: 172:             } else {
+[; ;main.c: 172:                 dato = ((Rx - 48) & 0x0F) << 4;
+[e = _dato -> << & - -> _Rx `i -> 48 `i -> 15 `i -> 4 `i `uc ]
+"173
+[; ;main.c: 173:             } else {
 }
 [e $U 435  ]
 [e :U 434 ]
 {
-"173
-[; ;main.c: 173:                 dato |= (Rx - 48) & 0x0F;
-[e =| _dato -> & - -> _Rx `i -> 48 `i -> 15 `i `uc ]
 "174
-[; ;main.c: 174:                 datoCapturado = 1;
-[e = _datoCapturado -> -> 1 `i `uc ]
+[; ;main.c: 174:                 dato |= (Rx - 48) & 0x0F;
+[e =| _dato -> & - -> _Rx `i -> 48 `i -> 15 `i `uc ]
 "175
-[; ;main.c: 175:             }
+[; ;main.c: 175:                 datoCapturado = 1;
+[e = _datoCapturado -> -> 1 `i `uc ]
+"176
+[; ;main.c: 176:             }
 }
 [e :U 435 ]
-"176
-[; ;main.c: 176:         } else {
+"177
+[; ;main.c: 177:         } else {
 }
 [e $U 436  ]
 [e :U 433 ]
 {
-"177
-[; ;main.c: 177:             datoCapturado = 0;
+"178
+[; ;main.c: 178:             datoCapturado = 0;
 [e = _datoCapturado -> -> 0 `i `uc ]
-"179
-[; ;main.c: 179:             UART_write('F');
-[e ( _UART_write (1 -> -> 70 `ui `uc ]
 "180
-[; ;main.c: 180:             break;
-[e $U 431  ]
+[; ;main.c: 180:             UART_write('F');
+[e ( _UART_write (1 -> -> 70 `ui `uc ]
 "181
-[; ;main.c: 181:         }
+[; ;main.c: 181:             break;
+[e $U 431  ]
+"182
+[; ;main.c: 182:         }
 }
 [e :U 436 ]
-"182
-[; ;main.c: 182:     }
+"183
+[; ;main.c: 183:     }
 }
 [e ++ _i -> 1 `i ]
 [e $ < _i -> 2 `i 430  ]
 [e :U 431 ]
 }
-"184
-[; ;main.c: 184:     if (datoCapturado && !esperandoDatos)
-[e $ ! && != -> _datoCapturado `i -> 0 `i ! != -> _esperandoDatos `i -> 0 `i 437  ]
 "185
-[; ;main.c: 185:         escribe_rtc(direccion, dato);
+[; ;main.c: 185:     if (datoCapturado && !esperandoDatos)
+[e $ ! && != -> _datoCapturado `i -> 0 `i ! != -> _esperandoDatos `i -> 0 `i 437  ]
+"186
+[; ;main.c: 186:         escribe_rtc(direccion, dato);
 [e ( _escribe_rtc (2 , _direccion _dato ]
 [e :U 437 ]
-"186
-[; ;main.c: 186: }
+"187
+[; ;main.c: 187: }
 [e :UE 429 ]
 }
-"188
-[; ;main.c: 188: void escribe_eeprom(uint16_t direccion, unsigned char dato) {
+"189
+[; ;main.c: 189: void escribe_eeprom(uint16_t direccion, unsigned char dato) {
 [v _escribe_eeprom `(v ~T0 @X0 1 ef2`us`uc ]
 {
 [e :U _escribe_eeprom ]
 [v _direccion `us ~T0 @X0 1 r1 ]
 [v _dato `uc ~T0 @X0 1 r2 ]
 [f ]
-"189
-[; ;main.c: 189:     i2c_inicia_com();
-[e ( _i2c_inicia_com ..  ]
 "190
-[; ;main.c: 190:     i2c_envia_dato(0xAE);
-[e ( _i2c_envia_dato (1 -> -> 174 `i `uc ]
+[; ;main.c: 190:     i2c_inicia_com();
+[e ( _i2c_inicia_com ..  ]
 "191
-[; ;main.c: 191:     i2c_envia_dato(direccion >> 8);
+[; ;main.c: 191:     i2c_envia_dato(0xAE);
+[e ( _i2c_envia_dato (1 -> -> 174 `i `uc ]
+"192
+[; ;main.c: 192:     i2c_envia_dato(direccion >> 8);
 [e ( _i2c_envia_dato (1 -> >> -> _direccion `ui -> 8 `i `uc ]
-"193
-[; ;main.c: 193:     i2c_envia_dato(direccion);
+"194
+[; ;main.c: 194:     i2c_envia_dato(direccion);
 [e ( _i2c_envia_dato (1 -> _direccion `uc ]
-"195
-[; ;main.c: 195:     i2c_envia_dato(dato);
-[e ( _i2c_envia_dato (1 _dato ]
 "196
-[; ;main.c: 196:     i2c_detener();
-[e ( _i2c_detener ..  ]
+[; ;main.c: 196:     i2c_envia_dato(dato);
+[e ( _i2c_envia_dato (1 _dato ]
 "197
-[; ;main.c: 197:     _delay((unsigned long)((10)*(4000000/4000.0)));
-[e ( __delay (1 -> * -> -> 10 `i `d / -> -> 4000000 `l `d .4000.0 `ul ]
+[; ;main.c: 197:     i2c_detener();
+[e ( _i2c_detener ..  ]
 "198
-[; ;main.c: 198: }
+[; ;main.c: 198:     _delay((unsigned long)((10)*(4000000/4000.0)));
+[e ( __delay (1 -> * -> -> 10 `i `d / -> -> 4000000 `l `d .4000.0 `ul ]
+"199
+[; ;main.c: 199: }
 [e :UE 438 ]
 }
-"200
-[; ;main.c: 200: unsigned char leer_eeprom(uint16_t direccion) {
+"201
+[; ;main.c: 201: unsigned char leer_eeprom(uint16_t direccion) {
 [v _leer_eeprom `(uc ~T0 @X0 1 ef1`us ]
 {
 [e :U _leer_eeprom ]
 [v _direccion `us ~T0 @X0 1 r1 ]
 [f ]
-"202
-[; ;main.c: 202:     unsigned char dato;
+"203
+[; ;main.c: 203:     unsigned char dato;
 [v _dato `uc ~T0 @X0 1 a ]
-"204
-[; ;main.c: 204:     i2c_inicia_com();
-[e ( _i2c_inicia_com ..  ]
 "205
-[; ;main.c: 205:     i2c_envia_dato(0xAE);
-[e ( _i2c_envia_dato (1 -> -> 174 `i `uc ]
+[; ;main.c: 205:     i2c_inicia_com();
+[e ( _i2c_inicia_com ..  ]
 "206
-[; ;main.c: 206:     i2c_envia_dato(direccion >> 8);
-[e ( _i2c_envia_dato (1 -> >> -> _direccion `ui -> 8 `i `uc ]
+[; ;main.c: 206:     i2c_envia_dato(0xAE);
+[e ( _i2c_envia_dato (1 -> -> 174 `i `uc ]
 "207
-[; ;main.c: 207:     i2c_envia_dato(direccion);
-[e ( _i2c_envia_dato (1 -> _direccion `uc ]
+[; ;main.c: 207:     i2c_envia_dato(direccion >> 8);
+[e ( _i2c_envia_dato (1 -> >> -> _direccion `ui -> 8 `i `uc ]
 "208
-[; ;main.c: 208:     i2c_reinicia_com();
-[e ( _i2c_reinicia_com ..  ]
+[; ;main.c: 208:     i2c_envia_dato(direccion);
+[e ( _i2c_envia_dato (1 -> _direccion `uc ]
 "209
-[; ;main.c: 209:     i2c_envia_dato(0xAF);
-[e ( _i2c_envia_dato (1 -> -> 175 `i `uc ]
+[; ;main.c: 209:     i2c_reinicia_com();
+[e ( _i2c_reinicia_com ..  ]
 "210
-[; ;main.c: 210:     dato = i2c_recibe_dato();
-[e = _dato ( _i2c_recibe_dato ..  ]
+[; ;main.c: 210:     i2c_envia_dato(0xAF);
+[e ( _i2c_envia_dato (1 -> -> 175 `i `uc ]
 "211
-[; ;main.c: 211:     i2c_detener();
-[e ( _i2c_detener ..  ]
+[; ;main.c: 211:     dato = i2c_recibe_dato();
+[e = _dato ( _i2c_recibe_dato ..  ]
 "212
-[; ;main.c: 212:     _delay((unsigned long)((10)*(4000000/4000.0)));
+[; ;main.c: 212:     i2c_detener();
+[e ( _i2c_detener ..  ]
+"213
+[; ;main.c: 213:     _delay((unsigned long)((10)*(4000000/4000.0)));
 [e ( __delay (1 -> * -> -> 10 `i `d / -> -> 4000000 `l `d .4000.0 `ul ]
-"214
-[; ;main.c: 214:     return dato;
+"215
+[; ;main.c: 215:     return dato;
 [e ) _dato ]
 [e $UE 439  ]
-"215
-[; ;main.c: 215: }
+"216
+[; ;main.c: 216: }
 [e :UE 439 ]
 }
-"217
-[; ;main.c: 217: void escribeHorariosMemoria() {
+"218
+[; ;main.c: 218: void escribeHorariosMemoria() {
 [v _escribeHorariosMemoria `(v ~T0 @X0 1 ef ]
 {
 [e :U _escribeHorariosMemoria ]
 [f ]
-"219
-[; ;main.c: 219:     int contMemoria = 0;
+"220
+[; ;main.c: 220:     int contMemoria = 0;
 [v _contMemoria `i ~T0 @X0 1 a ]
 [e = _contMemoria -> 0 `i ]
-"220
-[; ;main.c: 220:     for (int i = 0; i < 24; i++) {
+"221
+[; ;main.c: 221:     for (int i = 0; i < 24; i++) {
 {
 [v _i `i ~T0 @X0 1 a ]
 [e = _i -> 0 `i ]
@@ -1926,38 +1929,38 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e $U 442  ]
 [e :U 441 ]
 {
-"221
-[; ;main.c: 221:         escribe_eeprom(contMemoria++, horarios[i].hora);
-[e ( _escribe_eeprom (2 , -> ++ _contMemoria -> 1 `i `us . *U + &U _horarios * -> -> _i `ui `ux -> -> # *U &U _horarios `ui `ux 0 ]
 "222
-[; ;main.c: 222:         escribe_eeprom(contMemoria++, horarios[i].regar);
-[e ( _escribe_eeprom (2 , -> ++ _contMemoria -> 1 `i `us . *U + &U _horarios * -> -> _i `ui `ux -> -> # *U &U _horarios `ui `ux 1 ]
+[; ;main.c: 222:         escribe_eeprom(contMemoria++, horarios[i].hora);
+[e ( _escribe_eeprom (2 , -> ++ _contMemoria -> 1 `i `us . *U + &U _horarios * -> -> _i `ui `ux -> -> # *U &U _horarios `ui `ux 0 ]
 "223
-[; ;main.c: 223:         escribe_eeprom(contMemoria++, horarios[i].tiempoRegar);
-[e ( _escribe_eeprom (2 , -> ++ _contMemoria -> 1 `i `us . *U + &U _horarios * -> -> _i `ui `ux -> -> # *U &U _horarios `ui `ux 2 ]
+[; ;main.c: 223:         escribe_eeprom(contMemoria++, horarios[i].regar);
+[e ( _escribe_eeprom (2 , -> ++ _contMemoria -> 1 `i `us . *U + &U _horarios * -> -> _i `ui `ux -> -> # *U &U _horarios `ui `ux 1 ]
 "224
-[; ;main.c: 224:     }
+[; ;main.c: 224:         escribe_eeprom(contMemoria++, horarios[i].tiempoRegar);
+[e ( _escribe_eeprom (2 , -> ++ _contMemoria -> 1 `i `us . *U + &U _horarios * -> -> _i `ui `ux -> -> # *U &U _horarios `ui `ux 2 ]
+"225
+[; ;main.c: 225:     }
 }
 [e ++ _i -> 1 `i ]
 [e $ < _i -> 24 `i 441  ]
 [e :U 442 ]
 }
-"225
-[; ;main.c: 225: }
+"226
+[; ;main.c: 226: }
 [e :UE 440 ]
 }
-"227
-[; ;main.c: 227: void leeHorariosMemoria() {
+"228
+[; ;main.c: 228: void leeHorariosMemoria() {
 [v _leeHorariosMemoria `(v ~T0 @X0 1 ef ]
 {
 [e :U _leeHorariosMemoria ]
 [f ]
-"229
-[; ;main.c: 229:     int contMemoria = 0;
+"230
+[; ;main.c: 230:     int contMemoria = 0;
 [v _contMemoria `i ~T0 @X0 1 a ]
 [e = _contMemoria -> 0 `i ]
-"231
-[; ;main.c: 231:     for (int i = 0; i < 24; i++) {
+"232
+[; ;main.c: 232:     for (int i = 0; i < 24; i++) {
 {
 [v _i `i ~T0 @X0 1 a ]
 [e = _i -> 0 `i ]
@@ -1965,66 +1968,66 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e $U 446  ]
 [e :U 445 ]
 {
-"232
-[; ;main.c: 232:         horarios[i].hora = leer_eeprom(contMemoria++);
-[e = . *U + &U _horarios * -> -> _i `ui `ux -> -> # *U &U _horarios `ui `ux 0 ( _leer_eeprom (1 -> ++ _contMemoria -> 1 `i `us ]
 "233
-[; ;main.c: 233:         horarios[i].regar = leer_eeprom(contMemoria++);
-[e = . *U + &U _horarios * -> -> _i `ui `ux -> -> # *U &U _horarios `ui `ux 1 ( _leer_eeprom (1 -> ++ _contMemoria -> 1 `i `us ]
+[; ;main.c: 233:         horarios[i].hora = leer_eeprom(contMemoria++);
+[e = . *U + &U _horarios * -> -> _i `ui `ux -> -> # *U &U _horarios `ui `ux 0 ( _leer_eeprom (1 -> ++ _contMemoria -> 1 `i `us ]
 "234
-[; ;main.c: 234:         horarios[i].tiempoRegar = leer_eeprom(contMemoria++);
-[e = . *U + &U _horarios * -> -> _i `ui `ux -> -> # *U &U _horarios `ui `ux 2 ( _leer_eeprom (1 -> ++ _contMemoria -> 1 `i `us ]
+[; ;main.c: 234:         horarios[i].regar = leer_eeprom(contMemoria++);
+[e = . *U + &U _horarios * -> -> _i `ui `ux -> -> # *U &U _horarios `ui `ux 1 ( _leer_eeprom (1 -> ++ _contMemoria -> 1 `i `us ]
 "235
-[; ;main.c: 235:     }
+[; ;main.c: 235:         horarios[i].tiempoRegar = leer_eeprom(contMemoria++);
+[e = . *U + &U _horarios * -> -> _i `ui `ux -> -> # *U &U _horarios `ui `ux 2 ( _leer_eeprom (1 -> ++ _contMemoria -> 1 `i `us ]
+"236
+[; ;main.c: 236:     }
 }
 [e ++ _i -> 1 `i ]
 [e $ < _i -> 24 `i 445  ]
 [e :U 446 ]
 }
-"237
-[; ;main.c: 237: }
+"238
+[; ;main.c: 238: }
 [e :UE 444 ]
 }
-"239
-[; ;main.c: 239: void setRtcDefault(void) {
+"240
+[; ;main.c: 240: void setRtcDefault(void) {
 [v _setRtcDefault `(v ~T0 @X0 1 ef ]
 {
 [e :U _setRtcDefault ]
 [f ]
-"240
-[; ;main.c: 240:     unsigned char horaRtc;
+"241
+[; ;main.c: 241:     unsigned char horaRtc;
 [v _horaRtc `uc ~T0 @X0 1 a ]
-"242
-[; ;main.c: 242:     horaRtc = ((1) & 0x0F) << 4;
+"243
+[; ;main.c: 243:     horaRtc = ((1) & 0x0F) << 4;
 [e = _horaRtc -> << & -> 1 `i -> 15 `i -> 4 `i `uc ]
-"244
-[; ;main.c: 244:     horaRtc |= (2) & 0x0F;
+"245
+[; ;main.c: 245:     horaRtc |= (2) & 0x0F;
 [e =| _horaRtc -> & -> 2 `i -> 15 `i `uc ]
-"246
-[; ;main.c: 246:     escribe_rtc(0x02, horaRtc);
+"247
+[; ;main.c: 247:     escribe_rtc(0x02, horaRtc);
 [e ( _escribe_rtc (2 , -> -> 2 `i `uc _horaRtc ]
-"248
-[; ;main.c: 248:     escribe_rtc(0x01, 0);
-[e ( _escribe_rtc (2 , -> -> 1 `i `uc -> -> 0 `i `uc ]
 "249
-[; ;main.c: 249:     escribe_rtc(0x00, 0);
-[e ( _escribe_rtc (2 , -> -> 0 `i `uc -> -> 0 `i `uc ]
+[; ;main.c: 249:     escribe_rtc(0x01, 0);
+[e ( _escribe_rtc (2 , -> -> 1 `i `uc -> -> 0 `i `uc ]
 "250
-[; ;main.c: 250: }
+[; ;main.c: 250:     escribe_rtc(0x00, 0);
+[e ( _escribe_rtc (2 , -> -> 0 `i `uc -> -> 0 `i `uc ]
+"251
+[; ;main.c: 251: }
 [e :UE 448 ]
 }
-"252
-[; ;main.c: 252: void encenderBombas() {
+"253
+[; ;main.c: 253: void encenderBombas() {
 [v _encenderBombas `(v ~T0 @X0 1 ef ]
 {
 [e :U _encenderBombas ]
 [f ]
-"254
-[; ;main.c: 254:     char flagSeco = 0;
+"255
+[; ;main.c: 255:     char flagSeco = 0;
 [v _flagSeco `uc ~T0 @X0 1 a ]
 [e = _flagSeco -> -> 0 `i `uc ]
-"256
-[; ;main.c: 256:     for (int i = 0; i < 3; i++) {
+"257
+[; ;main.c: 257:     for (int i = 0; i < 3; i++) {
 {
 [v _i `i ~T0 @X0 1 a ]
 [e = _i -> 0 `i ]
@@ -2032,172 +2035,172 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e $U 451  ]
 [e :U 450 ]
 {
-"258
-[; ;main.c: 258:         switch (i) {
+"259
+[; ;main.c: 259:         switch (i) {
 [e $U 454  ]
 {
-"260
-[; ;main.c: 260:             case 0:
-[e :U 455 ]
 "261
-[; ;main.c: 261:                 if (estaSeco(sensores[i])) {
+[; ;main.c: 261:             case 0:
+[e :U 455 ]
+"262
+[; ;main.c: 262:                 if (estaSeco(sensores[i])) {
 [e $ ! != ( _estaSeco (1 *U + &U _sensores * -> -> _i `ui `ux -> -> # *U &U _sensores `ui `ux -> 0 `i 456  ]
 {
-"262
-[; ;main.c: 262:                     LATDbits.LATD0 = 1;
-[e = . . _LATDbits 0 0 -> -> 1 `i `uc ]
 "263
-[; ;main.c: 263:                     flagSeco = 1;
-[e = _flagSeco -> -> 1 `i `uc ]
+[; ;main.c: 263:                     LATDbits.LATD0 = 1;
+[e = . . _LATDbits 0 0 -> -> 1 `i `uc ]
 "264
-[; ;main.c: 264:                 }
+[; ;main.c: 264:                     flagSeco = 1;
+[e = _flagSeco -> -> 1 `i `uc ]
+"265
+[; ;main.c: 265:                 }
 }
 [e :U 456 ]
-"265
-[; ;main.c: 265:                 break;
+"266
+[; ;main.c: 266:                 break;
 [e $U 453  ]
-"267
-[; ;main.c: 267:             case 1:
-[e :U 457 ]
 "268
-[; ;main.c: 268:                 if (estaSeco(sensores[i])) {
+[; ;main.c: 268:             case 1:
+[e :U 457 ]
+"269
+[; ;main.c: 269:                 if (estaSeco(sensores[i])) {
 [e $ ! != ( _estaSeco (1 *U + &U _sensores * -> -> _i `ui `ux -> -> # *U &U _sensores `ui `ux -> 0 `i 458  ]
 {
-"269
-[; ;main.c: 269:                     LATDbits.LATD1 = 1;
-[e = . . _LATDbits 0 1 -> -> 1 `i `uc ]
 "270
-[; ;main.c: 270:                     flagSeco = 1;
-[e = _flagSeco -> -> 1 `i `uc ]
+[; ;main.c: 270:                     LATDbits.LATD1 = 1;
+[e = . . _LATDbits 0 1 -> -> 1 `i `uc ]
 "271
-[; ;main.c: 271:                 }
+[; ;main.c: 271:                     flagSeco = 1;
+[e = _flagSeco -> -> 1 `i `uc ]
+"272
+[; ;main.c: 272:                 }
 }
 [e :U 458 ]
-"272
-[; ;main.c: 272:                 break;
+"273
+[; ;main.c: 273:                 break;
 [e $U 453  ]
-"274
-[; ;main.c: 274:             case 2:
-[e :U 459 ]
 "275
-[; ;main.c: 275:                 if (estaSeco(sensores[i])) {
+[; ;main.c: 275:             case 2:
+[e :U 459 ]
+"276
+[; ;main.c: 276:                 if (estaSeco(sensores[i])) {
 [e $ ! != ( _estaSeco (1 *U + &U _sensores * -> -> _i `ui `ux -> -> # *U &U _sensores `ui `ux -> 0 `i 460  ]
 {
-"276
-[; ;main.c: 276:                     LATDbits.LATD2 = 1;
-[e = . . _LATDbits 0 2 -> -> 1 `i `uc ]
 "277
-[; ;main.c: 277:                     flagSeco = 1;
-[e = _flagSeco -> -> 1 `i `uc ]
+[; ;main.c: 277:                     LATDbits.LATD2 = 1;
+[e = . . _LATDbits 0 2 -> -> 1 `i `uc ]
 "278
-[; ;main.c: 278:                 }
+[; ;main.c: 278:                     flagSeco = 1;
+[e = _flagSeco -> -> 1 `i `uc ]
+"279
+[; ;main.c: 279:                 }
 }
 [e :U 460 ]
-"279
-[; ;main.c: 279:                 break;
+"280
+[; ;main.c: 280:                 break;
 [e $U 453  ]
-"281
-[; ;main.c: 281:             case 3:
-[e :U 461 ]
 "282
-[; ;main.c: 282:                 if (estaSeco(sensores[i])) {
+[; ;main.c: 282:             case 3:
+[e :U 461 ]
+"283
+[; ;main.c: 283:                 if (estaSeco(sensores[i])) {
 [e $ ! != ( _estaSeco (1 *U + &U _sensores * -> -> _i `ui `ux -> -> # *U &U _sensores `ui `ux -> 0 `i 462  ]
 {
-"283
-[; ;main.c: 283:                     LATDbits.LATD3 = 1;
-[e = . . _LATDbits 0 3 -> -> 1 `i `uc ]
 "284
-[; ;main.c: 284:                     flagSeco = 1;
-[e = _flagSeco -> -> 1 `i `uc ]
+[; ;main.c: 284:                     LATDbits.LATD3 = 1;
+[e = . . _LATDbits 0 3 -> -> 1 `i `uc ]
 "285
-[; ;main.c: 285:                 }
+[; ;main.c: 285:                     flagSeco = 1;
+[e = _flagSeco -> -> 1 `i `uc ]
+"286
+[; ;main.c: 286:                 }
 }
 [e :U 462 ]
-"286
-[; ;main.c: 286:                 break;
+"287
+[; ;main.c: 287:                 break;
 [e $U 453  ]
-"288
-[; ;main.c: 288:             case 4:
-[e :U 463 ]
 "289
-[; ;main.c: 289:                 if (estaSeco(sensores[i])) {
+[; ;main.c: 289:             case 4:
+[e :U 463 ]
+"290
+[; ;main.c: 290:                 if (estaSeco(sensores[i])) {
 [e $ ! != ( _estaSeco (1 *U + &U _sensores * -> -> _i `ui `ux -> -> # *U &U _sensores `ui `ux -> 0 `i 464  ]
 {
-"290
-[; ;main.c: 290:                     LATDbits.LATD4 = 1;
-[e = . . _LATDbits 0 4 -> -> 1 `i `uc ]
 "291
-[; ;main.c: 291:                     flagSeco = 1;
-[e = _flagSeco -> -> 1 `i `uc ]
+[; ;main.c: 291:                     LATDbits.LATD4 = 1;
+[e = . . _LATDbits 0 4 -> -> 1 `i `uc ]
 "292
-[; ;main.c: 292:                 }
+[; ;main.c: 292:                     flagSeco = 1;
+[e = _flagSeco -> -> 1 `i `uc ]
+"293
+[; ;main.c: 293:                 }
 }
 [e :U 464 ]
-"293
-[; ;main.c: 293:                 break;
+"294
+[; ;main.c: 294:                 break;
 [e $U 453  ]
-"295
-[; ;main.c: 295:             case 5:
-[e :U 465 ]
 "296
-[; ;main.c: 296:                 if (estaSeco(sensores[i])) {
+[; ;main.c: 296:             case 5:
+[e :U 465 ]
+"297
+[; ;main.c: 297:                 if (estaSeco(sensores[i])) {
 [e $ ! != ( _estaSeco (1 *U + &U _sensores * -> -> _i `ui `ux -> -> # *U &U _sensores `ui `ux -> 0 `i 466  ]
 {
-"297
-[; ;main.c: 297:                     LATDbits.LATD5 = 1;
-[e = . . _LATDbits 0 5 -> -> 1 `i `uc ]
 "298
-[; ;main.c: 298:                     flagSeco = 1;
-[e = _flagSeco -> -> 1 `i `uc ]
+[; ;main.c: 298:                     LATDbits.LATD5 = 1;
+[e = . . _LATDbits 0 5 -> -> 1 `i `uc ]
 "299
-[; ;main.c: 299:                 }
+[; ;main.c: 299:                     flagSeco = 1;
+[e = _flagSeco -> -> 1 `i `uc ]
+"300
+[; ;main.c: 300:                 }
 }
 [e :U 466 ]
-"300
-[; ;main.c: 300:                 break;
+"301
+[; ;main.c: 301:                 break;
 [e $U 453  ]
-"302
-[; ;main.c: 302:             case 6:
-[e :U 467 ]
 "303
-[; ;main.c: 303:                 if (estaSeco(sensores[i])) {
+[; ;main.c: 303:             case 6:
+[e :U 467 ]
+"304
+[; ;main.c: 304:                 if (estaSeco(sensores[i])) {
 [e $ ! != ( _estaSeco (1 *U + &U _sensores * -> -> _i `ui `ux -> -> # *U &U _sensores `ui `ux -> 0 `i 468  ]
 {
-"304
-[; ;main.c: 304:                     LATDbits.LATD6 = 1;
-[e = . . _LATDbits 0 6 -> -> 1 `i `uc ]
 "305
-[; ;main.c: 305:                     flagSeco = 1;
-[e = _flagSeco -> -> 1 `i `uc ]
+[; ;main.c: 305:                     LATDbits.LATD6 = 1;
+[e = . . _LATDbits 0 6 -> -> 1 `i `uc ]
 "306
-[; ;main.c: 306:                 }
+[; ;main.c: 306:                     flagSeco = 1;
+[e = _flagSeco -> -> 1 `i `uc ]
+"307
+[; ;main.c: 307:                 }
 }
 [e :U 468 ]
-"307
-[; ;main.c: 307:                 break;
+"308
+[; ;main.c: 308:                 break;
 [e $U 453  ]
-"309
-[; ;main.c: 309:             case 7:
-[e :U 469 ]
 "310
-[; ;main.c: 310:                 if (estaSeco(sensores[i])) {
+[; ;main.c: 310:             case 7:
+[e :U 469 ]
+"311
+[; ;main.c: 311:                 if (estaSeco(sensores[i])) {
 [e $ ! != ( _estaSeco (1 *U + &U _sensores * -> -> _i `ui `ux -> -> # *U &U _sensores `ui `ux -> 0 `i 470  ]
 {
-"311
-[; ;main.c: 311:                     LATDbits.LATD7 = 1;
-[e = . . _LATDbits 0 7 -> -> 1 `i `uc ]
 "312
-[; ;main.c: 312:                     flagSeco = 1;
-[e = _flagSeco -> -> 1 `i `uc ]
+[; ;main.c: 312:                     LATDbits.LATD7 = 1;
+[e = . . _LATDbits 0 7 -> -> 1 `i `uc ]
 "313
-[; ;main.c: 313:                 }
+[; ;main.c: 313:                     flagSeco = 1;
+[e = _flagSeco -> -> 1 `i `uc ]
+"314
+[; ;main.c: 314:                 }
 }
 [e :U 470 ]
-"314
-[; ;main.c: 314:                 break;
+"315
+[; ;main.c: 315:                 break;
 [e $U 453  ]
-"316
-[; ;main.c: 316:         }
+"317
+[; ;main.c: 317:         }
 }
 [e $U 453  ]
 [e :U 454 ]
@@ -2211,97 +2214,97 @@ Version 4.0 HI-TECH Software Intermediate Code
  , $ -> 7 `i 469
  453 ]
 [e :U 453 ]
-"317
-[; ;main.c: 317:     }
+"318
+[; ;main.c: 318:     }
 }
 [e ++ _i -> 1 `i ]
 [e $ < _i -> 3 `i 450  ]
 [e :U 451 ]
 }
-"319
-[; ;main.c: 319:     if (flagSeco)
-[e $ ! != -> _flagSeco `i -> 0 `i 471  ]
 "320
-[; ;main.c: 320:         regando = 1;
+[; ;main.c: 320:     if (flagSeco)
+[e $ ! != -> _flagSeco `i -> 0 `i 471  ]
+"321
+[; ;main.c: 321:         regando = 1;
 [e = _regando -> -> 1 `i `uc ]
 [e :U 471 ]
-"322
-[; ;main.c: 322: }
+"323
+[; ;main.c: 323: }
 [e :UE 449 ]
 }
-"324
-[; ;main.c: 324: void fijaHoraRtc(void) {
+"325
+[; ;main.c: 325: void fijaHoraRtc(void) {
 [v _fijaHoraRtc `(v ~T0 @X0 1 ef ]
 {
 [e :U _fijaHoraRtc ]
 [f ]
-"326
-[; ;main.c: 326:     UART_printf("\r\n FIJA HORA \r\n");
+"327
+[; ;main.c: 327:     UART_printf("\r\n FIJA HORA \r\n");
 [e ( _UART_printf (1 :s 1C ]
-"329
-[; ;main.c: 329:     UART_printf("\r\n Envie las Horas en formato 24 Ej: 15 \r\n");
-[e ( _UART_printf (1 :s 2C ]
 "330
-[; ;main.c: 330:     setRtc(0x02);
+[; ;main.c: 330:     UART_printf("\r\n Envie las Horas en formato 24 Ej: 15 \r\n");
+[e ( _UART_printf (1 :s 2C ]
+"331
+[; ;main.c: 331:     setRtc(0x02);
 [e ( _setRtc (1 -> -> 2 `i `uc ]
-"333
-[; ;main.c: 333:     if (!esperandoDatos) {
+"334
+[; ;main.c: 334:     if (!esperandoDatos) {
 [e $ ! ! != -> _esperandoDatos `i -> 0 `i 473  ]
 {
-"334
-[; ;main.c: 334:         UART_printf("\r\n Envie los Minutos Ej: 25 \r\n");
-[e ( _UART_printf (1 :s 3C ]
 "335
-[; ;main.c: 335:         setRtc(0x01);
+[; ;main.c: 335:         UART_printf("\r\n Envie los Minutos Ej: 25 \r\n");
+[e ( _UART_printf (1 :s 3C ]
+"336
+[; ;main.c: 336:         setRtc(0x01);
 [e ( _setRtc (1 -> -> 1 `i `uc ]
-"337
-[; ;main.c: 337:     }
+"338
+[; ;main.c: 338:     }
 }
 [e :U 473 ]
-"339
-[; ;main.c: 339:     if (!esperandoDatos) {
+"340
+[; ;main.c: 340:     if (!esperandoDatos) {
 [e $ ! ! != -> _esperandoDatos `i -> 0 `i 474  ]
 {
-"341
-[; ;main.c: 341:         UART_printf("\r\n HORA ESTABLECIDA CORRECTAMENTE \r\n");
-[e ( _UART_printf (1 :s 4C ]
 "342
-[; ;main.c: 342:         escribe_rtc(0x00, 0);
+[; ;main.c: 342:         UART_printf("\r\n HORA ESTABLECIDA CORRECTAMENTE \r\n");
+[e ( _UART_printf (1 :s 4C ]
+"343
+[; ;main.c: 343:         escribe_rtc(0x00, 0);
 [e ( _escribe_rtc (2 , -> -> 0 `i `uc -> -> 0 `i `uc ]
-"344
-[; ;main.c: 344:     }
+"345
+[; ;main.c: 345:     }
 }
 [e :U 474 ]
-"346
-[; ;main.c: 346: }
+"347
+[; ;main.c: 347: }
 [e :UE 472 ]
 }
-"348
-[; ;main.c: 348: void asignarHorarios()
-[v _asignarHorarios `(v ~T0 @X0 1 ef ]
 "349
-[; ;main.c: 349: {
+[; ;main.c: 349: void asignarHorarios()
+[v _asignarHorarios `(v ~T0 @X0 1 ef ]
+"350
+[; ;main.c: 350: {
 {
 [e :U _asignarHorarios ]
 [f ]
-"350
-[; ;main.c: 350:     unsigned char hora;
-[v _hora `uc ~T0 @X0 1 a ]
 "351
-[; ;main.c: 351:     unsigned char Rx;
-[v _Rx `uc ~T0 @X0 1 a ]
+[; ;main.c: 351:     unsigned char hora;
+[v _hora `uc ~T0 @X0 1 a ]
 "352
-[; ;main.c: 352:     char datoCapturado = 0;
+[; ;main.c: 352:     unsigned char Rx;
+[v _Rx `uc ~T0 @X0 1 a ]
+"353
+[; ;main.c: 353:     char datoCapturado = 0;
 [v _datoCapturado `uc ~T0 @X0 1 a ]
 [e = _datoCapturado -> -> 0 `i `uc ]
-"354
-[; ;main.c: 354:     UART_printf("\r\n OPCIONES DE REGADO \r\n");
-[e ( _UART_printf (1 :s 5C ]
 "355
-[; ;main.c: 355:     UART_printf("\r\n Ingrese una hora en formato de 24 hrs ej: 15 \r\n");
+[; ;main.c: 355:     UART_printf("\r\n OPCIONES DE REGADO \r\n");
+[e ( _UART_printf (1 :s 5C ]
+"356
+[; ;main.c: 356:     UART_printf("\r\n Ingrese una hora en formato de 24 hrs ej: 15 \r\n");
 [e ( _UART_printf (1 :s 6C ]
-"357
-[; ;main.c: 357:     for (int i = 0; i < 2; i++) {
+"358
+[; ;main.c: 358:     for (int i = 0; i < 2; i++) {
 {
 [v _i `i ~T0 @X0 1 a ]
 [e = _i -> 0 `i ]
@@ -2309,152 +2312,152 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e $U 477  ]
 [e :U 476 ]
 {
-"358
-[; ;main.c: 358:         Rx = UART_read();
-[e = _Rx ( _UART_read ..  ]
 "359
-[; ;main.c: 359:         if (Rx >= 48 && Rx <= 57) {
+[; ;main.c: 359:         Rx = UART_read();
+[e = _Rx ( _UART_read ..  ]
+"360
+[; ;main.c: 360:         if (Rx >= 48 && Rx <= 57) {
 [e $ ! && >= -> _Rx `i -> 48 `i <= -> _Rx `i -> 57 `i 479  ]
 {
-"360
-[; ;main.c: 360:             if (!i) {
+"361
+[; ;main.c: 361:             if (!i) {
 [e $ ! ! != _i -> 0 `i 480  ]
 {
-"361
-[; ;main.c: 361:                 Rx -= 48;
-[e =- _Rx -> -> 48 `i `uc ]
 "362
-[; ;main.c: 362:                 hora = Rx;
-[e = _hora _Rx ]
+[; ;main.c: 362:                 Rx -= 48;
+[e =- _Rx -> -> 48 `i `uc ]
 "363
-[; ;main.c: 363:                 hora *= 10;
-[e =* _hora -> -> 10 `i `uc ]
+[; ;main.c: 363:                 hora = Rx;
+[e = _hora _Rx ]
 "364
-[; ;main.c: 364:             } else {
+[; ;main.c: 364:                 hora *= 10;
+[e =* _hora -> -> 10 `i `uc ]
+"365
+[; ;main.c: 365:             } else {
 }
 [e $U 481  ]
 [e :U 480 ]
 {
-"365
-[; ;main.c: 365:                 datoCapturado = 1;
-[e = _datoCapturado -> -> 1 `i `uc ]
 "366
-[; ;main.c: 366:                 Rx -= 48;
-[e =- _Rx -> -> 48 `i `uc ]
+[; ;main.c: 366:                 datoCapturado = 1;
+[e = _datoCapturado -> -> 1 `i `uc ]
 "367
-[; ;main.c: 367:                 hora += Rx;
-[e =+ _hora -> _Rx `uc ]
+[; ;main.c: 367:                 Rx -= 48;
+[e =- _Rx -> -> 48 `i `uc ]
 "368
-[; ;main.c: 368:             }
+[; ;main.c: 368:                 hora += Rx;
+[e =+ _hora -> _Rx `uc ]
+"369
+[; ;main.c: 369:             }
 }
 [e :U 481 ]
-"369
-[; ;main.c: 369:         } else {
+"370
+[; ;main.c: 370:         } else {
 }
 [e $U 482  ]
 [e :U 479 ]
 {
-"370
-[; ;main.c: 370:             datoCapturado = 0;
+"371
+[; ;main.c: 371:             datoCapturado = 0;
 [e = _datoCapturado -> -> 0 `i `uc ]
-"372
-[; ;main.c: 372:             UART_write('F');
-[e ( _UART_write (1 -> -> 70 `ui `uc ]
 "373
-[; ;main.c: 373:             break;
-[e $U 477  ]
+[; ;main.c: 373:             UART_write('F');
+[e ( _UART_write (1 -> -> 70 `ui `uc ]
 "374
-[; ;main.c: 374:         }
+[; ;main.c: 374:             break;
+[e $U 477  ]
+"375
+[; ;main.c: 375:         }
 }
 [e :U 482 ]
-"375
-[; ;main.c: 375:     }
+"376
+[; ;main.c: 376:     }
 }
 [e ++ _i -> 1 `i ]
 [e $ < _i -> 2 `i 476  ]
 [e :U 477 ]
 }
-"377
-[; ;main.c: 377:     if (datoCapturado && !esperandoDatos) {
+"378
+[; ;main.c: 378:     if (datoCapturado && !esperandoDatos) {
 [e $ ! && != -> _datoCapturado `i -> 0 `i ! != -> _esperandoDatos `i -> 0 `i 483  ]
 {
-"379
-[; ;main.c: 379:         UART_printf("\r\n Ingrese 1 para regar || ingrese 0 para no regar: \r\n");
+"380
+[; ;main.c: 380:         UART_printf("\r\n Ingrese 1 para regar || ingrese 0 para no regar: \r\n");
 [e ( _UART_printf (1 :s 7C ]
-"381
-[; ;main.c: 381:         Rx = UART_read();
-[e = _Rx ( _UART_read ..  ]
 "382
-[; ;main.c: 382:         Rx -= 48;
+[; ;main.c: 382:         Rx = UART_read();
+[e = _Rx ( _UART_read ..  ]
+"383
+[; ;main.c: 383:         Rx -= 48;
 [e =- _Rx -> -> 48 `i `uc ]
-"384
-[; ;main.c: 384:         if (Rx != 1 && Rx != 0)
-[e $ ! && != -> _Rx `i -> 1 `i != -> _Rx `i -> 0 `i 484  ]
 "385
-[; ;main.c: 385:             Rx = 0;
+[; ;main.c: 385:         if (Rx != 1 && Rx != 0)
+[e $ ! && != -> _Rx `i -> 1 `i != -> _Rx `i -> 0 `i 484  ]
+"386
+[; ;main.c: 386:             Rx = 0;
 [e = _Rx -> -> 0 `i `uc ]
 [e :U 484 ]
-"387
-[; ;main.c: 387:         if (!esperandoDatos) {
+"388
+[; ;main.c: 388:         if (!esperandoDatos) {
 [e $ ! ! != -> _esperandoDatos `i -> 0 `i 485  ]
 {
-"388
-[; ;main.c: 388:             UART_printf("\r\n Horario Modificado! \r\n");
+"389
+[; ;main.c: 389:             UART_printf("\r\n Horario Modificado! \r\n");
 [e ( _UART_printf (1 :s 8C ]
-"390
-[; ;main.c: 390:             horarios[hora].regar = Rx;
+"391
+[; ;main.c: 391:             horarios[hora].regar = Rx;
 [e = . *U + &U _horarios * -> _hora `ux -> -> # *U &U _horarios `ui `ux 1 _Rx ]
-"392
-[; ;main.c: 392:             escribeHorariosMemoria();
+"393
+[; ;main.c: 393:             escribeHorariosMemoria();
 [e ( _escribeHorariosMemoria ..  ]
-"395
-[; ;main.c: 395:         } else {
+"396
+[; ;main.c: 396:         } else {
 }
 [e $U 486  ]
 [e :U 485 ]
 {
-"397
-[; ;main.c: 397:             UART_write('F');
-[e ( _UART_write (1 -> -> 70 `ui `uc ]
 "398
-[; ;main.c: 398:         }
+[; ;main.c: 398:             UART_write('F');
+[e ( _UART_write (1 -> -> 70 `ui `uc ]
+"399
+[; ;main.c: 399:         }
 }
 [e :U 486 ]
-"400
-[; ;main.c: 400:     }
+"401
+[; ;main.c: 401:     }
 }
 [e :U 483 ]
-"402
-[; ;main.c: 402: }
+"403
+[; ;main.c: 403: }
 [e :UE 475 ]
 }
-"404
-[; ;main.c: 404: void setTiempoRegar() {
+"405
+[; ;main.c: 405: void setTiempoRegar() {
 [v _setTiempoRegar `(v ~T0 @X0 1 ef ]
 {
 [e :U _setTiempoRegar ]
 [f ]
-"406
-[; ;main.c: 406:     unsigned char hora;
-[v _hora `uc ~T0 @X0 1 a ]
 "407
-[; ;main.c: 407:     unsigned char tiempoRegar;
-[v _tiempoRegar `uc ~T0 @X0 1 a ]
+[; ;main.c: 407:     unsigned char hora;
+[v _hora `uc ~T0 @X0 1 a ]
 "408
-[; ;main.c: 408:     unsigned char Rx;
-[v _Rx `uc ~T0 @X0 1 a ]
+[; ;main.c: 408:     unsigned char tiempoRegar;
+[v _tiempoRegar `uc ~T0 @X0 1 a ]
 "409
-[; ;main.c: 409:     char datoCapturado = 0;
+[; ;main.c: 409:     unsigned char Rx;
+[v _Rx `uc ~T0 @X0 1 a ]
+"410
+[; ;main.c: 410:     char datoCapturado = 0;
 [v _datoCapturado `uc ~T0 @X0 1 a ]
 [e = _datoCapturado -> -> 0 `i `uc ]
-"411
-[; ;main.c: 411:     UART_printf("\r\n TIEMPO DE REGADO \r\n");
-[e ( _UART_printf (1 :s 9C ]
 "412
-[; ;main.c: 412:     UART_printf("\r\n Ingrese una hora en formato de 24 hrs ej: 15 \r\n");
+[; ;main.c: 412:     UART_printf("\r\n TIEMPO DE REGADO \r\n");
+[e ( _UART_printf (1 :s 9C ]
+"413
+[; ;main.c: 413:     UART_printf("\r\n Ingrese una hora en formato de 24 hrs ej: 15 \r\n");
 [e ( _UART_printf (1 :s 10C ]
-"414
-[; ;main.c: 414:     for (int i = 0; i < 2; i++) {
+"415
+[; ;main.c: 415:     for (int i = 0; i < 2; i++) {
 {
 [v _i `i ~T0 @X0 1 a ]
 [e = _i -> 0 `i ]
@@ -2462,80 +2465,80 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e $U 489  ]
 [e :U 488 ]
 {
-"415
-[; ;main.c: 415:         Rx = UART_read();
-[e = _Rx ( _UART_read ..  ]
 "416
-[; ;main.c: 416:         if (Rx >= 48 && Rx <= 57) {
+[; ;main.c: 416:         Rx = UART_read();
+[e = _Rx ( _UART_read ..  ]
+"417
+[; ;main.c: 417:         if (Rx >= 48 && Rx <= 57) {
 [e $ ! && >= -> _Rx `i -> 48 `i <= -> _Rx `i -> 57 `i 491  ]
 {
-"417
-[; ;main.c: 417:             if (!i) {
+"418
+[; ;main.c: 418:             if (!i) {
 [e $ ! ! != _i -> 0 `i 492  ]
 {
-"418
-[; ;main.c: 418:                 Rx -= 48;
-[e =- _Rx -> -> 48 `i `uc ]
 "419
-[; ;main.c: 419:                 hora = Rx;
-[e = _hora _Rx ]
+[; ;main.c: 419:                 Rx -= 48;
+[e =- _Rx -> -> 48 `i `uc ]
 "420
-[; ;main.c: 420:                 hora *= 10;
-[e =* _hora -> -> 10 `i `uc ]
+[; ;main.c: 420:                 hora = Rx;
+[e = _hora _Rx ]
 "421
-[; ;main.c: 421:             } else {
+[; ;main.c: 421:                 hora *= 10;
+[e =* _hora -> -> 10 `i `uc ]
+"422
+[; ;main.c: 422:             } else {
 }
 [e $U 493  ]
 [e :U 492 ]
 {
-"422
-[; ;main.c: 422:                 datoCapturado = 1;
-[e = _datoCapturado -> -> 1 `i `uc ]
 "423
-[; ;main.c: 423:                 Rx -= 48;
-[e =- _Rx -> -> 48 `i `uc ]
+[; ;main.c: 423:                 datoCapturado = 1;
+[e = _datoCapturado -> -> 1 `i `uc ]
 "424
-[; ;main.c: 424:                 hora += Rx;
-[e =+ _hora -> _Rx `uc ]
+[; ;main.c: 424:                 Rx -= 48;
+[e =- _Rx -> -> 48 `i `uc ]
 "425
-[; ;main.c: 425:             }
+[; ;main.c: 425:                 hora += Rx;
+[e =+ _hora -> _Rx `uc ]
+"426
+[; ;main.c: 426:             }
 }
 [e :U 493 ]
-"426
-[; ;main.c: 426:         } else {
+"427
+[; ;main.c: 427:         } else {
 }
 [e $U 494  ]
 [e :U 491 ]
 {
-"427
-[; ;main.c: 427:             datoCapturado = 0;
+"428
+[; ;main.c: 428:             datoCapturado = 0;
 [e = _datoCapturado -> -> 0 `i `uc ]
-"429
-[; ;main.c: 429:             UART_write('F');
-[e ( _UART_write (1 -> -> 70 `ui `uc ]
 "430
-[; ;main.c: 430:             break;
-[e $U 489  ]
+[; ;main.c: 430:             UART_write('F');
+[e ( _UART_write (1 -> -> 70 `ui `uc ]
 "431
-[; ;main.c: 431:         }
+[; ;main.c: 431:             break;
+[e $U 489  ]
+"432
+[; ;main.c: 432:         }
 }
 [e :U 494 ]
-"432
-[; ;main.c: 432:     }
+"433
+[; ;main.c: 433:     }
 }
 [e ++ _i -> 1 `i ]
 [e $ < _i -> 2 `i 488  ]
 [e :U 489 ]
 }
-"434
-[; ;main.c: 434:     if (datoCapturado && !esperandoDatos) {
+"435
+[; ;main.c: 435:     if (datoCapturado && !esperandoDatos) {
 [e $ ! && != -> _datoCapturado `i -> 0 `i ! != -> _esperandoDatos `i -> 0 `i 495  ]
 {
-"436
-[; ;main.c: 436:         UART_printf("\r\n Ingrese los minutos que desee que se riegue en ese horario ej: 15 \r\n");
+"437
+[; ;main.c: 437:         UART_printf("\r\n Ingrese los minutos que desee que se riegue en ese horario ej: 15 \r\n");
 [e ( _UART_printf (1 :s 11C ]
-"438
-[; ;main.c: 438:         for (int i = 0; i < 2; i++) {
+"439
+[; ;main.c: 439:         for (int i = 0; i < 2; i++) {
 {
 [v _i `i ~T0 @X0 1 a ]
 [e = _i -> 0 `i ]
@@ -2543,957 +2546,1018 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e $U 497  ]
 [e :U 496 ]
 {
-"439
-[; ;main.c: 439:             Rx = UART_read();
-[e = _Rx ( _UART_read ..  ]
 "440
-[; ;main.c: 440:             if (Rx >= 48 && Rx <= 57) {
+[; ;main.c: 440:             Rx = UART_read();
+[e = _Rx ( _UART_read ..  ]
+"441
+[; ;main.c: 441:             if (Rx >= 48 && Rx <= 57) {
 [e $ ! && >= -> _Rx `i -> 48 `i <= -> _Rx `i -> 57 `i 499  ]
 {
-"441
-[; ;main.c: 441:                 if (!i) {
+"442
+[; ;main.c: 442:                 if (!i) {
 [e $ ! ! != _i -> 0 `i 500  ]
 {
-"442
-[; ;main.c: 442:                     Rx -= 48;
-[e =- _Rx -> -> 48 `i `uc ]
 "443
-[; ;main.c: 443:                     tiempoRegar = Rx;
-[e = _tiempoRegar _Rx ]
+[; ;main.c: 443:                     Rx -= 48;
+[e =- _Rx -> -> 48 `i `uc ]
 "444
-[; ;main.c: 444:                     tiempoRegar *= 10;
-[e =* _tiempoRegar -> -> 10 `i `uc ]
+[; ;main.c: 444:                     tiempoRegar = Rx;
+[e = _tiempoRegar _Rx ]
 "445
-[; ;main.c: 445:                 } else {
+[; ;main.c: 445:                     tiempoRegar *= 10;
+[e =* _tiempoRegar -> -> 10 `i `uc ]
+"446
+[; ;main.c: 446:                 } else {
 }
 [e $U 501  ]
 [e :U 500 ]
 {
-"446
-[; ;main.c: 446:                     datoCapturado = 1;
-[e = _datoCapturado -> -> 1 `i `uc ]
 "447
-[; ;main.c: 447:                     Rx -= 48;
-[e =- _Rx -> -> 48 `i `uc ]
+[; ;main.c: 447:                     datoCapturado = 1;
+[e = _datoCapturado -> -> 1 `i `uc ]
 "448
-[; ;main.c: 448:                     tiempoRegar += Rx;
-[e =+ _tiempoRegar -> _Rx `uc ]
+[; ;main.c: 448:                     Rx -= 48;
+[e =- _Rx -> -> 48 `i `uc ]
 "449
-[; ;main.c: 449:                 }
+[; ;main.c: 449:                     tiempoRegar += Rx;
+[e =+ _tiempoRegar -> _Rx `uc ]
+"450
+[; ;main.c: 450:                 }
 }
 [e :U 501 ]
-"450
-[; ;main.c: 450:             } else {
+"451
+[; ;main.c: 451:             } else {
 }
 [e $U 502  ]
 [e :U 499 ]
 {
-"451
-[; ;main.c: 451:                 datoCapturado = 0;
+"452
+[; ;main.c: 452:                 datoCapturado = 0;
 [e = _datoCapturado -> -> 0 `i `uc ]
-"453
-[; ;main.c: 453:                 UART_write('F');
-[e ( _UART_write (1 -> -> 70 `ui `uc ]
 "454
-[; ;main.c: 454:                 break;
-[e $U 497  ]
+[; ;main.c: 454:                 UART_write('F');
+[e ( _UART_write (1 -> -> 70 `ui `uc ]
 "455
-[; ;main.c: 455:             }
+[; ;main.c: 455:                 break;
+[e $U 497  ]
+"456
+[; ;main.c: 456:             }
 }
 [e :U 502 ]
-"456
-[; ;main.c: 456:         }
+"457
+[; ;main.c: 457:         }
 }
 [e ++ _i -> 1 `i ]
 [e $ < _i -> 2 `i 496  ]
 [e :U 497 ]
 }
-"458
-[; ;main.c: 458:         if (datoCapturado && !esperandoDatos) {
+"459
+[; ;main.c: 459:         if (datoCapturado && !esperandoDatos) {
 [e $ ! && != -> _datoCapturado `i -> 0 `i ! != -> _esperandoDatos `i -> 0 `i 503  ]
 {
-"460
-[; ;main.c: 460:             UART_printf("\r\n Minutos de riego establecidos! \r\n");
+"461
+[; ;main.c: 461:             UART_printf("\r\n Minutos de riego establecidos! \r\n");
 [e ( _UART_printf (1 :s 12C ]
-"462
-[; ;main.c: 462:             horarios[hora].tiempoRegar = tiempoRegar;
-[e = . *U + &U _horarios * -> _hora `ux -> -> # *U &U _horarios `ui `ux 2 _tiempoRegar ]
 "463
-[; ;main.c: 463:             minutosRegar = horarios[hora].tiempoRegar;
+[; ;main.c: 463:             horarios[hora].tiempoRegar = tiempoRegar;
+[e = . *U + &U _horarios * -> _hora `ux -> -> # *U &U _horarios `ui `ux 2 _tiempoRegar ]
+"464
+[; ;main.c: 464:             minutosRegar = horarios[hora].tiempoRegar;
 [e = _minutosRegar . *U + &U _horarios * -> _hora `ux -> -> # *U &U _horarios `ui `ux 2 ]
-"465
-[; ;main.c: 465:             escribeHorariosMemoria();
+"466
+[; ;main.c: 466:             escribeHorariosMemoria();
 [e ( _escribeHorariosMemoria ..  ]
-"467
-[; ;main.c: 467:         }
+"468
+[; ;main.c: 468:         }
 }
 [e :U 503 ]
-"469
-[; ;main.c: 469:     }
+"470
+[; ;main.c: 470:     }
 }
 [e :U 495 ]
-"471
-[; ;main.c: 471: }
+"472
+[; ;main.c: 472: }
 [e :UE 487 ]
 }
-"473
-[; ;main.c: 473: short dameHumedadSuelo(char canalLeer) {
+"474
+[; ;main.c: 474: short dameHumedadSuelo(char canalLeer) {
 [v _dameHumedadSuelo `(s ~T0 @X0 1 ef1`uc ]
 {
 [e :U _dameHumedadSuelo ]
 [v _canalLeer `uc ~T0 @X0 1 r1 ]
 [f ]
-"475
-[; ;main.c: 475:     _delay((unsigned long)((20)*(4000000/4000000.0)));
+"476
+[; ;main.c: 476:     _delay((unsigned long)((20)*(4000000/4000000.0)));
 [e ( __delay (1 -> * -> -> 20 `i `d / -> -> 4000000 `l `d .4000000.0 `ul ]
-"477
-[; ;main.c: 477:     ADCON0bits.ADON = 1;
-[e = . . _ADCON0bits 1 0 -> -> 1 `i `uc ]
 "478
-[; ;main.c: 478:     ADCON0bits.CHS = canalLeer;
-[e = . . _ADCON0bits 1 2 -> _canalLeer `uc ]
+[; ;main.c: 478:     ADCON0bits.ADON = 1;
+[e = . . _ADCON0bits 1 0 -> -> 1 `i `uc ]
 "479
-[; ;main.c: 479:     ADCON0bits.GO = 1;
-[e = . . _ADCON0bits 4 1 -> -> 1 `i `uc ]
+[; ;main.c: 479:     ADCON0bits.CHS = canalLeer;
+[e = . . _ADCON0bits 1 2 -> _canalLeer `uc ]
 "480
-[; ;main.c: 480:     ADCON0bits.GO_DONE = 1;
+[; ;main.c: 480:     ADCON0bits.GO = 1;
+[e = . . _ADCON0bits 4 1 -> -> 1 `i `uc ]
+"481
+[; ;main.c: 481:     ADCON0bits.GO_DONE = 1;
 [e = . . _ADCON0bits 2 1 -> -> 1 `i `uc ]
-"482
-[; ;main.c: 482:     while (ADCON0bits.GO_DONE);
+"483
+[; ;main.c: 483:     while (ADCON0bits.GO_DONE);
 [e $U 505  ]
 [e :U 506 ]
 [e :U 505 ]
 [e $ != -> . . _ADCON0bits 2 1 `i -> 0 `i 506  ]
 [e :U 507 ]
-"484
-[; ;main.c: 484:     ADCON0bits.ADON = 0;
+"485
+[; ;main.c: 485:     ADCON0bits.ADON = 0;
 [e = . . _ADCON0bits 1 0 -> -> 0 `i `uc ]
-"486
-[; ;main.c: 486:     return (ADRESH << 8) +ADRESL;
+"487
+[; ;main.c: 487:     return (ADRESH << 8) +ADRESL;
 [e ) -> + << -> _ADRESH `i -> 8 `i -> _ADRESL `i `s ]
 [e $UE 504  ]
-"488
-[; ;main.c: 488: }
+"489
+[; ;main.c: 489: }
 [e :UE 504 ]
 }
-"490
-[; ;main.c: 490: void restablecerDatosSensor() {
+"491
+[; ;main.c: 491: void restablecerDatosSensor() {
 [v _restablecerDatosSensor `(v ~T0 @X0 1 ef ]
 {
 [e :U _restablecerDatosSensor ]
 [f ]
-"491
-[; ;main.c: 491:     for (int i = 0; i < 3; i++)
+"492
+[; ;main.c: 492:     for (int i = 0; i < 3; i++)
 {
 [v _i `i ~T0 @X0 1 a ]
 [e = _i -> 0 `i ]
 [e $ < _i -> 3 `i 509  ]
 [e $U 510  ]
 [e :U 509 ]
-"492
-[; ;main.c: 492:         constructorSensor(sensores[i], 0, i);
+"493
+[; ;main.c: 493:         constructorSensor(sensores[i], 0, i);
 [e ( _constructorSensor (3 , , *U + &U _sensores * -> -> _i `ui `ux -> -> # *U &U _sensores `ui `ux -> -> 0 `i `uc -> _i `uc ]
 [e ++ _i -> 1 `i ]
 [e $ < _i -> 3 `i 509  ]
 [e :U 510 ]
 }
-"493
-[; ;main.c: 493: }
+"494
+[; ;main.c: 494: }
 [e :UE 508 ]
 }
-"495
-[; ;main.c: 495: void lecturaWifi() {
+"496
+[; ;main.c: 496: void lecturaWifi() {
 [v _lecturaWifi `(v ~T0 @X0 1 ef ]
 {
 [e :U _lecturaWifi ]
 [f ]
-"497
-[; ;main.c: 497:     PIE1bits.RCIE = 0;
+"498
+[; ;main.c: 498:     PIE1bits.RCIE = 0;
 [e = . . _PIE1bits 0 5 -> -> 0 `i `uc ]
-"499
-[; ;main.c: 499:     char Rx = 0;
+"500
+[; ;main.c: 500:     unsigned char Rx = 0, porcientoHumedad;
 [v _Rx `uc ~T0 @X0 1 a ]
 [e = _Rx -> -> 0 `i `uc ]
+[v _porcientoHumedad `uc ~T0 @X0 1 a ]
 "501
-[; ;main.c: 501:     restablecerDatosSensor();
-[e ( _restablecerDatosSensor ..  ]
+[; ;main.c: 501:     char buffer[50];
+[v _buffer `uc ~T0 @X0 -> 50 `i a ]
 "503
-[; ;main.c: 503:     UART_write('R');
-[e ( _UART_write (1 -> -> 82 `ui `uc ]
+[; ;main.c: 503:     restablecerDatosSensor();
+[e ( _restablecerDatosSensor ..  ]
 "505
-[; ;main.c: 505:     UART_printf("\r\nSolicitando Muestreo de sensores\r\n\n");
-[e ( _UART_printf (1 :s 13C ]
+[; ;main.c: 505:     UART_write('R');
+[e ( _UART_write (1 -> -> 82 `ui `uc ]
 "507
-[; ;main.c: 507:     Rx = UART_read();
-[e = _Rx -> ( _UART_read ..  `uc ]
+[; ;main.c: 507:     UART_printf("\r\nSolicitando Muestreo de sensores\r\n\n");
+[e ( _UART_printf (1 :s 13C ]
 "509
-[; ;main.c: 509:     if (Rx == 'O') {
+[; ;main.c: 509:     Rx = UART_read();
+[e = _Rx ( _UART_read ..  ]
+"511
+[; ;main.c: 511:     if (Rx == 'O') {
 [e $ ! == -> _Rx `ui -> 79 `ui 513  ]
 {
-"511
-[; ;main.c: 511:         peticionLecturaSensores = 1;
-[e = _peticionLecturaSensores -> -> 1 `i `uc ]
 "513
-[; ;main.c: 513:         for (int i = 0; i < 3; i++) {
+[; ;main.c: 513:         peticionLecturaSensores = 1;
+[e = _peticionLecturaSensores -> -> 1 `i `uc ]
+"515
+[; ;main.c: 515:         for (int j = 0; j < 3; j++) {
 {
-[v _i `i ~T0 @X0 1 a ]
-[e = _i -> 0 `i ]
-[e $ < _i -> 3 `i 514  ]
+[v _j `i ~T0 @X0 1 a ]
+[e = _j -> 0 `i ]
+[e $ < _j -> 3 `i 514  ]
 [e $U 515  ]
 [e :U 514 ]
 {
-"515
-[; ;main.c: 515:             UART_printf("\r\nDame DATOS DEL SENSOR :\r\n");
-[e ( _UART_printf (1 :s 14C ]
 "517
-[; ;main.c: 517:             Rx = UART_read();
-[e = _Rx -> ( _UART_read ..  `uc ]
+[; ;main.c: 517:             sprintf(buffer, "\r\nIngrese el porcentaje de humedad del sensor %d\r\n", j);
+[e ( _sprintf (1 , (. , &U _buffer :s 14C _j ]
 "518
-[; ;main.c: 518:             Rx -= 48;
-[e =- _Rx -> -> 48 `i `uc ]
+[; ;main.c: 518:             UART_printf(buffer);
+[e ( _UART_printf (1 &U _buffer ]
 "520
-[; ;main.c: 520:             if (Rx == 1)
-[e $ ! == -> _Rx `i -> 1 `i 517  ]
-"521
-[; ;main.c: 521:                 sensores[i].humedadMedida = 60;
-[e = . *U + &U _sensores * -> -> _i `ui `ux -> -> # *U &U _sensores `ui `ux 0 -> -> 60 `i `s ]
+[; ;main.c: 520:             for (int i = 0; i < 3; i++) {
+{
+[v _i `i ~T0 @X0 1 a ]
+[e = _i -> 0 `i ]
+[e $ < _i -> 3 `i 517  ]
 [e $U 518  ]
-"522
-[; ;main.c: 522:             else
 [e :U 517 ]
-"523
-[; ;main.c: 523:                 sensores[i].humedadMedida = 0;
-[e = . *U + &U _sensores * -> -> _i `ui `ux -> -> # *U &U _sensores `ui `ux 0 -> -> 0 `i `s ]
-[e :U 518 ]
-"525
-[; ;main.c: 525:         }
+{
+"522
+[; ;main.c: 522:                 Rx = UART_read();
+[e = _Rx ( _UART_read ..  ]
+"524
+[; ;main.c: 524:                 if (Rx >= 48 && Rx <= 57) {
+[e $ ! && >= -> _Rx `i -> 48 `i <= -> _Rx `i -> 57 `i 520  ]
+{
+"526
+[; ;main.c: 526:                     Rx -= 48;
+[e =- _Rx -> -> 48 `i `uc ]
+"528
+[; ;main.c: 528:                     switch (i) {
+[e $U 522  ]
+{
+"529
+[; ;main.c: 529:                         case 0:
+[e :U 523 ]
+"530
+[; ;main.c: 530:                             porcientoHumedad = Rx;
+[e = _porcientoHumedad _Rx ]
+"531
+[; ;main.c: 531:                             porcientoHumedad *= 100;
+[e =* _porcientoHumedad -> -> 100 `i `uc ]
+"532
+[; ;main.c: 532:                             break;
+[e $U 521  ]
+"534
+[; ;main.c: 534:                         case 1:
+[e :U 524 ]
+"535
+[; ;main.c: 535:                             porcientoHumedad += (Rx * 10);
+[e =+ _porcientoHumedad -> * -> _Rx `i -> 10 `i `uc ]
+"536
+[; ;main.c: 536:                             break;
+[e $U 521  ]
+"538
+[; ;main.c: 538:                         case 2:
+[e :U 525 ]
+"539
+[; ;main.c: 539:                             porcientoHumedad += Rx;
+[e =+ _porcientoHumedad -> _Rx `uc ]
+"540
+[; ;main.c: 540:                             sensores[j].porcientoHumedad = porcientoHumedad;
+[e = . *U + &U _sensores * -> -> _j `ui `ux -> -> # *U &U _sensores `ui `ux 0 _porcientoHumedad ]
+"541
+[; ;main.c: 541:                             break;
+[e $U 521  ]
+"543
+[; ;main.c: 543:                         default:
+[e :U 526 ]
+"544
+[; ;main.c: 544:                             break;
+[e $U 521  ]
+"545
+[; ;main.c: 545:                     }
+}
+[e $U 521  ]
+[e :U 522 ]
+[e [\ _i , $ -> 0 `i 523
+ , $ -> 1 `i 524
+ , $ -> 2 `i 525
+ 526 ]
+[e :U 521 ]
+"547
+[; ;main.c: 547:                 } else {
+}
+[e $U 527  ]
+[e :U 520 ]
+{
+"549
+[; ;main.c: 549:                     sensores[j].porcientoHumedad = 100;
+[e = . *U + &U _sensores * -> -> _j `ui `ux -> -> # *U &U _sensores `ui `ux 0 -> -> 100 `i `uc ]
+"550
+[; ;main.c: 550:                     UART_write('F');
+[e ( _UART_write (1 -> -> 70 `ui `uc ]
+"551
+[; ;main.c: 551:                     break;
+[e $U 518  ]
+"552
+[; ;main.c: 552:                 }
+}
+[e :U 527 ]
+"553
+[; ;main.c: 553:             }
 }
 [e ++ _i -> 1 `i ]
-[e $ < _i -> 3 `i 514  ]
+[e $ < _i -> 3 `i 517  ]
+[e :U 518 ]
+}
+"555
+[; ;main.c: 555:         }
+}
+[e ++ _j -> 1 `i ]
+[e $ < _j -> 3 `i 514  ]
 [e :U 515 ]
 }
-"527
-[; ;main.c: 527:         UART_printf("\r\nSensores Leidos con Exito!\r\n\n");
+"557
+[; ;main.c: 557:         UART_printf("\r\nSensores Leidos con Exito!\r\n\n");
 [e ( _UART_printf (1 :s 15C ]
-"529
-[; ;main.c: 529:     } else {
+"559
+[; ;main.c: 559:     } else {
 }
-[e $U 519  ]
+[e $U 528  ]
 [e :U 513 ]
 {
-"530
-[; ;main.c: 530:         peticionLecturaSensores = 0;
+"560
+[; ;main.c: 560:         peticionLecturaSensores = 0;
 [e = _peticionLecturaSensores -> -> 0 `i `uc ]
-"531
-[; ;main.c: 531:     }
+"561
+[; ;main.c: 561:     }
 }
-[e :U 519 ]
-"533
-[; ;main.c: 533:     PIE1bits.RCIE = 1;
+[e :U 528 ]
+"563
+[; ;main.c: 563:     PIE1bits.RCIE = 1;
 [e = . . _PIE1bits 0 5 -> -> 1 `i `uc ]
-"535
-[; ;main.c: 535: }
+"565
+[; ;main.c: 565: }
 [e :UE 512 ]
 }
-"537
-[; ;main.c: 537: void lecturaAnalogaSensores() {
+"567
+[; ;main.c: 567: void lecturaAnalogaSensores() {
 [v _lecturaAnalogaSensores `(v ~T0 @X0 1 ef ]
 {
 [e :U _lecturaAnalogaSensores ]
 [f ]
-"539
-[; ;main.c: 539:     for (int i = 0; i < 3; i++) {
+"569
+[; ;main.c: 569:     for (int i = 0; i < 3; i++) {
 {
 [v _i `i ~T0 @X0 1 a ]
 [e = _i -> 0 `i ]
-[e $ < _i -> 3 `i 521  ]
-[e $U 522  ]
-[e :U 521 ]
+[e $ < _i -> 3 `i 530  ]
+[e $U 531  ]
+[e :U 530 ]
 {
-"540
-[; ;main.c: 540:         sensores[i].humedadMedida = dameHumedadSuelo(i);
-[e = . *U + &U _sensores * -> -> _i `ui `ux -> -> # *U &U _sensores `ui `ux 0 ( _dameHumedadSuelo (1 -> _i `uc ]
-"541
-[; ;main.c: 541:         _delay((unsigned long)((5)*(4000000/4000.0)));
+"570
+[; ;main.c: 570:         sensores[i].porcientoHumedad = map(dameHumedadSuelo(i), 0, 1023, 100, 0);
+[e = . *U + &U _sensores * -> -> _i `ui `ux -> -> # *U &U _sensores `ui `ux 0 -> ( _map (4 , , , , -> ( _dameHumedadSuelo (1 -> _i `uc `l -> -> 0 `i `l -> -> 1023 `i `l -> -> 100 `i `l -> -> 0 `i `l `uc ]
+"571
+[; ;main.c: 571:         _delay((unsigned long)((5)*(4000000/4000.0)));
 [e ( __delay (1 -> * -> -> 5 `i `d / -> -> 4000000 `l `d .4000.0 `ul ]
-"542
-[; ;main.c: 542:     }
+"572
+[; ;main.c: 572:     }
 }
 [e ++ _i -> 1 `i ]
-[e $ < _i -> 3 `i 521  ]
-[e :U 522 ]
+[e $ < _i -> 3 `i 530  ]
+[e :U 531 ]
 }
-"544
-[; ;main.c: 544: }
-[e :UE 520 ]
+"574
+[; ;main.c: 574: }
+[e :UE 529 ]
 }
-"546
-[; ;main.c: 546: void mostrarMenu(void) {
+"576
+[; ;main.c: 576: void mostrarMenu(void) {
 [v _mostrarMenu `(v ~T0 @X0 1 ef ]
 {
 [e :U _mostrarMenu ]
 [f ]
-"548
-[; ;main.c: 548:     UART_printf("\r\n Ingresa una opcion a Realizar: \r\n");
+"578
+[; ;main.c: 578:     UART_printf("\r\n Ingresa una opcion a Realizar: \r\n");
 [e ( _UART_printf (1 :s 16C ]
-"549
-[; ;main.c: 549:     UART_printf("\r\n 1. Fijar Hora Actual \r\n");
+"579
+[; ;main.c: 579:     UART_printf("\r\n 1. Fijar Hora Actual \r\n");
 [e ( _UART_printf (1 :s 17C ]
-"550
-[; ;main.c: 550:     UART_printf("\r\n 2. Asignar Horarios para regar \r\n");
+"580
+[; ;main.c: 580:     UART_printf("\r\n 2. Asignar Horarios para regar \r\n");
 [e ( _UART_printf (1 :s 18C ]
-"551
-[; ;main.c: 551:     UART_printf("\r\n 3. Programar tiempo de riego en un horario \r\n");
+"581
+[; ;main.c: 581:     UART_printf("\r\n 3. Programar tiempo de riego en un horario \r\n");
 [e ( _UART_printf (1 :s 19C ]
-"552
-[; ;main.c: 552:     UART_printf("\r\n 4. Dame datos del sistema \r\n");
+"582
+[; ;main.c: 582:     UART_printf("\r\n 4. Dame datos del sistema \r\n");
 [e ( _UART_printf (1 :s 20C ]
-"553
-[; ;main.c: 553:     UART_printf("\r\n 5. Mostrar valores sensores \r\n");
+"583
+[; ;main.c: 583:     UART_printf("\r\n 5. Mostrar valores sensores \r\n");
 [e ( _UART_printf (1 :s 21C ]
-"554
-[; ;main.c: 554:     UART_printf("\r\n Opcion:  \r");
+"584
+[; ;main.c: 584:     UART_printf("\r\n Opcion:  \r");
 [e ( _UART_printf (1 :s 22C ]
-"555
-[; ;main.c: 555:     UART_printf("\r\n");
+"585
+[; ;main.c: 585:     UART_printf("\r\n");
 [e ( _UART_printf (1 :s 23C ]
-"556
-[; ;main.c: 556: }
-[e :UE 524 ]
+"586
+[; ;main.c: 586: }
+[e :UE 533 ]
 }
-"558
-[; ;main.c: 558: void sistemaPrincipal(unsigned char opcion) {
+"588
+[; ;main.c: 588: void sistemaPrincipal(unsigned char opcion) {
 [v _sistemaPrincipal `(v ~T0 @X0 1 ef1`uc ]
 {
 [e :U _sistemaPrincipal ]
 [v _opcion `uc ~T0 @X0 1 r1 ]
 [f ]
-"560
-[; ;main.c: 560:     PIE1bits.RCIE = 0;
-[e = . . _PIE1bits 0 5 -> -> 0 `i `uc ]
-"562
-[; ;main.c: 562:     switch (opcion) {
-[e $U 527  ]
-{
-"564
-[; ;main.c: 564:         case 1:
-[e :U 528 ]
-"565
-[; ;main.c: 565:             fijaHoraRtc();
-[e ( _fijaHoraRtc ..  ]
-"566
-[; ;main.c: 566:             break;
-[e $U 526  ]
-"568
-[; ;main.c: 568:         case 2:
-[e :U 529 ]
-"569
-[; ;main.c: 569:             asignarHorarios();
-[e ( _asignarHorarios ..  ]
-"570
-[; ;main.c: 570:             break;
-[e $U 526  ]
-"572
-[; ;main.c: 572:         case 3:
-[e :U 530 ]
-"573
-[; ;main.c: 573:             setTiempoRegar();
-[e ( _setTiempoRegar ..  ]
-"574
-[; ;main.c: 574:             break;
-[e $U 526  ]
-"576
-[; ;main.c: 576:         case 4:
-[e :U 531 ]
-"577
-[; ;main.c: 577:             dameDatosSistema();
-[e ( _dameDatosSistema ..  ]
-"578
-[; ;main.c: 578:             break;
-[e $U 526  ]
-"580
-[; ;main.c: 580:         case 5:
-[e :U 532 ]
-"581
-[; ;main.c: 581:             if (0)
-[e $ ! != -> 0 `i -> 0 `i 533  ]
-"582
-[; ;main.c: 582:                 mostrarDatosSensoresWIFI();
-[e ( _mostrarDatosSensoresWIFI ..  ]
-[e $U 534  ]
-"583
-[; ;main.c: 583:             else
-[e :U 533 ]
-"584
-[; ;main.c: 584:                 mostrarDatosSensores();
-[e ( _mostrarDatosSensores ..  ]
-[e :U 534 ]
-"585
-[; ;main.c: 585:             break;
-[e $U 526  ]
-"588
-[; ;main.c: 588:         default:
-[e :U 535 ]
-"589
-[; ;main.c: 589:             UART_printf("\r\n Solo se permiten numeros del 1 al 3 \r\n");
-[e ( _UART_printf (1 :s 24C ]
 "590
-[; ;main.c: 590:             break;
-[e $U 526  ]
-"591
-[; ;main.c: 591:     }
-}
-[e $U 526  ]
-[e :U 527 ]
-[e [\ -> _opcion `i , $ -> 1 `i 528
- , $ -> 2 `i 529
- , $ -> 3 `i 530
- , $ -> 4 `i 531
- , $ -> 5 `i 532
- 535 ]
-[e :U 526 ]
-"593
-[; ;main.c: 593:     mostrarMenu();
-[e ( _mostrarMenu ..  ]
+[; ;main.c: 590:     PIE1bits.RCIE = 0;
+[e = . . _PIE1bits 0 5 -> -> 0 `i `uc ]
+"592
+[; ;main.c: 592:     switch (opcion) {
+[e $U 536  ]
+{
 "594
-[; ;main.c: 594:     PIE1bits.RCIE = 1;
-[e = . . _PIE1bits 0 5 -> -> 1 `i `uc ]
+[; ;main.c: 594:         case 1:
+[e :U 537 ]
+"595
+[; ;main.c: 595:             fijaHoraRtc();
+[e ( _fijaHoraRtc ..  ]
 "596
-[; ;main.c: 596: }
-[e :UE 525 ]
-}
+[; ;main.c: 596:             break;
+[e $U 535  ]
 "598
-[; ;main.c: 598: void sistemaRegado(void) {
+[; ;main.c: 598:         case 2:
+[e :U 538 ]
+"599
+[; ;main.c: 599:             asignarHorarios();
+[e ( _asignarHorarios ..  ]
+"600
+[; ;main.c: 600:             break;
+[e $U 535  ]
+"602
+[; ;main.c: 602:         case 3:
+[e :U 539 ]
+"603
+[; ;main.c: 603:             setTiempoRegar();
+[e ( _setTiempoRegar ..  ]
+"604
+[; ;main.c: 604:             break;
+[e $U 535  ]
+"606
+[; ;main.c: 606:         case 4:
+[e :U 540 ]
+"607
+[; ;main.c: 607:             dameDatosSistema();
+[e ( _dameDatosSistema ..  ]
+"608
+[; ;main.c: 608:             break;
+[e $U 535  ]
+"610
+[; ;main.c: 610:         case 5:
+[e :U 541 ]
+"611
+[; ;main.c: 611:             if (MODO_COMUNICACION)
+[e $ ! != -> _MODO_COMUNICACION `i -> 0 `i 542  ]
+"612
+[; ;main.c: 612:                 mostrarDatosSensoresWIFI();
+[e ( _mostrarDatosSensoresWIFI ..  ]
+[e $U 543  ]
+"613
+[; ;main.c: 613:             else
+[e :U 542 ]
+"614
+[; ;main.c: 614:                 mostrarDatosSensores();
+[e ( _mostrarDatosSensores ..  ]
+[e :U 543 ]
+"615
+[; ;main.c: 615:             break;
+[e $U 535  ]
+"618
+[; ;main.c: 618:         default:
+[e :U 544 ]
+"619
+[; ;main.c: 619:             UART_printf("\r\n Solo se permiten numeros del 1 al 3 \r\n");
+[e ( _UART_printf (1 :s 24C ]
+"620
+[; ;main.c: 620:             break;
+[e $U 535  ]
+"621
+[; ;main.c: 621:     }
+}
+[e $U 535  ]
+[e :U 536 ]
+[e [\ -> _opcion `i , $ -> 1 `i 537
+ , $ -> 2 `i 538
+ , $ -> 3 `i 539
+ , $ -> 4 `i 540
+ , $ -> 5 `i 541
+ 544 ]
+[e :U 535 ]
+"623
+[; ;main.c: 623:     mostrarMenu();
+[e ( _mostrarMenu ..  ]
+"624
+[; ;main.c: 624:     PIE1bits.RCIE = 1;
+[e = . . _PIE1bits 0 5 -> -> 1 `i `uc ]
+"626
+[; ;main.c: 626: }
+[e :UE 534 ]
+}
+"628
+[; ;main.c: 628: void sistemaRegado(void) {
 [v _sistemaRegado `(v ~T0 @X0 1 ef ]
 {
 [e :U _sistemaRegado ]
 [f ]
-"602
-[; ;main.c: 602:     if (regando) {
-[e $ ! != -> _regando `i -> 0 `i 537  ]
-{
-"603
-[; ;main.c: 603:         contInterrupciones++;
-[e ++ _contInterrupciones -> 1 `i ]
-"605
-[; ;main.c: 605:         if (contInterrupciones == 6) {
-[e $ ! == _contInterrupciones -> 6 `i 538  ]
-{
-"606
-[; ;main.c: 606:             contInterrupciones = 0;
-[e = _contInterrupciones -> 0 `i ]
-"607
-[; ;main.c: 607:             minutosTranscurridos++;
-[e ++ _minutosTranscurridos -> -> 1 `i `uc ]
-"610
-[; ;main.c: 610:             if (minutosTranscurridos >= minutosRegar) {
-[e $ ! >= -> _minutosTranscurridos `i -> _minutosRegar `i 539  ]
-{
-"612
-[; ;main.c: 612:                 LATD = 0;
-[e = _LATD -> -> 0 `i `uc ]
-"613
-[; ;main.c: 613:                 minutosTranscurridos = 0;
-[e = _minutosTranscurridos -> -> 0 `i `uc ]
-"614
-[; ;main.c: 614:                 regando = 0;
-[e = _regando -> -> 0 `i `uc ]
-"615
-[; ;main.c: 615:             }
-}
-[e :U 539 ]
-"616
-[; ;main.c: 616:         }
-}
-[e :U 538 ]
-"618
-[; ;main.c: 618:     } else {
-}
-[e $U 540  ]
-[e :U 537 ]
-{
-"620
-[; ;main.c: 620:         dameHoraActual();
-[e ( _dameHoraActual ..  ]
-"622
-[; ;main.c: 622:         if (horaRegar() && !minutos) {
-[e $ ! && != ( _horaRegar ..  -> 0 `i ! != -> _minutos `i -> 0 `i 541  ]
-{
-"626
-[; ;main.c: 626:             if (0) {
-[e $ ! != -> 0 `i -> 0 `i 542  ]
-{
-"627
-[; ;main.c: 627:                 lecturaWifi();
-[e ( _lecturaWifi ..  ]
-"628
-[; ;main.c: 628:                 if (peticionLecturaSensores) {
-[e $ ! != -> _peticionLecturaSensores `i -> 0 `i 543  ]
-{
-"629
-[; ;main.c: 629:                     minutosRegar = horarios[hora].tiempoRegar;
-[e = _minutosRegar . *U + &U _horarios * -> _hora `ux -> -> # *U &U _horarios `ui `ux 2 ]
-"630
-[; ;main.c: 630:                     encenderBombas();
-[e ( _encenderBombas ..  ]
-"631
-[; ;main.c: 631:                 }
-}
-[e :U 543 ]
 "632
-[; ;main.c: 632:                 mostrarMenu();
-[e ( _mostrarMenu ..  ]
-"633
-[; ;main.c: 633:             } else {
-}
-[e $U 544  ]
-[e :U 542 ]
+[; ;main.c: 632:     if (regando) {
+[e $ ! != -> _regando `i -> 0 `i 546  ]
 {
-"634
-[; ;main.c: 634:                 lecturaAnalogaSensores();
-[e ( _lecturaAnalogaSensores ..  ]
+"633
+[; ;main.c: 633:         contInterrupciones++;
+[e ++ _contInterrupciones -> 1 `i ]
 "635
-[; ;main.c: 635:                 minutosRegar = horarios[hora].tiempoRegar;
-[e = _minutosRegar . *U + &U _horarios * -> _hora `ux -> -> # *U &U _horarios `ui `ux 2 ]
+[; ;main.c: 635:         if (contInterrupciones == 6) {
+[e $ ! == _contInterrupciones -> 6 `i 547  ]
+{
 "636
-[; ;main.c: 636:                 encenderBombas();
-[e ( _encenderBombas ..  ]
+[; ;main.c: 636:             contInterrupciones = 0;
+[e = _contInterrupciones -> 0 `i ]
 "637
-[; ;main.c: 637:             }
-}
-[e :U 544 ]
-"638
-[; ;main.c: 638:         }
-}
-[e :U 541 ]
-"639
-[; ;main.c: 639:     }
-}
-[e :U 540 ]
-"641
-[; ;main.c: 641: }
-[e :UE 536 ]
-}
+[; ;main.c: 637:             minutosTranscurridos++;
+[e ++ _minutosTranscurridos -> -> 1 `i `uc ]
+"640
+[; ;main.c: 640:             if (minutosTranscurridos >= minutosRegar) {
+[e $ ! >= -> _minutosTranscurridos `i -> _minutosRegar `i 548  ]
+{
+"642
+[; ;main.c: 642:                 LATD = 0;
+[e = _LATD -> -> 0 `i `uc ]
 "643
-[; ;main.c: 643: void dameDatosSistema(void) {
+[; ;main.c: 643:                 minutosTranscurridos = 0;
+[e = _minutosTranscurridos -> -> 0 `i `uc ]
+"644
+[; ;main.c: 644:                 regando = 0;
+[e = _regando -> -> 0 `i `uc ]
+"645
+[; ;main.c: 645:             }
+}
+[e :U 548 ]
+"646
+[; ;main.c: 646:         }
+}
+[e :U 547 ]
+"648
+[; ;main.c: 648:     } else {
+}
+[e $U 549  ]
+[e :U 546 ]
+{
+"650
+[; ;main.c: 650:         dameHoraActual();
+[e ( _dameHoraActual ..  ]
+"653
+[; ;main.c: 653:         if ((!MODO_COMUNICACION && (horaRegar() && !minutos)) || (MODO_COMUNICACION
+[e $ ! || && ! != -> _MODO_COMUNICACION `i -> 0 `i && != ( _horaRegar ..  -> 0 `i ! != -> _minutos `i -> 0 `i && != -> _MODO_COMUNICACION `i -> 0 `i && != ( _horaRegar ..  -> 0 `i < -> _minutos `i -> 3 `i 550  ]
+"654
+[; ;main.c: 654:                 && (horaRegar() && minutos < 3))) {
+{
+"658
+[; ;main.c: 658:             if (MODO_COMUNICACION) {
+[e $ ! != -> _MODO_COMUNICACION `i -> 0 `i 551  ]
+{
+"659
+[; ;main.c: 659:                 lecturaWifi();
+[e ( _lecturaWifi ..  ]
+"660
+[; ;main.c: 660:                 if (peticionLecturaSensores) {
+[e $ ! != -> _peticionLecturaSensores `i -> 0 `i 552  ]
+{
+"661
+[; ;main.c: 661:                     minutosRegar = horarios[hora].tiempoRegar;
+[e = _minutosRegar . *U + &U _horarios * -> _hora `ux -> -> # *U &U _horarios `ui `ux 2 ]
+"662
+[; ;main.c: 662:                     encenderBombas();
+[e ( _encenderBombas ..  ]
+"663
+[; ;main.c: 663:                 }
+}
+[e :U 552 ]
+"664
+[; ;main.c: 664:                 mostrarMenu();
+[e ( _mostrarMenu ..  ]
+"665
+[; ;main.c: 665:             } else {
+}
+[e $U 553  ]
+[e :U 551 ]
+{
+"666
+[; ;main.c: 666:                 lecturaAnalogaSensores();
+[e ( _lecturaAnalogaSensores ..  ]
+"667
+[; ;main.c: 667:                 minutosRegar = horarios[hora].tiempoRegar;
+[e = _minutosRegar . *U + &U _horarios * -> _hora `ux -> -> # *U &U _horarios `ui `ux 2 ]
+"668
+[; ;main.c: 668:                 encenderBombas();
+[e ( _encenderBombas ..  ]
+"669
+[; ;main.c: 669:             }
+}
+[e :U 553 ]
+"670
+[; ;main.c: 670:         }
+}
+[e :U 550 ]
+"671
+[; ;main.c: 671:     }
+}
+[e :U 549 ]
+"673
+[; ;main.c: 673: }
+[e :UE 545 ]
+}
+"675
+[; ;main.c: 675: void dameDatosSistema(void) {
 [v _dameDatosSistema `(v ~T0 @X0 1 ef ]
 {
 [e :U _dameDatosSistema ]
 [f ]
-"645
-[; ;main.c: 645:     char buffer[50];
+"677
+[; ;main.c: 677:     char buffer[50];
 [v _buffer `uc ~T0 @X0 -> 50 `i a ]
-"647
-[; ;main.c: 647:     UART_write('I');
+"679
+[; ;main.c: 679:     UART_write('I');
 [e ( _UART_write (1 -> -> 73 `ui `uc ]
-"649
-[; ;main.c: 649:     UART_printf("\r\n\nHora | Regar(1 si 0 no) | Minutos de riego \r\n\n");
+"681
+[; ;main.c: 681:     UART_printf("\r\n\nHora | Regar(1 si 0 no) | Minutos de riego \r\n\n");
 [e ( _UART_printf (1 :s 25C ]
-"651
-[; ;main.c: 651:     for (int i = 0; i < 24; i++) {
+"683
+[; ;main.c: 683:     for (int i = 0; i < 24; i++) {
 {
 [v _i `i ~T0 @X0 1 a ]
 [e = _i -> 0 `i ]
-[e $ < _i -> 24 `i 546  ]
-[e $U 547  ]
-[e :U 546 ]
+[e $ < _i -> 24 `i 555  ]
+[e $U 556  ]
+[e :U 555 ]
 {
-"653
-[; ;main.c: 653:         sprintf(buffer, "%d | %d | %d \r\n", horarios[i].hora, horarios[i].regar,
+"685
+[; ;main.c: 685:         sprintf(buffer, "%d | %d | %d \r\n", horarios[i].hora, horarios[i].regar,
 [e ( _sprintf (1 , , , (. , &U _buffer :s 26C -> . *U + &U _horarios * -> -> _i `ui `ux -> -> # *U &U _horarios `ui `ux 0 `i -> . *U + &U _horarios * -> -> _i `ui `ux -> -> # *U &U _horarios `ui `ux 1 `i -> . *U + &U _horarios * -> -> _i `ui `ux -> -> # *U &U _horarios `ui `ux 2 `i ]
-"656
-[; ;main.c: 656:         UART_printf(buffer);
+"688
+[; ;main.c: 688:         UART_printf(buffer);
 [e ( _UART_printf (1 &U _buffer ]
-"658
-[; ;main.c: 658:     }
+"690
+[; ;main.c: 690:     }
 }
 [e ++ _i -> 1 `i ]
-[e $ < _i -> 24 `i 546  ]
-[e :U 547 ]
+[e $ < _i -> 24 `i 555  ]
+[e :U 556 ]
 }
-"660
-[; ;main.c: 660:     UART_write('I');
+"692
+[; ;main.c: 692:     UART_write('I');
 [e ( _UART_write (1 -> -> 73 `ui `uc ]
-"662
-[; ;main.c: 662: }
-[e :UE 545 ]
+"694
+[; ;main.c: 694: }
+[e :UE 554 ]
 }
-"664
-[; ;main.c: 664: void dameTemperaturaHumedad(unsigned char* Humedad, unsigned char* Temperatura) {
+"696
+[; ;main.c: 696: void dameTemperaturaHumedad(unsigned char* Humedad, unsigned char* Temperatura) {
 [v _dameTemperaturaHumedad `(v ~T0 @X0 1 ef2`*uc`*uc ]
 {
 [e :U _dameTemperaturaHumedad ]
 [v _Humedad `*uc ~T0 @X0 1 r1 ]
 [v _Temperatura `*uc ~T0 @X0 1 r2 ]
 [f ]
-"666
-[; ;main.c: 666:     PIE1bits.RCIE = 0;
+"698
+[; ;main.c: 698:     PIE1bits.RCIE = 0;
 [e = . . _PIE1bits 0 5 -> -> 0 `i `uc ]
-"667
-[; ;main.c: 667:     T0CONbits.TMR0ON = 0;
+"699
+[; ;main.c: 699:     T0CONbits.TMR0ON = 0;
 [e = . . _T0CONbits 0 5 -> -> 0 `i `uc ]
-"669
-[; ;main.c: 669:     unsigned char humedad, humedadDecimal;
+"701
+[; ;main.c: 701:     unsigned char humedad, humedadDecimal;
 [v _humedad `uc ~T0 @X0 1 a ]
 [v _humedadDecimal `uc ~T0 @X0 1 a ]
-"670
-[; ;main.c: 670:     unsigned char temperatura, temperaturaDecimal;
+"702
+[; ;main.c: 702:     unsigned char temperatura, temperaturaDecimal;
 [v _temperatura `uc ~T0 @X0 1 a ]
 [v _temperaturaDecimal `uc ~T0 @X0 1 a ]
-"671
-[; ;main.c: 671:     unsigned checkSum = 0;
+"703
+[; ;main.c: 703:     unsigned checkSum = 0;
 [v _checkSum `ui ~T0 @X0 1 a ]
 [e = _checkSum -> -> 0 `i `ui ]
-"673
-[; ;main.c: 673:     DHT11_Start();
+"705
+[; ;main.c: 705:     DHT11_Start();
 [e ( _DHT11_Start ..  ]
-"675
-[; ;main.c: 675:     if (check_response()) {
-[e $ ! != -> ( _check_response ..  `i -> 0 `i 550  ]
+"707
+[; ;main.c: 707:     if (check_response()) {
+[e $ ! != -> ( _check_response ..  `i -> 0 `i 559  ]
 {
-"678
-[; ;main.c: 678:         humedad = DHT11_ReadData();
+"710
+[; ;main.c: 710:         humedad = DHT11_ReadData();
 [e = _humedad ( _DHT11_ReadData ..  ]
-"679
-[; ;main.c: 679:         humedadDecimal = DHT11_ReadData();
+"711
+[; ;main.c: 711:         humedadDecimal = DHT11_ReadData();
 [e = _humedadDecimal ( _DHT11_ReadData ..  ]
-"680
-[; ;main.c: 680:         temperatura = DHT11_ReadData();
+"712
+[; ;main.c: 712:         temperatura = DHT11_ReadData();
 [e = _temperatura ( _DHT11_ReadData ..  ]
-"681
-[; ;main.c: 681:         temperaturaDecimal = DHT11_ReadData();
+"713
+[; ;main.c: 713:         temperaturaDecimal = DHT11_ReadData();
 [e = _temperaturaDecimal ( _DHT11_ReadData ..  ]
-"682
-[; ;main.c: 682:         checkSum = DHT11_ReadData();
+"714
+[; ;main.c: 714:         checkSum = DHT11_ReadData();
 [e = _checkSum -> ( _DHT11_ReadData ..  `ui ]
-"684
-[; ;main.c: 684:         if (checkSum != (humedad + humedadDecimal + temperatura + temperaturaDecimal))
-[e $ ! != _checkSum -> + + + -> _humedad `i -> _humedadDecimal `i -> _temperatura `i -> _temperaturaDecimal `i `ui 551  ]
-"685
-[; ;main.c: 685:             UART_printf("Error de lectura DHT11\r\n");
+"716
+[; ;main.c: 716:         if (checkSum != (humedad + humedadDecimal + temperatura + temperaturaDecimal))
+[e $ ! != _checkSum -> + + + -> _humedad `i -> _humedadDecimal `i -> _temperatura `i -> _temperaturaDecimal `i `ui 560  ]
+"717
+[; ;main.c: 717:             UART_printf("Error de lectura DHT11\r\n");
 [e ( _UART_printf (1 :s 27C ]
-[e $U 552  ]
-"686
-[; ;main.c: 686:         else {
-[e :U 551 ]
+[e $U 561  ]
+"718
+[; ;main.c: 718:         else {
+[e :U 560 ]
 {
-"687
-[; ;main.c: 687:             *Humedad = humedad;
+"719
+[; ;main.c: 719:             *Humedad = humedad;
 [e = *U _Humedad _humedad ]
-"688
-[; ;main.c: 688:             *Temperatura = temperatura;
+"720
+[; ;main.c: 720:             *Temperatura = temperatura;
 [e = *U _Temperatura _temperatura ]
-"689
-[; ;main.c: 689:         }
+"721
+[; ;main.c: 721:         }
 }
-[e :U 552 ]
-"691
-[; ;main.c: 691:     } else
+[e :U 561 ]
+"723
+[; ;main.c: 723:     } else
 }
-[e $U 553  ]
-[e :U 550 ]
-"692
-[; ;main.c: 692:         UART_printf("DHT11 NO RESPONDIO\r\n");
+[e $U 562  ]
+[e :U 559 ]
+"724
+[; ;main.c: 724:         UART_printf("DHT11 NO RESPONDIO\r\n");
 [e ( _UART_printf (1 :s 28C ]
-[e :U 553 ]
-"695
-[; ;main.c: 695:     PIE1bits.RCIE = 1;
+[e :U 562 ]
+"727
+[; ;main.c: 727:     PIE1bits.RCIE = 1;
 [e = . . _PIE1bits 0 5 -> -> 1 `i `uc ]
-"696
-[; ;main.c: 696:     T0CONbits.TMR0ON = 1;
+"728
+[; ;main.c: 728:     T0CONbits.TMR0ON = 1;
 [e = . . _T0CONbits 0 5 -> -> 1 `i `uc ]
-"697
-[; ;main.c: 697: }
-[e :UE 549 ]
+"729
+[; ;main.c: 729: }
+[e :UE 558 ]
 }
-"699
-[; ;main.c: 699: void mostrarDatosSensores(void) {
+"731
+[; ;main.c: 731: void mostrarDatosSensores(void) {
 [v _mostrarDatosSensores `(v ~T0 @X0 1 ef ]
 {
 [e :U _mostrarDatosSensores ]
 [f ]
-"701
-[; ;main.c: 701:     char buffer[50];
+"733
+[; ;main.c: 733:     char buffer[50];
 [v _buffer `uc ~T0 @X0 -> 50 `i a ]
-"702
-[; ;main.c: 702:     unsigned char temperatura, humedad, porcentajeHumedad;
+"734
+[; ;main.c: 734:     unsigned char temperatura, humedad;
 [v _temperatura `uc ~T0 @X0 1 a ]
 [v _humedad `uc ~T0 @X0 1 a ]
-[v _porcentajeHumedad `uc ~T0 @X0 1 a ]
-"704
-[; ;main.c: 704:     dameTemperaturaHumedad(&humedad, &temperatura);
+"736
+[; ;main.c: 736:     dameTemperaturaHumedad(&humedad, &temperatura);
 [e ( _dameTemperaturaHumedad (2 , &U _humedad &U _temperatura ]
-"706
-[; ;main.c: 706:     UART_write('I');
+"738
+[; ;main.c: 738:     UART_write('I');
 [e ( _UART_write (1 -> -> 73 `ui `uc ]
-"709
-[; ;main.c: 709:     sprintf(buffer, "\r\n\nLa Humedad Ambiente es: %d\r\n", humedad);
+"741
+[; ;main.c: 741:     sprintf(buffer, "\r\n\nLa Humedad Ambiente es: %d\r\n", humedad);
 [e ( _sprintf (1 , (. , &U _buffer :s 29C -> _humedad `i ]
-"710
-[; ;main.c: 710:     UART_printf(buffer);
+"742
+[; ;main.c: 742:     UART_printf(buffer);
 [e ( _UART_printf (1 &U _buffer ]
-"711
-[; ;main.c: 711:     sprintf(buffer, "\r\n\nLa Temperatura es: %d C\r\n", temperatura);
+"743
+[; ;main.c: 743:     sprintf(buffer, "\r\n\nLa Temperatura es: %d C\r\n", temperatura);
 [e ( _sprintf (1 , (. , &U _buffer :s 30C -> _temperatura `i ]
-"712
-[; ;main.c: 712:     UART_printf(buffer);
+"744
+[; ;main.c: 744:     UART_printf(buffer);
 [e ( _UART_printf (1 &U _buffer ]
-"714
-[; ;main.c: 714:     lecturaAnalogaSensores();
+"746
+[; ;main.c: 746:     lecturaAnalogaSensores();
 [e ( _lecturaAnalogaSensores ..  ]
-"717
-[; ;main.c: 717:     for (int i = 0; i < 3; i++) {
+"749
+[; ;main.c: 749:     for (int i = 0; i < 3; i++) {
 {
 [v _i `i ~T0 @X0 1 a ]
 [e = _i -> 0 `i ]
-[e $ < _i -> 3 `i 555  ]
-[e $U 556  ]
-[e :U 555 ]
+[e $ < _i -> 3 `i 564  ]
+[e $U 565  ]
+[e :U 564 ]
 {
-"719
-[; ;main.c: 719:         porcentajeHumedad = map(sensores[i].humedadMedida, 0, 1023, 100, 0);
-[e = _porcentajeHumedad -> ( _map (4 , , , , -> . *U + &U _sensores * -> -> _i `ui `ux -> -> # *U &U _sensores `ui `ux 0 `l -> -> 0 `i `l -> -> 1023 `i `l -> -> 100 `i `l -> -> 0 `i `l `uc ]
-"721
-[; ;main.c: 721:         sprintf(buffer, "\r\n\nPorcentaje Humedad del sensor %d: %d\r\n"
-[e ( _sprintf (1 , , (. , &U _buffer :s 31C _i -> _porcentajeHumedad `i ]
-"723
-[; ;main.c: 723:         UART_printf(buffer);
+"751
+[; ;main.c: 751:         sprintf(buffer, "\r\n\nPorcentaje Humedad del sensor %d: %d %c\r\n"
+[e ( _sprintf (1 , , , (. , &U _buffer :s 31C _i -> . *U + &U _sensores * -> -> _i `ui `ux -> -> # *U &U _sensores `ui `ux 0 `i -> 37 `i ]
+"753
+[; ;main.c: 753:         UART_printf(buffer);
 [e ( _UART_printf (1 &U _buffer ]
-"726
-[; ;main.c: 726:     }
+"754
+[; ;main.c: 754:     }
 }
 [e ++ _i -> 1 `i ]
-[e $ < _i -> 3 `i 555  ]
-[e :U 556 ]
+[e $ < _i -> 3 `i 564  ]
+[e :U 565 ]
 }
-"728
-[; ;main.c: 728:     UART_write('I');
+"756
+[; ;main.c: 756:     UART_write('I');
 [e ( _UART_write (1 -> -> 73 `ui `uc ]
-"730
-[; ;main.c: 730: }
-[e :UE 554 ]
+"758
+[; ;main.c: 758: }
+[e :UE 563 ]
 }
-"732
-[; ;main.c: 732: void mostrarDatosSensoresWIFI(void) {
+"760
+[; ;main.c: 760: void mostrarDatosSensoresWIFI(void) {
 [v _mostrarDatosSensoresWIFI `(v ~T0 @X0 1 ef ]
 {
 [e :U _mostrarDatosSensoresWIFI ]
 [f ]
-"735
-[; ;main.c: 735:     char buffer[50];
+"763
+[; ;main.c: 763:     char buffer[50];
 [v _buffer `uc ~T0 @X0 -> 50 `i a ]
-"736
-[; ;main.c: 736:     unsigned char temperatura, humedad;
+"764
+[; ;main.c: 764:     unsigned char temperatura, humedad;
 [v _temperatura `uc ~T0 @X0 1 a ]
 [v _humedad `uc ~T0 @X0 1 a ]
-"738
-[; ;main.c: 738:     lecturaWifi();
-[e ( _lecturaWifi ..  ]
-"740
-[; ;main.c: 740:     UART_write('I');
-[e ( _UART_write (1 -> -> 73 `ui `uc ]
-"743
-[; ;main.c: 743:     if (peticionLecturaSensores) {
-[e $ ! != -> _peticionLecturaSensores `i -> 0 `i 559  ]
-{
-"745
-[; ;main.c: 745:         for (int i = 0; i < 3; i++) {
-{
-[v _i `i ~T0 @X0 1 a ]
-[e = _i -> 0 `i ]
-[e $ < _i -> 3 `i 560  ]
-[e $U 561  ]
-[e :U 560 ]
-{
-"747
-[; ;main.c: 747:             if (sensores[i].humedadMedida >= 60) {
-[e $ ! >= -> . *U + &U _sensores * -> -> _i `ui `ux -> -> # *U &U _sensores `ui `ux 0 `i -> 60 `i 563  ]
-{
-"748
-[; ;main.c: 748:                 sprintf(buffer, "\r\n\nEl sensor %d detecta tierra seca\r\n", i);
-[e ( _sprintf (1 , (. , &U _buffer :s 32C _i ]
-"749
-[; ;main.c: 749:                 UART_printf(buffer);
-[e ( _UART_printf (1 &U _buffer ]
-"752
-[; ;main.c: 752:             } else {
-}
-[e $U 564  ]
-[e :U 563 ]
-{
-"753
-[; ;main.c: 753:                 sprintf(buffer, "\r\n\nEl sensor %d detecta tierra humeda\r\n", i);
-[e ( _sprintf (1 , (. , &U _buffer :s 33C _i ]
-"754
-[; ;main.c: 754:                 UART_printf(buffer);
-[e ( _UART_printf (1 &U _buffer ]
-"755
-[; ;main.c: 755:             }
-}
-[e :U 564 ]
-"757
-[; ;main.c: 757:         }
-}
-[e ++ _i -> 1 `i ]
-[e $ < _i -> 3 `i 560  ]
-[e :U 561 ]
-}
-"759
-[; ;main.c: 759:     }
-}
-[e :U 559 ]
-"761
-[; ;main.c: 761:     dameTemperaturaHumedad(&humedad, &temperatura);
-[e ( _dameTemperaturaHumedad (2 , &U _humedad &U _temperatura ]
-"763
-[; ;main.c: 763:     sprintf(buffer, "\r\n\nLa Humedad Ambiente es: %d\r\n", humedad);
-[e ( _sprintf (1 , (. , &U _buffer :s 34C -> _humedad `i ]
-"764
-[; ;main.c: 764:     UART_printf(buffer);
-[e ( _UART_printf (1 &U _buffer ]
-"765
-[; ;main.c: 765:     sprintf(buffer, "\r\n\nLa Temperatura es: %d C\r\n", temperatura);
-[e ( _sprintf (1 , (. , &U _buffer :s 35C -> _temperatura `i ]
 "766
-[; ;main.c: 766:     UART_printf(buffer);
-[e ( _UART_printf (1 &U _buffer ]
+[; ;main.c: 766:     lecturaWifi();
+[e ( _lecturaWifi ..  ]
 "768
 [; ;main.c: 768:     UART_write('I');
 [e ( _UART_write (1 -> -> 73 `ui `uc ]
-"770
-[; ;main.c: 770: }
-[e :UE 558 ]
+"771
+[; ;main.c: 771:     if (peticionLecturaSensores) {
+[e $ ! != -> _peticionLecturaSensores `i -> 0 `i 568  ]
+{
+"773
+[; ;main.c: 773:         for (int i = 0; i < 3; i++) {
+{
+[v _i `i ~T0 @X0 1 a ]
+[e = _i -> 0 `i ]
+[e $ < _i -> 3 `i 569  ]
+[e $U 570  ]
+[e :U 569 ]
+{
+"775
+[; ;main.c: 775:             sprintf(buffer, "\r\n\nPorcentaje Humedad del sensor %d: %d %c\r\n"
+[e ( _sprintf (1 , , , (. , &U _buffer :s 32C _i -> . *U + &U _sensores * -> -> _i `ui `ux -> -> # *U &U _sensores `ui `ux 0 `i -> 37 `i ]
+"777
+[; ;main.c: 777:             UART_printf(buffer);
+[e ( _UART_printf (1 &U _buffer ]
+"779
+[; ;main.c: 779:         }
+}
+[e ++ _i -> 1 `i ]
+[e $ < _i -> 3 `i 569  ]
+[e :U 570 ]
+}
+"781
+[; ;main.c: 781:     }
+}
+[e :U 568 ]
+"783
+[; ;main.c: 783:     dameTemperaturaHumedad(&humedad, &temperatura);
+[e ( _dameTemperaturaHumedad (2 , &U _humedad &U _temperatura ]
+"785
+[; ;main.c: 785:     sprintf(buffer, "\r\n\nLa Humedad Ambiente es: %d\r\n", humedad);
+[e ( _sprintf (1 , (. , &U _buffer :s 33C -> _humedad `i ]
+"786
+[; ;main.c: 786:     UART_printf(buffer);
+[e ( _UART_printf (1 &U _buffer ]
+"787
+[; ;main.c: 787:     sprintf(buffer, "\r\n\nLa Temperatura es: %d C\r\n", temperatura);
+[e ( _sprintf (1 , (. , &U _buffer :s 34C -> _temperatura `i ]
+"788
+[; ;main.c: 788:     UART_printf(buffer);
+[e ( _UART_printf (1 &U _buffer ]
+"790
+[; ;main.c: 790:     UART_write('I');
+[e ( _UART_write (1 -> -> 73 `ui `uc ]
+"792
+[; ;main.c: 792: }
+[e :UE 567 ]
 }
 [v $root$_main `(v ~T0 @X0 0 e ]
-"772
-[; ;main.c: 772: void main(void) {
+"794
+[; ;main.c: 794: void main(void) {
 [v _main `(v ~T0 @X0 1 ef ]
 {
 [e :U _main ]
 [f ]
-"774
-[; ;main.c: 774:     unsigned char humedad, temperatura;
-[v _humedad `uc ~T0 @X0 1 a ]
-[v _temperatura `uc ~T0 @X0 1 a ]
-"776
-[; ;main.c: 776:     INTCONbits.GIE = 1;
-[e = . . _INTCONbits 1 7 -> -> 1 `i `uc ]
-"777
-[; ;main.c: 777:     INTCONbits.PEIE = 1;
-[e = . . _INTCONbits 1 6 -> -> 1 `i `uc ]
-"778
-[; ;main.c: 778:     INTCONbits.TMR0IE = 0;
-[e = . . _INTCONbits 0 5 -> -> 0 `i `uc ]
-"779
-[; ;main.c: 779:     INTCONbits.TMR0IF = 0;
-[e = . . _INTCONbits 0 2 -> -> 0 `i `uc ]
-"780
-[; ;main.c: 780:     PIE1bits.RCIE = 1;
-[e = . . _PIE1bits 0 5 -> -> 1 `i `uc ]
-"782
-[; ;main.c: 782:     T0CON = 0b00000111;
-[e = _T0CON -> -> 7 `i `uc ]
-"784
-[; ;main.c: 784:     INTCONbits.TMR0IE = 1;
-[e = . . _INTCONbits 0 5 -> -> 1 `i `uc ]
-"789
-[; ;main.c: 789:     restablecerDatosSensor();
-[e ( _restablecerDatosSensor ..  ]
-"791
-[; ;main.c: 791:     UART_init(9600);
-[e ( _UART_init (1 -> -> 9600 `i `l ]
-"792
-[; ;main.c: 792:     i2c_iniciar();
-[e ( _i2c_iniciar ..  ]
-"793
-[; ;main.c: 793:     configurarAdc();
-[e ( _configurarAdc ..  ]
-"794
-[; ;main.c: 794:     inicializarObjetos();
-[e ( _inicializarObjetos ..  ]
 "796
-[; ;main.c: 796:     leeHorariosMemoria();
-[e ( _leeHorariosMemoria ..  ]
+[; ;main.c: 796:     INTCONbits.GIE = 1;
+[e = . . _INTCONbits 1 7 -> -> 1 `i `uc ]
+"797
+[; ;main.c: 797:     INTCONbits.PEIE = 1;
+[e = . . _INTCONbits 1 6 -> -> 1 `i `uc ]
+"798
+[; ;main.c: 798:     INTCONbits.TMR0IE = 0;
+[e = . . _INTCONbits 0 5 -> -> 0 `i `uc ]
 "799
-[; ;main.c: 799:     TRISD = 0;
-[e = _TRISD -> -> 0 `i `uc ]
+[; ;main.c: 799:     INTCONbits.TMR0IF = 0;
+[e = . . _INTCONbits 0 2 -> -> 0 `i `uc ]
 "800
-[; ;main.c: 800:     LATD = 0;
-[e = _LATD -> -> 0 `i `uc ]
+[; ;main.c: 800:     PIE1bits.RCIE = 1;
+[e = . . _PIE1bits 0 5 -> -> 1 `i `uc ]
 "802
-[; ;main.c: 802:     TMR0 = VALOR_TIMER0;
-[e = _TMR0 -> _VALOR_TIMER0 `us ]
+[; ;main.c: 802:     T0CON = 0b00000111;
+[e = _T0CON -> -> 7 `i `uc ]
 "804
-[; ;main.c: 804:     INTCONbits.TMR0IF = 1;
-[e = . . _INTCONbits 0 2 -> -> 1 `i `uc ]
-"806
-[; ;main.c: 806:     T0CONbits.TMR0ON = 1;
-[e = . . _T0CONbits 0 5 -> -> 1 `i `uc ]
-"808
-[; ;main.c: 808:     mostrarMenu();
-[e ( _mostrarMenu ..  ]
+[; ;main.c: 804:     INTCONbits.TMR0IE = 1;
+[e = . . _INTCONbits 0 5 -> -> 1 `i `uc ]
+"809
+[; ;main.c: 809:     restablecerDatosSensor();
+[e ( _restablecerDatosSensor ..  ]
 "811
-[; ;main.c: 811:     while (1) {
-[e :U 567 ]
-{
+[; ;main.c: 811:     UART_init(9600);
+[e ( _UART_init (1 -> -> 9600 `i `l ]
+"812
+[; ;main.c: 812:     i2c_iniciar();
+[e ( _i2c_iniciar ..  ]
 "813
-[; ;main.c: 813:         if (datoRecibido) {
-[e $ ! != -> _datoRecibido `i -> 0 `i 569  ]
-{
-"815
-[; ;main.c: 815:             datoRecibido = 0;
-[e = _datoRecibido -> -> 0 `i `uc ]
+[; ;main.c: 813:     configurarAdc();
+[e ( _configurarAdc ..  ]
+"814
+[; ;main.c: 814:     inicializarObjetos();
+[e ( _inicializarObjetos ..  ]
 "816
-[; ;main.c: 816:             byteUart -= 48;
-[e =- _byteUart -> -> 48 `i `uc ]
-"817
-[; ;main.c: 817:             sistemaPrincipal(byteUart);
-[e ( _sistemaPrincipal (1 _byteUart ]
+[; ;main.c: 816:     leeHorariosMemoria();
+[e ( _leeHorariosMemoria ..  ]
 "819
-[; ;main.c: 819:         }
-}
-[e :U 569 ]
-"821
-[; ;main.c: 821:         if (overflowTimer) {
-[e $ ! != -> _overflowTimer `i -> 0 `i 570  ]
-{
-"823
-[; ;main.c: 823:             esperandoDatos = 0;
-[e = _esperandoDatos -> -> 0 `i `uc ]
+[; ;main.c: 819:     TRISD = 0;
+[e = _TRISD -> -> 0 `i `uc ]
+"820
+[; ;main.c: 820:     LATD = 0;
+[e = _LATD -> -> 0 `i `uc ]
+"822
+[; ;main.c: 822:     TMR0 = VALOR_TIMER0;
+[e = _TMR0 -> _VALOR_TIMER0 `us ]
 "824
-[; ;main.c: 824:             overflowTimer = 0;
-[e = _overflowTimer -> -> 0 `i `uc ]
-"825
-[; ;main.c: 825:             sistemaRegado();
-[e ( _sistemaRegado ..  ]
+[; ;main.c: 824:     INTCONbits.TMR0IF = 1;
+[e = . . _INTCONbits 0 2 -> -> 1 `i `uc ]
 "826
-[; ;main.c: 826:         }
-}
-[e :U 570 ]
+[; ;main.c: 826:     T0CONbits.TMR0ON = 1;
+[e = . . _T0CONbits 0 5 -> -> 1 `i `uc ]
 "828
-[; ;main.c: 828:     }
-}
-[e :U 566 ]
-[e $U 567  ]
-[e :U 568 ]
-"829
-[; ;main.c: 829:     return;
-[e $UE 565  ]
+[; ;main.c: 828:     mostrarMenu();
+[e ( _mostrarMenu ..  ]
 "830
-[; ;main.c: 830: }
-[e :UE 565 ]
+[; ;main.c: 830:     MODO_COMUNICACION = 0;
+[e = _MODO_COMUNICACION -> -> 0 `i `uc ]
+"833
+[; ;main.c: 833:     while (1) {
+[e :U 574 ]
+{
+"835
+[; ;main.c: 835:         if (datoRecibido) {
+[e $ ! != -> _datoRecibido `i -> 0 `i 576  ]
+{
+"837
+[; ;main.c: 837:             datoRecibido = 0;
+[e = _datoRecibido -> -> 0 `i `uc ]
+"838
+[; ;main.c: 838:             byteUart -= 48;
+[e =- _byteUart -> -> 48 `i `uc ]
+"839
+[; ;main.c: 839:             sistemaPrincipal(byteUart);
+[e ( _sistemaPrincipal (1 _byteUart ]
+"841
+[; ;main.c: 841:         }
 }
-[p f _sprintf 8388736 ]
+[e :U 576 ]
+"843
+[; ;main.c: 843:         if (overflowTimer) {
+[e $ ! != -> _overflowTimer `i -> 0 `i 577  ]
+{
+"845
+[; ;main.c: 845:             esperandoDatos = 0;
+[e = _esperandoDatos -> -> 0 `i `uc ]
+"846
+[; ;main.c: 846:             overflowTimer = 0;
+[e = _overflowTimer -> -> 0 `i `uc ]
+"847
+[; ;main.c: 847:             sistemaRegado();
+[e ( _sistemaRegado ..  ]
+"848
+[; ;main.c: 848:         }
+}
+[e :U 577 ]
+"850
+[; ;main.c: 850:     }
+}
+[e :U 573 ]
+[e $U 574  ]
+[e :U 575 ]
+"851
+[; ;main.c: 851:     return;
+[e $UE 572  ]
+"852
+[; ;main.c: 852: }
+[e :UE 572 ]
+}
+[p f _sprintf 8913024 ]
 [a 22C 13 10 32 79 112 99 105 111 110 58 32 32 13 0 ]
+[a 14C 13 10 73 110 103 114 101 115 101 32 101 108 32 112 111 114 99 101 110 116 97 106 101 32 100 101 32 104 117 109 101 100 97 100 32 100 101 108 32 115 101 110 115 111 114 32 37 100 13 10 0 ]
 [a 29C 13 10 10 76 97 32 72 117 109 101 100 97 100 32 65 109 98 105 101 110 116 101 32 101 115 58 32 37 100 13 10 0 ]
-[a 34C 13 10 10 76 97 32 72 117 109 101 100 97 100 32 65 109 98 105 101 110 116 101 32 101 115 58 32 37 100 13 10 0 ]
-[a 31C 13 10 10 80 111 114 99 101 110 116 97 106 101 32 72 117 109 101 100 97 100 32 100 101 108 32 115 101 110 115 111 114 32 37 100 58 32 37 100 13 10 0 ]
-[a 33C 13 10 10 69 108 32 115 101 110 115 111 114 32 37 100 32 100 101 116 101 99 116 97 32 116 105 101 114 114 97 32 104 117 109 101 100 97 13 10 0 ]
-[a 32C 13 10 10 69 108 32 115 101 110 115 111 114 32 37 100 32 100 101 116 101 99 116 97 32 116 105 101 114 114 97 32 115 101 99 97 13 10 0 ]
+[a 33C 13 10 10 76 97 32 72 117 109 101 100 97 100 32 65 109 98 105 101 110 116 101 32 101 115 58 32 37 100 13 10 0 ]
+[a 31C 13 10 10 80 111 114 99 101 110 116 97 106 101 32 72 117 109 101 100 97 100 32 100 101 108 32 115 101 110 115 111 114 32 37 100 58 32 37 100 32 37 99 13 10 0 ]
+[a 32C 13 10 10 80 111 114 99 101 110 116 97 106 101 32 72 117 109 101 100 97 100 32 100 101 108 32 115 101 110 115 111 114 32 37 100 58 32 37 100 32 37 99 13 10 0 ]
 [a 28C 68 72 84 49 49 32 78 79 32 82 69 83 80 79 78 68 73 79 13 10 0 ]
 [a 30C 13 10 10 76 97 32 84 101 109 112 101 114 97 116 117 114 97 32 101 115 58 32 37 100 32 67 13 10 0 ]
-[a 35C 13 10 10 76 97 32 84 101 109 112 101 114 97 116 117 114 97 32 101 115 58 32 37 100 32 67 13 10 0 ]
-[a 14C 13 10 68 97 109 101 32 68 65 84 79 83 32 68 69 76 32 83 69 78 83 79 82 32 58 13 10 0 ]
+[a 34C 13 10 10 76 97 32 84 101 109 112 101 114 97 116 117 114 97 32 101 115 58 32 37 100 32 67 13 10 0 ]
 [a 27C 69 114 114 111 114 32 100 101 32 108 101 99 116 117 114 97 32 68 72 84 49 49 13 10 0 ]
 [a 21C 13 10 32 53 46 32 77 111 115 116 114 97 114 32 118 97 108 111 114 101 115 32 115 101 110 115 111 114 101 115 32 13 10 0 ]
 [a 18C 13 10 32 50 46 32 65 115 105 103 110 97 114 32 72 111 114 97 114 105 111 115 32 112 97 114 97 32 114 101 103 97 114 32 13 10 0 ]

@@ -5693,91 +5693,6 @@ extern __attribute__((nonreentrant)) void _delay3(unsigned char);
 # 65 "./config.h" 2
 # 7 "main.c" 2
 
-# 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c99\\stdint.h" 1 3
-# 22 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c99\\stdint.h" 3
-# 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c99\\bits/alltypes.h" 1 3
-# 127 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c99\\bits/alltypes.h" 3
-typedef unsigned long uintptr_t;
-# 142 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c99\\bits/alltypes.h" 3
-typedef long intptr_t;
-# 158 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c99\\bits/alltypes.h" 3
-typedef signed char int8_t;
-
-
-
-
-typedef short int16_t;
-# 173 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c99\\bits/alltypes.h" 3
-typedef long int32_t;
-
-
-
-
-
-typedef long long int64_t;
-# 188 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c99\\bits/alltypes.h" 3
-typedef long long intmax_t;
-
-
-
-
-
-typedef unsigned char uint8_t;
-
-
-
-
-typedef unsigned short uint16_t;
-# 209 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c99\\bits/alltypes.h" 3
-typedef unsigned long uint32_t;
-
-
-
-
-
-typedef unsigned long long uint64_t;
-# 229 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c99\\bits/alltypes.h" 3
-typedef unsigned long long uintmax_t;
-# 22 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c99\\stdint.h" 2 3
-
-
-typedef int8_t int_fast8_t;
-
-typedef int64_t int_fast64_t;
-
-
-typedef int8_t int_least8_t;
-typedef int16_t int_least16_t;
-
-typedef int24_t int_least24_t;
-
-typedef int32_t int_least32_t;
-
-typedef int64_t int_least64_t;
-
-
-typedef uint8_t uint_fast8_t;
-
-typedef uint64_t uint_fast64_t;
-
-
-typedef uint8_t uint_least8_t;
-typedef uint16_t uint_least16_t;
-
-typedef uint24_t uint_least24_t;
-
-typedef uint32_t uint_least32_t;
-
-typedef uint64_t uint_least64_t;
-# 139 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c99\\stdint.h" 3
-# 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c99\\bits/stdint.h" 1 3
-typedef int32_t int_fast16_t;
-typedef int32_t int_fast32_t;
-typedef uint32_t uint_fast16_t;
-typedef uint32_t uint_fast32_t;
-# 139 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c99\\stdint.h" 2 3
-# 8 "main.c" 2
-
 # 1 "./I2C.h" 1
 
 
@@ -5864,7 +5779,7 @@ unsigned char i2c_recibe_dato() {
 
     return datoleido;
 }
-# 9 "main.c" 2
+# 8 "main.c" 2
 
 # 1 "./RTC.h" 1
 
@@ -5900,7 +5815,7 @@ unsigned char convertirDato(unsigned char dato) {
     datoR = (datoR * 10) + (dato & 0x0F);
     return datoR;
 }
-# 10 "main.c" 2
+# 9 "main.c" 2
 
 # 1 "./UART.h" 1
 void UART_init(long BAUD);
@@ -5964,7 +5879,7 @@ void UART_printf(char* cadena) {
         UART_write(*cadena++);
     }
 }
-# 11 "main.c" 2
+# 10 "main.c" 2
 
 # 1 "./DHT11.h" 1
 
@@ -6018,7 +5933,7 @@ unsigned char check_response() {
 
     return respuesta;
 }
-# 12 "main.c" 2
+# 11 "main.c" 2
 
 # 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c99\\stdio.h" 1 3
 # 24 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c99\\stdio.h" 3
@@ -6158,10 +6073,95 @@ char *ctermid(char *);
 
 
 char *tempnam(const char *, const char *);
+# 12 "main.c" 2
+
+# 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c99\\stdint.h" 1 3
+# 22 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c99\\stdint.h" 3
+# 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c99\\bits/alltypes.h" 1 3
+# 127 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c99\\bits/alltypes.h" 3
+typedef unsigned long uintptr_t;
+# 142 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c99\\bits/alltypes.h" 3
+typedef long intptr_t;
+# 158 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c99\\bits/alltypes.h" 3
+typedef signed char int8_t;
+
+
+
+
+typedef short int16_t;
+# 173 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c99\\bits/alltypes.h" 3
+typedef long int32_t;
+
+
+
+
+
+typedef long long int64_t;
+# 188 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c99\\bits/alltypes.h" 3
+typedef long long intmax_t;
+
+
+
+
+
+typedef unsigned char uint8_t;
+
+
+
+
+typedef unsigned short uint16_t;
+# 209 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c99\\bits/alltypes.h" 3
+typedef unsigned long uint32_t;
+
+
+
+
+
+typedef unsigned long long uint64_t;
+# 229 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c99\\bits/alltypes.h" 3
+typedef unsigned long long uintmax_t;
+# 22 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c99\\stdint.h" 2 3
+
+
+typedef int8_t int_fast8_t;
+
+typedef int64_t int_fast64_t;
+
+
+typedef int8_t int_least8_t;
+typedef int16_t int_least16_t;
+
+typedef int24_t int_least24_t;
+
+typedef int32_t int_least32_t;
+
+typedef int64_t int_least64_t;
+
+
+typedef uint8_t uint_fast8_t;
+
+typedef uint64_t uint_fast64_t;
+
+
+typedef uint8_t uint_least8_t;
+typedef uint16_t uint_least16_t;
+
+typedef uint24_t uint_least24_t;
+
+typedef uint32_t uint_least32_t;
+
+typedef uint64_t uint_least64_t;
+# 139 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c99\\stdint.h" 3
+# 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c99\\bits/stdint.h" 1 3
+typedef int32_t int_fast16_t;
+typedef int32_t int_fast32_t;
+typedef uint32_t uint_fast16_t;
+typedef uint32_t uint_fast32_t;
+# 139 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c99\\stdint.h" 2 3
 # 13 "main.c" 2
-# 33 "main.c"
+# 34 "main.c"
 typedef struct {
-    short humedadMedida;
+    unsigned char porcientoHumedad;
     unsigned char pinSensor;
 
 } SensorHumedad;
@@ -6172,6 +6172,7 @@ typedef struct {
     unsigned char tiempoRegar;
 } Horario;
 
+unsigned char MODO_COMUNICACION;
 Horario horarios[24];
 SensorHumedad sensores[8];
 unsigned char hora = 0, minutos = 0, segundos = 0;
@@ -6190,7 +6191,7 @@ void inicializarObjetos(void);
 void asignarHorarios(void);
 int horaRegar(void);
 int estaSeco(SensorHumedad s);
-void constructorSensor(SensorHumedad s, unsigned char humedad, unsigned char pin);
+void constructorSensor(SensorHumedad s, unsigned char porcientoHumedad, unsigned char pin);
 void dameHoraActual(void);
 void setRtc(unsigned char direccion);
 unsigned char leer_eeprom(uint16_t direccion);
@@ -6248,9 +6249,8 @@ long map(long x, long in_min, long in_max, long out_min, long out_max) {
     return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
 }
 
-void constructorSensor(SensorHumedad s, unsigned char humedad, unsigned char pin) {
-
-    s.humedadMedida = humedad;
+void constructorSensor(SensorHumedad s, unsigned char porcientoHumedad, unsigned char pin) {
+    s.porcientoHumedad = porcientoHumedad;
     s.pinSensor = pin;
 }
 
@@ -6265,7 +6265,7 @@ int estaSeco(SensorHumedad s) {
     dameTemperaturaHumedad(((void*)0), &temperatura);
 
 
-    return (s.humedadMedida >= 60) && (temperatura < 34);
+    return (s.porcientoHumedad < 94) && (temperatura < 34);
 }
 
 int horaRegar() {
@@ -6626,7 +6626,8 @@ void lecturaWifi() {
 
     PIE1bits.RCIE = 0;
 
-    char Rx = 0;
+    unsigned char Rx = 0, porcientoHumedad;
+    char buffer[50];
 
     restablecerDatosSensor();
 
@@ -6640,17 +6641,45 @@ void lecturaWifi() {
 
         peticionLecturaSensores = 1;
 
-        for (int i = 0; i < 3; i++) {
+        for (int j = 0; j < 3; j++) {
 
-            UART_printf("\r\nDame DATOS DEL SENSOR :\r\n");
+            sprintf(buffer, "\r\nIngrese el porcentaje de humedad del sensor %d\r\n", j);
+            UART_printf(buffer);
 
-            Rx = UART_read();
-            Rx -= 48;
+            for (int i = 0; i < 3; i++) {
 
-            if (Rx == 1)
-                sensores[i].humedadMedida = 60;
-            else
-                sensores[i].humedadMedida = 0;
+                Rx = UART_read();
+
+                if (Rx >= 48 && Rx <= 57) {
+
+                    Rx -= 48;
+
+                    switch (i) {
+                        case 0:
+                            porcientoHumedad = Rx;
+                            porcientoHumedad *= 100;
+                            break;
+
+                        case 1:
+                            porcientoHumedad += (Rx * 10);
+                            break;
+
+                        case 2:
+                            porcientoHumedad += Rx;
+                            sensores[j].porcientoHumedad = porcientoHumedad;
+                            break;
+
+                        default:
+                            break;
+                    }
+
+                } else {
+
+                    sensores[j].porcientoHumedad = 100;
+                    UART_write('F');
+                    break;
+                }
+            }
 
         }
 
@@ -6667,7 +6696,7 @@ void lecturaWifi() {
 void lecturaAnalogaSensores() {
 
     for (int i = 0; i < 3; i++) {
-        sensores[i].humedadMedida = dameHumedadSuelo(i);
+        sensores[i].porcientoHumedad = map(dameHumedadSuelo(i), 0, 1023, 100, 0);
         _delay((unsigned long)((5)*(4000000/4000.0)));
     }
 
@@ -6708,7 +6737,7 @@ void sistemaPrincipal(unsigned char opcion) {
             break;
 
         case 5:
-            if (0)
+            if (MODO_COMUNICACION)
                 mostrarDatosSensoresWIFI();
             else
                 mostrarDatosSensores();
@@ -6749,11 +6778,13 @@ void sistemaRegado(void) {
 
         dameHoraActual();
 
-        if (horaRegar() && !minutos) {
+
+        if ((!MODO_COMUNICACION && (horaRegar() && !minutos)) || (MODO_COMUNICACION
+                && (horaRegar() && minutos < 3))) {
 
 
 
-            if (0) {
+            if (MODO_COMUNICACION) {
                 lecturaWifi();
                 if (peticionLecturaSensores) {
                     minutosRegar = horarios[hora].tiempoRegar;
@@ -6829,7 +6860,7 @@ void dameTemperaturaHumedad(unsigned char* Humedad, unsigned char* Temperatura) 
 void mostrarDatosSensores(void) {
 
     char buffer[50];
-    unsigned char temperatura, humedad, porcentajeHumedad;
+    unsigned char temperatura, humedad;
 
     dameTemperaturaHumedad(&humedad, &temperatura);
 
@@ -6846,13 +6877,9 @@ void mostrarDatosSensores(void) {
 
     for (int i = 0; i < 3; i++) {
 
-        porcentajeHumedad = map(sensores[i].humedadMedida, 0, 1023, 100, 0);
-
-        sprintf(buffer, "\r\n\nPorcentaje Humedad del sensor %d: %d\r\n"
-                , i, porcentajeHumedad);
+        sprintf(buffer, "\r\n\nPorcentaje Humedad del sensor %d: %d %c\r\n"
+                , i, sensores[i].porcientoHumedad, 37);
         UART_printf(buffer);
-
-
     }
 
     UART_write('I');
@@ -6874,15 +6901,9 @@ void mostrarDatosSensoresWIFI(void) {
 
         for (int i = 0; i < 3; i++) {
 
-            if (sensores[i].humedadMedida >= 60) {
-                sprintf(buffer, "\r\n\nEl sensor %d detecta tierra seca\r\n", i);
-                UART_printf(buffer);
-
-
-            } else {
-                sprintf(buffer, "\r\n\nEl sensor %d detecta tierra humeda\r\n", i);
-                UART_printf(buffer);
-            }
+            sprintf(buffer, "\r\n\nPorcentaje Humedad del sensor %d: %d %c\r\n"
+                    , i, sensores[i].porcientoHumedad, 37);
+            UART_printf(buffer);
 
         }
 
@@ -6900,8 +6921,6 @@ void mostrarDatosSensoresWIFI(void) {
 }
 
 void main(void) {
-
-    unsigned char humedad, temperatura;
 
     INTCONbits.GIE = 1;
     INTCONbits.PEIE = 1;
@@ -6936,6 +6955,8 @@ void main(void) {
     T0CONbits.TMR0ON = 1;
 
     mostrarMenu();
+
+    MODO_COMUNICACION = 0;
 
 
     while (1) {

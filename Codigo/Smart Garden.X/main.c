@@ -5,23 +5,24 @@
 
 #define _XTAL_FREQ 4000000 //FRECUENCIA DEL CRISTAL A 4 MHZ
 #include "config.h"
-#include <stdint.h>
 #include "I2C.h"
 #include "RTC.h"
 #include "UART.h"
 #include "DHT11.h"
 #include <stdio.h>
+#include <stdint.h>
 
-#define MODO_COMUNICACION 0 //0 NORMAL  | 1 WIFI
 #define TEMPERATURA_MAX 34
 #define TOTAL_SENSORES 3 //Sensores a Utilizar
 #define MAX_SENSORES 8   //Maximo 8 sensores
 #define REPETICIONES 6  //REPETICIONES PARA QUE TRANSCURRA 1 MINUTO
-#define SENSIBILIDAD_HUMEDAD 60 //Este nos indica a partir de cuantos bits se
-//considera seco el suelo#
+#define SENSIBILIDAD_HUMEDAD 94 //Este nos indica a partir de cuantos bits se
+//considera seco el suelo esta expresado en un porcentaje del 0 al 100
 #define MAX_TIEMPO_INACTIVIDAD 2 //Decenas de segundo de espera para que el 
 //usuario setie datos en el sistema a traves del protocolo UART
 #define TAMANO_CADENA 50   
+//Tolerancia para lectura de sensores por wifi en minutos
+#define TOLERANCIA_LECTURA 3 
 
 //INSTRUCCIONES DE CONTROL
 #define SETEO_DENEGADO 'F' //Variable que se mandara por UART a otro Micro
@@ -31,7 +32,7 @@
 #define BITS_ADC 1023 //Indica el numero de bits de lectura de ADC en este caso 10 bits
 
 typedef struct {
-    short humedadMedida;
+    unsigned char porcientoHumedad;
     unsigned char pinSensor; //0 -7 PORT D
 
 } SensorHumedad;
@@ -42,6 +43,7 @@ typedef struct {
     unsigned char tiempoRegar; //Minutos que se regaran en esa hora
 } Horario;
 
+unsigned char MODO_COMUNICACION; //0 NORMAL  | 1 WIFI
 Horario horarios[24]; //24 HORAS DEL DIA
 SensorHumedad sensores[MAX_SENSORES];
 unsigned char hora = 0, minutos = 0, segundos = 0;
@@ -60,7 +62,7 @@ void inicializarObjetos(void);
 void asignarHorarios(void); //MODULO ESP8266
 int horaRegar(void);
 int estaSeco(SensorHumedad s);
-void constructorSensor(SensorHumedad s, unsigned char humedad, unsigned char pin);
+void constructorSensor(SensorHumedad s, unsigned char porcientoHumedad, unsigned char pin);
 void dameHoraActual(void); //MODULO RTC 3231
 void setRtc(unsigned char direccion);
 unsigned char leer_eeprom(uint16_t direccion);
@@ -118,9 +120,8 @@ long map(long x, long in_min, long in_max, long out_min, long out_max) {
     return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
 }
 
-void constructorSensor(SensorHumedad s, unsigned char humedad, unsigned char pin) {
-
-    s.humedadMedida = humedad;
+void constructorSensor(SensorHumedad s, unsigned char porcientoHumedad, unsigned char pin) {
+    s.porcientoHumedad = porcientoHumedad;
     s.pinSensor = pin;
 }
 
@@ -135,7 +136,7 @@ int estaSeco(SensorHumedad s) {
     dameTemperaturaHumedad(NULL, &temperatura);
 
     //Temperatura Ambiente Sensada por el DHT11 y Humedad suelo por el FC -28
-    return (s.humedadMedida >= SENSIBILIDAD_HUMEDAD) && (temperatura < TEMPERATURA_MAX);
+    return (s.porcientoHumedad < SENSIBILIDAD_HUMEDAD) && (temperatura < TEMPERATURA_MAX);
 }
 
 int horaRegar() {
@@ -496,7 +497,8 @@ void lecturaWifi() {
 
     PIE1bits.RCIE = 0; //deshabilita interrupción por recepción USART PIC.
 
-    char Rx = 0;
+    unsigned char Rx = 0, porcientoHumedad;
+    char buffer[TAMANO_CADENA];
 
     restablecerDatosSensor();
 
@@ -510,17 +512,45 @@ void lecturaWifi() {
 
         peticionLecturaSensores = 1;
 
-        for (int i = 0; i < TOTAL_SENSORES; i++) {
+        for (int j = 0; j < TOTAL_SENSORES; j++) {
 
-            UART_printf("\r\nDame DATOS DEL SENSOR :\r\n"); //comentar
+            sprintf(buffer, "\r\nIngrese el porcentaje de humedad del sensor %d\r\n", j); //comentar
+            UART_printf(buffer); //comentar
 
-            Rx = UART_read();
-            Rx -= 48;
+            for (int i = 0; i < 3; i++) {//en las direccienes que van desde 0 a 50
 
-            if (Rx == 1) //1 Si esta seco | 0 si esta humedo
-                sensores[i].humedadMedida = 60;
-            else
-                sensores[i].humedadMedida = 0;
+                Rx = UART_read();
+
+                if (Rx >= 48 && Rx <= 57) {
+
+                    Rx -= 48;
+
+                    switch (i) {
+                        case 0:
+                            porcientoHumedad = Rx;
+                            porcientoHumedad *= 100;
+                            break;
+
+                        case 1:
+                            porcientoHumedad += (Rx * 10);
+                            break;
+
+                        case 2:
+                            porcientoHumedad += Rx;
+                            sensores[j].porcientoHumedad = porcientoHumedad;
+                            break;
+
+                        default:
+                            break;
+                    }
+
+                } else {
+                    //UART_printf("\r\n DATO NO RECIBIDO \r\n"); //comentar
+                    sensores[j].porcientoHumedad = 100; // Para no regar 
+                    UART_write(SETEO_DENEGADO); //Notificar al otro micro que no se recibira el dato
+                    break;
+                }
+            }
 
         }
 
@@ -537,7 +567,7 @@ void lecturaWifi() {
 void lecturaAnalogaSensores() {
 
     for (int i = 0; i < TOTAL_SENSORES; i++) { //Sensores humedad suelo FC-28
-        sensores[i].humedadMedida = dameHumedadSuelo(i);
+        sensores[i].porcientoHumedad = map(dameHumedadSuelo(i), 0, BITS_ADC, 100, 0);
         __delay_ms(5);
     }
 
@@ -619,7 +649,9 @@ void sistemaRegado(void) {
 
         dameHoraActual();
 
-        if (horaRegar() && !minutos) {
+        //5 minutos de tolerancia para lectura de sensores
+        if ((!MODO_COMUNICACION && (horaRegar() && !minutos)) || (MODO_COMUNICACION
+                && (horaRegar() && minutos < TOLERANCIA_LECTURA))) {
 
             //UART_printf("\n\nRiego Iniciado!\n");
 
@@ -699,7 +731,7 @@ void dameTemperaturaHumedad(unsigned char* Humedad, unsigned char* Temperatura) 
 void mostrarDatosSensores(void) {
 
     char buffer[TAMANO_CADENA];
-    unsigned char temperatura, humedad, porcentajeHumedad;
+    unsigned char temperatura, humedad;
 
     dameTemperaturaHumedad(&humedad, &temperatura);
 
@@ -716,13 +748,9 @@ void mostrarDatosSensores(void) {
 
     for (int i = 0; i < TOTAL_SENSORES; i++) {
 
-        porcentajeHumedad = map(sensores[i].humedadMedida, 0, BITS_ADC, 100, 0);
-
-        sprintf(buffer, "\r\n\nPorcentaje Humedad del sensor %d: %d\r\n"
-                , i, porcentajeHumedad);
+        sprintf(buffer, "\r\n\nPorcentaje Humedad del sensor %d: %d %c\r\n"
+                , i, sensores[i].porcientoHumedad, 37);
         UART_printf(buffer);
-
-
     }
 
     UART_write(INTERRUMPIR_COMANDOS); //Esta Indica que acabo la transmicion de cadenas
@@ -744,15 +772,9 @@ void mostrarDatosSensoresWIFI(void) {
 
         for (int i = 0; i < TOTAL_SENSORES; i++) {
 
-            if (sensores[i].humedadMedida >= SENSIBILIDAD_HUMEDAD) {
-                sprintf(buffer, "\r\n\nEl sensor %d detecta tierra seca\r\n", i);
-                UART_printf(buffer);
-
-
-            } else {
-                sprintf(buffer, "\r\n\nEl sensor %d detecta tierra humeda\r\n", i);
-                UART_printf(buffer);
-            }
+            sprintf(buffer, "\r\n\nPorcentaje Humedad del sensor %d: %d %c\r\n"
+                    , i, sensores[i].porcientoHumedad, 37);
+            UART_printf(buffer);
 
         }
 
@@ -770,8 +792,6 @@ void mostrarDatosSensoresWIFI(void) {
 }
 
 void main(void) {
-
-    unsigned char humedad, temperatura;
 
     INTCONbits.GIE = 1; //GLOBALS INTERRUPTIONS ENABLED
     INTCONbits.PEIE = 1; // PERIPHERAL INTERRUPTIONS ENABLED
@@ -806,6 +826,8 @@ void main(void) {
     T0CONbits.TMR0ON = 1; //Iniciar Timer 0
 
     mostrarMenu(); //comentar
+    
+    MODO_COMUNICACION = 0; //0 NORMAL  | 1 WIFI
 
 
     while (1) {
