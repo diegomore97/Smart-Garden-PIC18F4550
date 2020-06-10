@@ -86,7 +86,7 @@ void dameTemperaturaHumedad(unsigned char* Humedad, unsigned char* Temperatura);
 void mostrarDatosSensores(void);
 void mostrarDatosSensoresWIFI(void);
 long map(long x, long in_min, long in_max, long out_min, long out_max);
-
+void configBluetoothHC_06(void);
 void __interrupt() desbordamiento(void) {
 
     if (INTCONbits.TMR0IF) {
@@ -791,6 +791,17 @@ void mostrarDatosSensoresWIFI(void) {
 
 }
 
+void configBluetoothHC_06(void)
+{
+    __delay_ms(1000);
+    UART_printf("AT+NAMESMARTHOME");
+    __delay_ms(1000);
+    UART_printf("AT+BAUD4"); //9600 Baudios
+    __delay_ms(1000);
+    UART_printf("AT+PIN2501");
+    __delay_ms(1000);
+}
+
 void main(void) {
 
     INTCONbits.GIE = 1; //GLOBALS INTERRUPTIONS ENABLED
@@ -814,6 +825,7 @@ void main(void) {
     inicializarObjetos();
 
     leeHorariosMemoria();
+    //configBluetoothHC_06(); //Configurar el modulo Bluetooth | comentar una vez configurado
     //setRtcDefault(); //Comentar despues de programar el chip por primera vez y volver a programar
 
     TRISD = 0; //PUERTO D COMO SALIDA

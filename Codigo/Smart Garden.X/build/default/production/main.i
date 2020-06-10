@@ -6215,7 +6215,7 @@ void dameTemperaturaHumedad(unsigned char* Humedad, unsigned char* Temperatura);
 void mostrarDatosSensores(void);
 void mostrarDatosSensoresWIFI(void);
 long map(long x, long in_min, long in_max, long out_min, long out_max);
-
+void configBluetoothHC_06(void);
 void __attribute__((picinterrupt(("")))) desbordamiento(void) {
 
     if (INTCONbits.TMR0IF) {
@@ -6920,6 +6920,17 @@ void mostrarDatosSensoresWIFI(void) {
 
 }
 
+void configBluetoothHC_06(void)
+{
+    _delay((unsigned long)((1000)*(4000000/4000.0)));
+    UART_printf("AT+NAMESMARTHOME");
+    _delay((unsigned long)((1000)*(4000000/4000.0)));
+    UART_printf("AT+BAUD4");
+    _delay((unsigned long)((1000)*(4000000/4000.0)));
+    UART_printf("AT+PIN2501");
+    _delay((unsigned long)((1000)*(4000000/4000.0)));
+}
+
 void main(void) {
 
     INTCONbits.GIE = 1;
@@ -6943,6 +6954,7 @@ void main(void) {
     inicializarObjetos();
 
     leeHorariosMemoria();
+
 
 
     TRISD = 0;

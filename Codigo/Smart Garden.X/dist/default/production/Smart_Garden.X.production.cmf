@@ -83,8 +83,8 @@ bssBANK1 BANK1 1 100 100 78 1
 intcode CODE 0 8 8 6 1
 idataBANK0 CODE 0 240E 240E 4 1
 dataBANK0 BANK0 1 FA FA 4 1
-mediumconst MEDIUMCONST 0 7BFA 7BFA 406 1
-$C:\Users\DIEGOM~1\AppData\Local\Temp\s5vo.o
+mediumconst MEDIUMCONST 0 7BD6 7BD6 42A 1
+$C:\Users\DIEGOM~1\AppData\Local\Temp\s3ts.o
 idloc IDLOC 0 200000 200000 8 1
 init CODE 0 E E 4 1
 reset_vec CODE 0 0 0 4 1
@@ -107,15 +107,15 @@ BANK5 500-5FF 1
 BANK6 600-6FF 1
 BANK7 700-7FF 1
 CONST 4-7 1
-CONST 2414-7BF9 1
+CONST 2414-7BD5 1
 STACK 178-7FF 1
-SMALLCONST 2414-7BF9 1
+SMALLCONST 2414-7BD5 1
 CODE 4-7 1
-CODE 2414-7BF9 1
+CODE 2414-7BD5 1
 BIGRAM FE-FF 1
 BIGRAM 178-7FF 1
 EEDATA F00000-F000FF 1
-MEDIUMCONST 2414-7BF9 1
+MEDIUMCONST 2414-7BD5 1
 # %LINETAB Section
 # This section enumerates the file/line to address mappings.
 # The beginning of the section is indicated by %LINETAB.
@@ -130,7 +130,7 @@ MEDIUMCONST 2414-7BF9 1
 # All other numeric values are in decimal.
 %LINETAB
 $dist/default/production\Smart_Garden.X.production.o
-8 intcode CODE >13179:C:\Users\DIEGOM~1\AppData\Local\Temp\s5vo.s
+8 intcode CODE >13225:C:\Users\DIEGOM~1\AppData\Local\Temp\s3ts.s
 8 intcode CODE >90:C:\Users\Diego Moreno\Documents\Mis Proyectos con Pic\Smart Garden\Codigo\Smart Garden.X\main.c
 1CFA intcode_body CODE >90:C:\Users\Diego Moreno\Documents\Mis Proyectos con Pic\Smart Garden\Codigo\Smart Garden.X\main.c
 1CFC intcode_body CODE >92:C:\Users\Diego Moreno\Documents\Mis Proyectos con Pic\Smart Garden\Codigo\Smart Garden.X\main.c
@@ -827,71 +827,71 @@ FF4 text1 CODE >661:C:\Users\Diego Moreno\Documents\Mis Proyectos con Pic\Smart 
 1018 text1 CODE >667:C:\Users\Diego Moreno\Documents\Mis Proyectos con Pic\Smart Garden\Codigo\Smart Garden.X\main.c
 102E text1 CODE >668:C:\Users\Diego Moreno\Documents\Mis Proyectos con Pic\Smart Garden\Codigo\Smart Garden.X\main.c
 1032 text1 CODE >673:C:\Users\Diego Moreno\Documents\Mis Proyectos con Pic\Smart Garden\Codigo\Smart Garden.X\main.c
-1A08 text0 CODE >794:C:\Users\Diego Moreno\Documents\Mis Proyectos con Pic\Smart Garden\Codigo\Smart Garden.X\main.c
-1A08 text0 CODE >796:C:\Users\Diego Moreno\Documents\Mis Proyectos con Pic\Smart Garden\Codigo\Smart Garden.X\main.c
-1A0A text0 CODE >797:C:\Users\Diego Moreno\Documents\Mis Proyectos con Pic\Smart Garden\Codigo\Smart Garden.X\main.c
-1A0C text0 CODE >798:C:\Users\Diego Moreno\Documents\Mis Proyectos con Pic\Smart Garden\Codigo\Smart Garden.X\main.c
-1A0E text0 CODE >799:C:\Users\Diego Moreno\Documents\Mis Proyectos con Pic\Smart Garden\Codigo\Smart Garden.X\main.c
-1A10 text0 CODE >800:C:\Users\Diego Moreno\Documents\Mis Proyectos con Pic\Smart Garden\Codigo\Smart Garden.X\main.c
-1A12 text0 CODE >802:C:\Users\Diego Moreno\Documents\Mis Proyectos con Pic\Smart Garden\Codigo\Smart Garden.X\main.c
-1A16 text0 CODE >804:C:\Users\Diego Moreno\Documents\Mis Proyectos con Pic\Smart Garden\Codigo\Smart Garden.X\main.c
-1A18 text0 CODE >809:C:\Users\Diego Moreno\Documents\Mis Proyectos con Pic\Smart Garden\Codigo\Smart Garden.X\main.c
-1A1C text0 CODE >811:C:\Users\Diego Moreno\Documents\Mis Proyectos con Pic\Smart Garden\Codigo\Smart Garden.X\main.c
-1A30 text0 CODE >812:C:\Users\Diego Moreno\Documents\Mis Proyectos con Pic\Smart Garden\Codigo\Smart Garden.X\main.c
-1A34 text0 CODE >813:C:\Users\Diego Moreno\Documents\Mis Proyectos con Pic\Smart Garden\Codigo\Smart Garden.X\main.c
-1A38 text0 CODE >814:C:\Users\Diego Moreno\Documents\Mis Proyectos con Pic\Smart Garden\Codigo\Smart Garden.X\main.c
-1A3C text0 CODE >816:C:\Users\Diego Moreno\Documents\Mis Proyectos con Pic\Smart Garden\Codigo\Smart Garden.X\main.c
-1A40 text0 CODE >819:C:\Users\Diego Moreno\Documents\Mis Proyectos con Pic\Smart Garden\Codigo\Smart Garden.X\main.c
-1A44 text0 CODE >820:C:\Users\Diego Moreno\Documents\Mis Proyectos con Pic\Smart Garden\Codigo\Smart Garden.X\main.c
-1A48 text0 CODE >822:C:\Users\Diego Moreno\Documents\Mis Proyectos con Pic\Smart Garden\Codigo\Smart Garden.X\main.c
-1A50 text0 CODE >824:C:\Users\Diego Moreno\Documents\Mis Proyectos con Pic\Smart Garden\Codigo\Smart Garden.X\main.c
-1A52 text0 CODE >826:C:\Users\Diego Moreno\Documents\Mis Proyectos con Pic\Smart Garden\Codigo\Smart Garden.X\main.c
-1A54 text0 CODE >828:C:\Users\Diego Moreno\Documents\Mis Proyectos con Pic\Smart Garden\Codigo\Smart Garden.X\main.c
-1A58 text0 CODE >830:C:\Users\Diego Moreno\Documents\Mis Proyectos con Pic\Smart Garden\Codigo\Smart Garden.X\main.c
-1A5E text0 CODE >835:C:\Users\Diego Moreno\Documents\Mis Proyectos con Pic\Smart Garden\Codigo\Smart Garden.X\main.c
-1A70 text0 CODE >837:C:\Users\Diego Moreno\Documents\Mis Proyectos con Pic\Smart Garden\Codigo\Smart Garden.X\main.c
-1A74 text0 CODE >838:C:\Users\Diego Moreno\Documents\Mis Proyectos con Pic\Smart Garden\Codigo\Smart Garden.X\main.c
-1A78 text0 CODE >839:C:\Users\Diego Moreno\Documents\Mis Proyectos con Pic\Smart Garden\Codigo\Smart Garden.X\main.c
-1A7E text0 CODE >843:C:\Users\Diego Moreno\Documents\Mis Proyectos con Pic\Smart Garden\Codigo\Smart Garden.X\main.c
-1A90 text0 CODE >845:C:\Users\Diego Moreno\Documents\Mis Proyectos con Pic\Smart Garden\Codigo\Smart Garden.X\main.c
-1A94 text0 CODE >846:C:\Users\Diego Moreno\Documents\Mis Proyectos con Pic\Smart Garden\Codigo\Smart Garden.X\main.c
-1A98 text0 CODE >847:C:\Users\Diego Moreno\Documents\Mis Proyectos con Pic\Smart Garden\Codigo\Smart Garden.X\main.c
-202E cinit CODE >1836:C:\Users\DIEGOM~1\AppData\Local\Temp\s5vo.s
-202E cinit CODE >1838:C:\Users\DIEGOM~1\AppData\Local\Temp\s5vo.s
-202E cinit CODE >1841:C:\Users\DIEGOM~1\AppData\Local\Temp\s5vo.s
-202E cinit CODE >1929:C:\Users\DIEGOM~1\AppData\Local\Temp\s5vo.s
-2030 cinit CODE >1930:C:\Users\DIEGOM~1\AppData\Local\Temp\s5vo.s
-2032 cinit CODE >1931:C:\Users\DIEGOM~1\AppData\Local\Temp\s5vo.s
-2034 cinit CODE >1932:C:\Users\DIEGOM~1\AppData\Local\Temp\s5vo.s
-2036 cinit CODE >1933:C:\Users\DIEGOM~1\AppData\Local\Temp\s5vo.s
-2038 cinit CODE >1934:C:\Users\DIEGOM~1\AppData\Local\Temp\s5vo.s
-203A cinit CODE >1935:C:\Users\DIEGOM~1\AppData\Local\Temp\s5vo.s
-203E cinit CODE >1936:C:\Users\DIEGOM~1\AppData\Local\Temp\s5vo.s
-2042 cinit CODE >1937:C:\Users\DIEGOM~1\AppData\Local\Temp\s5vo.s
-2042 cinit CODE >1938:C:\Users\DIEGOM~1\AppData\Local\Temp\s5vo.s
-2044 cinit CODE >1939:C:\Users\DIEGOM~1\AppData\Local\Temp\s5vo.s
-2048 cinit CODE >1940:C:\Users\DIEGOM~1\AppData\Local\Temp\s5vo.s
-204A cinit CODE >1941:C:\Users\DIEGOM~1\AppData\Local\Temp\s5vo.s
-204C cinit CODE >1942:C:\Users\DIEGOM~1\AppData\Local\Temp\s5vo.s
-204E cinit CODE >1946:C:\Users\DIEGOM~1\AppData\Local\Temp\s5vo.s
-2052 cinit CODE >1947:C:\Users\DIEGOM~1\AppData\Local\Temp\s5vo.s
-2054 cinit CODE >1948:C:\Users\DIEGOM~1\AppData\Local\Temp\s5vo.s
-2054 cinit CODE >1949:C:\Users\DIEGOM~1\AppData\Local\Temp\s5vo.s
-2056 cinit CODE >1950:C:\Users\DIEGOM~1\AppData\Local\Temp\s5vo.s
-2058 cinit CODE >1951:C:\Users\DIEGOM~1\AppData\Local\Temp\s5vo.s
-205A cinit CODE >1954:C:\Users\DIEGOM~1\AppData\Local\Temp\s5vo.s
-205E cinit CODE >1955:C:\Users\DIEGOM~1\AppData\Local\Temp\s5vo.s
-2060 cinit CODE >1956:C:\Users\DIEGOM~1\AppData\Local\Temp\s5vo.s
-2060 cinit CODE >1957:C:\Users\DIEGOM~1\AppData\Local\Temp\s5vo.s
-2062 cinit CODE >1958:C:\Users\DIEGOM~1\AppData\Local\Temp\s5vo.s
-2064 cinit CODE >1959:C:\Users\DIEGOM~1\AppData\Local\Temp\s5vo.s
-2066 cinit CODE >1965:C:\Users\DIEGOM~1\AppData\Local\Temp\s5vo.s
-2066 cinit CODE >1967:C:\Users\DIEGOM~1\AppData\Local\Temp\s5vo.s
-2068 cinit CODE >1968:C:\Users\DIEGOM~1\AppData\Local\Temp\s5vo.s
-206A cinit CODE >1970:C:\Users\DIEGOM~1\AppData\Local\Temp\s5vo.s
-206C cinit CODE >1971:C:\Users\DIEGOM~1\AppData\Local\Temp\s5vo.s
-206E cinit CODE >1972:C:\Users\DIEGOM~1\AppData\Local\Temp\s5vo.s
-2070 cinit CODE >1973:C:\Users\DIEGOM~1\AppData\Local\Temp\s5vo.s
+1A08 text0 CODE >805:C:\Users\Diego Moreno\Documents\Mis Proyectos con Pic\Smart Garden\Codigo\Smart Garden.X\main.c
+1A08 text0 CODE >807:C:\Users\Diego Moreno\Documents\Mis Proyectos con Pic\Smart Garden\Codigo\Smart Garden.X\main.c
+1A0A text0 CODE >808:C:\Users\Diego Moreno\Documents\Mis Proyectos con Pic\Smart Garden\Codigo\Smart Garden.X\main.c
+1A0C text0 CODE >809:C:\Users\Diego Moreno\Documents\Mis Proyectos con Pic\Smart Garden\Codigo\Smart Garden.X\main.c
+1A0E text0 CODE >810:C:\Users\Diego Moreno\Documents\Mis Proyectos con Pic\Smart Garden\Codigo\Smart Garden.X\main.c
+1A10 text0 CODE >811:C:\Users\Diego Moreno\Documents\Mis Proyectos con Pic\Smart Garden\Codigo\Smart Garden.X\main.c
+1A12 text0 CODE >813:C:\Users\Diego Moreno\Documents\Mis Proyectos con Pic\Smart Garden\Codigo\Smart Garden.X\main.c
+1A16 text0 CODE >815:C:\Users\Diego Moreno\Documents\Mis Proyectos con Pic\Smart Garden\Codigo\Smart Garden.X\main.c
+1A18 text0 CODE >820:C:\Users\Diego Moreno\Documents\Mis Proyectos con Pic\Smart Garden\Codigo\Smart Garden.X\main.c
+1A1C text0 CODE >822:C:\Users\Diego Moreno\Documents\Mis Proyectos con Pic\Smart Garden\Codigo\Smart Garden.X\main.c
+1A30 text0 CODE >823:C:\Users\Diego Moreno\Documents\Mis Proyectos con Pic\Smart Garden\Codigo\Smart Garden.X\main.c
+1A34 text0 CODE >824:C:\Users\Diego Moreno\Documents\Mis Proyectos con Pic\Smart Garden\Codigo\Smart Garden.X\main.c
+1A38 text0 CODE >825:C:\Users\Diego Moreno\Documents\Mis Proyectos con Pic\Smart Garden\Codigo\Smart Garden.X\main.c
+1A3C text0 CODE >827:C:\Users\Diego Moreno\Documents\Mis Proyectos con Pic\Smart Garden\Codigo\Smart Garden.X\main.c
+1A40 text0 CODE >831:C:\Users\Diego Moreno\Documents\Mis Proyectos con Pic\Smart Garden\Codigo\Smart Garden.X\main.c
+1A44 text0 CODE >832:C:\Users\Diego Moreno\Documents\Mis Proyectos con Pic\Smart Garden\Codigo\Smart Garden.X\main.c
+1A48 text0 CODE >834:C:\Users\Diego Moreno\Documents\Mis Proyectos con Pic\Smart Garden\Codigo\Smart Garden.X\main.c
+1A50 text0 CODE >836:C:\Users\Diego Moreno\Documents\Mis Proyectos con Pic\Smart Garden\Codigo\Smart Garden.X\main.c
+1A52 text0 CODE >838:C:\Users\Diego Moreno\Documents\Mis Proyectos con Pic\Smart Garden\Codigo\Smart Garden.X\main.c
+1A54 text0 CODE >840:C:\Users\Diego Moreno\Documents\Mis Proyectos con Pic\Smart Garden\Codigo\Smart Garden.X\main.c
+1A58 text0 CODE >842:C:\Users\Diego Moreno\Documents\Mis Proyectos con Pic\Smart Garden\Codigo\Smart Garden.X\main.c
+1A5E text0 CODE >847:C:\Users\Diego Moreno\Documents\Mis Proyectos con Pic\Smart Garden\Codigo\Smart Garden.X\main.c
+1A70 text0 CODE >849:C:\Users\Diego Moreno\Documents\Mis Proyectos con Pic\Smart Garden\Codigo\Smart Garden.X\main.c
+1A74 text0 CODE >850:C:\Users\Diego Moreno\Documents\Mis Proyectos con Pic\Smart Garden\Codigo\Smart Garden.X\main.c
+1A78 text0 CODE >851:C:\Users\Diego Moreno\Documents\Mis Proyectos con Pic\Smart Garden\Codigo\Smart Garden.X\main.c
+1A7E text0 CODE >855:C:\Users\Diego Moreno\Documents\Mis Proyectos con Pic\Smart Garden\Codigo\Smart Garden.X\main.c
+1A90 text0 CODE >857:C:\Users\Diego Moreno\Documents\Mis Proyectos con Pic\Smart Garden\Codigo\Smart Garden.X\main.c
+1A94 text0 CODE >858:C:\Users\Diego Moreno\Documents\Mis Proyectos con Pic\Smart Garden\Codigo\Smart Garden.X\main.c
+1A98 text0 CODE >859:C:\Users\Diego Moreno\Documents\Mis Proyectos con Pic\Smart Garden\Codigo\Smart Garden.X\main.c
+202E cinit CODE >1879:C:\Users\DIEGOM~1\AppData\Local\Temp\s3ts.s
+202E cinit CODE >1881:C:\Users\DIEGOM~1\AppData\Local\Temp\s3ts.s
+202E cinit CODE >1884:C:\Users\DIEGOM~1\AppData\Local\Temp\s3ts.s
+202E cinit CODE >1972:C:\Users\DIEGOM~1\AppData\Local\Temp\s3ts.s
+2030 cinit CODE >1973:C:\Users\DIEGOM~1\AppData\Local\Temp\s3ts.s
+2032 cinit CODE >1974:C:\Users\DIEGOM~1\AppData\Local\Temp\s3ts.s
+2034 cinit CODE >1975:C:\Users\DIEGOM~1\AppData\Local\Temp\s3ts.s
+2036 cinit CODE >1976:C:\Users\DIEGOM~1\AppData\Local\Temp\s3ts.s
+2038 cinit CODE >1977:C:\Users\DIEGOM~1\AppData\Local\Temp\s3ts.s
+203A cinit CODE >1978:C:\Users\DIEGOM~1\AppData\Local\Temp\s3ts.s
+203E cinit CODE >1979:C:\Users\DIEGOM~1\AppData\Local\Temp\s3ts.s
+2042 cinit CODE >1980:C:\Users\DIEGOM~1\AppData\Local\Temp\s3ts.s
+2042 cinit CODE >1981:C:\Users\DIEGOM~1\AppData\Local\Temp\s3ts.s
+2044 cinit CODE >1982:C:\Users\DIEGOM~1\AppData\Local\Temp\s3ts.s
+2048 cinit CODE >1983:C:\Users\DIEGOM~1\AppData\Local\Temp\s3ts.s
+204A cinit CODE >1984:C:\Users\DIEGOM~1\AppData\Local\Temp\s3ts.s
+204C cinit CODE >1985:C:\Users\DIEGOM~1\AppData\Local\Temp\s3ts.s
+204E cinit CODE >1989:C:\Users\DIEGOM~1\AppData\Local\Temp\s3ts.s
+2052 cinit CODE >1990:C:\Users\DIEGOM~1\AppData\Local\Temp\s3ts.s
+2054 cinit CODE >1991:C:\Users\DIEGOM~1\AppData\Local\Temp\s3ts.s
+2054 cinit CODE >1992:C:\Users\DIEGOM~1\AppData\Local\Temp\s3ts.s
+2056 cinit CODE >1993:C:\Users\DIEGOM~1\AppData\Local\Temp\s3ts.s
+2058 cinit CODE >1994:C:\Users\DIEGOM~1\AppData\Local\Temp\s3ts.s
+205A cinit CODE >1997:C:\Users\DIEGOM~1\AppData\Local\Temp\s3ts.s
+205E cinit CODE >1998:C:\Users\DIEGOM~1\AppData\Local\Temp\s3ts.s
+2060 cinit CODE >1999:C:\Users\DIEGOM~1\AppData\Local\Temp\s3ts.s
+2060 cinit CODE >2000:C:\Users\DIEGOM~1\AppData\Local\Temp\s3ts.s
+2062 cinit CODE >2001:C:\Users\DIEGOM~1\AppData\Local\Temp\s3ts.s
+2064 cinit CODE >2002:C:\Users\DIEGOM~1\AppData\Local\Temp\s3ts.s
+2066 cinit CODE >2008:C:\Users\DIEGOM~1\AppData\Local\Temp\s3ts.s
+2066 cinit CODE >2010:C:\Users\DIEGOM~1\AppData\Local\Temp\s3ts.s
+2068 cinit CODE >2011:C:\Users\DIEGOM~1\AppData\Local\Temp\s3ts.s
+206A cinit CODE >2013:C:\Users\DIEGOM~1\AppData\Local\Temp\s3ts.s
+206C cinit CODE >2014:C:\Users\DIEGOM~1\AppData\Local\Temp\s3ts.s
+206E cinit CODE >2015:C:\Users\DIEGOM~1\AppData\Local\Temp\s3ts.s
+2070 cinit CODE >2016:C:\Users\DIEGOM~1\AppData\Local\Temp\s3ts.s
 # %SYMTAB Section
 # An enumeration of all symbols in the program.
 # The beginning of the section is indicated by %SYMTAB.
@@ -908,7 +908,7 @@ _sistemaRegado F00 0 CODE 0 text1 dist/default/production\Smart_Garden.X.product
 _i2c_reinicia_com 23F6 0 CODE 0 text49 dist/default/production\Smart_Garden.X.production.o
 __LdataBANK0 0 0 ABS 0 dataBANK0 dist/default/production\Smart_Garden.X.production.o
 leer_rtc@direccion 3 0 COMRAM 1 cstackCOMRAM dist/default/production\Smart_Garden.X.production.o
-__Lmediumconst 7BFA 0 MEDIUMCONST 0 mediumconst dist/default/production\Smart_Garden.X.production.o
+__Lmediumconst 7BD6 0 MEDIUMCONST 0 mediumconst dist/default/production\Smart_Garden.X.production.o
 __Hspace_0 30000E 0 ABS 0 - dist/default/production\Smart_Garden.X.production.o
 __Hspace_1 178 0 ABS 0 - dist/default/production\Smart_Garden.X.production.o
 __Hspace_2 0 0 ABS 0 - dist/default/production\Smart_Garden.X.production.o
@@ -920,7 +920,7 @@ _i2c_recibe_dato 2390 0 CODE 0 text50 dist/default/production\Smart_Garden.X.pro
 encenderBombas@flagSeco 16 0 COMRAM 1 cstackCOMRAM dist/default/production\Smart_Garden.X.production.o
 __end_of_mostrarMenu 1DC0 0 CODE 0 text10 dist/default/production\Smart_Garden.X.production.o
 __Hibigdata 0 0 CODE 0 ibigdata dist/default/production\Smart_Garden.X.production.o
-__mediumconst 7BFA 0 MEDIUMCONST 0 mediumconst C:\Users\DIEGOM~1\AppData\Local\Temp\s5vo.o
+__mediumconst 7BD6 0 MEDIUMCONST 0 mediumconst C:\Users\DIEGOM~1\AppData\Local\Temp\s3ts.o
 __Heeprom_data 0 0 EEDATA 0 eeprom_data dist/default/production\Smart_Garden.X.production.o
 __size_of_sistemaPrincipal 0 0 ABS 0 - dist/default/production\Smart_Garden.X.production.o
 convertirDato@datoR 3 0 COMRAM 1 cstackCOMRAM dist/default/production\Smart_Garden.X.production.o
@@ -938,7 +938,7 @@ escribe_eeprom@dato 9 0 COMRAM 1 cstackCOMRAM dist/default/production\Smart_Gard
 __Lsmallconst 0 0 SMALLCONST 0 smallconst dist/default/production\Smart_Garden.X.production.o
 _LATD F8C 0 ABS 0 - dist/default/production\Smart_Garden.X.production.o
 _TMR0 FD6 0 ABS 0 - dist/default/production\Smart_Garden.X.production.o
-___sp 0 0 STACK 2 stack C:\Users\DIEGOM~1\AppData\Local\Temp\s5vo.o
+___sp 0 0 STACK 2 stack C:\Users\DIEGOM~1\AppData\Local\Temp\s3ts.o
 _ctoa 1EDC 0 CODE 0 text35 dist/default/production\Smart_Garden.X.production.o
 _dbuf 158 0 BANK1 1 bssBANK1 dist/default/production\Smart_Garden.X.production.o
 _dtoa 12 0 CODE 0 text31 dist/default/production\Smart_Garden.X.production.o
@@ -956,7 +956,7 @@ pad@p 15 0 COMRAM 1 cstackCOMRAM dist/default/production\Smart_Garden.X.producti
 pad@w 1A 0 COMRAM 1 cstackCOMRAM dist/default/production\Smart_Garden.X.production.o
 lecturaWifi@i A7 0 BANK0 1 cstackBANK0 dist/default/production\Smart_Garden.X.production.o
 lecturaWifi@j A9 0 BANK0 1 cstackBANK0 dist/default/production\Smart_Garden.X.production.o
-start E 0 CODE 0 init C:\Users\DIEGOM~1\AppData\Local\Temp\s5vo.o
+start E 0 CODE 0 init C:\Users\DIEGOM~1\AppData\Local\Temp\s3ts.o
 i2c_envia_dato@dato 2 0 COMRAM 1 cstackCOMRAM dist/default/production\Smart_Garden.X.production.o
 setRtc@i 9 0 COMRAM 1 cstackCOMRAM dist/default/production\Smart_Garden.X.production.o
 ___aomod@counter 11 0 COMRAM 1 cstackCOMRAM dist/default/production\Smart_Garden.X.production.o
@@ -994,11 +994,11 @@ escribe_rtc@dato 3 0 COMRAM 1 cstackCOMRAM dist/default/production\Smart_Garden.
 __size_of_dameHumedadSuelo 0 0 ABS 0 - dist/default/production\Smart_Garden.X.production.o
 __end_of_escribeHorariosMemoria 14E4 0 CODE 0 text42 dist/default/production\Smart_Garden.X.production.o
 __size_of_encenderBombas 0 0 ABS 0 - dist/default/production\Smart_Garden.X.production.o
-__accesstop 60 0 ABS 0 - C:\Users\DIEGOM~1\AppData\Local\Temp\s5vo.o
-intlevel0 0 0 CODE 0 text C:\Users\DIEGOM~1\AppData\Local\Temp\s5vo.o
-intlevel1 0 0 CODE 0 text C:\Users\DIEGOM~1\AppData\Local\Temp\s5vo.o
-intlevel2 0 0 CODE 0 text C:\Users\DIEGOM~1\AppData\Local\Temp\s5vo.o
-intlevel3 0 0 CODE 0 text C:\Users\DIEGOM~1\AppData\Local\Temp\s5vo.o
+__accesstop 60 0 ABS 0 - C:\Users\DIEGOM~1\AppData\Local\Temp\s3ts.o
+intlevel0 0 0 CODE 0 text C:\Users\DIEGOM~1\AppData\Local\Temp\s3ts.o
+intlevel1 0 0 CODE 0 text C:\Users\DIEGOM~1\AppData\Local\Temp\s3ts.o
+intlevel2 0 0 CODE 0 text C:\Users\DIEGOM~1\AppData\Local\Temp\s3ts.o
+intlevel3 0 0 CODE 0 text C:\Users\DIEGOM~1\AppData\Local\Temp\s3ts.o
 estaSeco@s 10 0 COMRAM 1 cstackCOMRAM dist/default/production\Smart_Garden.X.production.o
 __CFG_USBDIV$1 0 0 ABS 0 - dist/default/production\Smart_Garden.X.production.o
 _DHT11_Start 2352 0 CODE 0 text22 dist/default/production\Smart_Garden.X.production.o
@@ -1035,8 +1035,8 @@ _ADRESH FC4 0 ABS 0 - dist/default/production\Smart_Garden.X.production.o
 _ADRESL FC3 0 ABS 0 - dist/default/production\Smart_Garden.X.production.o
 __end_of_leer_rtc 22E6 0 CODE 0 text6 dist/default/production\Smart_Garden.X.production.o
 __size_of_sistemaRegado 0 0 ABS 0 - dist/default/production\Smart_Garden.X.production.o
-___inthi_sp 0 0 STACK 2 stack C:\Users\DIEGOM~1\AppData\Local\Temp\s5vo.o
-___intlo_sp 0 0 STACK 2 stack C:\Users\DIEGOM~1\AppData\Local\Temp\s5vo.o
+___inthi_sp 0 0 STACK 2 stack C:\Users\DIEGOM~1\AppData\Local\Temp\s3ts.o
+___intlo_sp 0 0 STACK 2 stack C:\Users\DIEGOM~1\AppData\Local\Temp\s3ts.o
 __size_of_i2c_reinicia_com 0 0 ABS 0 - dist/default/production\Smart_Garden.X.production.o
 __size_of_i2c_recibe_dato 0 0 ABS 0 - dist/default/production\Smart_Garden.X.production.o
 __Hintcode_body 0 0 ABS 0 intcode_body dist/default/production\Smart_Garden.X.production.o
@@ -1156,7 +1156,7 @@ __size_of_i2c_detener 0 0 ABS 0 - dist/default/production\Smart_Garden.X.product
 __Hbigbss 0 0 BIGRAM 1 bigbss dist/default/production\Smart_Garden.X.production.o
 __Hbigram 0 0 ABS 0 bigram dist/default/production\Smart_Garden.X.production.o
 __size_of_fijaHoraRtc 0 0 ABS 0 - dist/default/production\Smart_Garden.X.production.o
-__smallconst 0 0 SMALLCONST 0 smallconst C:\Users\DIEGOM~1\AppData\Local\Temp\s5vo.o
+__smallconst 0 0 SMALLCONST 0 smallconst C:\Users\DIEGOM~1\AppData\Local\Temp\s3ts.o
 ?_dameHumedadSuelo 1 0 COMRAM 1 cstackCOMRAM dist/default/production\Smart_Garden.X.production.o
 lecturaAnalogaSensores@i 30 0 COMRAM 1 cstackCOMRAM dist/default/production\Smart_Garden.X.production.o
 __end_of_sprintf 1FDE 0 CODE 0 text28 dist/default/production\Smart_Garden.X.production.o
@@ -1246,7 +1246,7 @@ asignarHorarios@i 11 0 COMRAM 1 cstackCOMRAM dist/default/production\Smart_Garde
 __Hnvrram 0 0 COMRAM 1 nvrram dist/default/production\Smart_Garden.X.production.o
 sprintf@fmt 62 0 BANK0 1 cstackBANK0 dist/default/production\Smart_Garden.X.production.o
 __size_of_setTiempoRegar 0 0 ABS 0 - dist/default/production\Smart_Garden.X.production.o
-_dtoa$1018 2E 0 COMRAM 1 cstackCOMRAM dist/default/production\Smart_Garden.X.production.o
+_dtoa$1022 2E 0 COMRAM 1 cstackCOMRAM dist/default/production\Smart_Garden.X.production.o
 __end_of_DHT11_Start 2372 0 CODE 0 text22 dist/default/production\Smart_Garden.X.production.o
 __end_of_abs 21C2 0 CODE 0 text32 dist/default/production\Smart_Garden.X.production.o
 __end_of_map 1BB4 0 CODE 0 text17 dist/default/production\Smart_Garden.X.production.o
@@ -1415,8 +1415,8 @@ map@in_max 23 0 COMRAM 1 cstackCOMRAM dist/default/production\Smart_Garden.X.pro
 map@in_min 1F 0 COMRAM 1 cstackCOMRAM dist/default/production\Smart_Garden.X.production.o
 __end_of_UART_printf 1E80 0 CODE 0 text45 dist/default/production\Smart_Garden.X.production.o
 __size_of_vfprintf 0 0 ABS 0 - dist/default/production\Smart_Garden.X.production.o
-stackhi 7FF 0 ABS 0 - C:\Users\DIEGOM~1\AppData\Local\Temp\s5vo.o
-stacklo 178 0 ABS 0 - C:\Users\DIEGOM~1\AppData\Local\Temp\s5vo.o
+stackhi 7FF 0 ABS 0 - C:\Users\DIEGOM~1\AppData\Local\Temp\s3ts.o
+stacklo 178 0 ABS 0 - C:\Users\DIEGOM~1\AppData\Local\Temp\s3ts.o
 constructorSensor@pin 4 0 COMRAM 1 cstackCOMRAM dist/default/production\Smart_Garden.X.production.o
 __size_of_leeHorariosMemoria 0 0 ABS 0 - dist/default/production\Smart_Garden.X.production.o
 setRtc@dato 7 0 COMRAM 1 cstackCOMRAM dist/default/production\Smart_Garden.X.production.o
@@ -1546,7 +1546,7 @@ __Ltext57 0 0 ABS 0 text57 dist/default/production\Smart_Garden.X.production.o
 __Ltext58 0 0 ABS 0 text58 dist/default/production\Smart_Garden.X.production.o
 __Ltext59 0 0 ABS 0 text59 dist/default/production\Smart_Garden.X.production.o
 __Ltext60 0 0 ABS 0 text60 dist/default/production\Smart_Garden.X.production.o
-__ramtop 800 0 RAM 0 ramtop C:\Users\DIEGOM~1\AppData\Local\Temp\s5vo.o
+__ramtop 800 0 RAM 0 ramtop C:\Users\DIEGOM~1\AppData\Local\Temp\s3ts.o
 ___aldiv@dividend D 0 COMRAM 1 cstackCOMRAM dist/default/production\Smart_Garden.X.production.o
 _sprintf 1F8C 0 CODE 0 text28 dist/default/production\Smart_Garden.X.production.o
 __size_of_asignarHorarios 0 0 ABS 0 - dist/default/production\Smart_Garden.X.production.o
@@ -1594,8 +1594,8 @@ __pcstackCOMRAM 1 0 COMRAM 1 cstackCOMRAM dist/default/production\Smart_Garden.X
 _VALOR_TIMER0UART FC 0 BANK0 1 dataBANK0 dist/default/production\Smart_Garden.X.production.o
 _TXSTAbits FAC 0 ABS 0 - dist/default/production\Smart_Garden.X.production.o
 DHT11_ReadData@i 1 0 COMRAM 1 cstackCOMRAM dist/default/production\Smart_Garden.X.production.o
-_UART_init$1795 23 0 COMRAM 1 cstackCOMRAM dist/default/production\Smart_Garden.X.production.o
-__pmediumconst 7BFA 0 MEDIUMCONST 0 mediumconst dist/default/production\Smart_Garden.X.production.o
+_UART_init$1802 23 0 COMRAM 1 cstackCOMRAM dist/default/production\Smart_Garden.X.production.o
+__pmediumconst 7BD6 0 MEDIUMCONST 0 mediumconst dist/default/production\Smart_Garden.X.production.o
 _SSPCON1 FC6 0 ABS 0 - dist/default/production\Smart_Garden.X.production.o
 _SSPCON2 FC5 0 ABS 0 - dist/default/production\Smart_Garden.X.production.o
 _SSPSTAT FC7 0 ABS 0 - dist/default/production\Smart_Garden.X.production.o
@@ -1715,7 +1715,7 @@ cstackBANK0 1 60 60 9E 1
 reset_vec 0 0 0 4 1
 bssBANK1 1 100 100 78 1
 intcode 0 8 8 240C 1
-mediumconst 0 7BFA 7BFA 406 1
+mediumconst 0 7BD6 7BD6 42A 1
 config 0 300000 300000 E 1
 # OTES Section
 # This section contains data of all the note-psects.  The beginning of the section

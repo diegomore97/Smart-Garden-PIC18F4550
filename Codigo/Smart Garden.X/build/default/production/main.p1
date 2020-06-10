@@ -3430,125 +3430,161 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;main.c: 792: }
 [e :UE 567 ]
 }
-[v $root$_main `(v ~T0 @X0 0 e ]
 "794
-[; ;main.c: 794: void main(void) {
+[; ;main.c: 794: void configBluetoothHC_06(void)
+[v _configBluetoothHC_06 `(v ~T0 @X0 1 ef ]
+"795
+[; ;main.c: 795: {
+{
+[e :U _configBluetoothHC_06 ]
+[f ]
+"796
+[; ;main.c: 796:     _delay((unsigned long)((1000)*(4000000/4000.0)));
+[e ( __delay (1 -> * -> -> 1000 `i `d / -> -> 4000000 `l `d .4000.0 `ul ]
+"797
+[; ;main.c: 797:     UART_printf("AT+NAMESMARTHOME");
+[e ( _UART_printf (1 :s 35C ]
+"798
+[; ;main.c: 798:     _delay((unsigned long)((1000)*(4000000/4000.0)));
+[e ( __delay (1 -> * -> -> 1000 `i `d / -> -> 4000000 `l `d .4000.0 `ul ]
+"799
+[; ;main.c: 799:     UART_printf("AT+BAUD4");
+[e ( _UART_printf (1 :s 36C ]
+"800
+[; ;main.c: 800:     _delay((unsigned long)((1000)*(4000000/4000.0)));
+[e ( __delay (1 -> * -> -> 1000 `i `d / -> -> 4000000 `l `d .4000.0 `ul ]
+"801
+[; ;main.c: 801:     UART_printf("AT+PIN2501");
+[e ( _UART_printf (1 :s 37C ]
+"802
+[; ;main.c: 802:     _delay((unsigned long)((1000)*(4000000/4000.0)));
+[e ( __delay (1 -> * -> -> 1000 `i `d / -> -> 4000000 `l `d .4000.0 `ul ]
+"803
+[; ;main.c: 803: }
+[e :UE 572 ]
+}
+[v $root$_main `(v ~T0 @X0 0 e ]
+"805
+[; ;main.c: 805: void main(void) {
 [v _main `(v ~T0 @X0 1 ef ]
 {
 [e :U _main ]
 [f ]
-"796
-[; ;main.c: 796:     INTCONbits.GIE = 1;
+"807
+[; ;main.c: 807:     INTCONbits.GIE = 1;
 [e = . . _INTCONbits 1 7 -> -> 1 `i `uc ]
-"797
-[; ;main.c: 797:     INTCONbits.PEIE = 1;
+"808
+[; ;main.c: 808:     INTCONbits.PEIE = 1;
 [e = . . _INTCONbits 1 6 -> -> 1 `i `uc ]
-"798
-[; ;main.c: 798:     INTCONbits.TMR0IE = 0;
-[e = . . _INTCONbits 0 5 -> -> 0 `i `uc ]
-"799
-[; ;main.c: 799:     INTCONbits.TMR0IF = 0;
-[e = . . _INTCONbits 0 2 -> -> 0 `i `uc ]
-"800
-[; ;main.c: 800:     PIE1bits.RCIE = 1;
-[e = . . _PIE1bits 0 5 -> -> 1 `i `uc ]
-"802
-[; ;main.c: 802:     T0CON = 0b00000111;
-[e = _T0CON -> -> 7 `i `uc ]
-"804
-[; ;main.c: 804:     INTCONbits.TMR0IE = 1;
-[e = . . _INTCONbits 0 5 -> -> 1 `i `uc ]
 "809
-[; ;main.c: 809:     restablecerDatosSensor();
-[e ( _restablecerDatosSensor ..  ]
+[; ;main.c: 809:     INTCONbits.TMR0IE = 0;
+[e = . . _INTCONbits 0 5 -> -> 0 `i `uc ]
+"810
+[; ;main.c: 810:     INTCONbits.TMR0IF = 0;
+[e = . . _INTCONbits 0 2 -> -> 0 `i `uc ]
 "811
-[; ;main.c: 811:     UART_init(9600);
-[e ( _UART_init (1 -> -> 9600 `i `l ]
-"812
-[; ;main.c: 812:     i2c_iniciar();
-[e ( _i2c_iniciar ..  ]
+[; ;main.c: 811:     PIE1bits.RCIE = 1;
+[e = . . _PIE1bits 0 5 -> -> 1 `i `uc ]
 "813
-[; ;main.c: 813:     configurarAdc();
-[e ( _configurarAdc ..  ]
-"814
-[; ;main.c: 814:     inicializarObjetos();
-[e ( _inicializarObjetos ..  ]
-"816
-[; ;main.c: 816:     leeHorariosMemoria();
-[e ( _leeHorariosMemoria ..  ]
-"819
-[; ;main.c: 819:     TRISD = 0;
-[e = _TRISD -> -> 0 `i `uc ]
+[; ;main.c: 813:     T0CON = 0b00000111;
+[e = _T0CON -> -> 7 `i `uc ]
+"815
+[; ;main.c: 815:     INTCONbits.TMR0IE = 1;
+[e = . . _INTCONbits 0 5 -> -> 1 `i `uc ]
 "820
-[; ;main.c: 820:     LATD = 0;
-[e = _LATD -> -> 0 `i `uc ]
+[; ;main.c: 820:     restablecerDatosSensor();
+[e ( _restablecerDatosSensor ..  ]
 "822
-[; ;main.c: 822:     TMR0 = VALOR_TIMER0;
-[e = _TMR0 -> _VALOR_TIMER0 `us ]
+[; ;main.c: 822:     UART_init(9600);
+[e ( _UART_init (1 -> -> 9600 `i `l ]
+"823
+[; ;main.c: 823:     i2c_iniciar();
+[e ( _i2c_iniciar ..  ]
 "824
-[; ;main.c: 824:     INTCONbits.TMR0IF = 1;
+[; ;main.c: 824:     configurarAdc();
+[e ( _configurarAdc ..  ]
+"825
+[; ;main.c: 825:     inicializarObjetos();
+[e ( _inicializarObjetos ..  ]
+"827
+[; ;main.c: 827:     leeHorariosMemoria();
+[e ( _leeHorariosMemoria ..  ]
+"831
+[; ;main.c: 831:     TRISD = 0;
+[e = _TRISD -> -> 0 `i `uc ]
+"832
+[; ;main.c: 832:     LATD = 0;
+[e = _LATD -> -> 0 `i `uc ]
+"834
+[; ;main.c: 834:     TMR0 = VALOR_TIMER0;
+[e = _TMR0 -> _VALOR_TIMER0 `us ]
+"836
+[; ;main.c: 836:     INTCONbits.TMR0IF = 1;
 [e = . . _INTCONbits 0 2 -> -> 1 `i `uc ]
-"826
-[; ;main.c: 826:     T0CONbits.TMR0ON = 1;
-[e = . . _T0CONbits 0 5 -> -> 1 `i `uc ]
-"828
-[; ;main.c: 828:     mostrarMenu();
-[e ( _mostrarMenu ..  ]
-"830
-[; ;main.c: 830:     MODO_COMUNICACION = 0;
-[e = _MODO_COMUNICACION -> -> 0 `i `uc ]
-"833
-[; ;main.c: 833:     while (1) {
-[e :U 574 ]
-{
-"835
-[; ;main.c: 835:         if (datoRecibido) {
-[e $ ! != -> _datoRecibido `i -> 0 `i 576  ]
-{
-"837
-[; ;main.c: 837:             datoRecibido = 0;
-[e = _datoRecibido -> -> 0 `i `uc ]
 "838
-[; ;main.c: 838:             byteUart -= 48;
-[e =- _byteUart -> -> 48 `i `uc ]
-"839
-[; ;main.c: 839:             sistemaPrincipal(byteUart);
-[e ( _sistemaPrincipal (1 _byteUart ]
-"841
-[; ;main.c: 841:         }
-}
-[e :U 576 ]
-"843
-[; ;main.c: 843:         if (overflowTimer) {
-[e $ ! != -> _overflowTimer `i -> 0 `i 577  ]
-{
+[; ;main.c: 838:     T0CONbits.TMR0ON = 1;
+[e = . . _T0CONbits 0 5 -> -> 1 `i `uc ]
+"840
+[; ;main.c: 840:     mostrarMenu();
+[e ( _mostrarMenu ..  ]
+"842
+[; ;main.c: 842:     MODO_COMUNICACION = 0;
+[e = _MODO_COMUNICACION -> -> 0 `i `uc ]
 "845
-[; ;main.c: 845:             esperandoDatos = 0;
-[e = _esperandoDatos -> -> 0 `i `uc ]
-"846
-[; ;main.c: 846:             overflowTimer = 0;
-[e = _overflowTimer -> -> 0 `i `uc ]
+[; ;main.c: 845:     while (1) {
+[e :U 575 ]
+{
 "847
-[; ;main.c: 847:             sistemaRegado();
-[e ( _sistemaRegado ..  ]
-"848
-[; ;main.c: 848:         }
+[; ;main.c: 847:         if (datoRecibido) {
+[e $ ! != -> _datoRecibido `i -> 0 `i 577  ]
+{
+"849
+[; ;main.c: 849:             datoRecibido = 0;
+[e = _datoRecibido -> -> 0 `i `uc ]
+"850
+[; ;main.c: 850:             byteUart -= 48;
+[e =- _byteUart -> -> 48 `i `uc ]
+"851
+[; ;main.c: 851:             sistemaPrincipal(byteUart);
+[e ( _sistemaPrincipal (1 _byteUart ]
+"853
+[; ;main.c: 853:         }
 }
 [e :U 577 ]
-"850
-[; ;main.c: 850:     }
+"855
+[; ;main.c: 855:         if (overflowTimer) {
+[e $ ! != -> _overflowTimer `i -> 0 `i 578  ]
+{
+"857
+[; ;main.c: 857:             esperandoDatos = 0;
+[e = _esperandoDatos -> -> 0 `i `uc ]
+"858
+[; ;main.c: 858:             overflowTimer = 0;
+[e = _overflowTimer -> -> 0 `i `uc ]
+"859
+[; ;main.c: 859:             sistemaRegado();
+[e ( _sistemaRegado ..  ]
+"860
+[; ;main.c: 860:         }
 }
-[e :U 573 ]
-[e $U 574  ]
-[e :U 575 ]
-"851
-[; ;main.c: 851:     return;
-[e $UE 572  ]
-"852
-[; ;main.c: 852: }
-[e :UE 572 ]
+[e :U 578 ]
+"862
+[; ;main.c: 862:     }
+}
+[e :U 574 ]
+[e $U 575  ]
+[e :U 576 ]
+"863
+[; ;main.c: 863:     return;
+[e $UE 573  ]
+"864
+[; ;main.c: 864: }
+[e :UE 573 ]
 }
 [p f _sprintf 8913024 ]
+[a 35C 65 84 43 78 65 77 69 83 77 65 82 84 72 79 77 69 0 ]
+[a 36C 65 84 43 66 65 85 68 52 0 ]
+[a 37C 65 84 43 80 73 78 50 53 48 49 0 ]
 [a 22C 13 10 32 79 112 99 105 111 110 58 32 32 13 0 ]
 [a 14C 13 10 73 110 103 114 101 115 101 32 101 108 32 112 111 114 99 101 110 116 97 106 101 32 100 101 32 104 117 109 101 100 97 100 32 100 101 108 32 115 101 110 115 111 114 32 37 100 13 10 0 ]
 [a 29C 13 10 10 76 97 32 72 117 109 101 100 97 100 32 65 109 98 105 101 110 116 101 32 101 115 58 32 37 100 13 10 0 ]

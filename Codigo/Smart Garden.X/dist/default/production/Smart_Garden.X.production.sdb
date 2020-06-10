@@ -147,7 +147,7 @@
 [v _mostrarDatosSensores mostrarDatosSensores `(v  1 e 1 0 ]
 "760
 [v _mostrarDatosSensoresWIFI mostrarDatosSensoresWIFI `(v  1 e 1 0 ]
-"794
+"805
 [v _main main `(v  1 e 1 0 ]
 "6 C:\Users\Diego Moreno\Documents\Mis Proyectos con Pic\Smart Garden\Codigo\Smart Garden.X/UART.h
 [v _tiempoInactividadTrans tiempoInactividadTrans `uc  1 e 1 0 ]
@@ -493,10 +493,10 @@
 [v _regando regando `uc  1 e 1 0 ]
 "58
 [v _peticionLecturaSensores peticionLecturaSensores `uc  1 e 1 0 ]
-"794
+"805
 [v _main main `(v  1 e 1 0 ]
 {
-"852
+"864
 } 0
 "628
 [v _sistemaRegado sistemaRegado `(v  1 e 1 0 ]
@@ -758,9 +758,9 @@
 "9 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\sources\c99\common\nf_sprintf.c
 [v _sprintf sprintf `(i  1 e 2 0 ]
 {
-[s S1479 _IO_FILE 6 `*.39uc 1 buffer 2 0 `i 1 count 2 2 `i 1 limit 2 4 ]
+[s S1483 _IO_FILE 6 `*.39uc 1 buffer 2 0 `i 1 count 2 2 `i 1 limit 2 4 ]
 "13
-[v sprintf@f f `S1479  1 a 6 14 ]
+[v sprintf@f f `S1483  1 a 6 14 ]
 "12
 [v sprintf@ap ap `[1]*.39v  1 a 2 12 ]
 "9
@@ -773,9 +773,9 @@
 {
 "1371
 [v vfprintf@cfmt cfmt `*.25uc  1 a 2 86 ]
-[s S965 _IO_FILE 0 ]
+[s S969 _IO_FILE 0 ]
 "1368
-[v vfprintf@fp fp `*.39S965  1 p 2 80 ]
+[v vfprintf@fp fp `*.39S969  1 p 2 80 ]
 [v vfprintf@fmt fmt `*.25Cuc  1 p 2 82 ]
 [v vfprintf@ap ap `*.39*.39v  1 p 2 84 ]
 "1382
@@ -787,9 +787,9 @@
 [v vfpfcnvrt@ll ll `o  1 a 8 71 ]
 "672
 [v vfpfcnvrt@c c `uc  1 a 1 79 ]
-[s S965 _IO_FILE 0 ]
+[s S969 _IO_FILE 0 ]
 "670
-[v vfpfcnvrt@fp fp `*.39S965  1 p 2 63 ]
+[v vfpfcnvrt@fp fp `*.39S969  1 p 2 63 ]
 [v vfpfcnvrt@fmt fmt `*.39*.25uc  1 p 2 65 ]
 [v vfpfcnvrt@ap ap `*.39*.39v  1 p 2 67 ]
 "1365
@@ -804,9 +804,9 @@
 [v dtoa@s s `i  1 a 2 51 ]
 [v dtoa@w w `i  1 a 2 49 ]
 [v dtoa@p p `i  1 a 2 47 ]
-[s S965 _IO_FILE 0 ]
+[s S969 _IO_FILE 0 ]
 "274
-[v dtoa@fp fp `*.39S965  1 p 2 27 ]
+[v dtoa@fp fp `*.39S969  1 p 2 27 ]
 [v dtoa@d d `o  1 p 8 29 ]
 "315
 } 0
@@ -845,9 +845,9 @@
 {
 "261
 [v ctoa@w w `i  1 a 2 30 ]
-[s S965 _IO_FILE 0 ]
+[s S969 _IO_FILE 0 ]
 "259
-[v ctoa@fp fp `*.39S965  1 p 2 27 ]
+[v ctoa@fp fp `*.39S969  1 p 2 27 ]
 [v ctoa@c c `uc  1 p 1 29 ]
 "270
 } 0
@@ -857,9 +857,9 @@
 "74
 [v pad@w w `i  1 a 2 25 ]
 [v pad@i i `i  1 a 2 23 ]
-[s S965 _IO_FILE 0 ]
+[s S969 _IO_FILE 0 ]
 "72
-[v pad@fp fp `*.39S965  1 p 2 16 ]
+[v pad@fp fp `*.39S969  1 p 2 16 ]
 [v pad@buf buf `*.39uc  1 p 2 18 ]
 [v pad@p p `i  1 p 2 20 ]
 "95
@@ -882,16 +882,16 @@
 [v fputs@c c `uc  1 a 1 13 ]
 "8
 [v fputs@s s `*.39Cuc  1 p 2 9 ]
-[s S1479 _IO_FILE 6 `*.39uc 1 buffer 2 0 `i 1 count 2 2 `i 1 limit 2 4 ]
-[v fputs@fp fp `*.39S1479  1 p 2 11 ]
+[s S1483 _IO_FILE 6 `*.39uc 1 buffer 2 0 `i 1 count 2 2 `i 1 limit 2 4 ]
+[v fputs@fp fp `*.39S1483  1 p 2 11 ]
 "19
 } 0
 "8 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\sources\c99\common\nf_fputc.c
 [v _fputc fputc `(i  1 e 2 0 ]
 {
 [v fputc@c c `i  1 p 2 0 ]
-[s S1479 _IO_FILE 6 `*.39uc 1 buffer 2 0 `i 1 count 2 2 `i 1 limit 2 4 ]
-[v fputc@fp fp `*.39S1479  1 p 2 2 ]
+[s S1483 _IO_FILE 6 `*.39uc 1 buffer 2 0 `i 1 count 2 2 `i 1 limit 2 4 ]
+[v fputc@fp fp `*.39S1483  1 p 2 2 ]
 "21
 } 0
 "7 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\sources\c99\common\putch.c
