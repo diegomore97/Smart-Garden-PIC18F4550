@@ -6193,7 +6193,7 @@ int horaRegar(void);
 int estaSeco(SensorHumedad s);
 void constructorSensor(SensorHumedad s, unsigned char porcientoHumedad, unsigned char pin);
 void dameHoraActual(void);
-void setRtc(unsigned char direccion);
+unsigned char setRtc(unsigned char direccion);
 unsigned char leer_eeprom(uint16_t direccion);
 void escribe_eeprom(uint16_t direccion, unsigned char dato);
 void escribeHorariosMemoria(void);
@@ -6215,7 +6215,9 @@ void dameTemperaturaHumedad(unsigned char* Humedad, unsigned char* Temperatura);
 void mostrarDatosSensores(void);
 void mostrarDatosSensoresWIFI(void);
 long map(long x, long in_min, long in_max, long out_min, long out_max);
+unsigned char getValue(short numCharacters);
 void configBluetoothHC_06(void);
+
 void __attribute__((picinterrupt(("")))) desbordamiento(void) {
 
     if (INTCONbits.TMR0IF) {
@@ -6224,7 +6226,7 @@ void __attribute__((picinterrupt(("")))) desbordamiento(void) {
 
             tiempoInactividadTrans++;
 
-            if (tiempoInactividadTrans == 2)
+            if (tiempoInactividadTrans == 1)
                 esperaDatoConcluida = 1;
 
 
@@ -6290,29 +6292,19 @@ void dameHoraActual() {
     hora = convertirDato(leer_rtc(0x02));
 }
 
-void setRtc(unsigned char direccion) {
-    unsigned char dato;
-    char datoCapturado = 0;
+unsigned char setRtc(unsigned char direccion) {
 
-    for (int i = 0; i < 2; i++) {
-        char Rx = UART_read();
-        if (Rx >= 48 && Rx <= 57) {
-            if (!i) {
-                dato = ((Rx - 48) & 0x0F) << 4;
-            } else {
-                dato |= (Rx - 48) & 0x0F;
-                datoCapturado = 1;
-            }
-        } else {
-            datoCapturado = 0;
+    unsigned char dato = 0;
+    unsigned char seteado = 0;
 
-            UART_write('F');
-            break;
-        }
+    dato = getValue(2);
+
+    if (dato != 'F') {
+        escribe_rtc(direccion, dato);
+        seteado = 1;
     }
 
-    if (datoCapturado && !esperandoDatos)
-        escribe_rtc(direccion, dato);
+    return seteado;
 }
 
 void escribe_eeprom(uint16_t direccion, unsigned char dato) {
@@ -6457,20 +6449,15 @@ void fijaHoraRtc(void) {
 
 
     UART_printf("\r\n Envie las Horas en formato 24 Ej: 15 \r\n");
-    setRtc(0x02);
 
 
-    if (!esperandoDatos) {
+    if (setRtc(0x02)) {
         UART_printf("\r\n Envie los Minutos Ej: 25 \r\n");
-        setRtc(0x01);
+        if (setRtc(0x01)) {
+            UART_printf("\r\n HORA ESTABLECIDA CORRECTAMENTE \r\n");
+            escribe_rtc(0x00, 0);
 
-    }
-
-    if (!esperandoDatos) {
-
-        UART_printf("\r\n HORA ESTABLECIDA CORRECTAMENTE \r\n");
-        escribe_rtc(0x00, 0);
-
+        }
     }
 
 }
@@ -6479,52 +6466,28 @@ void asignarHorarios()
 {
     unsigned char hora;
     unsigned char Rx;
-    char datoCapturado = 0;
 
     UART_printf("\r\n OPCIONES DE REGADO \r\n");
+
     UART_printf("\r\n Ingrese una hora en formato de 24 hrs ej: 15 \r\n");
+    hora = getValue(2);
 
-    for (int i = 0; i < 2; i++) {
-        Rx = UART_read();
-        if (Rx >= 48 && Rx <= 57) {
-            if (!i) {
-                Rx -= 48;
-                hora = Rx;
-                hora *= 10;
-            } else {
-                datoCapturado = 1;
-                Rx -= 48;
-                hora += Rx;
-            }
-        } else {
-            datoCapturado = 0;
-
-            UART_write('F');
-            break;
-        }
-    }
-
-    if (datoCapturado && !esperandoDatos) {
+    if (hora != 'F') {
 
         UART_printf("\r\n Ingrese 1 para regar || ingrese 0 para no regar: \r\n");
 
-        Rx = UART_read();
-        Rx -= 48;
+        Rx = getValue(1);
 
-        if (Rx != 1 && Rx != 0)
-            Rx = 0;
 
-        if (!esperandoDatos) {
-            UART_printf("\r\n Horario Modificado! \r\n");
+        if (Rx != 'F') {
 
             horarios[hora].regar = Rx;
 
             escribeHorariosMemoria();
 
 
-        } else {
+            UART_printf("\r\n Horario Modificado! \r\n");
 
-            UART_write('F');
         }
 
     }
@@ -6535,57 +6498,18 @@ void setTiempoRegar() {
 
     unsigned char hora;
     unsigned char tiempoRegar;
-    unsigned char Rx;
-    char datoCapturado = 0;
 
     UART_printf("\r\n TIEMPO DE REGADO \r\n");
+
     UART_printf("\r\n Ingrese una hora en formato de 24 hrs ej: 15 \r\n");
+    hora = getValue(2);
 
-    for (int i = 0; i < 2; i++) {
-        Rx = UART_read();
-        if (Rx >= 48 && Rx <= 57) {
-            if (!i) {
-                Rx -= 48;
-                hora = Rx;
-                hora *= 10;
-            } else {
-                datoCapturado = 1;
-                Rx -= 48;
-                hora += Rx;
-            }
-        } else {
-            datoCapturado = 0;
-
-            UART_write('F');
-            break;
-        }
-    }
-
-    if (datoCapturado && !esperandoDatos) {
+    if (hora != 'F') {
 
         UART_printf("\r\n Ingrese los minutos que desee que se riegue en ese horario ej: 15 \r\n");
+        tiempoRegar = getValue(2);
 
-        for (int i = 0; i < 2; i++) {
-            Rx = UART_read();
-            if (Rx >= 48 && Rx <= 57) {
-                if (!i) {
-                    Rx -= 48;
-                    tiempoRegar = Rx;
-                    tiempoRegar *= 10;
-                } else {
-                    datoCapturado = 1;
-                    Rx -= 48;
-                    tiempoRegar += Rx;
-                }
-            } else {
-                datoCapturado = 0;
-
-                UART_write('F');
-                break;
-            }
-        }
-
-        if (datoCapturado && !esperandoDatos) {
+        if (tiempoRegar != 'F') {
 
             UART_printf("\r\n Minutos de riego establecidos! \r\n");
 
@@ -6595,7 +6519,6 @@ void setTiempoRegar() {
             escribeHorariosMemoria();
 
         }
-
     }
 
 }
@@ -6626,7 +6549,7 @@ void lecturaWifi() {
 
     PIE1bits.RCIE = 0;
 
-    unsigned char Rx = 0, porcientoHumedad;
+    unsigned char Rx = 0, humedadMedida;
     char buffer[50];
 
     restablecerDatosSensor();
@@ -6641,45 +6564,17 @@ void lecturaWifi() {
 
         peticionLecturaSensores = 1;
 
-        for (int j = 0; j < 3; j++) {
+        for (int i = 0; i < 3; i++) {
 
-            sprintf(buffer, "\r\nIngrese el porcentaje de humedad del sensor %d\r\n", j);
+            sprintf(buffer, "\r\nIngrese el porcentaje de humedad del sensor %d\r\n", i);
             UART_printf(buffer);
 
-            for (int i = 0; i < 3; i++) {
+            humedadMedida = getValue(3);
 
-                Rx = UART_read();
-
-                if (Rx >= 48 && Rx <= 57) {
-
-                    Rx -= 48;
-
-                    switch (i) {
-                        case 0:
-                            porcientoHumedad = Rx;
-                            porcientoHumedad *= 100;
-                            break;
-
-                        case 1:
-                            porcientoHumedad += (Rx * 10);
-                            break;
-
-                        case 2:
-                            porcientoHumedad += Rx;
-                            sensores[j].porcientoHumedad = porcientoHumedad;
-                            break;
-
-                        default:
-                            break;
-                    }
-
-                } else {
-
-                    sensores[j].porcientoHumedad = 100;
-                    UART_write('F');
-                    break;
-                }
-            }
+            if (humedadMedida != 'F')
+                sensores[i].porcientoHumedad = humedadMedida;
+            else
+                sensores[i].porcientoHumedad = 100;
 
         }
 
@@ -6920,8 +6815,7 @@ void mostrarDatosSensoresWIFI(void) {
 
 }
 
-void configBluetoothHC_06(void)
-{
+void configBluetoothHC_06(void) {
     _delay((unsigned long)((1000)*(4000000/4000.0)));
     UART_printf("AT+NAMESMARTHOME");
     _delay((unsigned long)((1000)*(4000000/4000.0)));
@@ -6929,6 +6823,110 @@ void configBluetoothHC_06(void)
     _delay((unsigned long)((1000)*(4000000/4000.0)));
     UART_printf("AT+PIN2501");
     _delay((unsigned long)((1000)*(4000000/4000.0)));
+}
+
+unsigned char getValue(short numCharacters) {
+
+    unsigned char Rx = 0;
+    unsigned char datoIncorrecto = 0;
+    unsigned char dato = 0;
+
+    switch (numCharacters) {
+
+        case 1:
+            Rx = UART_read();
+
+            if (Rx >= 48 && Rx <= 57) {
+                Rx -= 48;
+                dato = Rx;
+            } else {
+                UART_write('F');
+                datoIncorrecto = 1;
+            }
+
+            break;
+
+        case 2:
+            for (int i = 0; i < 2; i++) {
+
+                Rx = UART_read();
+
+                if (Rx >= 48 && Rx <= 57) {
+
+                    Rx -= 48;
+
+                    switch (i) {
+                        case 0:
+                            dato = Rx;
+                            dato *= 10;
+                            break;
+
+                        case 1:
+                            dato += Rx;
+                            break;
+
+                        default:
+                            break;
+                    }
+
+                } else {
+
+                    datoIncorrecto = 1;
+                    UART_write('F');
+                    break;
+                }
+            }
+            break;
+
+        case 3:
+            for (int i = 0; i < 3; i++) {
+
+                Rx = UART_read();
+
+                if (Rx >= 48 && Rx <= 57) {
+
+                    Rx -= 48;
+
+                    switch (i) {
+                        case 0:
+                            dato = Rx;
+                            dato *= 100;
+                            break;
+
+                        case 1:
+                            dato += (Rx * 10);
+                            break;
+
+                        case 2:
+                            dato += Rx;
+                            break;
+
+                        default:
+                            break;
+                    }
+
+                } else {
+
+                    datoIncorrecto = 1;
+                    UART_write('F');
+                    break;
+                }
+            }
+            break;
+
+        default:
+            break;
+    }
+
+
+
+    if (esperandoDatos || datoIncorrecto) {
+
+        UART_printf("\nFALLO EL SETEO\r\n");
+        return 'F';
+    } else
+        return dato;
+
 }
 
 void main(void) {
@@ -6968,7 +6966,7 @@ void main(void) {
 
     mostrarMenu();
 
-    MODO_COMUNICACION = 0;
+    MODO_COMUNICACION = 1;
 
 
     while (1) {

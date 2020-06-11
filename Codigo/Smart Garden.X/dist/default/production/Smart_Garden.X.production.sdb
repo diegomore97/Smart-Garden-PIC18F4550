@@ -91,63 +91,65 @@
 [v ___lmul __lmul `(ul  1 e 4 0 ]
 "91 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\sources\c99\common\Umul64.c
 [v ___omul __omul `(uo  1 e 8 0 ]
-"90 C:\Users\Diego Moreno\Documents\Mis Proyectos con Pic\Smart Garden\Codigo\Smart Garden.X\main.c
+"92 C:\Users\Diego Moreno\Documents\Mis Proyectos con Pic\Smart Garden\Codigo\Smart Garden.X\main.c
 [v _desbordamiento desbordamiento `IIH(v  1 e 1 0 ]
-"119
+"121
 [v _map map `(l  1 e 4 0 ]
-"123
+"125
 [v _constructorSensor constructorSensor `(v  1 e 1 0 ]
-"128
+"130
 [v _configurarAdc configurarAdc `(v  1 e 1 0 ]
-"133
+"135
 [v _estaSeco estaSeco `(i  1 e 2 0 ]
-"142
+"144
 [v _horaRegar horaRegar `(i  1 e 2 0 ]
-"147
+"149
 [v _inicializarObjetos inicializarObjetos `(v  1 e 1 0 ]
-"157
+"159
 [v _dameHoraActual dameHoraActual `(v  1 e 1 0 ]
-"164
-[v _setRtc setRtc `(v  1 e 1 0 ]
-"189
+"166
+[v _setRtc setRtc `(uc  1 e 1 0 ]
+"181
 [v _escribe_eeprom escribe_eeprom `(v  1 e 1 0 ]
-"201
+"193
 [v _leer_eeprom leer_eeprom `(uc  1 e 1 0 ]
-"218
+"210
 [v _escribeHorariosMemoria escribeHorariosMemoria `(v  1 e 1 0 ]
-"228
+"220
 [v _leeHorariosMemoria leeHorariosMemoria `(v  1 e 1 0 ]
-"253
+"245
 [v _encenderBombas encenderBombas `(v  1 e 1 0 ]
-"325
+"317
 [v _fijaHoraRtc fijaHoraRtc `(v  1 e 1 0 ]
-"349
+"336
 [v _asignarHorarios asignarHorarios `(v  1 e 1 0 ]
-"405
+"368
 [v _setTiempoRegar setTiempoRegar `(v  1 e 1 0 ]
-"474
+"397
 [v _dameHumedadSuelo dameHumedadSuelo `(s  1 e 2 0 ]
-"491
+"414
 [v _restablecerDatosSensor restablecerDatosSensor `(v  1 e 1 0 ]
-"496
+"419
 [v _lecturaWifi lecturaWifi `(v  1 e 1 0 ]
-"567
+"462
 [v _lecturaAnalogaSensores lecturaAnalogaSensores `(v  1 e 1 0 ]
-"576
+"471
 [v _mostrarMenu mostrarMenu `(v  1 e 1 0 ]
-"588
+"483
 [v _sistemaPrincipal sistemaPrincipal `(v  1 e 1 0 ]
-"628
+"523
 [v _sistemaRegado sistemaRegado `(v  1 e 1 0 ]
-"675
+"570
 [v _dameDatosSistema dameDatosSistema `(v  1 e 1 0 ]
-"696
+"591
 [v _dameTemperaturaHumedad dameTemperaturaHumedad `(v  1 e 1 0 ]
-"731
+"626
 [v _mostrarDatosSensores mostrarDatosSensores `(v  1 e 1 0 ]
-"760
+"655
 [v _mostrarDatosSensoresWIFI mostrarDatosSensoresWIFI `(v  1 e 1 0 ]
-"805
+"699
+[v _getValue getValue `(uc  1 e 1 0 ]
+"803
 [v _main main `(v  1 e 1 0 ]
 "6 C:\Users\Diego Moreno\Documents\Mis Proyectos con Pic\Smart Garden\Codigo\Smart Garden.X/UART.h
 [v _tiempoInactividadTrans tiempoInactividadTrans `uc  1 e 1 0 ]
@@ -256,7 +258,7 @@
 "4033
 [u S338 . 1 `S320 1 . 1 0 `S267 1 . 1 0 ]
 [v _TRISDbits TRISDbits `VES338  1 e 1 @3989 ]
-[s S534 . 1 `uc 1 TMR1IE 1 0 :1:0 
+[s S539 . 1 `uc 1 TMR1IE 1 0 :1:0 
 `uc 1 TMR2IE 1 0 :1:1 
 `uc 1 CCP1IE 1 0 :1:2 
 `uc 1 SSPIE 1 0 :1:3 
@@ -266,14 +268,14 @@
 `uc 1 SPPIE 1 0 :1:7 
 ]
 "4408
-[s S543 . 1 `uc 1 . 1 0 :4:0 
+[s S548 . 1 `uc 1 . 1 0 :4:0 
 `uc 1 TX1IE 1 0 :1:4 
 `uc 1 RC1IE 1 0 :1:5 
 `uc 1 . 1 0 :1:6 
 `uc 1 PSPIE 1 0 :1:7 
 ]
-[u S549 . 1 `S534 1 . 1 0 `S543 1 . 1 0 ]
-[v _PIE1bits PIE1bits `VES549  1 e 1 @3997 ]
+[u S554 . 1 `S539 1 . 1 0 `S548 1 . 1 0 ]
+[v _PIE1bits PIE1bits `VES554  1 e 1 @3997 ]
 [s S231 . 1 `uc 1 TMR1IF 1 0 :1:0 
 `uc 1 TMR2IF 1 0 :1:1 
 `uc 1 CCP1IF 1 0 :1:2 
@@ -354,38 +356,38 @@
 [v _ADCON2 ADCON2 `VEuc  1 e 1 @4032 ]
 "6581
 [v _ADCON1 ADCON1 `VEuc  1 e 1 @4033 ]
-[s S464 . 1 `uc 1 . 1 0 :1:0 
+[s S469 . 1 `uc 1 . 1 0 :1:0 
 `uc 1 GO_NOT_DONE 1 0 :1:1 
 ]
 "6710
-[s S467 . 1 `uc 1 ADON 1 0 :1:0 
+[s S472 . 1 `uc 1 ADON 1 0 :1:0 
 `uc 1 GO_nDONE 1 0 :1:1 
 `uc 1 CHS 1 0 :4:2 
 ]
-[s S471 . 1 `uc 1 . 1 0 :1:0 
+[s S476 . 1 `uc 1 . 1 0 :1:0 
 `uc 1 GO_DONE 1 0 :1:1 
 `uc 1 CHS0 1 0 :1:2 
 `uc 1 CHS1 1 0 :1:3 
 `uc 1 CHS2 1 0 :1:4 
 `uc 1 CHS3 1 0 :1:5 
 ]
-[s S478 . 1 `uc 1 . 1 0 :1:0 
+[s S483 . 1 `uc 1 . 1 0 :1:0 
 `uc 1 DONE 1 0 :1:1 
 ]
-[s S481 . 1 `uc 1 . 1 0 :1:0 
+[s S486 . 1 `uc 1 . 1 0 :1:0 
 `uc 1 GO 1 0 :1:1 
 ]
-[s S484 . 1 `uc 1 . 1 0 :1:0 
+[s S489 . 1 `uc 1 . 1 0 :1:0 
 `uc 1 NOT_DONE 1 0 :1:1 
 ]
-[s S487 . 1 `uc 1 . 1 0 :1:0 
+[s S492 . 1 `uc 1 . 1 0 :1:0 
 `uc 1 nDONE 1 0 :1:1 
 ]
-[s S490 . 1 `uc 1 . 1 0 :1:0 
+[s S495 . 1 `uc 1 . 1 0 :1:0 
 `uc 1 GODONE 1 0 :1:1 
 ]
-[u S493 . 1 `S464 1 . 1 0 `S467 1 . 1 0 `S471 1 . 1 0 `S478 1 . 1 0 `S481 1 . 1 0 `S484 1 . 1 0 `S487 1 . 1 0 `S490 1 . 1 0 ]
-[v _ADCON0bits ADCON0bits `VES493  1 e 1 @4034 ]
+[u S498 . 1 `S469 1 . 1 0 `S472 1 . 1 0 `S476 1 . 1 0 `S483 1 . 1 0 `S486 1 . 1 0 `S489 1 . 1 0 `S492 1 . 1 0 `S495 1 . 1 0 ]
+[v _ADCON0bits ADCON0bits `VES498  1 e 1 @4034 ]
 "6792
 [v _ADRESL ADRESL `VEuc  1 e 1 @4035 ]
 "6799
@@ -414,7 +416,7 @@
 [v _SSPBUF SSPBUF `VEuc  1 e 1 @4041 ]
 "8069
 [v _T0CON T0CON `VEuc  1 e 1 @4053 ]
-[s S587 . 1 `uc 1 T0PS 1 0 :3:0 
+[s S592 . 1 `uc 1 T0PS 1 0 :3:0 
 `uc 1 PSA 1 0 :1:3 
 `uc 1 T0SE 1 0 :1:4 
 `uc 1 T0CS 1 0 :1:5 
@@ -422,12 +424,12 @@
 `uc 1 TMR0ON 1 0 :1:7 
 ]
 "8089
-[s S594 . 1 `uc 1 T0PS0 1 0 :1:0 
+[s S599 . 1 `uc 1 T0PS0 1 0 :1:0 
 `uc 1 T0PS1 1 0 :1:1 
 `uc 1 T0PS2 1 0 :1:2 
 ]
-[u S598 . 1 `S587 1 . 1 0 `S594 1 . 1 0 ]
-[v _T0CONbits T0CONbits `VES598  1 e 1 @4053 ]
+[u S603 . 1 `S592 1 . 1 0 `S599 1 . 1 0 ]
+[v _T0CONbits T0CONbits `VES603  1 e 1 @4053 ]
 "8139
 [v _TMR0 TMR0 `VEus  1 e 2 @4054 ]
 [s S407 . 1 `uc 1 RBIF 1 0 :1:0 
@@ -493,44 +495,44 @@
 [v _regando regando `uc  1 e 1 0 ]
 "58
 [v _peticionLecturaSensores peticionLecturaSensores `uc  1 e 1 0 ]
-"805
+"803
 [v _main main `(v  1 e 1 0 ]
 {
-"864
+"862
 } 0
-"628
+"523
 [v _sistemaRegado sistemaRegado `(v  1 e 1 0 ]
 {
-"673
+"568
 } 0
-"142
+"144
 [v _horaRegar horaRegar `(i  1 e 2 0 ]
 {
-"145
+"147
 } 0
-"253
+"245
 [v _encenderBombas encenderBombas `(v  1 e 1 0 ]
 {
-"257
+"249
 [v encenderBombas@i i `i  1 a 2 22 ]
-"255
+"247
 [v encenderBombas@flagSeco flagSeco `uc  1 a 1 21 ]
-"323
+"315
 } 0
-"133
+"135
 [v _estaSeco estaSeco `(i  1 e 2 0 ]
 {
-"134
+"136
 [v estaSeco@temperatura temperatura `uc  1 a 1 18 ]
 [s S404 . 2 `uc 1 porcientoHumedad 1 0 `uc 1 pinSensor 1 1 ]
-"133
+"135
 [v estaSeco@s s `S404  1 p 2 15 ]
-"140
+"142
 } 0
-"157
+"159
 [v _dameHoraActual dameHoraActual `(v  1 e 1 0 ]
 {
-"162
+"164
 } 0
 "13 C:\Users\Diego Moreno\Documents\Mis Proyectos con Pic\Smart Garden\Codigo\Smart Garden.X/RTC.h
 [v _leer_rtc leer_rtc `(uc  1 e 1 0 ]
@@ -555,99 +557,89 @@
 [v convertirDato@dato dato `uc  1 a 1 1 ]
 "33
 } 0
-"588 C:\Users\Diego Moreno\Documents\Mis Proyectos con Pic\Smart Garden\Codigo\Smart Garden.X\main.c
+"483 C:\Users\Diego Moreno\Documents\Mis Proyectos con Pic\Smart Garden\Codigo\Smart Garden.X\main.c
 [v _sistemaPrincipal sistemaPrincipal `(v  1 e 1 0 ]
 {
 [v sistemaPrincipal@opcion opcion `uc  1 a 1 wreg ]
 [v sistemaPrincipal@opcion opcion `uc  1 a 1 wreg ]
-"590
+"485
 [v sistemaPrincipal@opcion opcion `uc  1 a 1 93 ]
-"626
+"521
 } 0
-"405
+"368
 [v _setTiempoRegar setTiempoRegar `(v  1 e 1 0 ]
 {
-"439
-[v setTiempoRegar@i_841 i `i  1 a 2 18 ]
-"415
-[v setTiempoRegar@i i `i  1 a 2 16 ]
-"409
-[v setTiempoRegar@Rx Rx `uc  1 a 1 21 ]
-"410
-[v setTiempoRegar@datoCapturado datoCapturado `uc  1 a 1 20 ]
-"407
+"370
 [v setTiempoRegar@hora hora `uc  1 a 1 15 ]
-"408
+"371
 [v setTiempoRegar@tiempoRegar tiempoRegar `uc  1 a 1 14 ]
-"472
+"395
 } 0
-"576
+"471
 [v _mostrarMenu mostrarMenu `(v  1 e 1 0 ]
 {
-"586
+"481
 } 0
-"760
+"655
 [v _mostrarDatosSensoresWIFI mostrarDatosSensoresWIFI `(v  1 e 1 0 ]
 {
-"773
-[v mostrarDatosSensoresWIFI@i i `i  1 a 2 128 ]
-"763
-[v mostrarDatosSensoresWIFI@buffer buffer `[50]uc  1 a 50 76 ]
-"764
-[v mostrarDatosSensoresWIFI@humedad humedad `uc  1 a 1 127 ]
-[v mostrarDatosSensoresWIFI@temperatura temperatura `uc  1 a 1 126 ]
-"792
+"668
+[v mostrarDatosSensoresWIFI@i i `i  1 a 2 126 ]
+"658
+[v mostrarDatosSensoresWIFI@buffer buffer `[50]uc  1 a 50 74 ]
+"659
+[v mostrarDatosSensoresWIFI@humedad humedad `uc  1 a 1 125 ]
+[v mostrarDatosSensoresWIFI@temperatura temperatura `uc  1 a 1 124 ]
+"687
 } 0
-"496
+"419
 [v _lecturaWifi lecturaWifi `(v  1 e 1 0 ]
 {
-"520
-[v lecturaWifi@i i `i  1 a 2 71 ]
-"515
-[v lecturaWifi@j j `i  1 a 2 73 ]
-"501
+"438
+[v lecturaWifi@i i `i  1 a 2 72 ]
+"424
 [v lecturaWifi@buffer buffer `[50]uc  1 a 50 20 ]
-"500
-[v lecturaWifi@Rx Rx `uc  1 a 1 75 ]
-[v lecturaWifi@porcientoHumedad porcientoHumedad `uc  1 a 1 70 ]
-"565
+"423
+[v lecturaWifi@humedadMedida humedadMedida `uc  1 a 1 71 ]
+[v lecturaWifi@Rx Rx `uc  1 a 1 70 ]
+"460
 } 0
-"491
+"414
 [v _restablecerDatosSensor restablecerDatosSensor `(v  1 e 1 0 ]
 {
-"492
+"415
 [v restablecerDatosSensor@i i `i  1 a 2 4 ]
-"494
+"417
 } 0
-"123
+"125
 [v _constructorSensor constructorSensor `(v  1 e 1 0 ]
 {
 [s S404 . 2 `uc 1 porcientoHumedad 1 0 `uc 1 pinSensor 1 1 ]
 [v constructorSensor@s s `S404  1 p 2 0 ]
 [v constructorSensor@porcientoHumedad porcientoHumedad `uc  1 p 1 2 ]
 [v constructorSensor@pin pin `uc  1 p 1 3 ]
-"126
+"128
 } 0
-"731
+"626
 [v _mostrarDatosSensores mostrarDatosSensores `(v  1 e 1 0 ]
 {
-"749
+"644
 [v mostrarDatosSensores@i i `i  1 a 2 72 ]
-"733
+"628
 [v mostrarDatosSensores@buffer buffer `[50]uc  1 a 50 20 ]
-"734
+"629
 [v mostrarDatosSensores@humedad humedad `uc  1 a 1 71 ]
 [v mostrarDatosSensores@temperatura temperatura `uc  1 a 1 70 ]
-"758
+"653
 } 0
-"567
+"462
 [v _lecturaAnalogaSensores lecturaAnalogaSensores `(v  1 e 1 0 ]
 {
-"569
+"464
 [v lecturaAnalogaSensores@i i `i  1 a 2 47 ]
-"574
+"469
 } 0
-"119
+"121
 [v _map map `(l  1 e 4 0 ]
 {
 [v map@x x `l  1 p 4 26 ]
@@ -655,7 +647,7 @@
 [v map@in_max in_max `l  1 p 4 34 ]
 [v map@out_min out_min `l  1 p 4 38 ]
 [v map@out_max out_max `l  1 p 4 42 ]
-"121
+"123
 } 0
 "15 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\sources\c99\common\Umul32.c
 [v ___lmul __lmul `(ul  1 e 4 0 ]
@@ -667,32 +659,32 @@
 [v ___lmul@multiplicand multiplicand `ul  1 p 4 4 ]
 "129
 } 0
-"474 C:\Users\Diego Moreno\Documents\Mis Proyectos con Pic\Smart Garden\Codigo\Smart Garden.X\main.c
+"397 C:\Users\Diego Moreno\Documents\Mis Proyectos con Pic\Smart Garden\Codigo\Smart Garden.X\main.c
 [v _dameHumedadSuelo dameHumedadSuelo `(s  1 e 2 0 ]
 {
 [v dameHumedadSuelo@canalLeer canalLeer `uc  1 a 1 wreg ]
 [v dameHumedadSuelo@canalLeer canalLeer `uc  1 a 1 wreg ]
-"476
+"399
 [v dameHumedadSuelo@canalLeer canalLeer `uc  1 a 1 4 ]
-"489
+"412
 } 0
-"696
+"591
 [v _dameTemperaturaHumedad dameTemperaturaHumedad `(v  1 e 1 0 ]
 {
-"703
+"598
 [v dameTemperaturaHumedad@checkSum checkSum `ui  1 a 2 9 ]
-"702
+"597
 [v dameTemperaturaHumedad@temperatura temperatura `uc  1 a 1 14 ]
-"701
+"596
 [v dameTemperaturaHumedad@humedad humedad `uc  1 a 1 13 ]
-"702
+"597
 [v dameTemperaturaHumedad@temperaturaDecimal temperaturaDecimal `uc  1 a 1 12 ]
-"701
+"596
 [v dameTemperaturaHumedad@humedadDecimal humedadDecimal `uc  1 a 1 11 ]
-"696
+"591
 [v dameTemperaturaHumedad@Humedad Humedad `*.39uc  1 p 2 3 ]
 [v dameTemperaturaHumedad@Temperatura Temperatura `*.39uc  1 p 2 5 ]
-"729
+"624
 } 0
 "38 C:\Users\Diego Moreno\Documents\Mis Proyectos con Pic\Smart Garden\Codigo\Smart Garden.X/DHT11.h
 [v _check_response check_response `(uc  1 e 1 0 ]
@@ -714,28 +706,24 @@
 [v DHT11_ReadData@i i `uc  1 a 1 0 ]
 "21
 } 0
-"325 C:\Users\Diego Moreno\Documents\Mis Proyectos con Pic\Smart Garden\Codigo\Smart Garden.X\main.c
+"317 C:\Users\Diego Moreno\Documents\Mis Proyectos con Pic\Smart Garden\Codigo\Smart Garden.X\main.c
 [v _fijaHoraRtc fijaHoraRtc `(v  1 e 1 0 ]
 {
-"347
+"334
 } 0
-"164
-[v _setRtc setRtc `(v  1 e 1 0 ]
+"166
+[v _setRtc setRtc `(uc  1 e 1 0 ]
 {
 [v setRtc@direccion direccion `uc  1 a 1 wreg ]
-"169
-[v setRtc@Rx Rx `uc  1 a 1 10 ]
 "168
-[v setRtc@i i `i  1 a 2 8 ]
+[v setRtc@dato dato `uc  1 a 1 16 ]
+"169
+[v setRtc@seteado seteado `uc  1 a 1 15 ]
 "166
-[v setRtc@datoCapturado datoCapturado `uc  1 a 1 7 ]
-"165
-[v setRtc@dato dato `uc  1 a 1 6 ]
-"164
 [v setRtc@direccion direccion `uc  1 a 1 wreg ]
-"166
-[v setRtc@direccion direccion `uc  1 a 1 5 ]
-"187
+"169
+[v setRtc@direccion direccion `uc  1 a 1 14 ]
+"179
 } 0
 "2 C:\Users\Diego Moreno\Documents\Mis Proyectos con Pic\Smart Garden\Codigo\Smart Garden.X/RTC.h
 [v _escribe_rtc escribe_rtc `(v  1 e 1 0 ]
@@ -746,21 +734,21 @@
 [v escribe_rtc@direccion direccion `uc  1 a 1 3 ]
 "8
 } 0
-"675 C:\Users\Diego Moreno\Documents\Mis Proyectos con Pic\Smart Garden\Codigo\Smart Garden.X\main.c
+"570 C:\Users\Diego Moreno\Documents\Mis Proyectos con Pic\Smart Garden\Codigo\Smart Garden.X\main.c
 [v _dameDatosSistema dameDatosSistema `(v  1 e 1 0 ]
 {
-"683
+"578
 [v dameDatosSistema@i i `i  1 a 2 70 ]
-"677
+"572
 [v dameDatosSistema@buffer buffer `[50]uc  1 a 50 20 ]
-"694
+"589
 } 0
 "9 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\sources\c99\common\nf_sprintf.c
 [v _sprintf sprintf `(i  1 e 2 0 ]
 {
-[s S1483 _IO_FILE 6 `*.39uc 1 buffer 2 0 `i 1 count 2 2 `i 1 limit 2 4 ]
+[s S1487 _IO_FILE 6 `*.39uc 1 buffer 2 0 `i 1 count 2 2 `i 1 limit 2 4 ]
 "13
-[v sprintf@f f `S1483  1 a 6 14 ]
+[v sprintf@f f `S1487  1 a 6 14 ]
 "12
 [v sprintf@ap ap `[1]*.39v  1 a 2 12 ]
 "9
@@ -773,9 +761,9 @@
 {
 "1371
 [v vfprintf@cfmt cfmt `*.25uc  1 a 2 86 ]
-[s S969 _IO_FILE 0 ]
+[s S973 _IO_FILE 0 ]
 "1368
-[v vfprintf@fp fp `*.39S969  1 p 2 80 ]
+[v vfprintf@fp fp `*.39S973  1 p 2 80 ]
 [v vfprintf@fmt fmt `*.25Cuc  1 p 2 82 ]
 [v vfprintf@ap ap `*.39*.39v  1 p 2 84 ]
 "1382
@@ -787,9 +775,9 @@
 [v vfpfcnvrt@ll ll `o  1 a 8 71 ]
 "672
 [v vfpfcnvrt@c c `uc  1 a 1 79 ]
-[s S969 _IO_FILE 0 ]
+[s S973 _IO_FILE 0 ]
 "670
-[v vfpfcnvrt@fp fp `*.39S969  1 p 2 63 ]
+[v vfpfcnvrt@fp fp `*.39S973  1 p 2 63 ]
 [v vfpfcnvrt@fmt fmt `*.39*.25uc  1 p 2 65 ]
 [v vfpfcnvrt@ap ap `*.39*.39v  1 p 2 67 ]
 "1365
@@ -804,9 +792,9 @@
 [v dtoa@s s `i  1 a 2 51 ]
 [v dtoa@w w `i  1 a 2 49 ]
 [v dtoa@p p `i  1 a 2 47 ]
-[s S969 _IO_FILE 0 ]
+[s S973 _IO_FILE 0 ]
 "274
-[v dtoa@fp fp `*.39S969  1 p 2 27 ]
+[v dtoa@fp fp `*.39S973  1 p 2 27 ]
 [v dtoa@d d `o  1 p 8 29 ]
 "315
 } 0
@@ -845,9 +833,9 @@
 {
 "261
 [v ctoa@w w `i  1 a 2 30 ]
-[s S969 _IO_FILE 0 ]
+[s S973 _IO_FILE 0 ]
 "259
-[v ctoa@fp fp `*.39S969  1 p 2 27 ]
+[v ctoa@fp fp `*.39S973  1 p 2 27 ]
 [v ctoa@c c `uc  1 p 1 29 ]
 "270
 } 0
@@ -857,9 +845,9 @@
 "74
 [v pad@w w `i  1 a 2 25 ]
 [v pad@i i `i  1 a 2 23 ]
-[s S969 _IO_FILE 0 ]
+[s S973 _IO_FILE 0 ]
 "72
-[v pad@fp fp `*.39S969  1 p 2 16 ]
+[v pad@fp fp `*.39S973  1 p 2 16 ]
 [v pad@buf buf `*.39uc  1 p 2 18 ]
 [v pad@p p `i  1 p 2 20 ]
 "95
@@ -882,16 +870,16 @@
 [v fputs@c c `uc  1 a 1 13 ]
 "8
 [v fputs@s s `*.39Cuc  1 p 2 9 ]
-[s S1483 _IO_FILE 6 `*.39uc 1 buffer 2 0 `i 1 count 2 2 `i 1 limit 2 4 ]
-[v fputs@fp fp `*.39S1483  1 p 2 11 ]
+[s S1487 _IO_FILE 6 `*.39uc 1 buffer 2 0 `i 1 count 2 2 `i 1 limit 2 4 ]
+[v fputs@fp fp `*.39S1487  1 p 2 11 ]
 "19
 } 0
 "8 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\sources\c99\common\nf_fputc.c
 [v _fputc fputc `(i  1 e 2 0 ]
 {
 [v fputc@c c `i  1 p 2 0 ]
-[s S1483 _IO_FILE 6 `*.39uc 1 buffer 2 0 `i 1 count 2 2 `i 1 limit 2 4 ]
-[v fputc@fp fp `*.39S1483  1 p 2 2 ]
+[s S1487 _IO_FILE 6 `*.39uc 1 buffer 2 0 `i 1 count 2 2 `i 1 limit 2 4 ]
+[v fputc@fp fp `*.39S1487  1 p 2 2 ]
 "21
 } 0
 "7 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\sources\c99\common\putch.c
@@ -899,34 +887,31 @@
 {
 "9
 } 0
-"349 C:\Users\Diego Moreno\Documents\Mis Proyectos con Pic\Smart Garden\Codigo\Smart Garden.X\main.c
+"336 C:\Users\Diego Moreno\Documents\Mis Proyectos con Pic\Smart Garden\Codigo\Smart Garden.X\main.c
 [v _asignarHorarios asignarHorarios `(v  1 e 1 0 ]
 {
-"358
-[v asignarHorarios@i i `i  1 a 2 16 ]
-"352
-[v asignarHorarios@Rx Rx `uc  1 a 1 18 ]
-"353
-[v asignarHorarios@datoCapturado datoCapturado `uc  1 a 1 15 ]
-"351
+"339
+[v asignarHorarios@Rx Rx `uc  1 a 1 15 ]
+"338
 [v asignarHorarios@hora hora `uc  1 a 1 14 ]
-"403
+"366
 } 0
-"218
-[v _escribeHorariosMemoria escribeHorariosMemoria `(v  1 e 1 0 ]
+"699
+[v _getValue getValue `(uc  1 e 1 0 ]
 {
-"221
-[v escribeHorariosMemoria@i i `i  1 a 2 12 ]
-"220
-[v escribeHorariosMemoria@contMemoria contMemoria `i  1 a 2 10 ]
-"226
-} 0
-"189
-[v _escribe_eeprom escribe_eeprom `(v  1 e 1 0 ]
-{
-[v escribe_eeprom@direccion direccion `us  1 p 2 6 ]
-[v escribe_eeprom@dato dato `uc  1 p 1 8 ]
-"199
+"753
+[v getValue@i_951 i `i  1 a 2 10 ]
+"721
+[v getValue@i i `i  1 a 2 8 ]
+"701
+[v getValue@Rx Rx `uc  1 a 1 13 ]
+"703
+[v getValue@dato dato `uc  1 a 1 12 ]
+"702
+[v getValue@datoIncorrecto datoIncorrecto `uc  1 a 1 7 ]
+"699
+[v getValue@numCharacters numCharacters `s  1 p 2 3 ]
+"801
 } 0
 "34 C:\Users\Diego Moreno\Documents\Mis Proyectos con Pic\Smart Garden\Codigo\Smart Garden.X/UART.h
 [v _UART_read UART_read `(uc  1 e 1 0 ]
@@ -947,23 +932,39 @@
 [v UART_write@dato dato `uc  1 a 1 0 ]
 "55
 } 0
-"228 C:\Users\Diego Moreno\Documents\Mis Proyectos con Pic\Smart Garden\Codigo\Smart Garden.X\main.c
+"210 C:\Users\Diego Moreno\Documents\Mis Proyectos con Pic\Smart Garden\Codigo\Smart Garden.X\main.c
+[v _escribeHorariosMemoria escribeHorariosMemoria `(v  1 e 1 0 ]
+{
+"213
+[v escribeHorariosMemoria@i i `i  1 a 2 12 ]
+"212
+[v escribeHorariosMemoria@contMemoria contMemoria `i  1 a 2 10 ]
+"218
+} 0
+"181
+[v _escribe_eeprom escribe_eeprom `(v  1 e 1 0 ]
+{
+[v escribe_eeprom@direccion direccion `us  1 p 2 6 ]
+[v escribe_eeprom@dato dato `uc  1 p 1 8 ]
+"191
+} 0
+"220
 [v _leeHorariosMemoria leeHorariosMemoria `(v  1 e 1 0 ]
 {
-"232
+"224
 [v leeHorariosMemoria@i i `i  1 a 2 8 ]
-"230
+"222
 [v leeHorariosMemoria@contMemoria contMemoria `i  1 a 2 6 ]
-"238
+"230
 } 0
-"201
+"193
 [v _leer_eeprom leer_eeprom `(uc  1 e 1 0 ]
 {
-"203
+"195
 [v leer_eeprom@dato dato `uc  1 a 1 5 ]
-"201
+"193
 [v leer_eeprom@direccion direccion `us  1 p 2 2 ]
-"216
+"208
 } 0
 "37 C:\Users\Diego Moreno\Documents\Mis Proyectos con Pic\Smart Garden\Codigo\Smart Garden.X/I2C.h
 [v _i2c_reinicia_com i2c_reinicia_com `(v  1 e 1 0 ]
@@ -1000,12 +1001,12 @@
 {
 "22
 } 0
-"147 C:\Users\Diego Moreno\Documents\Mis Proyectos con Pic\Smart Garden\Codigo\Smart Garden.X\main.c
+"149 C:\Users\Diego Moreno\Documents\Mis Proyectos con Pic\Smart Garden\Codigo\Smart Garden.X\main.c
 [v _inicializarObjetos inicializarObjetos `(v  1 e 1 0 ]
 {
-"149
+"151
 [v inicializarObjetos@i i `i  1 a 2 6 ]
-"155
+"157
 } 0
 "15 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\sources\c99\common\Umul16.c
 [v ___wmul __wmul `(ui  1 e 2 0 ]
@@ -1022,10 +1023,10 @@
 {
 "11
 } 0
-"128 C:\Users\Diego Moreno\Documents\Mis Proyectos con Pic\Smart Garden\Codigo\Smart Garden.X\main.c
+"130 C:\Users\Diego Moreno\Documents\Mis Proyectos con Pic\Smart Garden\Codigo\Smart Garden.X\main.c
 [v _configurarAdc configurarAdc `(v  1 e 1 0 ]
 {
-"131
+"133
 } 0
 "12 C:\Users\Diego Moreno\Documents\Mis Proyectos con Pic\Smart Garden\Codigo\Smart Garden.X/UART.h
 [v _UART_init UART_init `(v  1 e 1 0 ]
@@ -1046,8 +1047,8 @@
 [v ___aldiv@divisor divisor `l  1 p 4 16 ]
 "41
 } 0
-"90 C:\Users\Diego Moreno\Documents\Mis Proyectos con Pic\Smart Garden\Codigo\Smart Garden.X\main.c
+"92 C:\Users\Diego Moreno\Documents\Mis Proyectos con Pic\Smart Garden\Codigo\Smart Garden.X\main.c
 [v _desbordamiento desbordamiento `IIH(v  1 e 1 0 ]
 {
-"117
+"119
 } 0
