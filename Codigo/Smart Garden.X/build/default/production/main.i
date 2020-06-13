@@ -6159,7 +6159,7 @@ typedef uint32_t uint_fast16_t;
 typedef uint32_t uint_fast32_t;
 # 139 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c99\\stdint.h" 2 3
 # 13 "main.c" 2
-# 34 "main.c"
+# 33 "main.c"
 typedef struct {
     unsigned char porcientoHumedad;
     unsigned char pinSensor;
@@ -6169,6 +6169,7 @@ typedef struct {
 typedef struct {
     unsigned char hora;
     unsigned char regar;
+    unsigned char regado;
     unsigned char tiempoRegar;
 } Horario;
 
@@ -6178,6 +6179,8 @@ SensorHumedad sensores[8];
 unsigned char hora = 0, minutos = 0, segundos = 0;
 unsigned char datoRecibido = 0;
 unsigned char overflowTimer = 0;
+unsigned char tempHora = 0;
+unsigned char flagRegado = 0;
 
 int VALOR_TIMER0 = 26473;
 int contInterrupciones = 0;
@@ -6217,6 +6220,7 @@ void mostrarDatosSensoresWIFI(void);
 long map(long x, long in_min, long in_max, long out_min, long out_max);
 unsigned char getValue(short numCharacters);
 void configBluetoothHC_06(void);
+void regadoRapido(void);
 
 void __attribute__((picinterrupt(("")))) desbordamiento(void) {
 
@@ -6272,7 +6276,7 @@ int estaSeco(SensorHumedad s) {
 
 int horaRegar() {
 
-    return horarios[hora].regar == 1;
+    return (horarios[hora].regar) && (!horarios[hora].regado);
 }
 
 void inicializarObjetos() {
@@ -6280,6 +6284,7 @@ void inicializarObjetos() {
     for (int i = 0; i < 24; i++) {
         horarios[i].hora = i;
         horarios[i].regar = 0;
+        horarios[i].regado = 0;
         horarios[i].tiempoRegar = 15;
     }
 
@@ -6296,11 +6301,15 @@ unsigned char setRtc(unsigned char direccion) {
 
     unsigned char dato = 0;
     unsigned char seteado = 0;
+    unsigned char datoRtc = 0;
 
     dato = getValue(2);
 
     if (dato != 'F') {
-        escribe_rtc(direccion, dato);
+
+        datoRtc = ((dato / 10) & 0x0F) << 4;
+        datoRtc |= (dato % 10) & 0x0F;
+        escribe_rtc(direccion, datoRtc);
         seteado = 1;
     }
 
@@ -6438,8 +6447,10 @@ void encenderBombas() {
         }
     }
 
-    if (flagSeco)
+    if (flagSeco) {
         regando = 1;
+        horarios[hora].regado = 0;
+    }
 
 }
 
@@ -6605,6 +6616,7 @@ void mostrarMenu(void) {
     UART_printf("\r\n 3. Programar tiempo de riego en un horario \r\n");
     UART_printf("\r\n 4. Dame datos del sistema \r\n");
     UART_printf("\r\n 5. Mostrar valores sensores \r\n");
+    UART_printf("\r\n 6. Regado rapido \r\n");
     UART_printf("\r\n Opcion:  \r");
     UART_printf("\r\n");
 }
@@ -6638,6 +6650,9 @@ void sistemaPrincipal(unsigned char opcion) {
                 mostrarDatosSensores();
             break;
 
+        case 6:
+            regadoRapido();
+            break;
 
         default:
             UART_printf("\r\n Solo se permiten numeros del 1 al 3 \r\n");
@@ -6654,6 +6669,7 @@ void sistemaRegado(void) {
 
 
     if (regando) {
+
         contInterrupciones++;
 
         if (contInterrupciones == 6) {
@@ -6666,6 +6682,9 @@ void sistemaRegado(void) {
                 LATD = 0;
                 minutosTranscurridos = 0;
                 regando = 0;
+                horarios[hora].regado = 1;
+                tempHora = hora;
+                flagRegado = 0;
             }
         }
 
@@ -6673,9 +6692,13 @@ void sistemaRegado(void) {
 
         dameHoraActual();
 
+        if (hora != tempHora && !flagRegado) {
+            horarios[tempHora].regado = 0;
+            flagRegado = 1;
+        }
 
-        if ((!MODO_COMUNICACION && (horaRegar() && !minutos)) || (MODO_COMUNICACION
-                && (horaRegar() && minutos < 3))) {
+        if ((!MODO_COMUNICACION && horaRegar()) || (MODO_COMUNICACION
+                && horaRegar())) {
 
 
 
@@ -6929,6 +6952,76 @@ unsigned char getValue(short numCharacters) {
 
 }
 
+void regadoRapido(void) {
+
+    unsigned char tiempoRegar;
+    unsigned char areaRegar;
+
+    UART_printf("\r\n REGADO RAPIDO \r\n");
+
+    if (!regando) {
+        UART_printf("\r\n Ingrese los minutos que desee que se riegue ej: 15 \r\n");
+        tiempoRegar = getValue(2);
+
+        if (tiempoRegar != 'F') {
+
+            UART_printf("\r\n Ingrese el numero de sensor del area a regar ej: 5 \r\n");
+            areaRegar = getValue(1);
+
+            if (areaRegar != 'F') {
+
+                areaRegar--;
+
+                switch (areaRegar) {
+
+                    case 0:
+                        LATDbits.LATD0 = 1;
+                        break;
+
+                    case 1:
+                        LATDbits.LATD1 = 1;
+                        break;
+
+                    case 2:
+                        LATDbits.LATD2 = 1;
+                        break;
+
+                    case 3:
+                        LATDbits.LATD3 = 1;
+                        break;
+
+                    case 4:
+                        LATDbits.LATD4 = 1;
+                        break;
+
+                    case 5:
+                        LATDbits.LATD5 = 1;
+                        break;
+
+                    case 6:
+                        LATDbits.LATD6 = 1;
+                        break;
+
+                    case 7:
+                        LATDbits.LATD7 = 1;
+                        break;
+
+                }
+
+                regando = 1;
+                horarios[hora].regado = 0;
+                minutosRegar = tiempoRegar;
+
+            }
+
+        }
+
+    } else {
+        UART_printf("\r\n Ya se esta efectuando un riego, intentelo mas tarde \r\n");
+    }
+
+}
+
 void main(void) {
 
     INTCONbits.GIE = 1;
@@ -6966,7 +7059,7 @@ void main(void) {
 
     mostrarMenu();
 
-    MODO_COMUNICACION = 1;
+    MODO_COMUNICACION = 0;
 
 
     while (1) {
