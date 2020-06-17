@@ -6159,7 +6159,7 @@ typedef uint32_t uint_fast16_t;
 typedef uint32_t uint_fast32_t;
 # 139 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c99\\stdint.h" 2 3
 # 13 "main.c" 2
-# 33 "main.c"
+# 34 "main.c"
 typedef struct {
     unsigned char porcientoHumedad;
     unsigned char pinSensor;
@@ -6168,6 +6168,7 @@ typedef struct {
 
 typedef struct {
     unsigned char hora;
+    unsigned char dias[7 + 1];
     unsigned char regar;
     unsigned char regado;
     unsigned char tiempoRegar;
@@ -6177,6 +6178,7 @@ unsigned char MODO_COMUNICACION;
 Horario horarios[24];
 SensorHumedad sensores[8];
 unsigned char hora = 0, minutos = 0, segundos = 0;
+unsigned char diaActual = 0;
 unsigned char datoRecibido = 0;
 unsigned char overflowTimer = 0;
 unsigned char tempHora = 0;
@@ -6196,6 +6198,7 @@ int horaRegar(void);
 int estaSeco(SensorHumedad s);
 void constructorSensor(SensorHumedad s, unsigned char porcientoHumedad, unsigned char pin);
 void dameHoraActual(void);
+void dameDiaActual(void);
 unsigned char setRtc(unsigned char direccion);
 unsigned char leer_eeprom(uint16_t direccion);
 void escribe_eeprom(uint16_t direccion, unsigned char dato);
@@ -6203,6 +6206,7 @@ void escribeHorariosMemoria(void);
 void leeHorariosMemoria(void);
 void setRtcDefault(void);
 void fijaHoraRtc(void);
+void fijaDiaRtc(void);
 void setTiempoRegar(void);
 void encenderBombas(void);
 void restablecerDatosSensor(void);
@@ -6276,7 +6280,8 @@ int estaSeco(SensorHumedad s) {
 
 int horaRegar() {
 
-    return (horarios[hora].regar) && (!horarios[hora].regado);
+    return (horarios[hora].regar) && (!horarios[hora].regado) &&
+            (horarios[hora].dias[diaActual - 1]);
 }
 
 void inicializarObjetos() {
@@ -6288,6 +6293,14 @@ void inicializarObjetos() {
         horarios[i].tiempoRegar = 15;
     }
 
+    for (int i = 0; i < 24; i++) {
+
+        for (int j = 0; j < 7; j++)
+            horarios[i].dias[j] = 0;
+
+        horarios[i].dias[7] = '\0';
+    }
+
 }
 
 void dameHoraActual() {
@@ -6295,6 +6308,21 @@ void dameHoraActual() {
     segundos = convertirDato(leer_rtc(0x00));
     minutos = convertirDato(leer_rtc(0x01));
     hora = convertirDato(leer_rtc(0x02));
+}
+
+void dameDiaActual(void) {
+
+    diaActual = convertirDato(leer_rtc(0x03));
+}
+
+void fijaDiaRtc(void) {
+
+    UART_printf("\r\n Envie el dia de la semana Ej: 01 = DOMINGO ... 07 = SABADO \r\n");
+
+    if (setRtc(0x03)) {
+        UART_printf("\r\n DIA ESTABLECIDO CORRECTAMENTE \r\n");
+    }
+
 }
 
 unsigned char setRtc(unsigned char direccion) {
@@ -6350,6 +6378,11 @@ void escribeHorariosMemoria() {
     int contMemoria = 0;
     for (int i = 0; i < 24; i++) {
         escribe_eeprom(contMemoria++, horarios[i].hora);
+
+        for (int j = 0; j < 7; j++) {
+            escribe_eeprom(contMemoria++, horarios[i].dias[j]);
+        }
+
         escribe_eeprom(contMemoria++, horarios[i].regar);
         escribe_eeprom(contMemoria++, horarios[i].tiempoRegar);
     }
@@ -6361,6 +6394,11 @@ void leeHorariosMemoria() {
 
     for (int i = 0; i < 24; i++) {
         horarios[i].hora = leer_eeprom(contMemoria++);
+
+        for (int j = 0; j < 7; j++) {
+            horarios[i].dias[j] = leer_eeprom(contMemoria++);
+        }
+
         horarios[i].regar = leer_eeprom(contMemoria++);
         horarios[i].tiempoRegar = leer_eeprom(contMemoria++);
     }
@@ -6477,6 +6515,8 @@ void asignarHorarios()
 {
     unsigned char hora;
     unsigned char Rx;
+    unsigned char diaRegar;
+    char buffer[50];
 
     UART_printf("\r\n OPCIONES DE REGADO \r\n");
 
@@ -6485,12 +6525,27 @@ void asignarHorarios()
 
     if (hora != 'F') {
 
-        UART_printf("\r\n Ingrese 1 para regar || ingrese 0 para no regar: \r\n");
+        UART_printf("\r\n Ingrese 1 para activar || ingrese 0 para desactivar: \r\n");
 
         Rx = getValue(1);
 
 
         if (Rx != 'F') {
+
+            UART_printf("\r\n Ingrese 1 para activar || ingrese 0 para desactivar: \r\n");
+            UART_printf("\r\n DOMINGO = [1] ... SABADO = [7] \r\n");
+
+            for (int i = 0; i < 7; i++) {
+                sprintf(buffer, "\r\n[%d]: ", i + 1);
+                UART_printf(buffer);
+                diaRegar = getValue(1);
+
+                if (diaRegar != 'F') {
+
+                    horarios[hora].dias[i] = diaRegar;
+                }
+
+            }
 
             horarios[hora].regar = Rx;
 
@@ -6521,6 +6576,8 @@ void setTiempoRegar() {
         tiempoRegar = getValue(2);
 
         if (tiempoRegar != 'F') {
+
+
 
             UART_printf("\r\n Minutos de riego establecidos! \r\n");
 
@@ -6617,6 +6674,7 @@ void mostrarMenu(void) {
     UART_printf("\r\n 4. Dame datos del sistema \r\n");
     UART_printf("\r\n 5. Mostrar valores sensores \r\n");
     UART_printf("\r\n 6. Regado rapido \r\n");
+    UART_printf("\r\n 7. Fijar Dia Actual \r\n");
     UART_printf("\r\n Opcion:  \r");
     UART_printf("\r\n");
 }
@@ -6652,6 +6710,10 @@ void sistemaPrincipal(unsigned char opcion) {
 
         case 6:
             regadoRapido();
+            break;
+
+        case 7:
+            fijaDiaRtc();
             break;
 
         default:
@@ -6691,6 +6753,7 @@ void sistemaRegado(void) {
     } else {
 
         dameHoraActual();
+        dameDiaActual();
 
         if (hora != tempHora && !flagRegado) {
             horarios[tempHora].regado = 0;
@@ -6722,17 +6785,36 @@ void sistemaRegado(void) {
 void dameDatosSistema(void) {
 
     char buffer[50];
+    char diasRegar[50];
 
     UART_write('I');
 
-    UART_printf("\r\n\nHora | Regar(1 si 0 no) | Minutos de riego \r\n\n");
+    UART_printf("\r\n\nHora | Regar(1 si 0 no) | Minutos de riego | DIAS REGAR\r\n\n");
+    UART_printf("                                             DLMIJVS\r\n");
 
     for (int i = 0; i < 24; i++) {
 
-        sprintf(buffer, "%d | %d | %d \r\n", horarios[i].hora, horarios[i].regar,
-                horarios[i].tiempoRegar);
+        if (horarios[i].regar) {
 
-        UART_printf(buffer);
+            for (int j = 0; j < 7; j++) {
+                switch (horarios[i].dias[j]) {
+                    case 0:
+                        diasRegar[j] = '0';
+                        break;
+
+                    case 1:
+                        diasRegar[j] = '1';
+                        break;
+                }
+            }
+
+            sprintf(buffer, " %2d  |          %d       |         %2d       | %s\r\n",
+                    horarios[i].hora, horarios[i].regar, horarios[i].tiempoRegar,
+                    diasRegar);
+
+            UART_printf(buffer);
+
+        }
 
     }
 

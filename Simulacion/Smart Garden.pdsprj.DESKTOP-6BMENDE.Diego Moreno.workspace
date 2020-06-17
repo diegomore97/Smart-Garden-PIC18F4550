@@ -32,7 +32,7 @@
      <ITEM name="nItems">0</ITEM>
     </PROPERTIES>
    </POPUP>
-   <POPUP w="450" x="146" flags="00000023" y="276" h="250" pid="0" iid="18">
+   <POPUP w="450" x="146" flags="00000022" y="276" h="250" pid="0" iid="18">
     <PROPERTIES>
      <ITEM name="ComboBox1000">S</ITEM>
      <ITEM name="ComboBox1001">Sr</ITEM>
@@ -48,7 +48,7 @@
      <ITEM name="VSplitter1Pos">298</ITEM>
     </PROPERTIES>
    </POPUP>
-   <POPUP w="450" x="148" flags="00008023" y="522" h="299" pid="0" iid="34">
+   <POPUP w="620" x="230" flags="00008023" y="680" h="299" pid="0" iid="34">
     <PROPERTIES>
      <ITEM name="AutoEcho">1</ITEM>
      <ITEM name="HexMode">0</ITEM>
@@ -130,7 +130,7 @@
      <ITEM name="TopLineAddress">00000000</ITEM>
     </PROPERTIES>
    </POPUP>
-   <POPUP w="222" x="268" flags="00000001" y="847" h="104" pid="1" iid="14">
+   <POPUP w="222" x="1464" flags="00000001" y="756" h="104" pid="1" iid="14">
     <PROPERTIES/>
    </POPUP>
    <POPUP w="8" x="386" flags="00000008" y="516" h="32" pid="2" iid="14">
@@ -143,7 +143,7 @@
      <ITEM name="TopLineAddress">00000000</ITEM>
     </PROPERTIES>
    </POPUP>
-   <POPUP w="8" x="406" flags="0000000a" y="536" h="32" pid="101" iid="19">
+   <POPUP w="8" x="406" flags="0000000a" y="536" h="28" pid="101" iid="19">
     <PROPERTIES>
      <ITEM name="DataType">2</ITEM>
      <ITEM name="DispChars">Yes</ITEM>
