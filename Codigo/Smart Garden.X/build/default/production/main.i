@@ -39,7 +39,7 @@
 #pragma config CCP2MX = OFF
 #pragma config PBADEN = OFF
 #pragma config LPT1OSC = OFF
-#pragma config MCLRE = OFF
+#pragma config MCLRE = ON
 
 
 #pragma config STVREN = OFF
@@ -6333,7 +6333,7 @@ unsigned char setRtc(unsigned char direccion) {
 
     dato = getValue(2);
 
-    if (dato != 'F') {
+    if (dato != '@') {
 
         datoRtc = ((dato / 10) & 0x0F) << 4;
         datoRtc |= (dato % 10) & 0x0F;
@@ -6523,7 +6523,7 @@ void asignarHorarios()
     UART_printf("\r\n Ingrese una hora en formato de 24 hrs ej: 15 \r\n");
     hora = getValue(2);
 
-    if (hora != 'F') {
+    if (hora != '@') {
 
         UART_printf("\r\n Ingrese 1 para activar || ingrese 0 para desactivar: \r\n");
 
@@ -6540,7 +6540,7 @@ void asignarHorarios()
                 UART_printf(buffer);
                 diaRegar = getValue(1);
 
-                if (diaRegar != 'F') {
+                if (diaRegar != '@') {
 
                     horarios[hora].dias[i] = diaRegar;
                 }
@@ -6570,12 +6570,12 @@ void setTiempoRegar() {
     UART_printf("\r\n Ingrese una hora en formato de 24 hrs ej: 15 \r\n");
     hora = getValue(2);
 
-    if (hora != 'F') {
+    if (hora != '@') {
 
         UART_printf("\r\n Ingrese los minutos que desee que se riegue en ese horario ej: 15 \r\n");
         tiempoRegar = getValue(2);
 
-        if (tiempoRegar != 'F') {
+        if (tiempoRegar != '@') {
 
 
 
@@ -6639,7 +6639,7 @@ void lecturaWifi() {
 
             humedadMedida = getValue(3);
 
-            if (humedadMedida != 'F')
+            if (humedadMedida != '@')
                 sensores[i].porcientoHumedad = humedadMedida;
             else
                 sensores[i].porcientoHumedad = 100;
@@ -6717,7 +6717,7 @@ void sistemaPrincipal(unsigned char opcion) {
             break;
 
         default:
-            UART_printf("\r\n Solo se permiten numeros del 1 al 3 \r\n");
+            UART_printf("\r\n Solo se permiten numeros del 1 al 7 \r\n");
             break;
     }
 
@@ -6945,7 +6945,7 @@ unsigned char getValue(short numCharacters) {
                 Rx -= 48;
                 dato = Rx;
             } else {
-                UART_write('F');
+                UART_write('@');
                 datoIncorrecto = 1;
             }
 
@@ -6977,7 +6977,7 @@ unsigned char getValue(short numCharacters) {
                 } else {
 
                     datoIncorrecto = 1;
-                    UART_write('F');
+                    UART_write('@');
                     break;
                 }
             }
@@ -7013,7 +7013,7 @@ unsigned char getValue(short numCharacters) {
                 } else {
 
                     datoIncorrecto = 1;
-                    UART_write('F');
+                    UART_write('@');
                     break;
                 }
             }
@@ -7028,7 +7028,7 @@ unsigned char getValue(short numCharacters) {
     if (esperandoDatos || datoIncorrecto) {
 
         UART_printf("\nFALLO EL SETEO\r\n");
-        return 'F';
+        return '@';
     } else
         return dato;
 
@@ -7045,12 +7045,12 @@ void regadoRapido(void) {
         UART_printf("\r\n Ingrese los minutos que desee que se riegue ej: 15 \r\n");
         tiempoRegar = getValue(2);
 
-        if (tiempoRegar != 'F') {
+        if (tiempoRegar != '@') {
 
             UART_printf("\r\n Ingrese el numero de sensor del area a regar ej: 5 \r\n");
             areaRegar = getValue(1);
 
-            if (areaRegar != 'F') {
+            if (areaRegar != '@') {
 
                 areaRegar--;
 
@@ -7120,13 +7120,12 @@ void main(void) {
 
 
     restablecerDatosSensor();
-
     UART_init(9600);
     i2c_iniciar();
     configurarAdc();
     inicializarObjetos();
 
-    leeHorariosMemoria();
+
 
 
 
@@ -7141,7 +7140,7 @@ void main(void) {
 
     mostrarMenu();
 
-    MODO_COMUNICACION = 0;
+    MODO_COMUNICACION = 1;
 
 
     while (1) {

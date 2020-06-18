@@ -25,7 +25,7 @@
 #define TAMANO_CADENA 50   
 
 //INSTRUCCIONES DE CONTROL
-#define SETEO_DENEGADO 'F' //Variable que se mandara por UART a otro Micro
+#define SETEO_DENEGADO '@' //Variable que se mandara por UART a otro Micro
 #define SOLICITUD_DATOS_SENSORES 'R' //Variable que se mandara por UART a otro Micro
 #define ENVIANDO_DATOS_SENSORES 'O' //El otro micro ya nos confirmo que mandara los datos
 #define INTERRUMPIR_COMANDOS 'I' //Se utiliza esta constante para la opcion de leer sensores
@@ -588,7 +588,7 @@ void sistemaPrincipal(unsigned char opcion) {
             break;
 
         default:
-            UART_printf("\r\n Solo se permiten numeros del 1 al 3 \r\n"); //comentar
+            UART_printf("\r\n Solo se permiten numeros del 1 al 7 \r\n"); //comentar
             break;
     }
 
@@ -991,13 +991,12 @@ void main(void) {
     //24 horas del dia y en las columnas si se regara en ese horario
 
     restablecerDatosSensor();
-
     UART_init(9600); //9600 Baudios
     i2c_iniciar();
     configurarAdc();
     inicializarObjetos();
 
-    leeHorariosMemoria();
+    //leeHorariosMemoria(); //comentar hasta que hayas asignado un horario para regar
     //configBluetoothHC_06(); //Configurar el modulo Bluetooth | comentar una vez configurado
     //setRtcDefault(); //Comentar despues de programar el chip por primera vez y volver a programar
 
@@ -1012,7 +1011,7 @@ void main(void) {
 
     mostrarMenu(); //comentar
 
-    MODO_COMUNICACION = 0; //0 NORMAL  | 1 WIFI
+    MODO_COMUNICACION = 1; //0 NORMAL  | 1 WIFI
 
 
     while (1) {

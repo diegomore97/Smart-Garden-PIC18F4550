@@ -131,8 +131,6 @@
 [v _leer_eeprom leer_eeprom `(uc  1 e 1 0 ]
 "247
 [v _escribeHorariosMemoria escribeHorariosMemoria `(v  1 e 1 0 ]
-"262
-[v _leeHorariosMemoria leeHorariosMemoria `(v  1 e 1 0 ]
 "292
 [v _encenderBombas encenderBombas `(v  1 e 1 0 ]
 "366
@@ -522,7 +520,7 @@
 "978
 [v _main main `(v  1 e 1 0 ]
 {
-"1037
+"1036
 } 0
 "600
 [v _sistemaRegado sistemaRegado `(v  1 e 1 0 ]
@@ -575,7 +573,19 @@
 [v leer_rtc@direccion direccion `uc  1 a 1 2 ]
 "23
 } 0
-"28
+"37 C:\Users\Diego Moreno\Documents\Mis Proyectos con Pic\Smart Garden\Codigo\Smart Garden.X/I2C.h
+[v _i2c_reinicia_com i2c_reinicia_com `(v  1 e 1 0 ]
+{
+"40
+} 0
+"68
+[v _i2c_recibe_dato i2c_recibe_dato `(uc  1 e 1 0 ]
+{
+"70
+[v i2c_recibe_dato@datoleido datoleido `uc  1 a 1 1 ]
+"92
+} 0
+"28 C:\Users\Diego Moreno\Documents\Mis Proyectos con Pic\Smart Garden\Codigo\Smart Garden.X/RTC.h
 [v _convertirDato convertirDato `(uc  1 e 1 0 ]
 {
 [v convertirDato@dato dato `uc  1 a 1 wreg ]
@@ -836,9 +846,9 @@
 "9 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\sources\c99\common\nf_sprintf.c
 [v _sprintf sprintf `(i  1 e 2 0 ]
 {
-[s S1586 _IO_FILE 6 `*.39uc 1 buffer 2 0 `i 1 count 2 2 `i 1 limit 2 4 ]
+[s S1585 _IO_FILE 6 `*.39uc 1 buffer 2 0 `i 1 count 2 2 `i 1 limit 2 4 ]
 "13
-[v sprintf@f f `S1586  1 a 6 16 ]
+[v sprintf@f f `S1585  1 a 6 16 ]
 "12
 [v sprintf@ap ap `[1]*.39v  1 a 2 14 ]
 "9
@@ -851,9 +861,9 @@
 {
 "1371
 [v vfprintf@cfmt cfmt `*.25uc  1 a 2 92 ]
-[s S1018 _IO_FILE 0 ]
+[s S1017 _IO_FILE 0 ]
 "1368
-[v vfprintf@fp fp `*.39S1018  1 p 2 86 ]
+[v vfprintf@fp fp `*.39S1017  1 p 2 86 ]
 [v vfprintf@fmt fmt `*.25Cuc  1 p 2 88 ]
 [v vfprintf@ap ap `*.39*.39v  1 p 2 90 ]
 "1382
@@ -866,9 +876,9 @@
 "672
 [v vfpfcnvrt@cp cp `*.39uc  1 a 2 81 ]
 [v vfpfcnvrt@c c `uc  1 a 1 85 ]
-[s S1018 _IO_FILE 0 ]
+[s S1017 _IO_FILE 0 ]
 "670
-[v vfpfcnvrt@fp fp `*.39S1018  1 p 2 63 ]
+[v vfpfcnvrt@fp fp `*.39S1017  1 p 2 63 ]
 [v vfpfcnvrt@fmt fmt `*.39*.25uc  1 p 2 65 ]
 [v vfpfcnvrt@ap ap `*.39*.39v  1 p 2 67 ]
 "1365
@@ -886,9 +896,9 @@
 "549
 [v stoa@w w `i  1 a 2 23 ]
 [v stoa@i i `i  1 a 2 21 ]
-[s S1018 _IO_FILE 0 ]
+[s S1017 _IO_FILE 0 ]
 "546
-[v stoa@fp fp `*.39S1018  1 p 2 9 ]
+[v stoa@fp fp `*.39S1017  1 p 2 9 ]
 [v stoa@s s `*.39uc  1 p 2 11 ]
 "548
 [v stoa@F1144 F1144 `[7]uc  1 s 7 F1144 ]
@@ -904,9 +914,9 @@
 [v dtoa@s s `i  1 a 2 51 ]
 [v dtoa@w w `i  1 a 2 49 ]
 [v dtoa@p p `i  1 a 2 47 ]
-[s S1018 _IO_FILE 0 ]
+[s S1017 _IO_FILE 0 ]
 "274
-[v dtoa@fp fp `*.39S1018  1 p 2 27 ]
+[v dtoa@fp fp `*.39S1017  1 p 2 27 ]
 [v dtoa@d d `o  1 p 8 29 ]
 "315
 } 0
@@ -945,9 +955,9 @@
 {
 "261
 [v ctoa@w w `i  1 a 2 30 ]
-[s S1018 _IO_FILE 0 ]
+[s S1017 _IO_FILE 0 ]
 "259
-[v ctoa@fp fp `*.39S1018  1 p 2 27 ]
+[v ctoa@fp fp `*.39S1017  1 p 2 27 ]
 [v ctoa@c c `uc  1 p 1 29 ]
 "270
 } 0
@@ -957,9 +967,9 @@
 "74
 [v pad@w w `i  1 a 2 25 ]
 [v pad@i i `i  1 a 2 23 ]
-[s S1018 _IO_FILE 0 ]
+[s S1017 _IO_FILE 0 ]
 "72
-[v pad@fp fp `*.39S1018  1 p 2 16 ]
+[v pad@fp fp `*.39S1017  1 p 2 16 ]
 [v pad@buf buf `*.39uc  1 p 2 18 ]
 [v pad@p p `i  1 p 2 20 ]
 "95
@@ -982,16 +992,16 @@
 [v fputs@c c `uc  1 a 1 13 ]
 "8
 [v fputs@s s `*.39Cuc  1 p 2 9 ]
-[s S1586 _IO_FILE 6 `*.39uc 1 buffer 2 0 `i 1 count 2 2 `i 1 limit 2 4 ]
-[v fputs@fp fp `*.39S1586  1 p 2 11 ]
+[s S1585 _IO_FILE 6 `*.39uc 1 buffer 2 0 `i 1 count 2 2 `i 1 limit 2 4 ]
+[v fputs@fp fp `*.39S1585  1 p 2 11 ]
 "19
 } 0
 "8 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\sources\c99\common\nf_fputc.c
 [v _fputc fputc `(i  1 e 2 0 ]
 {
 [v fputc@c c `i  1 p 2 0 ]
-[s S1586 _IO_FILE 6 `*.39uc 1 buffer 2 0 `i 1 count 2 2 `i 1 limit 2 4 ]
-[v fputc@fp fp `*.39S1586  1 p 2 2 ]
+[s S1585 _IO_FILE 6 `*.39uc 1 buffer 2 0 `i 1 count 2 2 `i 1 limit 2 4 ]
+[v fputc@fp fp `*.39S1585  1 p 2 2 ]
 "21
 } 0
 "7 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\sources\c99\common\putch.c
@@ -1075,39 +1085,7 @@
 [v escribe_eeprom@dato dato `uc  1 p 1 8 ]
 "228
 } 0
-"262
-[v _leeHorariosMemoria leeHorariosMemoria `(v  1 e 1 0 ]
-{
-"269
-[v leeHorariosMemoria@j j `i  1 a 2 8 ]
-"266
-[v leeHorariosMemoria@i i `i  1 a 2 12 ]
-"264
-[v leeHorariosMemoria@contMemoria contMemoria `i  1 a 2 10 ]
-"277
-} 0
-"230
-[v _leer_eeprom leer_eeprom `(uc  1 e 1 0 ]
-{
-"232
-[v leer_eeprom@dato dato `uc  1 a 1 5 ]
-"230
-[v leer_eeprom@direccion direccion `us  1 p 2 2 ]
-"245
-} 0
-"37 C:\Users\Diego Moreno\Documents\Mis Proyectos con Pic\Smart Garden\Codigo\Smart Garden.X/I2C.h
-[v _i2c_reinicia_com i2c_reinicia_com `(v  1 e 1 0 ]
-{
-"40
-} 0
-"68
-[v _i2c_recibe_dato i2c_recibe_dato `(uc  1 e 1 0 ]
-{
-"70
-[v i2c_recibe_dato@datoleido datoleido `uc  1 a 1 1 ]
-"92
-} 0
-"28
+"28 C:\Users\Diego Moreno\Documents\Mis Proyectos con Pic\Smart Garden\Codigo\Smart Garden.X/I2C.h
 [v _i2c_inicia_com i2c_inicia_com `(v  1 e 1 0 ]
 {
 "31

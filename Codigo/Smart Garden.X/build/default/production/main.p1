@@ -366,7 +366,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 "25
 [p x LPT1OSC = OFF ]
 "26
-[p x MCLRE = OFF ]
+[p x MCLRE = ON ]
 "29
 [p x STVREN = OFF ]
 "30
@@ -1865,8 +1865,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;main.c: 205:     dato = getValue(2);
 [e = _dato ( _getValue (1 -> -> 2 `i `s ]
 "207
-[; ;main.c: 207:     if (dato != 'F') {
-[e $ ! != -> _dato `ui -> 70 `ui 439  ]
+[; ;main.c: 207:     if (dato != '@') {
+[e $ ! != -> _dato `ui -> 64 `ui 439  ]
 {
 "209
 [; ;main.c: 209:         datoRtc = ((dato / 10) & 0x0F) << 4;
@@ -2408,8 +2408,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;main.c: 395:     hora = getValue(2);
 [e = _hora ( _getValue (1 -> -> 2 `i `s ]
 "397
-[; ;main.c: 397:     if (hora != 'F') {
-[e $ ! != -> _hora `ui -> 70 `ui 484  ]
+[; ;main.c: 397:     if (hora != '@') {
+[e $ ! != -> _hora `ui -> 64 `ui 484  ]
 {
 "399
 [; ;main.c: 399:         UART_printf("\r\n Ingrese 1 para activar || ingrese 0 para desactivar: \r\n");
@@ -2446,8 +2446,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;main.c: 412:                 diaRegar = getValue(1);
 [e = _diaRegar ( _getValue (1 -> -> 1 `i `s ]
 "414
-[; ;main.c: 414:                 if (diaRegar != 'F') {
-[e $ ! != -> _diaRegar `ui -> 70 `ui 489  ]
+[; ;main.c: 414:                 if (diaRegar != '@') {
+[e $ ! != -> _diaRegar `ui -> 64 `ui 489  ]
 {
 "416
 [; ;main.c: 416:                     horarios[hora].dias[i] = diaRegar;
@@ -2506,8 +2506,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;main.c: 442:     hora = getValue(2);
 [e = _hora ( _getValue (1 -> -> 2 `i `s ]
 "444
-[; ;main.c: 444:     if (hora != 'F') {
-[e $ ! != -> _hora `ui -> 70 `ui 491  ]
+[; ;main.c: 444:     if (hora != '@') {
+[e $ ! != -> _hora `ui -> 64 `ui 491  ]
 {
 "446
 [; ;main.c: 446:         UART_printf("\r\n Ingrese los minutos que desee que se riegue en ese horario ej: 15 \r\n");
@@ -2516,8 +2516,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;main.c: 447:         tiempoRegar = getValue(2);
 [e = _tiempoRegar ( _getValue (1 -> -> 2 `i `s ]
 "449
-[; ;main.c: 449:         if (tiempoRegar != 'F') {
-[e $ ! != -> _tiempoRegar `ui -> 70 `ui 492  ]
+[; ;main.c: 449:         if (tiempoRegar != '@') {
+[e $ ! != -> _tiempoRegar `ui -> 64 `ui 492  ]
 {
 "453
 [; ;main.c: 453:             UART_printf("\r\n Minutos de riego establecidos! \r\n");
@@ -2663,8 +2663,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;main.c: 511:             humedadMedida = getValue(3);
 [e = _humedadMedida ( _getValue (1 -> -> 3 `i `s ]
 "513
-[; ;main.c: 513:             if (humedadMedida != 'F')
-[e $ ! != -> _humedadMedida `ui -> 70 `ui 506  ]
+[; ;main.c: 513:             if (humedadMedida != '@')
+[e $ ! != -> _humedadMedida `ui -> 64 `ui 506  ]
 "514
 [; ;main.c: 514:                 sensores[i].porcientoHumedad = humedadMedida;
 [e = . *U + &U _sensores * -> -> _i `ui `ux -> -> # *U &U _sensores `ui `ux 0 _humedadMedida ]
@@ -2870,7 +2870,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;main.c: 590:         default:
 [e :U 526 ]
 "591
-[; ;main.c: 591:             UART_printf("\r\n Solo se permiten numeros del 1 al 3 \r\n");
+[; ;main.c: 591:             UART_printf("\r\n Solo se permiten numeros del 1 al 7 \r\n");
 [e ( _UART_printf (1 :s 31C ]
 "592
 [; ;main.c: 592:             break;
@@ -3449,8 +3449,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e :U 569 ]
 {
 "819
-[; ;main.c: 819:                 UART_write('F');
-[e ( _UART_write (1 -> -> 70 `ui `uc ]
+[; ;main.c: 819:                 UART_write('@');
+[e ( _UART_write (1 -> -> 64 `ui `uc ]
 "820
 [; ;main.c: 820:                 datoIncorrecto = 1;
 [e = _datoIncorrecto -> -> 1 `i `uc ]
@@ -3533,8 +3533,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;main.c: 850:                     datoIncorrecto = 1;
 [e = _datoIncorrecto -> -> 1 `i `uc ]
 "851
-[; ;main.c: 851:                     UART_write('F');
-[e ( _UART_write (1 -> -> 70 `ui `uc ]
+[; ;main.c: 851:                     UART_write('@');
+[e ( _UART_write (1 -> -> 64 `ui `uc ]
 "852
 [; ;main.c: 852:                     break;
 [e $U 573  ]
@@ -3634,8 +3634,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;main.c: 886:                     datoIncorrecto = 1;
 [e = _datoIncorrecto -> -> 1 `i `uc ]
 "887
-[; ;main.c: 887:                     UART_write('F');
-[e ( _UART_write (1 -> -> 70 `ui `uc ]
+[; ;main.c: 887:                     UART_write('@');
+[e ( _UART_write (1 -> -> 64 `ui `uc ]
 "888
 [; ;main.c: 888:                     break;
 [e $U 584  ]
@@ -3677,8 +3677,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;main.c: 901:         UART_printf("\nFALLO EL SETEO\r\n");
 [e ( _UART_printf (1 :s 45C ]
 "902
-[; ;main.c: 902:         return 'F';
-[e ) -> -> 70 `ui `uc ]
+[; ;main.c: 902:         return '@';
+[e ) -> -> 64 `ui `uc ]
 [e $UE 565  ]
 "903
 [; ;main.c: 903:     } else
@@ -3720,8 +3720,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;main.c: 917:         tiempoRegar = getValue(2);
 [e = _tiempoRegar ( _getValue (1 -> -> 2 `i `s ]
 "919
-[; ;main.c: 919:         if (tiempoRegar != 'F') {
-[e $ ! != -> _tiempoRegar `ui -> 70 `ui 599  ]
+[; ;main.c: 919:         if (tiempoRegar != '@') {
+[e $ ! != -> _tiempoRegar `ui -> 64 `ui 599  ]
 {
 "921
 [; ;main.c: 921:             UART_printf("\r\n Ingrese el numero de sensor del area a regar ej: 5 \r\n");
@@ -3730,8 +3730,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;main.c: 922:             areaRegar = getValue(1);
 [e = _areaRegar ( _getValue (1 -> -> 1 `i `s ]
 "924
-[; ;main.c: 924:             if (areaRegar != 'F') {
-[e $ ! != -> _areaRegar `ui -> 70 `ui 600  ]
+[; ;main.c: 924:             if (areaRegar != '@') {
+[e $ ! != -> _areaRegar `ui -> 64 `ui 600  ]
 {
 "926
 [; ;main.c: 926:                 areaRegar--;
@@ -3892,91 +3892,88 @@ Version 4.0 HI-TECH Software Intermediate Code
 "993
 [; ;main.c: 993:     restablecerDatosSensor();
 [e ( _restablecerDatosSensor ..  ]
-"995
-[; ;main.c: 995:     UART_init(9600);
+"994
+[; ;main.c: 994:     UART_init(9600);
 [e ( _UART_init (1 -> -> 9600 `i `l ]
-"996
-[; ;main.c: 996:     i2c_iniciar();
+"995
+[; ;main.c: 995:     i2c_iniciar();
 [e ( _i2c_iniciar ..  ]
-"997
-[; ;main.c: 997:     configurarAdc();
+"996
+[; ;main.c: 996:     configurarAdc();
 [e ( _configurarAdc ..  ]
-"998
-[; ;main.c: 998:     inicializarObjetos();
+"997
+[; ;main.c: 997:     inicializarObjetos();
 [e ( _inicializarObjetos ..  ]
-"1000
-[; ;main.c: 1000:     leeHorariosMemoria();
-[e ( _leeHorariosMemoria ..  ]
-"1004
-[; ;main.c: 1004:     TRISD = 0;
+"1003
+[; ;main.c: 1003:     TRISD = 0;
 [e = _TRISD -> -> 0 `i `uc ]
-"1005
-[; ;main.c: 1005:     LATD = 0;
+"1004
+[; ;main.c: 1004:     LATD = 0;
 [e = _LATD -> -> 0 `i `uc ]
-"1007
-[; ;main.c: 1007:     TMR0 = VALOR_TIMER0;
+"1006
+[; ;main.c: 1006:     TMR0 = VALOR_TIMER0;
 [e = _TMR0 -> _VALOR_TIMER0 `us ]
-"1009
-[; ;main.c: 1009:     INTCONbits.TMR0IF = 1;
+"1008
+[; ;main.c: 1008:     INTCONbits.TMR0IF = 1;
 [e = . . _INTCONbits 0 2 -> -> 1 `i `uc ]
-"1011
-[; ;main.c: 1011:     T0CONbits.TMR0ON = 1;
+"1010
+[; ;main.c: 1010:     T0CONbits.TMR0ON = 1;
 [e = . . _T0CONbits 0 5 -> -> 1 `i `uc ]
-"1013
-[; ;main.c: 1013:     mostrarMenu();
+"1012
+[; ;main.c: 1012:     mostrarMenu();
 [e ( _mostrarMenu ..  ]
-"1015
-[; ;main.c: 1015:     MODO_COMUNICACION = 0;
-[e = _MODO_COMUNICACION -> -> 0 `i `uc ]
-"1018
-[; ;main.c: 1018:     while (1) {
+"1014
+[; ;main.c: 1014:     MODO_COMUNICACION = 1;
+[e = _MODO_COMUNICACION -> -> 1 `i `uc ]
+"1017
+[; ;main.c: 1017:     while (1) {
 [e :U 614 ]
 {
-"1020
-[; ;main.c: 1020:         if (datoRecibido) {
+"1019
+[; ;main.c: 1019:         if (datoRecibido) {
 [e $ ! != -> _datoRecibido `i -> 0 `i 616  ]
 {
-"1022
-[; ;main.c: 1022:             datoRecibido = 0;
+"1021
+[; ;main.c: 1021:             datoRecibido = 0;
 [e = _datoRecibido -> -> 0 `i `uc ]
-"1023
-[; ;main.c: 1023:             byteUart -= 48;
+"1022
+[; ;main.c: 1022:             byteUart -= 48;
 [e =- _byteUart -> -> 48 `i `uc ]
-"1024
-[; ;main.c: 1024:             sistemaPrincipal(byteUart);
+"1023
+[; ;main.c: 1023:             sistemaPrincipal(byteUart);
 [e ( _sistemaPrincipal (1 _byteUart ]
-"1026
-[; ;main.c: 1026:         }
+"1025
+[; ;main.c: 1025:         }
 }
 [e :U 616 ]
-"1028
-[; ;main.c: 1028:         if (overflowTimer) {
+"1027
+[; ;main.c: 1027:         if (overflowTimer) {
 [e $ ! != -> _overflowTimer `i -> 0 `i 617  ]
 {
-"1030
-[; ;main.c: 1030:             esperandoDatos = 0;
+"1029
+[; ;main.c: 1029:             esperandoDatos = 0;
 [e = _esperandoDatos -> -> 0 `i `uc ]
-"1031
-[; ;main.c: 1031:             overflowTimer = 0;
+"1030
+[; ;main.c: 1030:             overflowTimer = 0;
 [e = _overflowTimer -> -> 0 `i `uc ]
-"1032
-[; ;main.c: 1032:             sistemaRegado();
+"1031
+[; ;main.c: 1031:             sistemaRegado();
 [e ( _sistemaRegado ..  ]
-"1033
-[; ;main.c: 1033:         }
+"1032
+[; ;main.c: 1032:         }
 }
 [e :U 617 ]
-"1035
-[; ;main.c: 1035:     }
+"1034
+[; ;main.c: 1034:     }
 }
 [e :U 613 ]
 [e $U 614  ]
 [e :U 615 ]
-"1036
-[; ;main.c: 1036:     return;
+"1035
+[; ;main.c: 1035:     return;
 [e $UE 612  ]
-"1037
-[; ;main.c: 1037: }
+"1036
+[; ;main.c: 1036: }
 [e :UE 612 ]
 }
 [p f _sprintf 9207936 ]
@@ -4015,6 +4012,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [a 21C 13 10 32 73 110 103 114 101 115 97 32 117 110 97 32 111 112 99 105 111 110 32 97 32 82 101 97 108 105 122 97 114 58 32 13 10 0 ]
 [a 9C 13 10 32 73 110 103 114 101 115 101 32 49 32 112 97 114 97 32 97 99 116 105 118 97 114 32 124 124 32 105 110 103 114 101 115 101 32 48 32 112 97 114 97 32 100 101 115 97 99 116 105 118 97 114 58 32 13 10 0 ]
 [a 10C 13 10 32 73 110 103 114 101 115 101 32 49 32 112 97 114 97 32 97 99 116 105 118 97 114 32 124 124 32 105 110 103 114 101 115 101 32 48 32 112 97 114 97 32 100 101 115 97 99 116 105 118 97 114 58 32 13 10 0 ]
+[a 31C 13 10 32 83 111 108 111 32 115 101 32 112 101 114 109 105 116 101 110 32 110 117 109 101 114 111 115 32 100 101 108 32 49 32 97 108 32 55 32 13 10 0 ]
 [a 5C 13 10 32 69 110 118 105 101 32 108 111 115 32 77 105 110 117 116 111 115 32 69 106 58 32 50 53 32 13 10 0 ]
 [a 8C 13 10 32 73 110 103 114 101 115 101 32 117 110 97 32 104 111 114 97 32 101 110 32 102 111 114 109 97 116 111 32 100 101 32 50 52 32 104 114 115 32 101 106 58 32 49 53 32 13 10 0 ]
 [a 15C 13 10 32 73 110 103 114 101 115 101 32 117 110 97 32 104 111 114 97 32 101 110 32 102 111 114 109 97 116 111 32 100 101 32 50 52 32 104 114 115 32 101 106 58 32 49 53 32 13 10 0 ]
@@ -4022,7 +4020,6 @@ Version 4.0 HI-TECH Software Intermediate Code
 [a 47C 13 10 32 73 110 103 114 101 115 101 32 108 111 115 32 109 105 110 117 116 111 115 32 113 117 101 32 100 101 115 101 101 32 113 117 101 32 115 101 32 114 105 101 103 117 101 32 101 106 58 32 49 53 32 13 10 0 ]
 [a 4C 13 10 32 69 110 118 105 101 32 108 97 115 32 72 111 114 97 115 32 101 110 32 102 111 114 109 97 116 111 32 50 52 32 69 106 58 32 49 53 32 13 10 0 ]
 [a 48C 13 10 32 73 110 103 114 101 115 101 32 101 108 32 110 117 109 101 114 111 32 100 101 32 115 101 110 115 111 114 32 100 101 108 32 97 114 101 97 32 97 32 114 101 103 97 114 32 101 106 58 32 53 32 13 10 0 ]
-[a 31C 13 10 32 83 111 108 111 32 115 101 32 112 101 114 109 105 116 101 110 32 110 117 109 101 114 111 115 32 100 101 108 32 49 32 97 108 32 51 32 13 10 0 ]
 [a 17C 13 10 32 77 105 110 117 116 111 115 32 100 101 32 114 105 101 103 111 32 101 115 116 97 98 108 101 99 105 100 111 115 33 32 13 10 0 ]
 [a 13C 13 10 32 72 111 114 97 114 105 111 32 77 111 100 105 102 105 99 97 100 111 33 32 13 10 0 ]
 [a 30C 13 10 0 ]
