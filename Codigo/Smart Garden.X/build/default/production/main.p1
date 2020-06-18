@@ -3875,46 +3875,43 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;main.c: 981:     INTCONbits.PEIE = 1;
 [e = . . _INTCONbits 1 6 -> -> 1 `i `uc ]
 "982
-[; ;main.c: 982:     INTCONbits.TMR0IE = 0;
-[e = . . _INTCONbits 0 5 -> -> 0 `i `uc ]
-"983
-[; ;main.c: 983:     INTCONbits.TMR0IF = 0;
-[e = . . _INTCONbits 0 2 -> -> 0 `i `uc ]
+[; ;main.c: 982:     INTCONbits.TMR0IE = 1;
+[e = . . _INTCONbits 0 5 -> -> 1 `i `uc ]
 "984
 [; ;main.c: 984:     PIE1bits.RCIE = 1;
 [e = . . _PIE1bits 0 5 -> -> 1 `i `uc ]
 "986
 [; ;main.c: 986:     T0CON = 0b00000111;
 [e = _T0CON -> -> 7 `i `uc ]
-"988
-[; ;main.c: 988:     INTCONbits.TMR0IE = 1;
-[e = . . _INTCONbits 0 5 -> -> 1 `i `uc ]
-"993
-[; ;main.c: 993:     restablecerDatosSensor();
+"991
+[; ;main.c: 991:     restablecerDatosSensor();
 [e ( _restablecerDatosSensor ..  ]
+"992
+[; ;main.c: 992:     i2c_iniciar();
+[e ( _i2c_iniciar ..  ]
+"993
+[; ;main.c: 993:     configurarAdc();
+[e ( _configurarAdc ..  ]
 "994
 [; ;main.c: 994:     UART_init(9600);
 [e ( _UART_init (1 -> -> 9600 `i `l ]
 "995
-[; ;main.c: 995:     i2c_iniciar();
-[e ( _i2c_iniciar ..  ]
-"996
-[; ;main.c: 996:     configurarAdc();
-[e ( _configurarAdc ..  ]
-"997
-[; ;main.c: 997:     inicializarObjetos();
+[; ;main.c: 995:     inicializarObjetos();
 [e ( _inicializarObjetos ..  ]
-"1003
-[; ;main.c: 1003:     TRISD = 0;
+"998
+[; ;main.c: 998:     leeHorariosMemoria();
+[e ( _leeHorariosMemoria ..  ]
+"1002
+[; ;main.c: 1002:     TRISD = 0;
 [e = _TRISD -> -> 0 `i `uc ]
-"1004
-[; ;main.c: 1004:     LATD = 0;
+"1003
+[; ;main.c: 1003:     LATD = 0;
 [e = _LATD -> -> 0 `i `uc ]
-"1006
-[; ;main.c: 1006:     TMR0 = VALOR_TIMER0;
+"1005
+[; ;main.c: 1005:     TMR0 = VALOR_TIMER0;
 [e = _TMR0 -> _VALOR_TIMER0 `us ]
-"1008
-[; ;main.c: 1008:     INTCONbits.TMR0IF = 1;
+"1007
+[; ;main.c: 1007:     INTCONbits.TMR0IF = 1;
 [e = . . _INTCONbits 0 2 -> -> 1 `i `uc ]
 "1010
 [; ;main.c: 1010:     T0CONbits.TMR0ON = 1;
@@ -3923,8 +3920,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;main.c: 1012:     mostrarMenu();
 [e ( _mostrarMenu ..  ]
 "1014
-[; ;main.c: 1014:     MODO_COMUNICACION = 1;
-[e = _MODO_COMUNICACION -> -> 1 `i `uc ]
+[; ;main.c: 1014:     MODO_COMUNICACION = 0;
+[e = _MODO_COMUNICACION -> -> 0 `i `uc ]
 "1017
 [; ;main.c: 1017:     while (1) {
 [e :U 614 ]

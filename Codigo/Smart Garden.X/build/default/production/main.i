@@ -7108,24 +7108,23 @@ void main(void) {
 
     INTCONbits.GIE = 1;
     INTCONbits.PEIE = 1;
-    INTCONbits.TMR0IE = 0;
-    INTCONbits.TMR0IF = 0;
+    INTCONbits.TMR0IE = 1;
+
     PIE1bits.RCIE = 1;
 
     T0CON = 0b00000111;
-
-    INTCONbits.TMR0IE = 1;
 
 
 
 
     restablecerDatosSensor();
-    UART_init(9600);
     i2c_iniciar();
     configurarAdc();
+    UART_init(9600);
     inicializarObjetos();
 
 
+    leeHorariosMemoria();
 
 
 
@@ -7136,11 +7135,12 @@ void main(void) {
 
     INTCONbits.TMR0IF = 1;
 
+
     T0CONbits.TMR0ON = 1;
 
     mostrarMenu();
 
-    MODO_COMUNICACION = 1;
+    MODO_COMUNICACION = 0;
 
 
     while (1) {

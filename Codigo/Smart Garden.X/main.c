@@ -504,7 +504,7 @@ void lecturaWifi() {
         peticionLecturaSensores = 1;
 
         for (int i = 0; i < TOTAL_SENSORES; i++) {
-            
+
             sprintf(buffer, "\r\nIngrese el porcentaje de humedad del sensor %d\r\n", i); //comentar
             UART_printf(buffer); //comentar     
 
@@ -979,24 +979,23 @@ void main(void) {
 
     INTCONbits.GIE = 1; //GLOBALS INTERRUPTIONS ENABLED
     INTCONbits.PEIE = 1; // PERIPHERAL INTERRUPTIONS ENABLED
-    INTCONbits.TMR0IE = 0; //INTERRUPTION BY TIMER 0 OFF
-    INTCONbits.TMR0IF = 0; //INITIALIZING FLAG
+    INTCONbits.TMR0IE = 1; //INTERRUPTION BY TIMER 0 ON
+
     PIE1bits.RCIE = 1; //habilita interrupción por recepción USART PIC.
 
     T0CON = 0b00000111; //Timer 0 apagado, 16 bits , Temporizador, Prescaler 1:256
-
-    INTCONbits.TMR0IE = 1; //INTERRUPTION BY TIMER 0 ON
 
     //Matriz bidimensional que represente en las filas las
     //24 horas del dia y en las columnas si se regara en ese horario
 
     restablecerDatosSensor();
-    UART_init(9600); //9600 Baudios
     i2c_iniciar();
     configurarAdc();
+    UART_init(9600); //9600 Baudios
     inicializarObjetos();
 
-    //leeHorariosMemoria(); //comentar hasta que hayas asignado un horario para regar
+
+    leeHorariosMemoria(); //comentar hasta que hayas asignado un horario para regar
     //configBluetoothHC_06(); //Configurar el modulo Bluetooth | comentar una vez configurado
     //setRtcDefault(); //Comentar despues de programar el chip por primera vez y volver a programar
 
@@ -1007,11 +1006,12 @@ void main(void) {
 
     INTCONbits.TMR0IF = 1; //Inicializando Bandera del TIMER0
 
+
     T0CONbits.TMR0ON = 1; //Iniciar Timer 0
 
     mostrarMenu(); //comentar
 
-    MODO_COMUNICACION = 1; //0 NORMAL  | 1 WIFI
+    MODO_COMUNICACION = 0; //0 NORMAL  | 1 WIFI
 
 
     while (1) {
