@@ -401,7 +401,7 @@ void asignarHorarios() //ESP8266
         Rx = getValue(1);
 
 
-        if (Rx != SETEO_DENEGADO) {
+        if (Rx == 1) {
 
             UART_printf("\r\n Ingrese 1 para activar || ingrese 0 para desactivar: \r\n"); //comentar
             UART_printf("\r\n DOMINGO = [1] ... SABADO = [7] \r\n"); //comentar
@@ -504,7 +504,7 @@ void lecturaWifi() {
         peticionLecturaSensores = 1;
 
         for (int i = 0; i < TOTAL_SENSORES; i++) {
-
+            
             sprintf(buffer, "\r\nIngrese el porcentaje de humedad del sensor %d\r\n", i); //comentar
             UART_printf(buffer); //comentar     
 
@@ -704,25 +704,24 @@ void dameTemperaturaHumedad(unsigned char* Humedad, unsigned char* Temperatura) 
 
     DHT11_Start(); /* send start pulse to DHT11 module */
 
-    if (check_response()) {
+    while (!(check_response())) {
+        DHT11_Start(); /* send start pulse to DHT11 module */
+    }
 
-        /* read 40-bit data from DHT11 module */
-        humedad = DHT11_ReadData(); /* read Relative Humidity's integral value */
-        humedadDecimal = DHT11_ReadData(); /* read Relative Humidity's decimal value */
-        temperatura = DHT11_ReadData(); /* read Temperature's integral value */
-        temperaturaDecimal = DHT11_ReadData(); /* read Relative Temperature's decimal value */
-        checkSum = DHT11_ReadData(); /* read 8-bit checksum value */
 
-        if (checkSum != (humedad + humedadDecimal + temperatura + temperaturaDecimal))
-            UART_printf("Error de lectura DHT11\r\n"); //comentar
-        else {
-            *Humedad = humedad;
-            *Temperatura = temperatura;
-        }
+    /* read 40-bit data from DHT11 module */
+    humedad = DHT11_ReadData(); /* read Relative Humidity's integral value */
+    humedadDecimal = DHT11_ReadData(); /* read Relative Humidity's decimal value */
+    temperatura = DHT11_ReadData(); /* read Temperature's integral value */
+    temperaturaDecimal = DHT11_ReadData(); /* read Relative Temperature's decimal value */
+    checkSum = DHT11_ReadData(); /* read 8-bit checksum value */
 
-    } else
-        UART_printf("DHT11 NO RESPONDIO\r\n"); //Comentar
-
+    if (checkSum != (humedad + humedadDecimal + temperatura + temperaturaDecimal))
+        UART_printf("Error de lectura DHT11\r\n"); //comentar
+    else {
+        *Humedad = humedad;
+        *Temperatura = temperatura;
+    }
 
     PIE1bits.RCIE = 1; //habilita interrupción por recepción USART PIC.
     T0CONbits.TMR0ON = 1; //Iniciar Timer 0
@@ -761,31 +760,32 @@ void mostrarDatosSensoresWIFI(void) {
 
 
     char buffer[TAMANO_CADENA];
+    char bufferSensor[TAMANO_CADENA];
     unsigned char temperatura, humedad;
 
-    lecturaWifi();
+    dameTemperaturaHumedad(&humedad, &temperatura);
 
     UART_write(INTERRUMPIR_COMANDOS); //Esta Indica que se transmitiran cadenas por
     //UART que no tengan que ver con instrucciones
-
-    if (peticionLecturaSensores) {
-
-        for (int i = 0; i < TOTAL_SENSORES; i++) {
-
-            sprintf(buffer, "\r\n\nPorcentaje Humedad del sensor %d: %d %c\r\n"
-                    , i, sensores[i].porcientoHumedad, 37);
-            UART_printf(buffer);
-
-        }
-
-    }
-
-    dameTemperaturaHumedad(&humedad, &temperatura);
 
     sprintf(buffer, "\r\n\nLa Humedad Ambiente es: %d\r\n", humedad);
     UART_printf(buffer);
     sprintf(buffer, "\r\n\nLa Temperatura es: %d C\r\n", temperatura);
     UART_printf(buffer);
+
+    lecturaWifi();
+
+    if (peticionLecturaSensores) {
+
+        for (int i = 0; i < TOTAL_SENSORES; i++) {
+
+            sprintf(bufferSensor, "\r\n\nPorcentaje Humedad del sensor %d: %d %c\r\n"
+                    , i, sensores[i].porcientoHumedad, 37);
+            UART_printf(bufferSensor);
+
+        }
+
+    }
 
     UART_write(INTERRUMPIR_COMANDOS); //Esta Indica que acabo la transmicion de cadenas
 

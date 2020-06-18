@@ -6530,7 +6530,7 @@ void asignarHorarios()
         Rx = getValue(1);
 
 
-        if (Rx != 'F') {
+        if (Rx == 1) {
 
             UART_printf("\r\n Ingrese 1 para activar || ingrese 0 para desactivar: \r\n");
             UART_printf("\r\n DOMINGO = [1] ... SABADO = [7] \r\n");
@@ -6833,25 +6833,24 @@ void dameTemperaturaHumedad(unsigned char* Humedad, unsigned char* Temperatura) 
 
     DHT11_Start();
 
-    if (check_response()) {
+    while (!(check_response())) {
+        DHT11_Start();
+    }
 
 
-        humedad = DHT11_ReadData();
-        humedadDecimal = DHT11_ReadData();
-        temperatura = DHT11_ReadData();
-        temperaturaDecimal = DHT11_ReadData();
-        checkSum = DHT11_ReadData();
 
-        if (checkSum != (humedad + humedadDecimal + temperatura + temperaturaDecimal))
-            UART_printf("Error de lectura DHT11\r\n");
-        else {
-            *Humedad = humedad;
-            *Temperatura = temperatura;
-        }
+    humedad = DHT11_ReadData();
+    humedadDecimal = DHT11_ReadData();
+    temperatura = DHT11_ReadData();
+    temperaturaDecimal = DHT11_ReadData();
+    checkSum = DHT11_ReadData();
 
-    } else
-        UART_printf("DHT11 NO RESPONDIO\r\n");
-
+    if (checkSum != (humedad + humedadDecimal + temperatura + temperaturaDecimal))
+        UART_printf("Error de lectura DHT11\r\n");
+    else {
+        *Humedad = humedad;
+        *Temperatura = temperatura;
+    }
 
     PIE1bits.RCIE = 1;
     T0CONbits.TMR0ON = 1;
@@ -6890,31 +6889,32 @@ void mostrarDatosSensoresWIFI(void) {
 
 
     char buffer[50];
+    char bufferSensor[50];
     unsigned char temperatura, humedad;
 
-    lecturaWifi();
+    dameTemperaturaHumedad(&humedad, &temperatura);
 
     UART_write('I');
 
-
-    if (peticionLecturaSensores) {
-
-        for (int i = 0; i < 3; i++) {
-
-            sprintf(buffer, "\r\n\nPorcentaje Humedad del sensor %d: %d %c\r\n"
-                    , i, sensores[i].porcientoHumedad, 37);
-            UART_printf(buffer);
-
-        }
-
-    }
-
-    dameTemperaturaHumedad(&humedad, &temperatura);
 
     sprintf(buffer, "\r\n\nLa Humedad Ambiente es: %d\r\n", humedad);
     UART_printf(buffer);
     sprintf(buffer, "\r\n\nLa Temperatura es: %d C\r\n", temperatura);
     UART_printf(buffer);
+
+    lecturaWifi();
+
+    if (peticionLecturaSensores) {
+
+        for (int i = 0; i < 3; i++) {
+
+            sprintf(bufferSensor, "\r\n\nPorcentaje Humedad del sensor %d: %d %c\r\n"
+                    , i, sensores[i].porcientoHumedad, 37);
+            UART_printf(bufferSensor);
+
+        }
+
+    }
 
     UART_write('I');
 

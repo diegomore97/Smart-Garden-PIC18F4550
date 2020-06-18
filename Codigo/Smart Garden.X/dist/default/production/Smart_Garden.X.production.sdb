@@ -159,9 +159,9 @@
 [v _dameDatosSistema dameDatosSistema `(v  1 e 1 0 ]
 "696
 [v _dameTemperaturaHumedad dameTemperaturaHumedad `(v  1 e 1 0 ]
-"731
+"730
 [v _mostrarDatosSensores mostrarDatosSensores `(v  1 e 1 0 ]
-"760
+"759
 [v _mostrarDatosSensoresWIFI mostrarDatosSensoresWIFI `(v  1 e 1 0 ]
 "804
 [v _getValue getValue `(uc  1 e 1 0 ]
@@ -618,16 +618,18 @@
 {
 "551
 } 0
-"760
+"759
 [v _mostrarDatosSensoresWIFI mostrarDatosSensoresWIFI `(v  1 e 1 0 ]
 {
-"773
-[v mostrarDatosSensoresWIFI@i i `i  1 a 2 129 ]
+"780
+[v mostrarDatosSensoresWIFI@i i `i  1 a 2 102 ]
+"762
+[v mostrarDatosSensoresWIFI@buffer buffer `[50]uc  1 a 50 50 ]
 "763
-[v mostrarDatosSensoresWIFI@buffer buffer `[50]uc  1 a 50 77 ]
+[v mostrarDatosSensoresWIFI@bufferSensor bufferSensor `[50]uc  1 a 50 0 ]
 "764
-[v mostrarDatosSensoresWIFI@humedad humedad `uc  1 a 1 128 ]
-[v mostrarDatosSensoresWIFI@temperatura temperatura `uc  1 a 1 127 ]
+[v mostrarDatosSensoresWIFI@humedad humedad `uc  1 a 1 101 ]
+[v mostrarDatosSensoresWIFI@temperatura temperatura `uc  1 a 1 100 ]
 "792
 } 0
 "487
@@ -658,17 +660,17 @@
 [v constructorSensor@pin pin `uc  1 p 1 3 ]
 "136
 } 0
-"731
+"730
 [v _mostrarDatosSensores mostrarDatosSensores `(v  1 e 1 0 ]
 {
-"749
+"748
 [v mostrarDatosSensores@i i `i  1 a 2 75 ]
-"733
+"732
 [v mostrarDatosSensores@buffer buffer `[50]uc  1 a 50 23 ]
-"734
+"733
 [v mostrarDatosSensores@humedad humedad `uc  1 a 1 74 ]
 [v mostrarDatosSensores@temperatura temperatura `uc  1 a 1 73 ]
-"758
+"757
 } 0
 "530
 [v _lecturaAnalogaSensores lecturaAnalogaSensores `(v  1 e 1 0 ]
@@ -722,7 +724,7 @@
 "696
 [v dameTemperaturaHumedad@Humedad Humedad `*.39uc  1 p 2 3 ]
 [v dameTemperaturaHumedad@Temperatura Temperatura `*.39uc  1 p 2 5 ]
-"729
+"728
 } 0
 "38 C:\Users\Diego Moreno\Documents\Mis Proyectos con Pic\Smart Garden\Codigo\Smart Garden.X/DHT11.h
 [v _check_response check_response `(uc  1 e 1 0 ]
