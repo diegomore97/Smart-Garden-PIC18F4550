@@ -964,7 +964,44 @@ static int vfpfcnvrt(FILE *fp, char *fmt[], va_list ap)
 
         flags = width = 0;
         prec = -1;
-# 723 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\sources\\c99\\common\\doprnt.c"
+
+
+
+        done = 0;
+        while (!done) {
+            switch ((*fmt)[0]) {
+                case '-' :
+                    flags |= (1 << 0);
+                    ++*fmt;
+                    break;
+                case '0' :
+                    flags |= (1 << 1);
+                    ++*fmt;
+                    break;
+                case '+' :
+                    flags |= (1 << 2);
+                    ++*fmt;
+                    break;
+                case ' ' :
+                    flags |= (1 << 3);
+                    ++*fmt;
+                    break;
+                case '#' :
+                    flags |= (1 << 4);
+                    ++*fmt;
+                    break;
+                default:
+                    done = 1;
+                    break;
+            }
+        }
+        if (flags & (1 << 0)) {
+            flags &= ~(1 << 1);
+        }
+
+
+
+
         if ((*fmt)[0] == '*') {
             ++*fmt;
             width = (*(int *)__va_arg(*(int **)ap, (int)0));
@@ -976,6 +1013,23 @@ static int vfpfcnvrt(FILE *fp, char *fmt[], va_list ap)
             width = atoi(*fmt);
             while ((0 ? isdigit((*fmt)[0]) : ((unsigned)((*fmt)[0])-'0') < 10)) {
                 ++*fmt;
+            }
+        }
+
+
+
+
+        if ((*fmt)[0] == '.') {
+            prec = 0;
+            ++*fmt;
+            if ((*fmt)[0] == '*') {
+                ++*fmt;
+                prec = (*(int *)__va_arg(*(int **)ap, (int)0));
+            } else {
+                prec = atoi(*fmt);
+                while ((0 ? isdigit((*fmt)[0]) : ((unsigned)((*fmt)[0])-'0') < 10)) {
+                    ++*fmt;
+                }
             }
         }
 # 792 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\sources\\c99\\common\\doprnt.c"

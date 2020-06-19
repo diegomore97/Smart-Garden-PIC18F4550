@@ -6159,7 +6159,7 @@ typedef uint32_t uint_fast16_t;
 typedef uint32_t uint_fast32_t;
 # 139 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c99\\stdint.h" 2 3
 # 13 "main.c" 2
-# 34 "main.c"
+# 35 "main.c"
 typedef struct {
     unsigned char porcientoHumedad;
     unsigned char pinSensor;
@@ -6183,6 +6183,10 @@ unsigned char datoRecibido = 0;
 unsigned char overflowTimer = 0;
 unsigned char tempHora = 0;
 unsigned char flagRegado = 0;
+unsigned char Temperatura = 0, Humedad = 0;
+
+char buffer[70];
+char bufferDias[10];
 
 int VALOR_TIMER0 = 26473;
 int contInterrupciones = 0;
@@ -6218,7 +6222,7 @@ void mostrarMenu(void);
 void sistemaPrincipal(unsigned char opcion);
 void sistemaRegado(void);
 void dameDatosSistema(void);
-void dameTemperaturaHumedad(unsigned char* Humedad, unsigned char* Temperatura);
+void dameTemperaturaHumedad(void);
 void mostrarDatosSensores(void);
 void mostrarDatosSensoresWIFI(void);
 long map(long x, long in_min, long in_max, long out_min, long out_max);
@@ -6270,12 +6274,11 @@ void configurarAdc(void) {
 }
 
 int estaSeco(SensorHumedad s) {
-    unsigned char temperatura;
 
-    dameTemperaturaHumedad(((void*)0), &temperatura);
+    dameTemperaturaHumedad();
 
 
-    return (s.porcientoHumedad < 94) && (temperatura < 34);
+    return (s.porcientoHumedad < 94) && (Temperatura < 34);
 }
 
 int horaRegar() {
@@ -6516,7 +6519,6 @@ void asignarHorarios()
     unsigned char hora;
     unsigned char Rx;
     unsigned char diaRegar;
-    char buffer[50];
 
     UART_printf("\r\n OPCIONES DE REGADO \r\n");
 
@@ -6618,7 +6620,6 @@ void lecturaWifi() {
     PIE1bits.RCIE = 0;
 
     unsigned char Rx = 0, humedadMedida;
-    char buffer[50];
 
     restablecerDatosSensor();
 
@@ -6784,9 +6785,6 @@ void sistemaRegado(void) {
 
 void dameDatosSistema(void) {
 
-    char buffer[50];
-    char diasRegar[50];
-
     UART_write('I');
 
     UART_printf("\r\n\nHora | Regar(1 si 0 no) | Minutos de riego | DIAS REGAR\r\n\n");
@@ -6799,18 +6797,18 @@ void dameDatosSistema(void) {
             for (int j = 0; j < 7; j++) {
                 switch (horarios[i].dias[j]) {
                     case 0:
-                        diasRegar[j] = '0';
+                        bufferDias[j] = '0';
                         break;
 
                     case 1:
-                        diasRegar[j] = '1';
+                        bufferDias[j] = '1';
                         break;
                 }
             }
 
             sprintf(buffer, " %2d  |          %d       |         %2d       | %s\r\n",
                     horarios[i].hora, horarios[i].regar, horarios[i].tiempoRegar,
-                    diasRegar);
+                    bufferDias);
 
             UART_printf(buffer);
 
@@ -6818,11 +6816,47 @@ void dameDatosSistema(void) {
 
     }
 
+    switch (diaActual) {
+        case 1:
+            sprintf(buffer, "\r\n%0.2d:%0.2d| DOMINGO\r\n", hora, minutos);
+            break;
+
+        case 2:
+            sprintf(buffer, "\r\n%0.2d:%0.2d| LUNES\r\n", hora, minutos);
+            break;
+
+        case 3:
+            sprintf(buffer, "\r\n%0.2d:%0.2d| MARTES\r\n", hora, minutos);
+            break;
+
+        case 4:
+            sprintf(buffer, "\r\n%0.2d:%0.2d| MIERCOLES\r\n", hora, minutos);
+            break;
+
+        case 5:
+            sprintf(buffer, "\r\n%0.2d:%0.2d| JUEVES\r\n", hora, minutos);
+            break;
+
+        case 6:
+            sprintf(buffer, "\r\n%0.2d:%0.2d| VIERNES\r\n", hora, minutos);
+            break;
+
+        case 7:
+            sprintf(buffer, "\r\n%0.2d:%0.2d| SABADO\r\n", hora, minutos);
+            break;
+
+        default:
+            break;
+    }
+
+
+    UART_printf(buffer);
+
     UART_write('I');
 
 }
 
-void dameTemperaturaHumedad(unsigned char* Humedad, unsigned char* Temperatura) {
+void dameTemperaturaHumedad(void) {
 
     PIE1bits.RCIE = 0;
     T0CONbits.TMR0ON = 0;
@@ -6848,8 +6882,8 @@ void dameTemperaturaHumedad(unsigned char* Humedad, unsigned char* Temperatura) 
     if (checkSum != (humedad + humedadDecimal + temperatura + temperaturaDecimal))
         UART_printf("Error de lectura DHT11\r\n");
     else {
-        *Humedad = humedad;
-        *Temperatura = temperatura;
+        Humedad = humedad;
+        Temperatura = temperatura;
     }
 
     PIE1bits.RCIE = 1;
@@ -6858,17 +6892,14 @@ void dameTemperaturaHumedad(unsigned char* Humedad, unsigned char* Temperatura) 
 
 void mostrarDatosSensores(void) {
 
-    char buffer[50];
-    unsigned char temperatura, humedad;
-
-    dameTemperaturaHumedad(&humedad, &temperatura);
+    dameTemperaturaHumedad();
 
     UART_write('I');
 
 
-    sprintf(buffer, "\r\n\nLa Humedad Ambiente es: %d\r\n", humedad);
+    sprintf(buffer, "\r\n\nLa Humedad Ambiente es: %d\r\n", Humedad);
     UART_printf(buffer);
-    sprintf(buffer, "\r\n\nLa Temperatura es: %d C\r\n", temperatura);
+    sprintf(buffer, "\r\n\nLa Temperatura es: %d C\r\n", Temperatura);
     UART_printf(buffer);
 
     lecturaAnalogaSensores();
@@ -6887,19 +6918,14 @@ void mostrarDatosSensores(void) {
 
 void mostrarDatosSensoresWIFI(void) {
 
-
-    char buffer[50];
-    char bufferSensor[50];
-    unsigned char temperatura, humedad;
-
-    dameTemperaturaHumedad(&humedad, &temperatura);
+    dameTemperaturaHumedad();
 
     UART_write('I');
 
 
-    sprintf(buffer, "\r\n\nLa Humedad Ambiente es: %d\r\n", humedad);
+    sprintf(buffer, "\r\n\nLa Humedad Ambiente es: %d\r\n", Humedad);
     UART_printf(buffer);
-    sprintf(buffer, "\r\n\nLa Temperatura es: %d C\r\n", temperatura);
+    sprintf(buffer, "\r\n\nLa Temperatura es: %d C\r\n", Temperatura);
     UART_printf(buffer);
 
     lecturaWifi();
@@ -6908,9 +6934,9 @@ void mostrarDatosSensoresWIFI(void) {
 
         for (int i = 0; i < 3; i++) {
 
-            sprintf(bufferSensor, "\r\n\nPorcentaje Humedad del sensor %d: %d %c\r\n"
+            sprintf(buffer, "\r\n\nPorcentaje Humedad del sensor %d: %d %c\r\n"
                     , i, sensores[i].porcientoHumedad, 37);
-            UART_printf(bufferSensor);
+            UART_printf(buffer);
 
         }
 

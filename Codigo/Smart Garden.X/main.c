@@ -22,7 +22,8 @@
 //considera seco el suelo esta expresado en un porcentaje del 0 al 100
 #define MAX_TIEMPO_INACTIVIDAD 1 //Decenas de segundo de espera para que el 
 //usuario setie datos en el sistema a traves del protocolo UART
-#define TAMANO_CADENA 50   
+#define TAMANO_CADENA 70 
+#define TAMANO_CADENA_DIAS 10
 
 //INSTRUCCIONES DE CONTROL
 #define SETEO_DENEGADO '@' //Variable que se mandara por UART a otro Micro
@@ -54,6 +55,10 @@ unsigned char datoRecibido = 0;
 unsigned char overflowTimer = 0;
 unsigned char tempHora = 0;
 unsigned char flagRegado = 0;
+unsigned char Temperatura = 0, Humedad = 0;
+
+char buffer[TAMANO_CADENA];
+char bufferDias[TAMANO_CADENA_DIAS];
 
 int VALOR_TIMER0 = 26473;
 int contInterrupciones = 0;
@@ -89,7 +94,7 @@ void mostrarMenu(void);
 void sistemaPrincipal(unsigned char opcion);
 void sistemaRegado(void);
 void dameDatosSistema(void);
-void dameTemperaturaHumedad(unsigned char* Humedad, unsigned char* Temperatura);
+void dameTemperaturaHumedad(void);
 void mostrarDatosSensores(void);
 void mostrarDatosSensoresWIFI(void);
 long map(long x, long in_min, long in_max, long out_min, long out_max);
@@ -141,12 +146,11 @@ void configurarAdc(void) {
 }
 
 int estaSeco(SensorHumedad s) {
-    unsigned char temperatura;
 
-    dameTemperaturaHumedad(NULL, &temperatura);
+    dameTemperaturaHumedad();
 
     //Temperatura Ambiente Sensada por el DHT11 y Humedad suelo por el FC -28
-    return (s.porcientoHumedad < SENSIBILIDAD_HUMEDAD) && (temperatura < TEMPERATURA_MAX);
+    return (s.porcientoHumedad < SENSIBILIDAD_HUMEDAD) && (Temperatura < TEMPERATURA_MAX);
 }
 
 int horaRegar() {
@@ -387,7 +391,6 @@ void asignarHorarios() //ESP8266
     unsigned char hora;
     unsigned char Rx;
     unsigned char diaRegar;
-    char buffer[TAMANO_CADENA];
 
     UART_printf("\r\n OPCIONES DE REGADO \r\n"); //comentar
 
@@ -489,7 +492,6 @@ void lecturaWifi() {
     PIE1bits.RCIE = 0; //deshabilita interrupción por recepción USART PIC.
 
     unsigned char Rx = 0, humedadMedida;
-    char buffer[TAMANO_CADENA];
 
     restablecerDatosSensor();
 
@@ -655,9 +657,6 @@ void sistemaRegado(void) {
 
 void dameDatosSistema(void) {
 
-    char buffer[TAMANO_CADENA];
-    char diasRegar[TAMANO_CADENA];
-
     UART_write(INTERRUMPIR_COMANDOS); //Esta Indica que inicio la transmicion de cadenas
 
     UART_printf("\r\n\nHora | Regar(1 si 0 no) | Minutos de riego | DIAS REGAR\r\n\n");
@@ -670,18 +669,18 @@ void dameDatosSistema(void) {
             for (int j = 0; j < DIAS_SEMANA; j++) {
                 switch (horarios[i].dias[j]) {
                     case 0:
-                        diasRegar[j] = '0';
+                        bufferDias[j] = '0';
                         break;
 
                     case 1:
-                        diasRegar[j] = '1';
+                        bufferDias[j] = '1';
                         break;
                 }
             }
 
             sprintf(buffer, " %2d  |          %d       |         %2d       | %s\r\n",
                     horarios[i].hora, horarios[i].regar, horarios[i].tiempoRegar,
-                    diasRegar);
+                    bufferDias);
 
             UART_printf(buffer);
 
@@ -689,11 +688,47 @@ void dameDatosSistema(void) {
 
     }
 
+    switch (diaActual) {
+        case 1:
+            sprintf(buffer, "\r\n%0.2d:%0.2d| DOMINGO\r\n", hora, minutos);
+            break;
+
+        case 2:
+            sprintf(buffer, "\r\n%0.2d:%0.2d| LUNES\r\n", hora, minutos);
+            break;
+
+        case 3:
+            sprintf(buffer, "\r\n%0.2d:%0.2d| MARTES\r\n", hora, minutos);
+            break;
+
+        case 4:
+            sprintf(buffer, "\r\n%0.2d:%0.2d| MIERCOLES\r\n", hora, minutos);
+            break;
+
+        case 5:
+            sprintf(buffer, "\r\n%0.2d:%0.2d| JUEVES\r\n", hora, minutos);
+            break;
+
+        case 6:
+            sprintf(buffer, "\r\n%0.2d:%0.2d| VIERNES\r\n", hora, minutos);
+            break;
+
+        case 7:
+            sprintf(buffer, "\r\n%0.2d:%0.2d| SABADO\r\n", hora, minutos);
+            break;
+
+        default:
+            break;
+    }
+
+
+    UART_printf(buffer);
+
     UART_write(INTERRUMPIR_COMANDOS); //Esta Indica que acabo la transmicion de cadenas
 
 }
 
-void dameTemperaturaHumedad(unsigned char* Humedad, unsigned char* Temperatura) {
+void dameTemperaturaHumedad(void) {
 
     PIE1bits.RCIE = 0; //deshabilita interrupción por recepción USART PIC.
     T0CONbits.TMR0ON = 0; //PARAR Timer 0
@@ -719,8 +754,8 @@ void dameTemperaturaHumedad(unsigned char* Humedad, unsigned char* Temperatura) 
     if (checkSum != (humedad + humedadDecimal + temperatura + temperaturaDecimal))
         UART_printf("Error de lectura DHT11\r\n"); //comentar
     else {
-        *Humedad = humedad;
-        *Temperatura = temperatura;
+        Humedad = humedad;
+        Temperatura = temperatura;
     }
 
     PIE1bits.RCIE = 1; //habilita interrupción por recepción USART PIC.
@@ -729,17 +764,14 @@ void dameTemperaturaHumedad(unsigned char* Humedad, unsigned char* Temperatura) 
 
 void mostrarDatosSensores(void) {
 
-    char buffer[TAMANO_CADENA];
-    unsigned char temperatura, humedad;
-
-    dameTemperaturaHumedad(&humedad, &temperatura);
+    dameTemperaturaHumedad();
 
     UART_write(INTERRUMPIR_COMANDOS); //Esta Indica que se transmitiran cadenas por
     //UART que no tengan que ver con instrucciones
 
-    sprintf(buffer, "\r\n\nLa Humedad Ambiente es: %d\r\n", humedad);
+    sprintf(buffer, "\r\n\nLa Humedad Ambiente es: %d\r\n", Humedad);
     UART_printf(buffer);
-    sprintf(buffer, "\r\n\nLa Temperatura es: %d C\r\n", temperatura);
+    sprintf(buffer, "\r\n\nLa Temperatura es: %d C\r\n", Temperatura);
     UART_printf(buffer);
 
     lecturaAnalogaSensores();
@@ -758,19 +790,14 @@ void mostrarDatosSensores(void) {
 
 void mostrarDatosSensoresWIFI(void) {
 
-
-    char buffer[TAMANO_CADENA];
-    char bufferSensor[TAMANO_CADENA];
-    unsigned char temperatura, humedad;
-
-    dameTemperaturaHumedad(&humedad, &temperatura);
+    dameTemperaturaHumedad();
 
     UART_write(INTERRUMPIR_COMANDOS); //Esta Indica que se transmitiran cadenas por
     //UART que no tengan que ver con instrucciones
 
-    sprintf(buffer, "\r\n\nLa Humedad Ambiente es: %d\r\n", humedad);
+    sprintf(buffer, "\r\n\nLa Humedad Ambiente es: %d\r\n", Humedad);
     UART_printf(buffer);
-    sprintf(buffer, "\r\n\nLa Temperatura es: %d C\r\n", temperatura);
+    sprintf(buffer, "\r\n\nLa Temperatura es: %d C\r\n", Temperatura);
     UART_printf(buffer);
 
     lecturaWifi();
@@ -779,9 +806,9 @@ void mostrarDatosSensoresWIFI(void) {
 
         for (int i = 0; i < TOTAL_SENSORES; i++) {
 
-            sprintf(bufferSensor, "\r\n\nPorcentaje Humedad del sensor %d: %d %c\r\n"
+            sprintf(buffer, "\r\n\nPorcentaje Humedad del sensor %d: %d %c\r\n"
                     , i, sensores[i].porcientoHumedad, 37);
-            UART_printf(bufferSensor);
+            UART_printf(buffer);
 
         }
 
