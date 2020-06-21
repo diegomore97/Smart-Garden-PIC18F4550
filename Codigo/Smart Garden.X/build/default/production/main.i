@@ -6269,7 +6269,7 @@ void constructorSensor(SensorHumedad s, unsigned char porcientoHumedad, unsigned
 }
 
 void configurarAdc(void) {
-    ADCON1 = 0b00000000;
+    ADCON1 = 0b00000110;
     ADCON2 = 0b10100101;
 }
 

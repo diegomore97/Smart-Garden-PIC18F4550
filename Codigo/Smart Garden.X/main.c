@@ -141,7 +141,7 @@ void constructorSensor(SensorHumedad s, unsigned char porcientoHumedad, unsigned
 }
 
 void configurarAdc(void) {
-    ADCON1 = 0b00000000; //VSS REFERENCIA|TODOS LOS CANALES ANALOGOS
+    ADCON1 = 0b00000110; //VSS REFERENCIA|CANALES ANALOGOS DEL 0 AL 8
     ADCON2 = 0b10100101; //TIEMPO DE ADQUISICION 8 TAD, JUSTIFICADO A LA DERECHA, FOSC/16
 }
 

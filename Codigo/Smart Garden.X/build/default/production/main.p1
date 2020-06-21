@@ -1686,8 +1686,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e :U _configurarAdc ]
 [f ]
 "144
-[; ;main.c: 144:     ADCON1 = 0b00000000;
-[e = _ADCON1 -> -> 0 `i `uc ]
+[; ;main.c: 144:     ADCON1 = 0b00000110;
+[e = _ADCON1 -> -> 6 `i `uc ]
 "145
 [; ;main.c: 145:     ADCON2 = 0b10100101;
 [e = _ADCON2 -> -> 165 `i `uc ]
