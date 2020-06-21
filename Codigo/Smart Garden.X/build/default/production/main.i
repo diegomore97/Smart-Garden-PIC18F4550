@@ -6168,7 +6168,7 @@ typedef struct {
 
 typedef struct {
     unsigned char hora;
-    unsigned char dias[7 + 1];
+    char dias[7 + 1];
     unsigned char regar;
     unsigned char regado;
     unsigned char tiempoRegar;
@@ -6185,8 +6185,7 @@ unsigned char tempHora = 0;
 unsigned char flagRegado = 0;
 unsigned char Temperatura = 0, Humedad = 0;
 
-char buffer[70];
-char bufferDias[10];
+char buffer[50];
 
 int VALOR_TIMER0 = 26473;
 int contInterrupciones = 0;
@@ -6229,6 +6228,7 @@ long map(long x, long in_min, long in_max, long out_min, long out_max);
 unsigned char getValue(short numCharacters);
 void configBluetoothHC_06(void);
 void regadoRapido(void);
+void limpiarBuffer(void);
 
 void __attribute__((picinterrupt(("")))) desbordamiento(void) {
 
@@ -6284,7 +6284,7 @@ int estaSeco(SensorHumedad s) {
 int horaRegar() {
 
     return (horarios[hora].regar) && (!horarios[hora].regado) &&
-            (horarios[hora].dias[diaActual - 1]);
+            (horarios[hora].dias[diaActual - 1] == '1');
 }
 
 void inicializarObjetos() {
@@ -6301,7 +6301,7 @@ void inicializarObjetos() {
         for (int j = 0; j < 7; j++)
             horarios[i].dias[j] = 0;
 
-        horarios[i].dias[7] = '\0';
+        horarios[i].dias[7 - 1] = '\0';
     }
 
 }
@@ -6425,7 +6425,7 @@ void encenderBombas() {
 
     char flagSeco = 0;
 
-    for (int i = 0; i < 3; i++) {
+    for (int i = 0; i < 1; i++) {
 
         switch (i) {
 
@@ -6544,6 +6544,17 @@ void asignarHorarios()
 
                 if (diaRegar != '@') {
 
+                    switch (diaRegar) {
+                        case 0:
+                            diaRegar = '0';
+                            break;
+
+                        case 1:
+                            diaRegar = '1';
+                            break;
+                    }
+
+
                     horarios[hora].dias[i] = diaRegar;
                 }
 
@@ -6556,6 +6567,9 @@ void asignarHorarios()
 
             UART_printf("\r\n Horario Modificado! \r\n");
 
+        } else if (Rx == 0) {
+            horarios[hora].regar = Rx;
+            UART_printf("\r\n Horario Modificado! \r\n");
         }
 
     }
@@ -6611,7 +6625,7 @@ short dameHumedadSuelo(char canalLeer) {
 }
 
 void restablecerDatosSensor() {
-    for (int i = 0; i < 3; i++)
+    for (int i = 0; i < 1; i++)
         constructorSensor(sensores[i], 0, i);
 }
 
@@ -6633,7 +6647,7 @@ void lecturaWifi() {
 
         peticionLecturaSensores = 1;
 
-        for (int i = 0; i < 3; i++) {
+        for (int i = 0; i < 1; i++) {
 
             sprintf(buffer, "\r\nIngrese el porcentaje de humedad del sensor %d\r\n", i);
             UART_printf(buffer);
@@ -6653,13 +6667,15 @@ void lecturaWifi() {
         peticionLecturaSensores = 0;
     }
 
+    limpiarBuffer();
+
     PIE1bits.RCIE = 1;
 
 }
 
 void lecturaAnalogaSensores() {
 
-    for (int i = 0; i < 3; i++) {
+    for (int i = 0; i < 1; i++) {
         sensores[i].porcientoHumedad = map(dameHumedadSuelo(i), 0, 1023, 100, 0);
         _delay((unsigned long)((5)*(4000000/4000.0)));
     }
@@ -6707,6 +6723,7 @@ void sistemaPrincipal(unsigned char opcion) {
                 mostrarDatosSensoresWIFI();
             else
                 mostrarDatosSensores();
+
             break;
 
         case 6:
@@ -6785,36 +6802,33 @@ void sistemaRegado(void) {
 
 void dameDatosSistema(void) {
 
+    char bufferHorario[30];
+
     UART_write('I');
 
-    UART_printf("\r\n\nHora | Regar(1 si 0 no) | Minutos de riego | DIAS REGAR\r\n\n");
-    UART_printf("                                             DLMIJVS\r\n");
+    UART_printf("\r\nH = HORA\r\n");
+    UART_printf("\r\nR = REGAR( 1 SI | 0 NO)\r\n");
+    UART_printf("\r\nT = MINUTOS QUE DURARA EL RIEGO\r\n");
+    UART_printf("\r\nD = DIAS QUE EN LOS QUE SE REGARA\r\n");
+
+    UART_printf("                DLMIJVS\r\n");
+
 
     for (int i = 0; i < 24; i++) {
 
         if (horarios[i].regar) {
 
-            for (int j = 0; j < 7; j++) {
-                switch (horarios[i].dias[j]) {
-                    case 0:
-                        bufferDias[j] = '0';
-                        break;
-
-                    case 1:
-                        bufferDias[j] = '1';
-                        break;
-                }
-            }
-
-            sprintf(buffer, " %2d  |          %d       |         %2d       | %s\r\n",
+            sprintf(bufferHorario, "H:%2d|R:%d|T:%2d|D:%s\r\n",
                     horarios[i].hora, horarios[i].regar, horarios[i].tiempoRegar,
-                    bufferDias);
+                    horarios[i].dias);
 
-            UART_printf(buffer);
+            UART_printf(bufferHorario);
 
         }
 
     }
+
+    limpiarBuffer();
 
     switch (diaActual) {
         case 1:
@@ -6897,6 +6911,8 @@ void mostrarDatosSensores(void) {
     UART_write('I');
 
 
+    limpiarBuffer();
+
     sprintf(buffer, "\r\n\nLa Humedad Ambiente es: %d\r\n", Humedad);
     UART_printf(buffer);
     sprintf(buffer, "\r\n\nLa Temperatura es: %d C\r\n", Temperatura);
@@ -6905,7 +6921,7 @@ void mostrarDatosSensores(void) {
     lecturaAnalogaSensores();
 
 
-    for (int i = 0; i < 3; i++) {
+    for (int i = 0; i < 1; i++) {
 
         sprintf(buffer, "\r\n\nPorcentaje Humedad del sensor %d: %d %c\r\n"
                 , i, sensores[i].porcientoHumedad, 37);
@@ -6923,16 +6939,17 @@ void mostrarDatosSensoresWIFI(void) {
     UART_write('I');
 
 
+    limpiarBuffer();
+
     sprintf(buffer, "\r\n\nLa Humedad Ambiente es: %d\r\n", Humedad);
     UART_printf(buffer);
     sprintf(buffer, "\r\n\nLa Temperatura es: %d C\r\n", Temperatura);
     UART_printf(buffer);
 
     lecturaWifi();
-
     if (peticionLecturaSensores) {
 
-        for (int i = 0; i < 3; i++) {
+        for (int i = 0; i < 1; i++) {
 
             sprintf(buffer, "\r\n\nPorcentaje Humedad del sensor %d: %d %c\r\n"
                     , i, sensores[i].porcientoHumedad, 37);
@@ -7130,6 +7147,14 @@ void regadoRapido(void) {
 
 }
 
+void limpiarBuffer(void) {
+    for (int i = 0; i < 50; i++) {
+        buffer[i] = 0;
+    }
+
+    buffer[50 - 1] = '\0';
+}
+
 void main(void) {
 
     INTCONbits.GIE = 1;
@@ -7144,9 +7169,9 @@ void main(void) {
 
 
     restablecerDatosSensor();
-    i2c_iniciar();
     configurarAdc();
     UART_init(9600);
+    i2c_iniciar();
     inicializarObjetos();
 
 

@@ -15,15 +15,15 @@
 #define HORAS_DIA 24
 #define DIAS_SEMANA 7
 #define TEMPERATURA_MAX 34
-#define TOTAL_SENSORES 3 //Sensores a Utilizar
+#define TOTAL_SENSORES 1 //Sensores a Utilizar
 #define MAX_SENSORES 8   //Maximo 8 sensores
 #define REPETICIONES 6  //REPETICIONES PARA QUE TRANSCURRA 1 MINUTO
 #define SENSIBILIDAD_HUMEDAD 94 //Este nos indica a partir de cuantos bits se
 //considera seco el suelo esta expresado en un porcentaje del 0 al 100
 #define MAX_TIEMPO_INACTIVIDAD 1 //Decenas de segundo de espera para que el 
 //usuario setie datos en el sistema a traves del protocolo UART
-#define TAMANO_CADENA 70 
-#define TAMANO_CADENA_DIAS 10
+#define TAMANO_CADENA 50 
+#define TAMANO_CADENA_HORARIO 30
 
 //INSTRUCCIONES DE CONTROL
 #define SETEO_DENEGADO '@' //Variable que se mandara por UART a otro Micro
@@ -40,7 +40,7 @@ typedef struct {
 
 typedef struct {
     unsigned char hora; //0 - 23
-    unsigned char dias[DIAS_SEMANA + 1]; //Dias para regar
+    char dias[DIAS_SEMANA + 1]; //Dias para regar
     unsigned char regar; // Boolean
     unsigned char regado; //Boolean para saber si ya se rego en ese horario
     unsigned char tiempoRegar; //Minutos que se regaran en esa hora
@@ -58,7 +58,6 @@ unsigned char flagRegado = 0;
 unsigned char Temperatura = 0, Humedad = 0;
 
 char buffer[TAMANO_CADENA];
-char bufferDias[TAMANO_CADENA_DIAS];
 
 int VALOR_TIMER0 = 26473;
 int contInterrupciones = 0;
@@ -101,6 +100,7 @@ long map(long x, long in_min, long in_max, long out_min, long out_max);
 unsigned char getValue(short numCharacters); //ASCII TO NUMBER FROM UART
 void configBluetoothHC_06(void);
 void regadoRapido(void);
+void limpiarBuffer(void);
 
 void __interrupt() desbordamiento(void) {
 
@@ -156,7 +156,7 @@ int estaSeco(SensorHumedad s) {
 int horaRegar() {
 
     return (horarios[hora].regar) && (!horarios[hora].regado) &&
-            (horarios[hora].dias[diaActual - 1]);
+            (horarios[hora].dias[diaActual - 1] == '1');
 }
 
 void inicializarObjetos() {
@@ -173,7 +173,7 @@ void inicializarObjetos() {
         for (int j = 0; j < DIAS_SEMANA; j++)
             horarios[i].dias[j] = 0;
 
-        horarios[i].dias[DIAS_SEMANA] = '\0';
+        horarios[i].dias[DIAS_SEMANA - 1] = '\0';
     }
 
 }
@@ -416,6 +416,17 @@ void asignarHorarios() //ESP8266
 
                 if (diaRegar != SETEO_DENEGADO) {
 
+                    switch (diaRegar) {
+                        case 0:
+                            diaRegar = '0';
+                            break;
+
+                        case 1:
+                            diaRegar = '1';
+                            break;
+                    }
+
+
                     horarios[hora].dias[i] = diaRegar;
                 }
 
@@ -428,6 +439,9 @@ void asignarHorarios() //ESP8266
 
             UART_printf("\r\n Horario Modificado! \r\n"); //comentar
 
+        } else if (Rx == 0) {
+            horarios[hora].regar = Rx;
+            UART_printf("\r\n Horario Modificado! \r\n"); //comentar
         }
 
     }
@@ -525,6 +539,8 @@ void lecturaWifi() {
         peticionLecturaSensores = 0;
     }
 
+    limpiarBuffer();
+
     PIE1bits.RCIE = 1; //habilita interrupción por recepción USART PIC.
 
 }
@@ -579,6 +595,7 @@ void sistemaPrincipal(unsigned char opcion) {
                 mostrarDatosSensoresWIFI();
             else
                 mostrarDatosSensores();
+
             break;
 
         case 6:
@@ -657,36 +674,33 @@ void sistemaRegado(void) {
 
 void dameDatosSistema(void) {
 
+    char bufferHorario[TAMANO_CADENA_HORARIO];
+
     UART_write(INTERRUMPIR_COMANDOS); //Esta Indica que inicio la transmicion de cadenas
 
-    UART_printf("\r\n\nHora | Regar(1 si 0 no) | Minutos de riego | DIAS REGAR\r\n\n");
-    UART_printf("                                             DLMIJVS\r\n");
+    UART_printf("\r\nH = HORA\r\n");
+    UART_printf("\r\nR = REGAR( 1 SI | 0 NO)\r\n");
+    UART_printf("\r\nT = MINUTOS QUE DURARA EL RIEGO\r\n");
+    UART_printf("\r\nD = DIAS QUE EN LOS QUE SE REGARA\r\n");
+
+    UART_printf("                DLMIJVS\r\n");
+
 
     for (int i = 0; i < HORAS_DIA; i++) {
 
         if (horarios[i].regar) {
 
-            for (int j = 0; j < DIAS_SEMANA; j++) {
-                switch (horarios[i].dias[j]) {
-                    case 0:
-                        bufferDias[j] = '0';
-                        break;
-
-                    case 1:
-                        bufferDias[j] = '1';
-                        break;
-                }
-            }
-
-            sprintf(buffer, " %2d  |          %d       |         %2d       | %s\r\n",
+            sprintf(bufferHorario, "H:%2d|R:%d|T:%2d|D:%s\r\n",
                     horarios[i].hora, horarios[i].regar, horarios[i].tiempoRegar,
-                    bufferDias);
+                    horarios[i].dias);
 
-            UART_printf(buffer);
+            UART_printf(bufferHorario);
 
         }
 
     }
+
+    limpiarBuffer();
 
     switch (diaActual) {
         case 1:
@@ -769,6 +783,8 @@ void mostrarDatosSensores(void) {
     UART_write(INTERRUMPIR_COMANDOS); //Esta Indica que se transmitiran cadenas por
     //UART que no tengan que ver con instrucciones
 
+    limpiarBuffer();
+
     sprintf(buffer, "\r\n\nLa Humedad Ambiente es: %d\r\n", Humedad);
     UART_printf(buffer);
     sprintf(buffer, "\r\n\nLa Temperatura es: %d C\r\n", Temperatura);
@@ -795,13 +811,14 @@ void mostrarDatosSensoresWIFI(void) {
     UART_write(INTERRUMPIR_COMANDOS); //Esta Indica que se transmitiran cadenas por
     //UART que no tengan que ver con instrucciones
 
+    limpiarBuffer();
+
     sprintf(buffer, "\r\n\nLa Humedad Ambiente es: %d\r\n", Humedad);
     UART_printf(buffer);
     sprintf(buffer, "\r\n\nLa Temperatura es: %d C\r\n", Temperatura);
     UART_printf(buffer);
 
     lecturaWifi();
-
     if (peticionLecturaSensores) {
 
         for (int i = 0; i < TOTAL_SENSORES; i++) {
@@ -1002,6 +1019,14 @@ void regadoRapido(void) {
 
 }
 
+void limpiarBuffer(void) {
+    for (int i = 0; i < TAMANO_CADENA; i++) {
+        buffer[i] = 0;
+    }
+
+    buffer[TAMANO_CADENA - 1] = '\0';
+}
+
 void main(void) {
 
     INTCONbits.GIE = 1; //GLOBALS INTERRUPTIONS ENABLED
@@ -1016,9 +1041,9 @@ void main(void) {
     //24 horas del dia y en las columnas si se regara en ese horario
 
     restablecerDatosSensor();
-    i2c_iniciar();
     configurarAdc();
     UART_init(9600); //9600 Baudios
+    i2c_iniciar();
     inicializarObjetos();
 
 
