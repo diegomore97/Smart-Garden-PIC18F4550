@@ -564,6 +564,7 @@ void mostrarMenu(void) {
     UART_printf("\r\n 5. Mostrar valores sensores \r\n");
     UART_printf("\r\n 6. Regado rapido \r\n");
     UART_printf("\r\n 7. Fijar Dia Actual \r\n");
+    UART_printf("\r\n 8. Cargar datos de la memoria \r\n");
     UART_printf("\r\n Opcion:  \r");
     UART_printf("\r\n");
 }
@@ -605,9 +606,14 @@ void sistemaPrincipal(unsigned char opcion) {
         case 7:
             fijaDiaRtc();
             break;
+            
+        case 8:
+            leeHorariosMemoria();
+            UART_printf("\r\n HORARIOS CARGADOS CON EXITO!\r\n"); //comentar
+            break;
 
         default:
-            UART_printf("\r\n Solo se permiten numeros del 1 al 7 \r\n"); //comentar
+            UART_printf("\r\n Solo se permiten numeros del 1 al 8 \r\n"); //comentar
             break;
     }
 
@@ -1046,8 +1052,6 @@ void main(void) {
     i2c_iniciar();
     inicializarObjetos();
 
-
-    leeHorariosMemoria(); //comentar hasta que hayas asignado un horario para regar
     //configBluetoothHC_06(); //Configurar el modulo Bluetooth | comentar una vez configurado
     //setRtcDefault(); //Comentar despues de programar el chip por primera vez y volver a programar
 
