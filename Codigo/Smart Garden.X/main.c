@@ -24,6 +24,7 @@
 //usuario setie datos en el sistema a traves del protocolo UART
 #define TAMANO_CADENA 50 
 #define TAMANO_CADENA_HORARIO 30
+#define CARACTER_VALIDADOR 'T'
 
 //INSTRUCCIONES DE CONTROL
 #define SETEO_DENEGADO '@' //Variable que se mandara por UART a otro Micro
@@ -251,6 +252,10 @@ unsigned char leer_eeprom(uint16_t direccion) {
 void escribeHorariosMemoria() {
 
     int contMemoria = 0; //Variable que cuenta cuantos Bytes se ha escrito en la EEPROM
+
+    escribe_eeprom(contMemoria++, CARACTER_VALIDADOR); //digito verificador para leer la memoria
+    //y evitar datos corruptos
+
     for (int i = 0; i < HORAS_DIA; i++) {
         escribe_eeprom(contMemoria++, horarios[i].hora);
 
@@ -266,17 +271,27 @@ void escribeHorariosMemoria() {
 void leeHorariosMemoria() {
 
     int contMemoria = 0; //Variable que cuenta cuantos Bytes se han leido en la EEPROM
+    unsigned char caracterLeido;
 
-    for (int i = 0; i < HORAS_DIA; i++) {
-        horarios[i].hora = leer_eeprom(contMemoria++);
+    caracterLeido = leer_eeprom(contMemoria++);
 
-        for (int j = 0; j < DIAS_SEMANA; j++) {
-            horarios[i].dias[j] = leer_eeprom(contMemoria++);
+    if (caracterLeido == CARACTER_VALIDADOR) {
+
+        for (int i = 0; i < HORAS_DIA; i++) {
+            horarios[i].hora = leer_eeprom(contMemoria++);
+
+            for (int j = 0; j < DIAS_SEMANA; j++) {
+                horarios[i].dias[j] = leer_eeprom(contMemoria++);
+            }
+
+            horarios[i].regar = leer_eeprom(contMemoria++);
+            horarios[i].tiempoRegar = leer_eeprom(contMemoria++);
         }
 
-        horarios[i].regar = leer_eeprom(contMemoria++);
-        horarios[i].tiempoRegar = leer_eeprom(contMemoria++);
-    }
+        UART_printf("\r\n HORARIOS CARGADOS CON EXITO!\r\n"); //comentar
+
+    } else
+        UART_printf("\r\n NO HAY DATOS EN LA MEMORIA \r\n"); //comentar
 
 }
 
@@ -606,10 +621,9 @@ void sistemaPrincipal(unsigned char opcion) {
         case 7:
             fijaDiaRtc();
             break;
-            
+
         case 8:
             leeHorariosMemoria();
-            UART_printf("\r\n HORARIOS CARGADOS CON EXITO!\r\n"); //comentar
             break;
 
         default:

@@ -6159,7 +6159,7 @@ typedef uint32_t uint_fast16_t;
 typedef uint32_t uint_fast32_t;
 # 139 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c99\\stdint.h" 2 3
 # 13 "main.c" 2
-# 35 "main.c"
+# 36 "main.c"
 typedef struct {
     unsigned char porcientoHumedad;
     unsigned char pinSensor;
@@ -6379,6 +6379,10 @@ unsigned char leer_eeprom(uint16_t direccion) {
 void escribeHorariosMemoria() {
 
     int contMemoria = 0;
+
+    escribe_eeprom(contMemoria++, 'T');
+
+
     for (int i = 0; i < 24; i++) {
         escribe_eeprom(contMemoria++, horarios[i].hora);
 
@@ -6394,17 +6398,27 @@ void escribeHorariosMemoria() {
 void leeHorariosMemoria() {
 
     int contMemoria = 0;
+    unsigned char caracterLeido;
 
-    for (int i = 0; i < 24; i++) {
-        horarios[i].hora = leer_eeprom(contMemoria++);
+    caracterLeido = leer_eeprom(contMemoria++);
 
-        for (int j = 0; j < 7; j++) {
-            horarios[i].dias[j] = leer_eeprom(contMemoria++);
+    if (caracterLeido == 'T') {
+
+        for (int i = 0; i < 24; i++) {
+            horarios[i].hora = leer_eeprom(contMemoria++);
+
+            for (int j = 0; j < 7; j++) {
+                horarios[i].dias[j] = leer_eeprom(contMemoria++);
+            }
+
+            horarios[i].regar = leer_eeprom(contMemoria++);
+            horarios[i].tiempoRegar = leer_eeprom(contMemoria++);
         }
 
-        horarios[i].regar = leer_eeprom(contMemoria++);
-        horarios[i].tiempoRegar = leer_eeprom(contMemoria++);
-    }
+        UART_printf("\r\n HORARIOS CARGADOS CON EXITO!\r\n");
+
+    } else
+        UART_printf("\r\n NO HAY DATOS EN LA MEMORIA \r\n");
 
 }
 
@@ -6737,7 +6751,6 @@ void sistemaPrincipal(unsigned char opcion) {
 
         case 8:
             leeHorariosMemoria();
-            UART_printf("\r\n HORARIOS CARGADOS CON EXITO!\r\n");
             break;
 
         default:
