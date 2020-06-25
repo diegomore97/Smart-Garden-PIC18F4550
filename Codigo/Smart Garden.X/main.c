@@ -28,6 +28,7 @@
 
 //INSTRUCCIONES DE CONTROL
 #define SETEO_DENEGADO '@' //Variable que se mandara por UART a otro Micro
+#define SETEO_EXITOSO 'E' //Variable que se mandara por UART a otro Micro
 #define SOLICITUD_DATOS_SENSORES 'R' //Variable que se mandara por UART a otro Micro
 #define ENVIANDO_DATOS_SENSORES 'O' //El otro micro ya nos confirmo que mandara los datos
 #define INTERRUMPIR_COMANDOS 'I' //Se utiliza esta constante para la opcion de leer sensores
@@ -193,10 +194,11 @@ void dameDiaActual(void) {
 
 void fijaDiaRtc(void) {
 
-    UART_printf("\r\n Envie el dia de la semana Ej: 01 = DOMINGO ... 07 = SABADO \r\n"); //comentar
+    //UART_printf("\r\n Envie el dia de la semana Ej: 01 = DOMINGO ... 07 = SABADO \r\n"); //comentar
 
     if (setRtc(0x03)) {
-        UART_printf("\r\n DIA ESTABLECIDO CORRECTAMENTE \r\n"); //comentar
+        //UART_printf("\r\n DIA ESTABLECIDO CORRECTAMENTE \r\n"); //comentar
+        UART_write(SETEO_EXITOSO);
     }
 
 }
@@ -288,10 +290,14 @@ void leeHorariosMemoria() {
             horarios[i].tiempoRegar = leer_eeprom(contMemoria++);
         }
 
-        UART_printf("\r\n HORARIOS CARGADOS CON EXITO!\r\n"); //comentar
+        //UART_printf("\r\n HORARIOS CARGADOS CON EXITO!\r\n"); //comentar
+        UART_write(SETEO_EXITOSO);
 
-    } else
-        UART_printf("\r\n NO HAY DATOS EN LA MEMORIA \r\n"); //comentar
+    } else {
+        //UART_printf("\r\n NO HAY DATOS EN LA MEMORIA \r\n"); //comentar
+        UART_write(SETEO_DENEGADO); //Notificar al otro micro que no se recibira el dato
+
+    }
 
 }
 
@@ -384,17 +390,18 @@ void encenderBombas() {
 
 void fijaHoraRtc(void) {
 
-    UART_printf("\r\n FIJA HORA \r\n"); //comentar
+    //UART_printf("\r\n FIJA HORA \r\n"); //comentar
 
     //// Seccion Horas ///
-    UART_printf("\r\n Envie las Horas en formato 24 Ej: 15 \r\n"); //comentar
+    //UART_printf("\r\n Envie las Horas en formato 24 Ej: 15 \r\n"); //comentar
     ///////Seccion minutos/////
 
     if (setRtc(0x02)) {
-        UART_printf("\r\n Envie los Minutos Ej: 25 \r\n"); //comentar
+        //UART_printf("\r\n Envie los Minutos Ej: 25 \r\n"); //comentar
         if (setRtc(0x01)) {
-            UART_printf("\r\n HORA ESTABLECIDA CORRECTAMENTE \r\n"); //comentar
+            //UART_printf("\r\n HORA ESTABLECIDA CORRECTAMENTE \r\n"); //comentar 
             escribe_rtc(0x00, 0); //SEGUNDOS: 0 SEGUNDOS
+            UART_write(SETEO_EXITOSO);
 
         }
     }
@@ -407,26 +414,27 @@ void asignarHorarios() //ESP8266
     unsigned char Rx;
     unsigned char diaRegar;
 
-    UART_printf("\r\n OPCIONES DE REGADO \r\n"); //comentar
+    //UART_printf("\r\n OPCIONES DE REGADO \r\n"); //comentar
 
-    UART_printf("\r\n Ingrese una hora en formato de 24 hrs ej: 15 \r\n"); //comentar
+    //UART_printf("\r\n Ingrese una hora en formato de 24 hrs ej: 15 \r\n"); //comentar
     hora = getValue(2);
 
     if (hora != SETEO_DENEGADO) {
 
-        UART_printf("\r\n Ingrese 1 para activar || ingrese 0 para desactivar: \r\n"); //comentar
+        //UART_printf("\r\n Ingrese 1 para activar || ingrese 0 para desactivar: \r\n"); //comentar
 
         Rx = getValue(1);
 
 
         if (Rx == 1) {
 
-            UART_printf("\r\n Ingrese 1 para activar || ingrese 0 para desactivar: \r\n"); //comentar
-            UART_printf("\r\n DOMINGO = [1] ... SABADO = [7] \r\n"); //comentar
+            //UART_printf("\r\n Ingrese 1 para activar || ingrese 0 para desactivar: \r\n"); //comentar
+            //UART_printf("\r\n DOMINGO = [1] ... SABADO = [7] \r\n"); //comentar
 
             for (int i = 0; i < DIAS_SEMANA; i++) {
-                sprintf(buffer, "\r\n[%d]: ", i + 1); //comentar
-                UART_printf(buffer); //comentar
+
+                //sprintf(buffer, "\r\n[%d]: ", i + 1); //comentar
+                //UART_printf(buffer); //comentar
                 diaRegar = getValue(1);
 
                 if (diaRegar != SETEO_DENEGADO) {
@@ -452,11 +460,13 @@ void asignarHorarios() //ESP8266
             escribeHorariosMemoria(); //HACER ESTO INDEPENDIENTEMENTE DE SI MANDA DATO
             //POR UART
 
-            UART_printf("\r\n Horario Modificado! \r\n"); //comentar
+            //UART_printf("\r\n Horario Modificado! \r\n"); //comentar
+            UART_write(SETEO_EXITOSO);
 
         } else if (Rx == 0) {
             horarios[hora].regar = Rx;
-            UART_printf("\r\n Horario Modificado! \r\n"); //comentar
+            //UART_printf("\r\n Horario Modificado! \r\n"); //comentar
+            UART_write(SETEO_EXITOSO);
         }
 
     }
@@ -468,26 +478,28 @@ void setTiempoRegar() {
     unsigned char hora;
     unsigned char tiempoRegar;
 
-    UART_printf("\r\n TIEMPO DE REGADO \r\n"); //comentar
+    //UART_printf("\r\n TIEMPO DE REGADO \r\n"); //comentar
 
-    UART_printf("\r\n Ingrese una hora en formato de 24 hrs ej: 15 \r\n"); //comentar
+    //UART_printf("\r\n Ingrese una hora en formato de 24 hrs ej: 15 \r\n"); //comentar
     hora = getValue(2);
 
     if (hora != SETEO_DENEGADO) {
 
-        UART_printf("\r\n Ingrese los minutos que desee que se riegue en ese horario ej: 15 \r\n"); //comentar
+        //UART_printf("\r\n Ingrese los minutos que desee que se riegue en ese horario ej: 15 \r\n"); //comentar
         tiempoRegar = getValue(2);
 
         if (tiempoRegar != SETEO_DENEGADO) {
 
 
 
-            UART_printf("\r\n Minutos de riego establecidos! \r\n"); //comentar
+            //UART_printf("\r\n Minutos de riego establecidos! \r\n"); //comentar
 
             horarios[hora].tiempoRegar = tiempoRegar;
             minutosRegar = horarios[hora].tiempoRegar;
 
             escribeHorariosMemoria();
+
+            UART_write(SETEO_EXITOSO);
 
         }
     }
@@ -526,7 +538,7 @@ void lecturaWifi() {
 
     UART_write(SOLICITUD_DATOS_SENSORES); //Indicar al otro Micro que ya estoy listo para recibir los datos
 
-    UART_printf("\r\nSolicitando Muestreo de sensores\r\n\n"); //comentar
+    //UART_printf("\r\nSolicitando Muestreo de sensores\r\n\n"); //comentar
 
     Rx = UART_read(); //Esperar la confirmacion del otro micro
 
@@ -536,8 +548,8 @@ void lecturaWifi() {
 
         for (int i = 0; i < TOTAL_SENSORES; i++) {
 
-            sprintf(buffer, "\r\nIngrese el porcentaje de humedad del sensor %d\r\n", i); //comentar
-            UART_printf(buffer); //comentar     
+            //sprintf(buffer, "\r\nIngrese el porcentaje de humedad del sensor %d\r\n", i); //comentar
+            //UART_printf(buffer); //comentar     
 
             humedadMedida = getValue(3);
 
@@ -548,7 +560,8 @@ void lecturaWifi() {
 
         }
 
-        UART_printf("\r\nSensores Leidos con Exito!\r\n\n"); //comentar
+        //UART_printf("\r\nSensores Leidos con Exito!\r\n\n"); //comentar
+        UART_write(SETEO_EXITOSO);
 
     } else {
         peticionLecturaSensores = 0;
@@ -627,11 +640,11 @@ void sistemaPrincipal(unsigned char opcion) {
             break;
 
         default:
-            UART_printf("\r\n Solo se permiten numeros del 1 al 8 \r\n"); //comentar
+            //UART_printf("\r\n Solo se permiten numeros del 1 al 8 \r\n"); //comentar
             break;
     }
 
-    mostrarMenu(); //comentar
+    //mostrarMenu(); //comentar
     PIE1bits.RCIE = 1; //habilita interrupción por recepción USART PIC.
 
 }
@@ -681,7 +694,7 @@ void sistemaRegado(void) {
                     minutosRegar = horarios[hora].tiempoRegar;
                     encenderBombas();
                 }
-                mostrarMenu(); //comentar
+                //mostrarMenu(); //comentar
             } else {
                 lecturaAnalogaSensores(); //SENSORES CONECTADOS AL PIC
                 minutosRegar = horarios[hora].tiempoRegar;
@@ -785,9 +798,9 @@ void dameTemperaturaHumedad(void) {
     temperaturaDecimal = DHT11_ReadData(); /* read Relative Temperature's decimal value */
     checkSum = DHT11_ReadData(); /* read 8-bit checksum value */
 
-    if (checkSum != (humedad + humedadDecimal + temperatura + temperaturaDecimal))
-        UART_printf("Error de lectura DHT11\r\n"); //comentar
-    else {
+    if (checkSum != (humedad + humedadDecimal + temperatura + temperaturaDecimal)) {
+        //UART_printf("Error de lectura DHT11\r\n"); //comentar
+    } else {
         Humedad = humedad;
         Temperatura = temperatura;
     }
@@ -962,7 +975,7 @@ unsigned char getValue(short numCharacters) { //ASCII TO NUMBER FROM UART
 
     if (esperandoDatos || datoIncorrecto) {
 
-        UART_printf("\nFALLO EL SETEO\r\n"); //comentar
+        //UART_printf("\nFALLO EL SETEO\r\n"); //comentar
         return SETEO_DENEGADO;
     } else
         return dato;
@@ -974,15 +987,15 @@ void regadoRapido(void) {
     unsigned char tiempoRegar;
     unsigned char areaRegar;
 
-    UART_printf("\r\n REGADO RAPIDO \r\n"); //comentar
+    //UART_printf("\r\n REGADO RAPIDO \r\n"); //comentar
 
     if (!regando) {
-        UART_printf("\r\n Ingrese los minutos que desee que se riegue ej: 15 \r\n"); //comentar
+        //UART_printf("\r\n Ingrese los minutos que desee que se riegue ej: 15 \r\n"); //comentar
         tiempoRegar = getValue(2);
 
         if (tiempoRegar != SETEO_DENEGADO) {
 
-            UART_printf("\r\n Ingrese el numero de sensor del area a regar ej: 5 \r\n"); //comentar
+            //UART_printf("\r\n Ingrese el numero de sensor del area a regar ej: 5 \r\n"); //comentar
             areaRegar = getValue(1);
 
             if (areaRegar != SETEO_DENEGADO) {
@@ -1028,13 +1041,15 @@ void regadoRapido(void) {
                 regando = 1;
                 horarios[hora].regado = 0;
                 minutosRegar = tiempoRegar;
+                UART_write(SETEO_EXITOSO);
 
             }
 
         }
 
     } else {
-        UART_printf("\r\n Ya se esta efectuando un riego, intentelo mas tarde \r\n"); //comentar
+        //UART_printf("\r\n Ya se esta efectuando un riego, intentelo mas tarde \r\n"); //comentar
+        UART_write(SETEO_DENEGADO); //Notificar al otro micro que no se recibira el dato
     }
 
 }
@@ -1079,9 +1094,9 @@ void main(void) {
 
     T0CONbits.TMR0ON = 1; //Iniciar Timer 0
 
-    mostrarMenu(); //comentar
+    //mostrarMenu(); //comentar
 
-    MODO_COMUNICACION = 0; //0 NORMAL  | 1 WIFI
+    MODO_COMUNICACION = 1; //0 NORMAL  | 1 WIFI
 
 
     while (1) {
