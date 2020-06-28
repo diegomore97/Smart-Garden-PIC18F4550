@@ -1,7 +1,7 @@
 
 
 Microchip MPLAB XC8 Assembler V2.10 build 88905656 
-                                                                                               Sat Jun 27 14:54:04 2020
+                                                                                               Sun Jun 28 16:23:20 2020
 
 Microchip MPLAB XC8 C Compiler v2.10 (Free license) build 20190730164152 Og1 
      1                           	processor	18F4550
@@ -3623,8 +3623,8 @@ Microchip MPLAB XC8 C Compiler v2.10 (Free license) build 20190730164152 Og1
   3603                           ;main.c: 842:     dameTemperaturaHumedad();
   3604  001EC8  EC28  F013         	call	_dameTemperaturaHumedad	;wreg free
   3605  001ECC                     
-  3606                           ;main.c: 844:     UART_write('I');
-  3607  001ECC  0E49               	movlw	73
+  3606                           ;main.c: 844:     UART_write('&');
+  3607  001ECC  0E26               	movlw	38
   3608  001ECE  EC70  F018         	call	_UART_write
   3609  001ED2                     
   3610                           ;main.c: 847:     limpiarBuffer();
@@ -3753,8 +3753,8 @@ Microchip MPLAB XC8 C Compiler v2.10 (Free license) build 20190730164152 Og1
   3732  001FB0                     l4570:
   3733                           
   3734                           ; BSR set to: 0
-  3735                           ;main.c: 867:     UART_write('I');
-  3736  001FB0  0E49               	movlw	73
+  3735                           ;main.c: 867:     UART_write('&');
+  3736  001FB0  0E26               	movlw	38
   3737  001FB2  EC70  F018         	call	_UART_write
   3738  001FB6  0012               	return		;funcret
   3739  001FB8                     __end_of_mostrarDatosSensoresWIFI:
@@ -4091,8 +4091,8 @@ Microchip MPLAB XC8 C Compiler v2.10 (Free license) build 20190730164152 Og1
   4070                           ;main.c: 814:     dameTemperaturaHumedad();
   4071  001FB8  EC28  F013         	call	_dameTemperaturaHumedad	;wreg free
   4072  001FBC                     
-  4073                           ;main.c: 816:     UART_write('I');
-  4074  001FBC  0E49               	movlw	73
+  4073                           ;main.c: 816:     UART_write('&');
+  4074  001FBC  0E26               	movlw	38
   4075  001FBE  EC70  F018         	call	_UART_write
   4076  001FC2                     
   4077                           ;main.c: 819:     limpiarBuffer();
@@ -4210,8 +4210,8 @@ Microchip MPLAB XC8 C Compiler v2.10 (Free license) build 20190730164152 Og1
   4188  002090                     u3620:
   4189  002090                     
   4190                           ; BSR set to: 0
-  4191                           ;main.c: 836:     UART_write('I');
-  4192  002090  0E49               	movlw	73
+  4191                           ;main.c: 836:     UART_write('&');
+  4192  002090  0E26               	movlw	38
   4193  002092  EC70  F018         	call	_UART_write
   4194  002096  0012               	return		;funcret
   4195  002098                     __end_of_mostrarDatosSensores:
@@ -6051,8 +6051,8 @@ Microchip MPLAB XC8 C Compiler v2.10 (Free license) build 20190730164152 Og1
   6025  000594                     _dameDatosSistema:
   6026                           	opt callstack 20
   6027  000594                     
-  6028                           ;main.c: 710:     char bufferHorario[30];;main.c: 712:     UART_write('I');
-  6029  000594  0E49               	movlw	73
+  6028                           ;main.c: 710:     char bufferHorario[30];;main.c: 712:     UART_write('&');
+  6029  000594  0E26               	movlw	38
   6030  000596  EC70  F018         	call	_UART_write
   6031  00059A                     
   6032                           ;main.c: 714:     UART_printf("\r\nH = HORA\r\n");
@@ -6457,8 +6457,8 @@ Microchip MPLAB XC8 C Compiler v2.10 (Free license) build 20190730164152 Og1
   6427  000876  6E03               	movwf	(UART_printf@cadena+1)^0,c
   6428  000878  EC2E  F015         	call	_UART_printf	;wreg free
   6429  00087C                     
-  6430                           ;main.c: 774:     UART_write('I');
-  6431  00087C  0E49               	movlw	73
+  6430                           ;main.c: 774:     UART_write('&');
+  6431  00087C  0E26               	movlw	38
   6432  00087E  EC70  F018         	call	_UART_write
   6433  000882  0012               	return		;funcret
   6434  000884                     __end_of_dameDatosSistema:
@@ -12967,7 +12967,7 @@ CODE                 0      0       0       0        0.0%
 
 
 Microchip Technology PIC18 Macro Assembler V2.10 build 88905656 
-Symbol Table                                                                                   Sat Jun 27 14:54:04 2020
+Symbol Table                                                                                   Sun Jun 28 16:23:20 2020
 
                  __size_of_escribe_eeprom 0030                                        l83 310A  
                                       l92 3156                                        l95 314E  

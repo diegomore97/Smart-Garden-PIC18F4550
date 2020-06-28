@@ -3086,8 +3086,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;main.c: 710:     char bufferHorario[30];
 [v _bufferHorario `uc ~T0 @X0 -> 30 `i a ]
 "712
-[; ;main.c: 712:     UART_write('I');
-[e ( _UART_write (1 -> -> 73 `ui `uc ]
+[; ;main.c: 712:     UART_write('&');
+[e ( _UART_write (1 -> -> 38 `ui `uc ]
 "714
 [; ;main.c: 714:     UART_printf("\r\nH = HORA\r\n");
 [e ( _UART_printf (1 :s 12C ]
@@ -3227,8 +3227,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;main.c: 772:     UART_printf(buffer);
 [e ( _UART_printf (1 &U _buffer ]
 "774
-[; ;main.c: 774:     UART_write('I');
-[e ( _UART_write (1 -> -> 73 `ui `uc ]
+[; ;main.c: 774:     UART_write('&');
+[e ( _UART_write (1 -> -> 38 `ui `uc ]
 "776
 [; ;main.c: 776: }
 [e :UE 546 ]
@@ -3331,8 +3331,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;main.c: 814:     dameTemperaturaHumedad();
 [e ( _dameTemperaturaHumedad ..  ]
 "816
-[; ;main.c: 816:     UART_write('I');
-[e ( _UART_write (1 -> -> 73 `ui `uc ]
+[; ;main.c: 816:     UART_write('&');
+[e ( _UART_write (1 -> -> 38 `ui `uc ]
 "819
 [; ;main.c: 819:     limpiarBuffer();
 [e ( _limpiarBuffer ..  ]
@@ -3374,8 +3374,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e :U 569 ]
 }
 "836
-[; ;main.c: 836:     UART_write('I');
-[e ( _UART_write (1 -> -> 73 `ui `uc ]
+[; ;main.c: 836:     UART_write('&');
+[e ( _UART_write (1 -> -> 38 `ui `uc ]
 "838
 [; ;main.c: 838: }
 [e :UE 567 ]
@@ -3390,8 +3390,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;main.c: 842:     dameTemperaturaHumedad();
 [e ( _dameTemperaturaHumedad ..  ]
 "844
-[; ;main.c: 844:     UART_write('I');
-[e ( _UART_write (1 -> -> 73 `ui `uc ]
+[; ;main.c: 844:     UART_write('&');
+[e ( _UART_write (1 -> -> 38 `ui `uc ]
 "847
 [; ;main.c: 847:     limpiarBuffer();
 [e ( _limpiarBuffer ..  ]
@@ -3441,8 +3441,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 }
 [e :U 572 ]
 "867
-[; ;main.c: 867:     UART_write('I');
-[e ( _UART_write (1 -> -> 73 `ui `uc ]
+[; ;main.c: 867:     UART_write('&');
+[e ( _UART_write (1 -> -> 38 `ui `uc ]
 "869
 [; ;main.c: 869: }
 [e :UE 571 ]

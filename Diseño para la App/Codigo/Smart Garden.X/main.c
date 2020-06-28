@@ -31,7 +31,7 @@
 #define SETEO_EXITOSO 'E' //Variable que se mandara por UART a otro Micro
 #define SOLICITUD_DATOS_SENSORES 'R' //Variable que se mandara por UART a otro Micro
 #define ENVIANDO_DATOS_SENSORES 'O' //El otro micro ya nos confirmo que mandara los datos
-#define INTERRUMPIR_COMANDOS 'I' //Se utiliza esta constante para la opcion de leer sensores
+#define INTERRUMPIR_COMANDOS '&' //Se utiliza esta constante para la opcion de leer sensores
 #define BITS_ADC 1023 //Indica el numero de bits de lectura de ADC en este caso 10 bits
 
 typedef struct {
