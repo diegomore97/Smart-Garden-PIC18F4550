@@ -995,8 +995,8 @@ void regadoRapido(void) {
 
         if (tiempoRegar != SETEO_DENEGADO) {
 
-            //UART_printf("\r\n Ingrese el numero de sensor del area a regar ej: 5 \r\n"); //comentar
-            areaRegar = getValue(1);
+            //UART_printf("\r\n Ingrese el numero de sensor del area a regar ej: 05 \r\n"); //comentar
+            areaRegar = getValue(2);
 
             if (areaRegar != SETEO_DENEGADO) {
 

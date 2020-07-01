@@ -1,7 +1,7 @@
 
 
 Microchip MPLAB XC8 Assembler V2.10 build 88905656 
-                                                                                               Sun Jun 28 16:23:20 2020
+                                                                                               Tue Jun 30 19:10:21 2020
 
 Microchip MPLAB XC8 C Compiler v2.10 (Free license) build 20190730164152 Og1 
      1                           	processor	18F4550
@@ -3408,10 +3408,10 @@ Microchip MPLAB XC8 C Compiler v2.10 (Free license) build 20190730164152 Og1
   3389  001CD8  EFDD  F00E         	goto	l481
   3390  001CDC                     u3640:
   3391  001CDC                     
-  3392                           ;main.c: 999:             areaRegar = getValue(1);
+  3392                           ;main.c: 999:             areaRegar = getValue(2);
   3393  001CDC  0E00               	movlw	0
   3394  001CDE  6E03               	movwf	(getValue@numCharacters+1)^0,c
-  3395  001CE0  0E01               	movlw	1
+  3395  001CE0  0E02               	movlw	2
   3396  001CE2  6E02               	movwf	getValue@numCharacters^0,c
   3397  001CE4  ECE8  F006         	call	_getValue	;wreg free
   3398  001CE8  6E10               	movwf	regadoRapido@areaRegar^0,c
@@ -12967,7 +12967,7 @@ CODE                 0      0       0       0        0.0%
 
 
 Microchip Technology PIC18 Macro Assembler V2.10 build 88905656 
-Symbol Table                                                                                   Sun Jun 28 16:23:20 2020
+Symbol Table                                                                                   Tue Jun 30 19:10:21 2020
 
                  __size_of_escribe_eeprom 0030                                        l83 310A  
                                       l92 3156                                        l95 314E  

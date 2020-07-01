@@ -3790,8 +3790,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e $ ! != -> _tiempoRegar `ui -> 64 `ui 611  ]
 {
 "999
-[; ;main.c: 999:             areaRegar = getValue(1);
-[e = _areaRegar ( _getValue (1 -> -> 1 `i `s ]
+[; ;main.c: 999:             areaRegar = getValue(2);
+[e = _areaRegar ( _getValue (1 -> -> 2 `i `s ]
 "1001
 [; ;main.c: 1001:             if (areaRegar != '@') {
 [e $ ! != -> _areaRegar `ui -> 64 `ui 612  ]

@@ -7122,7 +7122,7 @@ void regadoRapido(void) {
         if (tiempoRegar != '@') {
 
 
-            areaRegar = getValue(1);
+            areaRegar = getValue(2);
 
             if (areaRegar != '@') {
 
