@@ -6238,7 +6238,7 @@ void __attribute__((picinterrupt(("")))) desbordamiento(void) {
 
             tiempoInactividadTrans++;
 
-            if (tiempoInactividadTrans == 2)
+            if (tiempoInactividadTrans == 1)
                 esperaDatoConcluida = 1;
 
 

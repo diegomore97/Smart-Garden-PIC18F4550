@@ -20,7 +20,7 @@
 #define REPETICIONES 6  //REPETICIONES PARA QUE TRANSCURRA 1 MINUTO
 #define SENSIBILIDAD_HUMEDAD 94 //Este nos indica a partir de cuantos bits se
 //considera seco el suelo esta expresado en un porcentaje del 0 al 100
-#define MAX_TIEMPO_INACTIVIDAD 2 //Decenas de segundo de espera para que el 
+#define MAX_TIEMPO_INACTIVIDAD 1 //Decenas de segundo de espera para que el 
 //usuario setie datos en el sistema a traves del protocolo UART
 #define TAMANO_CADENA 50 
 #define TAMANO_CADENA_HORARIO 30

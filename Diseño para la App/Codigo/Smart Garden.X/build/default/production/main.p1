@@ -1600,8 +1600,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;main.c: 113:             tiempoInactividadTrans++;
 [e ++ _tiempoInactividadTrans -> -> 1 `i `uc ]
 "115
-[; ;main.c: 115:             if (tiempoInactividadTrans == 2)
-[e $ ! == -> _tiempoInactividadTrans `i -> 2 `i 417  ]
+[; ;main.c: 115:             if (tiempoInactividadTrans == 1)
+[e $ ! == -> _tiempoInactividadTrans `i -> 1 `i 417  ]
 "116
 [; ;main.c: 116:                 esperaDatoConcluida = 1;
 [e = _esperaDatoConcluida -> -> 1 `i `uc ]
