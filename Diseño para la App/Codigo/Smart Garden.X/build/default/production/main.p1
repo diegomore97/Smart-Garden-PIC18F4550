@@ -3085,9 +3085,6 @@ Version 4.0 HI-TECH Software Intermediate Code
 "710
 [; ;main.c: 710:     char bufferHorario[30];
 [v _bufferHorario `uc ~T0 @X0 -> 30 `i a ]
-"712
-[; ;main.c: 712:     UART_write('&');
-[e ( _UART_write (1 -> -> 38 `ui `uc ]
 "714
 [; ;main.c: 714:     UART_printf("\r\nH = HORA\r\n");
 [e ( _UART_printf (1 :s 12C ]
@@ -3330,9 +3327,6 @@ Version 4.0 HI-TECH Software Intermediate Code
 "814
 [; ;main.c: 814:     dameTemperaturaHumedad();
 [e ( _dameTemperaturaHumedad ..  ]
-"816
-[; ;main.c: 816:     UART_write('&');
-[e ( _UART_write (1 -> -> 38 `ui `uc ]
 "819
 [; ;main.c: 819:     limpiarBuffer();
 [e ( _limpiarBuffer ..  ]
@@ -3389,9 +3383,6 @@ Version 4.0 HI-TECH Software Intermediate Code
 "842
 [; ;main.c: 842:     dameTemperaturaHumedad();
 [e ( _dameTemperaturaHumedad ..  ]
-"844
-[; ;main.c: 844:     UART_write('&');
-[e ( _UART_write (1 -> -> 38 `ui `uc ]
 "847
 [; ;main.c: 847:     limpiarBuffer();
 [e ( _limpiarBuffer ..  ]

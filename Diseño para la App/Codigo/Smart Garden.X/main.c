@@ -709,7 +709,7 @@ void dameDatosSistema(void) {
 
     char bufferHorario[TAMANO_CADENA_HORARIO];
 
-    UART_write(INTERRUMPIR_COMANDOS); //Esta Indica que inicio la transmicion de cadenas
+    //UART_write(INTERRUMPIR_COMANDOS); //Esta Indica que inicio la transmicion de cadenas
 
     UART_printf("\r\nH = HORA\r\n");
     UART_printf("\r\nR = REGAR( 1 SI | 0 NO)\r\n");
@@ -813,7 +813,7 @@ void mostrarDatosSensores(void) {
 
     dameTemperaturaHumedad();
 
-    UART_write(INTERRUMPIR_COMANDOS); //Esta Indica que se transmitiran cadenas por
+    //UART_write(INTERRUMPIR_COMANDOS); //Esta Indica que se transmitiran cadenas por
     //UART que no tengan que ver con instrucciones
 
     limpiarBuffer();
@@ -841,7 +841,7 @@ void mostrarDatosSensoresWIFI(void) {
 
     dameTemperaturaHumedad();
 
-    UART_write(INTERRUMPIR_COMANDOS); //Esta Indica que se transmitiran cadenas por
+    //UART_write(INTERRUMPIR_COMANDOS); //Esta Indica que se transmitiran cadenas por
     //UART que no tengan que ver con instrucciones
 
     limpiarBuffer();

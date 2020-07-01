@@ -6835,7 +6835,7 @@ void dameDatosSistema(void) {
 
     char bufferHorario[30];
 
-    UART_write('&');
+
 
     UART_printf("\r\nH = HORA\r\n");
     UART_printf("\r\nR = REGAR( 1 SI | 0 NO)\r\n");
@@ -6939,7 +6939,7 @@ void mostrarDatosSensores(void) {
 
     dameTemperaturaHumedad();
 
-    UART_write('&');
+
 
 
     limpiarBuffer();
@@ -6967,7 +6967,7 @@ void mostrarDatosSensoresWIFI(void) {
 
     dameTemperaturaHumedad();
 
-    UART_write('&');
+
 
 
     limpiarBuffer();
