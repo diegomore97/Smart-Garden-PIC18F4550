@@ -7222,7 +7222,7 @@ void main(void) {
 
 
 
-    MODO_COMUNICACION = 1;
+    MODO_COMUNICACION = 0;
 
 
     while (1) {

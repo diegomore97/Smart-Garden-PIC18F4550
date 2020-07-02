@@ -1096,7 +1096,7 @@ void main(void) {
 
     //mostrarMenu(); //comentar
 
-    MODO_COMUNICACION = 1; //0 NORMAL  | 1 WIFI
+    MODO_COMUNICACION = 0; //0 NORMAL  | 1 WIFI
 
 
     while (1) {
