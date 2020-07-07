@@ -5691,8 +5691,7 @@ extern __attribute__((nonreentrant)) void _delaywdt(unsigned long);
 extern __attribute__((nonreentrant)) void _delay3(unsigned char);
 # 32 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\xc.h" 2 3
 # 65 "./config.h" 2
-# 7 "main.c" 2
-
+# 8 "main.c" 2
 # 1 "./I2C.h" 1
 
 
@@ -5779,8 +5778,7 @@ unsigned char i2c_recibe_dato() {
 
     return datoleido;
 }
-# 8 "main.c" 2
-
+# 9 "main.c" 2
 # 1 "./RTC.h" 1
 
 void escribe_rtc(unsigned char direccion, unsigned char dato) {
@@ -5815,8 +5813,7 @@ unsigned char convertirDato(unsigned char dato) {
     datoR = (datoR * 10) + (dato & 0x0F);
     return datoR;
 }
-# 9 "main.c" 2
-
+# 10 "main.c" 2
 # 1 "./UART.h" 1
 void UART_init(long BAUD);
 unsigned char EUSART1_Read(void);
@@ -5879,8 +5876,7 @@ void UART_printf(char* cadena) {
         UART_write(*cadena++);
     }
 }
-# 10 "main.c" 2
-
+# 11 "main.c" 2
 # 1 "./DHT11.h" 1
 
 
@@ -5933,8 +5929,7 @@ unsigned char check_response() {
 
     return respuesta;
 }
-# 11 "main.c" 2
-
+# 12 "main.c" 2
 # 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c99\\stdio.h" 1 3
 # 24 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c99\\stdio.h" 3
 # 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c99\\bits/alltypes.h" 1 3
@@ -6073,8 +6068,7 @@ char *ctermid(char *);
 
 
 char *tempnam(const char *, const char *);
-# 12 "main.c" 2
-
+# 13 "main.c" 2
 # 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c99\\stdint.h" 1 3
 # 22 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c99\\stdint.h" 3
 # 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c99\\bits/alltypes.h" 1 3
@@ -6158,7 +6152,7 @@ typedef int32_t int_fast32_t;
 typedef uint32_t uint_fast16_t;
 typedef uint32_t uint_fast32_t;
 # 139 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c99\\stdint.h" 2 3
-# 13 "main.c" 2
+# 14 "main.c" 2
 # 36 "main.c"
 typedef struct {
     unsigned char porcientoHumedad;
